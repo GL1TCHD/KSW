@@ -183,6 +183,23 @@ class KswAttendanceSheet(models.Model):
     _name = 'ksw.attendance.sheet'
     _inherit = ['ksw.attendance.sheet', 'mail.activity.mixin']
 
+    def _approved_leaves(self):
+        """Only the leaves that take the day off the sheet's pay.
+
+        A paid leave (sick, business trip, Hajj, marriage...) is paid
+        through the sheet: its days stay Attended, and SICK_PAY_ADJ applies
+        the Article 117 tiers on top. Marking them absent sends them to
+        ATT_ABS, which deducts the full daily rate — KSWCO sheet 5155: an
+        approved 16-day sick leave blocked the month until it was marked
+        absent, i.e. until 16 paid days were deducted. Unpaid leave,
+        extensions and annual vacations (paid by their own payslip) lock
+        the sheet; an EOS day stays absent as it always has.
+        """
+        Leave = self.env['hr.leave']
+        return super()._approved_leaves().filtered(
+            lambda l: Leave._locks_attendance_sheet(l)
+            or getattr(l, 'x_is_eos_leave', False))
+
     def _covered_line_vals(self, leave, day):
         """Lock a day born absent exactly as the leave would have locked it.
 

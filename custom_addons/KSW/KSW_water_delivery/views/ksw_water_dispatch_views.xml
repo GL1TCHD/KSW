@@ -95,7 +95,7 @@
                             <field name="x_buyer_phone" invisible="not x_is_cash"
                                    readonly="state != 'draft'" placeholder="Optional" widget="phone"/>
                             <field name="x_is_pickup" invisible="1"/>
-                            <field name="x_collected_by" widget="radio" invisible="not x_is_cash"
+                            <field name="x_collected_by" widget="radio"
                                    readonly="state != 'draft'"/>
                             <field name="x_pickup_plate" invisible="not x_is_pickup"
                                    readonly="state != 'draft'" placeholder="Optional"/>

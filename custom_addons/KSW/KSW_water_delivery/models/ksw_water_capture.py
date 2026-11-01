@@ -1,5 +1,5 @@
 import logging
-from datetime import timedelta
+from datetime import datetime, time, timedelta
 
 from markupsafe import Markup
 
@@ -320,7 +320,11 @@ class KswWaterCapture(models.Model):
 
     def _falls_in_closed_month(self):
         self.ensure_one()
-        captured = self.captured_at.date()
+        # The month is the user's, like `today` below: a note captured at
+        # 00:30 Riyadh on the 1st is 21:30 UTC on the last day of the month
+        # before, and read in UTC it fell into last month -- for a cash
+        # customer, already invoiced, so it was held.
+        captured = fields.Datetime.context_timestamp(self, self.captured_at).date()
         month_start = captured.replace(day=1)
         today = fields.Date.context_today(self)
         if month_start >= today.replace(day=1):
@@ -331,10 +335,11 @@ class KswWaterCapture(models.Model):
             if lock and captured <= lock:
                 return True
         next_month = (month_start + timedelta(days=32)).replace(day=1)
+        offset = fields.Datetime.context_timestamp(self, self.captured_at).utcoffset()
         return bool(self.env['sale.order'].sudo().search_count([
             ('partner_id', '=', self.partner_id.id),
-            ('date_order', '>=', month_start),
-            ('date_order', '<', next_month),
+            ('date_order', '>=', datetime.combine(month_start, time.min) - offset),
+            ('date_order', '<', datetime.combine(next_month, time.min) - offset),
             ('invoice_ids.state', '=', 'posted'),
         ], limit=1))
 

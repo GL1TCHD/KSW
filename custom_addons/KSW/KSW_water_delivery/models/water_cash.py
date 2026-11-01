@@ -135,10 +135,13 @@ class KswWaterDispatch(models.Model):
 
     # Most cash sales are collected at the branch by the customer's own
     # tanker: nobody of ours drives, so the sale is delivered the moment it is
-    # paid. 'ours' is the dispatched delivery, confirmed by our driver.
+    # paid. 'ours' is the dispatched delivery, confirmed by our driver. A
+    # credit client may collect too (BAS: "Customers car 1001" on a credit
+    # note, mostly ex-factory water): issued at the desk, billed at month end.
+    # Default 'ours'; a cash sale starts on 'customer' (create + onchange).
     x_collected_by = fields.Selection(
         [('customer', "Customer's own tanker"), ('ours', 'Our driver')],
-        string='Delivered By', default='customer', tracking=True,
+        string='Delivered By', default='ours', tracking=True,
         help="Customer's own tanker: delivered the moment it is sold, at the "
              'branch. Our driver: dispatched, and delivered when he confirms it.')
     x_pickup_plate = fields.Char(string="Customer's Tanker Plate")
@@ -161,7 +164,7 @@ class KswWaterDispatch(models.Model):
     @api.depends('x_is_cash', 'x_collected_by')
     def _compute_is_pickup(self):
         for dispatch in self:
-            dispatch.x_is_pickup = dispatch.x_is_cash and dispatch.x_collected_by == 'customer'
+            dispatch.x_is_pickup = dispatch.x_collected_by == 'customer'
 
     @api.depends('x_is_cash', 'x_collected_by', 'picking_type_id', 'partner_id',
                  'product_id', 'entered_uom', 'vehicle_id')
@@ -201,6 +204,8 @@ class KswWaterDispatch(models.Model):
         # reaches the server from the web client (KSW gotcha #145).
         Type = self.env['stock.picking.type'].sudo()
         for vals in vals_list:
+            if vals.get('x_is_cash'):
+                vals.setdefault('x_collected_by', 'customer')
             if vals.get('x_is_cash') and vals.get('picking_type_id'):
                 cash = Type.browse(vals['picking_type_id']).x_cash_partner_id
                 if cash:
@@ -253,9 +258,13 @@ class KswWaterDispatch(models.Model):
         if self.product_id._origin not in products:
             self.product_id = products[:1] if len(products) == 1 else False
 
+    @api.onchange('x_is_cash')
+    def _onchange_water_cash_collected_by(self):
+        self.x_collected_by = 'customer' if self.x_is_cash else 'ours'
+
     @api.onchange('x_collected_by', 'x_is_cash')
     def _onchange_water_pickup(self):
-        if self.x_is_cash and self.x_collected_by == 'customer':
+        if self.x_collected_by == 'customer':
             self.entered_uom = 'product'
             self.driver_user_id = False
 
@@ -313,7 +322,9 @@ class KswWaterDispatch(models.Model):
                     client=dispatch.partner_id.display_name))
 
     def _water_sell_pickup(self):
-        """Customer collects with his own tanker: paid and delivered at once."""
+        """Customer collects with his own tanker: delivered at once. A cash
+        sale is paid and invoiced now; a credit client's note waits for the
+        month-end invoice like any other of his notes."""
         self._check_branch_authority()
         for dispatch in self:
             if dispatch.state != 'draft':
@@ -323,7 +334,9 @@ class KswWaterDispatch(models.Model):
                                   "is unknown: enter the quantity in the product's unit."))
             if dispatch.entered_qty <= 0:
                 raise UserError(_('The quantity must be greater than zero.'))
-        self._water_cash_checks()
+        cash = self.filtered('x_is_cash')
+        cash._water_cash_checks()
+        (self - cash)._water_credit_pickup_checks()
         now = fields.Datetime.now()
         for dispatch in self:
             values = {'state': 'delivered', 'dispatcher_id': self.env.uid,
@@ -333,9 +346,25 @@ class KswWaterDispatch(models.Model):
                 values['name'] = self.env['ir.sequence'].sudo().next_by_code(
                     'ksw.water.dispatch') or _('New')
             dispatch.sudo().write(values)
-            dispatch._water_take_cash()
+            if dispatch.x_is_cash:
+                dispatch._water_take_cash()
             dispatch._water_issue_pickup_note()
             dispatch._water_invoice_cash()
+
+    def _water_credit_pickup_checks(self):
+        Pricing = self.env['ksw.water.pricing']
+        for dispatch in self:
+            if dispatch.partner_id not in dispatch.allowed_partner_ids:
+                raise UserError(_(
+                    '%(client)s is not one of %(branch)s\'s priced clients.',
+                    client=dispatch.partner_id.display_name,
+                    branch=dispatch.picking_type_id.sudo().display_name))
+            if not Pricing._rate_for(dispatch.partner_id, dispatch.product_id,
+                                     dispatch.entered_qty or 1.0):
+                raise UserError(_(
+                    'There is no agreed rate for %(product)s with %(client)s.',
+                    product=dispatch.product_id.display_name,
+                    client=dispatch.partner_id.display_name))
 
     def _water_issue_pickup_note(self):
         """The delivery note of a pickup: the same native chain as a driver's

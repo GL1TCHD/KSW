@@ -106,4 +106,7 @@ class KswWaterDispatch(models.Model):
         return super(KswWaterDispatch, self.with_context(bypass_risk=True))._water_dispatch_delivery()
 
     def _water_sell_pickup(self):
+        # A credit client collecting at the branch is the same sale as a
+        # dispatched one: the same limit applies. Cash is paid at the desk.
+        self._water_check_credit()
         return super(KswWaterDispatch, self.with_context(bypass_risk=True))._water_sell_pickup()

@@ -6,7 +6,9 @@ capture recorded in the future, sent too late, or dated into a month already
 invoiced/closed is HELD for a dispatcher (never refused: the water is in the
 customer's tank). A client outside the driver's list or branch is held too.
 """
-from datetime import timedelta
+from datetime import datetime, timedelta
+
+from freezegun import freeze_time
 
 from odoo import fields
 from odoo.tests import tagged
@@ -54,6 +56,23 @@ class TestCaptureTimingAndScope(OfflineCaptureCommon):
                                 captured_at=_s(last_month))
         self.assertEqual(capture.state, 'held')
         self.assertIn('already invoiced or closed', capture.hold_reason)
+
+    def test_after_midnight_on_the_first_is_this_month(self):
+        """00:30 Riyadh on 1 Feb is 21:30 UTC on 31 Jan. With a posted January
+        invoice for the client, reading the month in UTC held the note."""
+        user = self.env.user.sudo()
+        user.tz = 'Asia/Riyadh'
+        captured = datetime(2026, 1, 31, 21, 30)
+        # Every month counts as invoiced, so only the month arithmetic decides.
+        self.patch(type(self.env['sale.order']), 'search_count', lambda *a, **k: 1)
+        with freeze_time(datetime(2026, 1, 31, 21, 35)):
+            capture = self.Capture.new({'captured_at': captured, 'partner_id': self.customer.id})
+            self.assertFalse(capture._falls_in_closed_month())
+            # Same capture an hour EARLIER in local time (23:30 on 31 Jan) is
+            # genuinely last month once February has an invoiced order.
+            capture.captured_at = datetime(2026, 1, 31, 20, 30)
+            with freeze_time(datetime(2026, 2, 1, 6, 0)):
+                self.assertTrue(capture._falls_in_closed_month())
 
     def test_client_off_the_drivers_list_is_held(self):
         self.driver.sudo().x_water_client_ids = [(6, 0, [self.customer.id])]

@@ -185,6 +185,41 @@ class TestVacationSheetSettlement(LeaveAttendanceSheetCommon):
         with self.assertRaises(UserError):
             day.write({'is_attended': True})
 
+    def test_paid_leave_days_stay_attended(self):
+        """KSWCO sheet 5155: an approved sick leave must not force its
+        days absent (absent = deducted) nor block the month."""
+        paid_type = self.env['hr.leave.type'].create({
+            'name': 'Sick Leave LA Test',
+            'requires_allocation': False,
+            'leave_validation_type': 'no_validation',
+        })
+        sheet = self._make_sheet(self.sheet_emp, 2028, 9)
+        leave = self.env['hr.leave'].sudo().create({
+            'employee_id': self.sheet_emp.id,
+            'holiday_status_id': paid_type.id,
+            'request_date_from': date(2028, 9, 10),
+            'request_date_to': date(2028, 9, 20),
+        })
+        if leave.state != 'validate':
+            leave._action_validate()
+        self.assertEqual(leave.state, 'validate')
+        sheet._recompute_blocked()
+        self.assertFalse(sheet.x_is_blocked, sheet.x_blocked_reason)
+        self.assertNotIn(leave, sheet._approved_leaves())
+        self.assertTrue(all(l.is_attended for l in self._workdays(sheet)))
+        # Generation: a sheet born after the leave keeps its days attended.
+        leave2 = self.env['hr.leave'].sudo().create({
+            'employee_id': self.sheet_emp.id,
+            'holiday_status_id': paid_type.id,
+            'request_date_from': date(2028, 10, 3),
+            'request_date_to': date(2028, 10, 5),
+        })
+        if leave2.state != 'validate':
+            leave2._action_validate()
+        oct_ = self._make_sheet(self.sheet_emp, 2028, 10)
+        self.assertTrue(all(l.is_attended for l in self._workdays(oct_)))
+        self.assertFalse(oct_.x_is_blocked, oct_.x_blocked_reason)
+
 
 @tagged('post_install', '-at_install')
 class TestVacationSheetOpenReturn(LeaveAttendanceSheetCommon):

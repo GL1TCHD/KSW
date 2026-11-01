@@ -249,6 +249,33 @@ class TestWaterCash(OfflineCaptureCommon):
         self.assertEqual(invoice.journal_id, self.cash_sales)
         self.assertIn(invoice.payment_state, ('paid', 'in_payment'))
 
+    def test_a_credit_client_collects_with_his_own_tanker(self):
+        """BAS "Customers car 1001" on a credit note: issued at the desk, no
+        driver, no cash; billed at month end like his other notes."""
+        dispatch = self.Dispatch.with_user(self.dispatch_user).create({
+            'picking_type_id': self.picking_type.id, 'partner_id': self.customer.id,
+            'product_id': self.water.id, 'entered_qty': 32.0,
+            'x_collected_by': 'customer', 'x_pickup_plate': 'XYZ 1234',
+        })
+        self.assertTrue(dispatch.x_is_pickup)
+        dispatch.action_dispatch()
+        self.assertEqual(dispatch.state, 'delivered')
+        self.assertFalse(dispatch.driver_user_id)
+        self.assertFalse(dispatch.x_cash_received)
+        self.assertFalse(dispatch.sudo().x_cash_payment_id)
+        self.assertFalse(dispatch.sudo().x_cash_invoice_id)
+        note = dispatch.sudo().picking_id
+        self.assertEqual(note.state, 'done')
+        self.assertEqual(note.partner_id, self.customer)
+        self.assertEqual(note.x_invoice_status, 'to invoice')
+
+    def test_a_credit_dispatch_defaults_to_our_driver(self):
+        dispatch = self.Dispatch.with_user(self.dispatch_user).create({
+            'picking_type_id': self.picking_type.id, 'partner_id': self.customer.id,
+            'product_id': self.water.id, 'entered_qty': 32.0})
+        self.assertEqual(dispatch.x_collected_by, 'ours')
+        self.assertFalse(dispatch.x_is_pickup)
+
     def test_a_pickup_needs_no_driver_and_works_on_any_branch(self):
         self.picking_type.x_issue_mode = 'driver'
         dispatch = self._pickup()
