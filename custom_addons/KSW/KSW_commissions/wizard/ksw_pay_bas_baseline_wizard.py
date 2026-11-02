@@ -154,12 +154,15 @@ class KswPayBasBaselineWizard(models.TransientModel):
         used = set()
         report = {'skipped': defaultdict(float), 'orphans': [],
                   'credits': defaultdict(float), 'expense': defaultdict(float),
-                  'loans': defaultdict(float), 'accrual_of': {}}
+                  'loans': defaultdict(float), 'accrual_of': {},
+                  # The rows themselves, for the month's BAS comparison.
+                  'skipped_serials': set()}
         for block in blocks:
             if not any((r['FCODE'] or '') in expense_codes for r in block):
                 for row in block:
                     report['skipped'][row['FCODE'] or row['TCODE'] or '?'] += \
                         round(row['AMOUNT'] or 0.0, 2)
+                    report['skipped_serials'].add(row['SERIAL'])
                 continue
             # Whose block: the first line naming him, else his advance account.
             employee = Employee
@@ -272,6 +275,7 @@ class KswPayBasBaselineWizard(models.TransientModel):
                     items[vals['key']] = vals
                 else:
                     report['skipped'][fcode or tcode] += amount
+                    report['skipped_serials'].add(row['SERIAL'])
 
         # The accrual each deduction drew on is the one BAS credited him.
         default_accrual = next(iter(sorted(accrual_codes)), '')
@@ -297,8 +301,6 @@ class KswPayBasBaselineWizard(models.TransientModel):
                       if e['kind'] == 'deduction')
         diff = defaultdict(float)
         register = set(self.run_id.sudo().line_ids.employee_id.ids)
-        vacation = self.env['ksw.pay.settlement'].sudo()._vacation_parts(
-            self.run_id.sudo())
         settled_elsewhere = []
         for key in set(loaded) | set(desired):
             item = next((i for i in items if i['key'] == key), None)
@@ -307,9 +309,6 @@ class KswPayBasBaselineWizard(models.TransientModel):
                 settled_elsewhere.append(item)
                 continue
             target = desired.get(key, {}).get('amount', 0.0)
-            if vacation.get(key):
-                target += min(max(loaded.get(key, 0.0) - target, 0.0),
-                              vacation[key])
             d = round(target - loaded.get(key, 0.0), 2)
             if d:
                 diff[(desired.get(key) or item)['kind']] += d

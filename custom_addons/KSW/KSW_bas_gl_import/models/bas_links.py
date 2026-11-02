@@ -444,10 +444,10 @@ class BasGlImport(models.Model):
         """Give each BAS monthly invoice the lines Odoo itself would have made.
 
         The converter only saw the GL voucher, so an invoice had one line per
-        revenue account ("مبيعات فرع العثمانية /تريلات"). Its delivery notes
-        are now linked, so each becomes its own line (product, quantity and
-        price from STR10, revenue account from the note's own 600 voucher)
-        under a section per product: the shape of
+        revenue account ("مبيعات فرع العثمانية /تريلات") and no product. Its
+        delivery notes are now linked, so it gets one line per product, rate
+        and revenue account (quantity and price from the notes' STR10 rows,
+        revenue account from each note's own 600 voucher): the shape of
         ``stock.picking._water_create_invoice``.
 
         Only when the notes add up to what BAS invoiced, per revenue account,
@@ -579,10 +579,28 @@ class BasGlImport(models.Model):
         if diff:
             return None, f'notes do not add up to the invoice ({diff})'
 
+        commands = [Command.delete(l.id) for l in old]
+        days = [b['day'] for b in built]
+        vals = {'invoice_origin': _('%(count)s delivery notes, %(start)s to %(end)s',
+                                    count=len({b['note'] for b in built}),
+                                    start=min(days), end=max(days))}
+        Move = self.env['account.move']
+        if hasattr(Move, '_water_merge_note_rows'):
+            # One sales line per product, rate and revenue account: the entry
+            # reads client / sales / VAT, and the notes stay linked to the
+            # invoice (x_bas_delivery_ids, the Delivery Notes button).
+            commands += Move._water_merge_note_rows([{
+                'product': b['product'], 'uom': b['product'].uom_id,
+                'price': b['amount'] / b['qty'], 'taxes': taxes, 'account': b['acc'],
+                'qty': b['qty'], 'amount': b['amount'], 'day': b['day'],
+            } for b in built])
+            vals.update(invoice_line_ids=commands, x_water_summary=True)
+            return vals, None
+
         groups = defaultdict(list)
         for b in built:
             groups[(b['product'], round(b['amount'] / b['qty'], 4))].append(b)
-        commands, seq = [Command.delete(l.id) for l in old], 0
+        seq = 0
         for (product, price), group in sorted(groups.items(),
                                               key=lambda kv: (kv[0][0].display_name, kv[0][1])):
             group.sort(key=lambda b: (b['day'], b['name']))
@@ -604,11 +622,7 @@ class BasGlImport(models.Model):
                     'quantity': b['qty'], 'price_unit': b['amount'] / b['qty'],
                     'account_id': b['acc'].id, 'tax_ids': [Command.set(taxes.ids)],
                 }))
-        days = [b['day'] for b in built]
-        vals = {'invoice_line_ids': commands,
-                'invoice_origin': _('%(count)s delivery notes, %(start)s to %(end)s',
-                                    count=len({b['note'] for b in built}),
-                                    start=min(days), end=max(days))}
+        vals['invoice_line_ids'] = commands
         if water:
             vals['x_water_summary'] = True
         return vals, None

@@ -42,15 +42,28 @@ class TestWaterAnalytic(WaterDeliveryCommon):
         self.assertEqual(line.analytic_distribution, {self._key(
             self.tanker_cc, self.branch_cc, self.driver_cc): 100.0})
 
-    def test_each_note_keeps_its_own_tags_on_one_invoice(self):
-        first = self._issue_note().picking_id.sudo()
+    def test_notes_on_one_line_split_their_tags_by_amount(self):
+        first = self._issue_note(entered_qty=3.0).picking_id.sudo()
         self.driver.sudo().x_analytic_account_id = False
-        second = self._issue_note().picking_id.sudo()
+        second = self._issue_note(entered_qty=1.0).picking_id.sudo()
         invoice = (first | second)._water_create_invoice()
-        tags = {l.sale_line_ids.order_id.picking_ids.id: l.analytic_distribution
-                for l in invoice.invoice_line_ids if l.sale_line_ids}
-        self.assertEqual(tags[first.id], {self._key(self.tanker_cc, self.branch_cc, self.driver_cc): 100.0})
-        self.assertEqual(tags[second.id], {self._key(self.tanker_cc, self.branch_cc): 100.0})
+        line = invoice.invoice_line_ids.filtered(lambda l: l.display_type == 'product')
+        self.assertEqual(len(line), 1)
+        self.assertEqual(line.analytic_distribution, {
+            self._key(self.tanker_cc, self.branch_cc, self.driver_cc): 75.0,
+            self._key(self.tanker_cc, self.branch_cc): 25.0,
+        })
+
+    def test_an_uneven_split_still_adds_up_to_the_whole(self):
+        notes = self._issue_note(entered_qty=1.0).picking_id.sudo()
+        self.driver.sudo().x_analytic_account_id = False
+        notes |= self._issue_note(entered_qty=1.0).picking_id.sudo()
+        notes |= self._issue_note(entered_qty=1.0).picking_id.sudo()
+        line = notes._water_create_invoice().invoice_line_ids.filtered(
+            lambda l: l.display_type == 'product')
+        shares = line.analytic_distribution
+        self.assertAlmostEqual(sum(shares.values()), 100.0, places=6)
+        self.assertEqual(shares[self._key(self.tanker_cc, self.branch_cc, self.driver_cc)], 33.3333)
 
     def test_branch_and_vehicle_in_one_plan_keep_the_vehicle(self):
         """A database still on one Cost Centres plan: no double count."""

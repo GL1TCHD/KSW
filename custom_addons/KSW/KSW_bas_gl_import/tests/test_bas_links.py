@@ -216,7 +216,7 @@ class TestInvoiceFromNotes(TransactionCase):
             self.invoice, rows, revenue, {'99995': self.water},
             {'4101995002': self.income}, 'x_water_summary' in self.invoice._fields)
 
-    def test_the_invoice_gets_a_line_per_note_and_keeps_its_payment(self):
+    def test_the_invoice_gets_its_products_and_keeps_its_payment(self):
         pay = self.env['account.move'].create({
             'journal_id': self.env['account.journal'].search([
                 ('type', '=', 'general'), ('company_id', '=', self.company.id)], limit=1).id,
@@ -231,10 +231,12 @@ class TestInvoiceFromNotes(TransactionCase):
         self.assertIsNone(why)
         self.G._replace_invoice_lines(self.invoice, vals)
         products = self.invoice.invoice_line_ids.filtered(lambda l: l.display_type == 'product')
-        self.assertEqual(len(products), 2)
+        if 'x_water_grouped' in products._fields:
+            # One sales line for the product, rate and revenue account.
+            self.assertEqual((len(products), products.quantity), (1, 64.0))
+        else:
+            self.assertEqual(len(products), 2)
         self.assertEqual(products.product_id, self.water)
-        self.assertEqual(len(self.invoice.invoice_line_ids.filtered(
-            lambda l: l.display_type == 'line_section')), 1)
         self.assertAlmostEqual(self.invoice.amount_total, 1251.2)
         self.assertEqual(self.invoice.state, 'posted')
         self.assertEqual(self.invoice.payment_state, 'paid')

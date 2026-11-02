@@ -79,6 +79,24 @@ class KswPayRun(models.Model):
             for employee in settled.employee_id
         }
 
+    def _vacation_slip_totals(self):
+        """``{(employee, payslip): {component: whole riyals}}`` — the
+        month's entries each confirmed vacation payslip paid: what its
+        disbursement line clears from the accrual."""
+        self.ensure_one()
+        settled = self._all_entries().filtered(
+            lambda e: e.employee_id
+            and e.x_vacation_payslip_id.state == 'done')
+        Employee = self.env['hr.employee'].sudo()
+        totals = {}
+        for slip in settled.x_vacation_payslip_id:
+            rows = settled.filtered(
+                lambda e, s=slip: e.x_vacation_payslip_id == s)
+            for emp_id, by_component in (
+                    self._rounded_component_totals(rows).items()):
+                totals[(Employee.browse(emp_id), slip)] = by_component
+        return totals
+
     @api.model
     def _bas_detail_lines(self, by_component):
         """One employee's month as the voucher itemises it.

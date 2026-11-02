@@ -1,12 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- Summary or detailed can be changed after the invoice is created. -->
+    <!-- Summary or detailed can be changed after the invoice is created. The
+         notes an invoice bills are behind its sales lines, one click away. -->
     <record id="view_move_form_water" model="ir.ui.view">
         <field name="name">account.move.form.water</field>
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_form"/>
         <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_view_water_notes" type="object" class="oe_stat_button"
+                        icon="fa-truck" invisible="not x_water_note_count"
+                        groups="stock.group_stock_user,KSW_water_delivery.group_water_billing">
+                    <field name="x_water_note_count" widget="statinfo" string="Delivery Notes"/>
+                </button>
+            </xpath>
             <xpath expr="//group[@name='sale_info_group']" position="inside">
                 <field name="x_has_water_sections" invisible="1"/>
                 <field name="x_water_summary" invisible="not x_has_water_sections"/>

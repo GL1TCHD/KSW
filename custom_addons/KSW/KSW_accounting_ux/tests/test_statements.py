@@ -96,3 +96,76 @@ class TestPartnerStatementFromMenu(TransactionCase):
         wiz = self.env['activity.statement.wizard'].with_context(
             active_model='res.partner', active_ids=partners.ids).create({})
         self.assertEqual(wiz.partner_ids, partners)
+
+
+@tagged('post_install', '-at_install')
+class TestPartnerStatementBothSides(TransactionCase):
+    """A partner who is both client and supplier gets one netted statement."""
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        Account = cls.env['account.account']
+        cls.partner = cls.env['res.partner'].create(
+            {'name': 'KSW both sides', 'customer_rank': 1, 'supplier_rank': 1})
+        receivable = Account.create({'name': 'KSW test AR', 'code': '1203999902',
+                                     'account_type': 'asset_receivable', 'reconcile': True})
+        payable = Account.create({'name': 'KSW test AP', 'code': '2101999902',
+                                  'account_type': 'liability_payable', 'reconcile': True})
+        income = Account.create({'name': 'KSW test inc', 'code': '4101999902', 'account_type': 'income'})
+        journal = cls.env['account.journal'].search(
+            [('type', '=', 'general'), ('company_id', '=', cls.env.company.id)], limit=1)
+        cls.first_day = date(2030, 2, 10)
+        cls.env['account.move'].create([{
+            'journal_id': journal.id, 'date': day, 'line_ids': [
+                (0, 0, {'account_id': debit.id, 'debit': amount, 'partner_id': cls.partner.id}),
+                (0, 0, {'account_id': credit.id, 'credit': amount, 'partner_id': cls.partner.id}),
+            ]} for day, debit, credit, amount in (
+                (cls.first_day, receivable, income, 1000.0),     # we sold to him
+                (date(2030, 3, 1), income, payable, 300.0),      # we bought from him
+            )]).action_post()
+        cls.currency = cls.env.company.currency_id
+
+    def _statement(self, model, report, **vals):
+        vals = dict({'partner_ids': [(6, 0, self.partner.ids)], 'date_end': date(2030, 3, 15),
+                     'x_date_range': 'custom'}, **vals)
+        if 'date_start' in self.env[model]._fields:
+            vals['date_start'] = date(2030, 1, 1)
+        wiz = self.env[model].create(vals)
+        data = wiz._prepare_statement()
+        res = self.env[report]._get_report_values(self.partner.ids, data)
+        return res['data'][self.partner.id]['currencies'][self.currency.id], res
+
+    def test_both_is_the_default(self):
+        self.assertEqual(self.env['activity.statement.wizard'].create({}).account_type, 'all')
+
+    def test_activity_statement_nets_both_sides(self):
+        report = 'report.partner_statement.activity_statement'
+        for account_type, due in (('all', 700.0), ('asset_receivable', 1000.0),
+                                  ('liability_payable', -300.0)):
+            cur, res = self._statement('activity.statement.wizard', report, account_type=account_type)
+            self.assertAlmostEqual(cur['amount_due'], due, msg=account_type)
+        cur, res = self._statement('activity.statement.wizard', report, account_type='all')
+        self.assertEqual(len(cur['lines']), 2)
+        title = res['get_title'](self.partner, account_type='all', starting_date='a',
+                                 ending_date='b', currency='SAR')
+        self.assertNotIn('Supplier', title)
+
+    def test_outstanding_and_detailed_statements_net_both_sides(self):
+        cur, _res = self._statement('outstanding.statement.wizard',
+                                    'report.partner_statement.outstanding_statement')
+        self.assertAlmostEqual(cur['amount_due'], 700.0)
+        cur, _res = self._statement('detailed.activity.statement.wizard',
+                                    'report.partner_statement.detailed_activity_statement')
+        self.assertAlmostEqual(cur['ending_lines'][-1]['balance'], 700.0)
+
+    def test_period_choices(self):
+        Wizard = self.env['activity.statement.wizard']
+        base = {'partner_ids': [(6, 0, self.partner.ids)], 'date_end': date(2030, 3, 15)}
+        self.assertEqual(Wizard.create(dict(base, x_date_range='history'))
+                         ._prepare_statement()['date_start'], self.first_day)
+        year_start = self.env.company.compute_fiscalyear_dates(date(2030, 3, 15))['date_from']
+        self.assertEqual(Wizard.create(dict(base, x_date_range='year'))
+                         ._prepare_statement()['date_start'], year_start)
+        self.assertEqual(Wizard.create(dict(base, x_date_range='custom', date_start=date(2030, 3, 1)))
+                         ._prepare_statement()['date_start'], date(2030, 3, 1))

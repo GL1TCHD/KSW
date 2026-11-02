@@ -1,6 +1,6 @@
 {
     'name': 'KSW Water Delivery Notes',
-    'version': '19.0.1.25.0',
+    'version': '19.0.1.26.0',
     'summary': 'Issue the water delivery note at the client, online or off',
     'description': """
 Water Delivery Notes
@@ -41,6 +41,7 @@ accounting the finished list.
         'data/ksw_water_delivery_data.xml',
         'data/ksw_water_app_templates.xml',
         'data/ksw_water_uom.xml',
+        'data/ksw_water_precision.xml',
         'report/report_water_delivery_note.xml',
         'report/report_invoice_water.xml',
         'views/ksw_water_rate_views.xml',

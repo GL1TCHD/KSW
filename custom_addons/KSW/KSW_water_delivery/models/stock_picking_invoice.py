@@ -1,10 +1,8 @@
-from collections import defaultdict
 import pytz
 from markupsafe import Markup
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
-from odoo.fields import Command
 
 # Where the notes are delivered. Stored dates must not depend on who happened
 # to trigger the compute, so this is the company's zone, not the user's.
@@ -84,23 +82,21 @@ class StockPicking(models.Model):
                 line.tax_ids, line.product_uom_id)
 
     def _water_create_invoice(self, invoice_date=None, show_notes=False, display_uoms=None):
-        """One draft customer invoice for these notes, a section per product.
+        """One draft customer invoice for these notes.
 
-        Every note keeps its own invoice line, linked to its own sale order
-        line. That is not a presentation choice: core counts a sale line's
-        invoiced quantity as the sum of the invoice lines linked to it
-        (`sale.order.line._prepare_qty_invoiced`), so a single "640 m³" line
-        linked to twenty notes would read as 640 m³ invoiced on EACH of them.
-        One line per note keeps every native consequence exact -- the note
-        reads as invoiced, cancelling the draft frees it, a credit note for one
-        disputed note reopens that note and nothing else.
+        The journal entry is three kinds of line: the client's receivable,
+        one sales line per (product, rate, revenue account) and the VAT. The
+        notes are not listed one by one; each sales line is linked to the
+        order lines of every note it bills, so the notes are one click away
+        (Delivery Notes on the invoice) and each still reads exactly
+        invoiced -- see `sale.order.line._water_share`. Cancelling the draft
+        frees the notes, a full credit note reopens them.
 
-        The grouping by product is the section. By default the invoice PRINTS
-        one row per product (`x_water_summary`); `show_notes` prints every note
-        under its section instead. `display_uoms` ({product id: uom.uom}) is
-        the unit each product is printed in -- m³ shown as trips -- and is only
-        ever a printing choice: the note lines stay in the product's unit, so
-        no amount goes through a conversion.
+        By default the invoice PRINTS one row per product (`x_water_summary`);
+        `show_notes` adds the list of notes. `display_uoms` ({product id:
+        uom.uom}) is the unit each product is printed in -- m³ shown as trips
+        -- and is only ever a printing choice: the lines stay in the
+        product's unit, so no amount goes through a conversion.
 
         Authority is the caller's job; this runs as whoever calls it.
         """
@@ -151,50 +147,44 @@ class StockPicking(models.Model):
             for line in note.sale_id.order_line:
                 note_of[line] = note
 
-        groups = defaultdict(lambda: self.env['sale.order.line'])
-        for line in lines:
-            groups[self._water_group_key(line)] |= line
-
         display_uoms = display_uoms or {}
-        invoice_lines = []
-        sequence = 0
-        for key in sorted(groups, key=lambda k: (k[0].display_name, k[1])):
-            product, price, _discount, _taxes, uom = key
-            group = groups[key].sorted(
-                lambda l: (note_of[l].x_delivery_date or fields.Date.today(), note_of[l].name))
+        rows = []
+        for line in lines:
+            product, uom = line.product_id, line.product_uom_id
             unit = display_uoms.get(product.id) or uom
             if not uom._ksw_converts_to(unit):
                 raise UserError(_(
                     '%(product)s is sold in %(uom)s and cannot be shown in %(unit)s.',
                     product=product.display_name, uom=uom.name, unit=unit.name))
-            quantity = uom._ksw_qty(sum(group.mapped('qty_to_invoice')), unit)
-            sequence += 1
-            invoice_lines.append(Command.create({
-                'display_type': 'line_section',
-                'sequence': sequence,
-                'name': _('%(product)s: %(qty)s %(uom)s at %(price)s (%(count)s notes)',
-                          product=product.display_name,
-                          qty=('%.4f' % quantity).rstrip('0').rstrip('.'),
-                          uom=unit.name, price=f'{uom._ksw_price(price, unit):g}',
-                          count=len(group)),
-                'x_water_section': True,
-                'x_display_uom_id': unit.id,
-            }))
-            for line in group:
-                note = note_of[line]
-                sequence += 1
-                invoice_lines.append(Command.create(line._prepare_invoice_line(
-                    sequence=sequence,
-                    name='%s · %s' % (note.name, fields.Date.to_string(note.x_delivery_date)),
-                )))
+            # The order line's own invoice values carry the branch revenue
+            # account and the note's cost centres (both hooked on
+            # `_prepare_invoice_line`), so Odoo's own "Create Invoice" and
+            # this builder agree on them.
+            base = line._prepare_invoice_line()
+            base.pop('sale_line_ids', None)
+            qty = line.qty_to_invoice
+            rows.append({
+                'base': base,
+                'product': product, 'uom': uom, 'price': line.price_unit,
+                'discount': line.discount, 'taxes': line.tax_ids,
+                'account': self.env['account.account'].browse(base.get('account_id')),
+                'qty': qty,
+                'amount': line.currency_id.round(
+                    qty * line.price_unit * (1 - (line.discount or 0.0) / 100.0)),
+                'analytic': base.get('analytic_distribution') or line.analytic_distribution,
+                'sale_line_ids': line.ids,
+                'day': note_of[line].x_delivery_date,
+            })
+        invoice_lines = self.env['account.move']._water_merge_note_rows(
+            rows, display_uoms=display_uoms)
 
         dates = notes.mapped('x_delivery_date')
         vals = orders[0]._prepare_invoice()
         vals.update({
             'invoice_line_ids': invoice_lines,
             # One order per trip, so the core origin would be hundreds of
-            # order numbers. The notes are on the lines; the header says what
-            # the pile was.
+            # order numbers. The notes are behind the lines; the header says
+            # what the pile was.
             'invoice_origin': _('%(count)s delivery notes, %(start)s to %(end)s',
                                 count=len(notes), start=min(dates), end=max(dates)),
             'ref': False,

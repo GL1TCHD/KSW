@@ -440,7 +440,7 @@ class KswCommissionBankExportWizard(models.TransientModel):
                 amt,
                 line.earnings,
                 0.0,  # HRA not applicable in commissions
-                line.earnings,
+                0.0,  # Other: the commission is the Basic, counted once
                 line.loan_offset,
                 emp.department_id.name if emp.department_id else '',
             ]
@@ -504,9 +504,11 @@ class KswCommissionBankExportWizard(models.TransientModel):
         (`ksw.wps.file.wizard._header` / `_pz` / `_pr` / `_swift4`), so the
         bank's format is defined once. Only the detail is written here,
         because payroll's reads a payslip and this reads a register line.
-        Its breakdown follows this module's other two bank files (the
-        Kawthar TXT and the WPS sheet): earnings as basic and as other,
-        housing 0, the loan offset as the deduction.
+        The breakdown must add up — the bank checks basic + housing + other
+        − deductions = net and rejects every row that does not: the
+        commission once, as basic; housing and other 0; the loan offset as
+        the deduction. (It was written as basic *and* as other, and KSWCO's
+        August WPS file came back with every record refused.)
 
         The account is the EMPLOYEE's IBAN (`primary_bank_account_id`);
         `bank` is the company account the file is paid from.
@@ -547,7 +549,7 @@ class KswCommissionBankExportWizard(models.TransientModel):
                 ' ' * 5,
                 wps._pz(self._halalas(line.earnings), 13),
                 wps._pz(0, 12),  # housing: not part of a commission
-                wps._pz(self._halalas(line.earnings), 12),
+                wps._pz(0, 12),  # other: the commission is the basic above
                 wps._pz(self._halalas(line.loan_offset), 12),
                 'SAR',
                 '0' * 5,

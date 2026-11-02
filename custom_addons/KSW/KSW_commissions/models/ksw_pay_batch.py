@@ -1914,8 +1914,14 @@ class KswPayEntry(models.Model):
         batch_id = self.env.context.get('default_batch_id')
         if not batch_id:
             return vals
+        # Draft rows only: a row already handed over (sent early in a
+        # sub-batch, approved) is settled business, not the line being typed
+        # next to. Copying it forward pre-filled every new line of a
+        # component with the employee who went early, and the save then
+        # failed on him (his vacation had paid that month).
         previous = self.search(
-            [('batch_id', '=', batch_id)], order='id desc', limit=1)
+            [('batch_id', '=', batch_id), ('state', '=', 'draft')],
+            order='id desc', limit=1)
         if not previous:
             return vals
         for field in self._COPY_FORWARD:

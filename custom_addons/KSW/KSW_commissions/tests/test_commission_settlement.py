@@ -445,22 +445,6 @@ class TestLoadFromBas(SettlementCommon):
         with self.assertRaisesRegex(UserError, 'Nothing changed'):
             self._export(run)
 
-    def test_07_the_vacation_part_of_a_pay_type_stays_in_bas(self):
-        """BAS holds 1,500 for him; 1,200 is in the register and 300 was paid
-        on his vacation payslip — nothing to post."""
-        run = self._approve(self._commission_entry(self.emp_a, 1200.0).batch_id)
-        first = self._export(run)
-        first.item_ids.sudo().write({'amount': 1500.0})
-        key = first.item_ids.key
-        Settlement = type(self.env['ksw.pay.settlement'])
-        with patch.object(Settlement, '_vacation_parts',
-                          lambda self, runs: {key: 300.0}):
-            with self.assertRaisesRegex(UserError, 'Nothing changed'):
-                self._export(run, number='26009002')
-        # Without the vacation part the 300 is a real decrease.
-        voucher = self._export(run, number='26009003')
-        self.assertAlmostEqual(voucher.total_right, -300.0)
-
     def test_08_a_zero_block_does_not_swallow_the_next_man(self):
         """KSWCO 26008282: a man whose loan ate his whole month has no
         accrual line, so the next man's lines run on into his block."""
@@ -791,3 +775,143 @@ class TestUnwindKeepsCompletedDeductionsOwed(SettlementCommon):
                                      )._unwind_loan_offset()
         self.assertEqual(ded.line_ids.state, 'pending')
         self.assertEqual(ded.state, 'active', 'owed again, so active again')
+
+
+class TestVacationPaidCommissionInBas(SettlementCommon):
+    """KSWCO September (the user, 2026-11-02): MAHMOUD ELFADALI's month was
+    paid on his vacation payslip SLIP/14580, so the month voucher left him
+    out, and a vacation payslip is in no payslip batch, so no BAS file ever
+    carried it. His right is proved in its month however it is paid; the
+    vacation payslip's transfer is its own disbursement line."""
+
+    def _vacation_slip(self, run):
+        slip = self.env['hr.payslip'].sudo().create({
+            'name': 'Vacation Payslip probe',
+            'employee_id': self.emp_a.id,
+            'date_from': run.period,
+            'date_to': run.period + relativedelta(months=1, days=-1),
+        })
+        slip.write({'state': 'done'})
+        self.assertEqual(slip.x_paid_bank_account_id, self.bank)
+        return slip
+
+    def _pay_on_vacation(self, run, slip):
+        """What confirming the vacation payslip leaves behind: his entries
+        stamped, his register line gone."""
+        run._all_entries().filtered(
+            lambda e: e.employee_id == self.emp_a).sudo().write(
+                {'x_vacation_payslip_id': slip.id})
+        self._register_line(run, self.emp_a).sudo().unlink()
+
+    def _key(self, run, slip):
+        return 'vacation:%d:%d:%d' % (run.id, self.emp_a.id, slip.id)
+
+    def test_01_a_month_paid_on_the_vacation_is_still_in_its_voucher(self):
+        run = self._approve(self._commission_entry(self.emp_a, 1200.0).batch_id)
+        slip = self._vacation_slip(run)
+        self._pay_on_vacation(run, slip)
+        voucher = self._export(run)
+        self.assertAlmostEqual(voucher.total_right, 1200.0)
+        self.assertAlmostEqual(voucher.total_paid, 1200.0)
+        paid = voucher.item_ids.filtered(lambda i: i.kind == 'payment')
+        self.assertEqual(paid.key, self._key(run, slip))
+        self.assertEqual(paid.bank_account_id, self.bank)
+        rows = voucher._bas_rows()
+        self.assertEqual(sorted(self._codes(rows)), sorted([
+            ('3201010006', 1200.0, 0.0),
+            ('2107010001', 0.0, 1200.0),
+            ('2107010001', 1200.0, 0.0),
+            (BANK_CODE, 0.0, 1200.0),
+        ]))
+        # Said on the accrual credit, the accrual debit and the bank line, so
+        # the accountant does not transfer it again.
+        number = slip.number or slip.name
+        for row in rows:
+            if row['code'] in ('2107010001', BANK_CODE):
+                self.assertIn(number, row['ref'])
+                # Still ends «<name> شهر <month>»: the BAS reader keys on it.
+                self.assertTrue(row['ref'].split()[-2] in ('شهر', 'month'),
+                                row['ref'])
+        with self.assertRaisesRegex(UserError, 'Nothing changed'):
+            self._export(run, number='26009002')
+
+    def test_02_a_right_already_in_bas_gets_only_its_disbursement(self):
+        """KSWCO August: the right was exported before the vacation payslip
+        took the month. It stays; only the transfer is new."""
+        run = self._approve(self._commission_entry(self.emp_a, 1200.0).batch_id)
+        self._export(run)
+        slip = self._vacation_slip(run)
+        self._pay_on_vacation(run, slip)
+        voucher = self._export(run, number='26009002')
+        self.assertEqual(voucher.item_ids.mapped('kind'), ['payment'])
+        self.assertEqual(sorted(self._codes(voucher._bas_rows())), sorted([
+            ('2107010001', 1200.0, 0.0),
+            (BANK_CODE, 0.0, 1200.0),
+        ]))
+
+    def test_03_a_deduction_bas_already_took_is_not_cleared_twice(self):
+        """KSWCO PE00260: 113 posted as taken out of his August, then
+        collected on the same vacation payslip — the transfer is the rest."""
+        run = self._approve(self._commission_entry(self.emp_a, 1200.0).batch_id)
+        slip = self._vacation_slip(run)
+        self._pay_on_vacation(run, slip)
+        installment = self._penalty(self.emp_a, 100.0).line_ids
+        installment.sudo().write({'state': 'paid', 'payslip_id': slip.id})
+        posted = self.env['ksw.pay.settlement'].sudo().create(
+            {'origin': 'month', 'run_id': run.id})
+        self.env['ksw.pay.settlement.item'].sudo().create({
+            'settlement_id': posted.id, 'key': 'deduction:%d' % installment.id,
+            'kind': 'deduction', 'run_id': run.id,
+            'employee_id': self.emp_a.id, 'deduction_line_id': installment.id,
+            'amount': 100.0, 'counter_code': '1205010385',
+            'accrual_split': [['2107010001', 'accrual', 100.0]],
+        })
+        posted.sudo().write({'state': 'done'})
+        voucher = self._export(run, number='26009002')
+        paid = voucher.item_ids.filtered(lambda i: i.kind == 'payment')
+        self.assertAlmostEqual(paid.amount, 1100.0)
+
+    def test_04_a_cancelled_vacation_payslip_reverses_its_disbursement(self):
+        run = self._approve(self._commission_entry(self.emp_a, 1200.0).batch_id)
+        slip = self._vacation_slip(run)
+        self._pay_on_vacation(run, slip)
+        self._export(run)
+        run._all_entries().sudo().write({'x_vacation_payslip_id': False})
+        voucher = self._export(run, number='26009002')
+        paid = voucher.item_ids.filtered(lambda i: i.kind == 'payment')
+        self.assertEqual(paid.key, self._key(run, slip))
+        self.assertAlmostEqual(paid.amount, -1200.0)
+        self.assertEqual(sorted(self._codes(voucher._bas_rows())), sorted([
+            ('2107010001', 0.0, 1200.0),
+            (BANK_CODE, 1200.0, 0.0),
+        ]))
+
+    def test_05_mid_month_it_is_issued_and_paid_in_one_voucher(self):
+        """KSWCO October: SLIP/14580 paid his October on 29 Oct, while the
+        month was still open. The normal order is issue, then disburse; a
+        mid-month payment is both at once, on the accountant's voucher."""
+        entry = self._commission_entry(self.emp_a, 1200.0)
+        run = entry.batch_id.run_id
+        self.assertNotIn(run.state, ('approved', 'paid'))
+        slip = self._vacation_slip(run)
+        self._pay_on_vacation(run, slip)
+        admin = self.env.ref('base.user_admin')
+        self.assertEqual(run.with_user(admin).x_bas_unsettled_count, 2)
+        voucher = self.env['ksw.pay.settlement'].with_user(admin).with_context(
+            ksw_settlement_new_confirmed=True).create(
+                {'journal_number': '26009005'})
+        mine = voucher.item_ids.filtered(lambda i: i.run_id == run)
+        self.assertEqual(sorted(mine.mapped('kind')), ['accrual', 'payment'])
+        self.assertAlmostEqual(sum(mine.filtered(
+            lambda i: i.kind == 'accrual').mapped('amount')), 1200.0)
+        voucher.with_user(admin).action_generate()
+        self.assertEqual(voucher.state, 'done')
+        rows = [r for r in voucher._bas_rows()
+                if (slip.number or slip.name) in r['ref']]
+        self.assertEqual(sorted(self._codes(rows)), sorted([
+            ('2107010001', 0.0, 1200.0),
+            ('2107010001', 1200.0, 0.0),
+            (BANK_CODE, 0.0, 1200.0),
+        ]))
+        self.assertFalse(self.env['ksw.pay.settlement']._pending_deltas(
+            runs=run), 'nothing left for the month export to repeat')

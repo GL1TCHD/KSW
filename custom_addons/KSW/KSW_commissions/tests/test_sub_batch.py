@@ -157,6 +157,28 @@ class TestSubBatchLock(SubBatchCommon):
         self.assertEqual(more.state, 'draft')
         self.assertFalse(more.x_sub_batch_id)
 
+    def test_12b_the_rest_of_the_month_after_the_only_row_went_early(self):
+        """KSWCO PB000134 (Oct 2026): the early employee's row was the only
+        one in the component, so 'Add a line' opened as him and every save
+        was refused. The rest of the department must go in as usual."""
+        meals_sub = self._sub_batch(self.emp_a, batch=self.meals_batch)
+        meals_sub.with_user(self.sup_a).action_submit()
+        meals_sub.with_user(self.gm).action_approve()
+        self.assertEqual(self.meal_a.state, 'approved')
+        # Add a line, as the form does it: nothing carried from his row.
+        defaults = self.env['ksw.pay.entry'].with_user(self.sup_a).with_context(
+            default_batch_id=self.meals_batch.id).default_get(
+                ['employee_id', 'quantity'])
+        self.assertFalse(defaults.get('employee_id'))
+        more = self._entry(self.meals_batch, self.emp_a2, user=self.sup_a)
+        self.assertEqual(more.state, 'draft')
+        self.assertFalse(more.x_sub_batch_id)
+        # The next line copies the new one, not the early one.
+        defaults = self.env['ksw.pay.entry'].with_user(self.sup_a).with_context(
+            default_batch_id=self.meals_batch.id).default_get(['employee_id'])
+        self.assertEqual(defaults.get('employee_id'), self.emp_a2.id)
+        self.assertEqual(self.meal_a.state, 'approved')
+
     def test_13_a_batch_with_approved_rows_cannot_be_deleted_by_anyone(self):
         sub = self._sub_batch(self.emp_a)
         sub.with_user(self.sup_a).action_submit()

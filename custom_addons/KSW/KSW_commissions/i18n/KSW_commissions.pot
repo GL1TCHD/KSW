@@ -2162,6 +2162,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_sales_commission_override_wizard_form
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_settlement_new_wizard_form
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_bas_baseline_wizard_form
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_bas_compare_wizard_form
 msgid "Cancel"
 msgstr ""
 
@@ -2810,6 +2811,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_settlement_item__create_uid
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_settlement_new_wizard__create_uid
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_bas_baseline_wizard__create_uid
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_account__create_uid
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__create_uid
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_wizard__create_uid
 msgid "Created by"
 msgstr ""
 
@@ -2855,6 +2859,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_settlement_item__create_date
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_settlement_new_wizard__create_date
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_bas_baseline_wizard__create_date
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_account__create_date
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__create_date
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_wizard__create_date
 msgid "Created on"
 msgstr ""
 
@@ -2889,6 +2896,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_settlement__currency_id
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_settlement_item__currency_id
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_settlement_new_wizard__currency_id
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_account__currency_id
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__currency_id
 msgid "Currency"
 msgstr ""
 
@@ -3209,6 +3218,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_settlement_item__display_name
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_settlement_new_wizard__display_name
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_bas_baseline_wizard__display_name
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_account__display_name
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__display_name
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_wizard__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -3416,6 +3428,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_settlement_item_search
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_settlement_search
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_employee_review_search
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__employee_id
 msgid "Employee"
 msgstr ""
 
@@ -4175,6 +4188,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_settlement_item__id
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_settlement_new_wizard__id
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_bas_baseline_wizard__id
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_account__id
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__id
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_wizard__id
 msgid "ID"
 msgstr ""
 
@@ -4614,6 +4630,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_settlement_item__write_uid
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_settlement_new_wizard__write_uid
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_bas_baseline_wizard__write_uid
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_account__write_uid
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__write_uid
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_wizard__write_uid
 msgid "Last Updated by"
 msgstr ""
 
@@ -4659,6 +4678,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_settlement_item__write_date
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_settlement_new_wizard__write_date
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_bas_baseline_wizard__write_date
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_account__write_date
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__write_date
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_wizard__write_date
 msgid "Last Updated on"
 msgstr ""
 
@@ -5336,6 +5358,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_site__note
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_settlement__note
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_settlement_form
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__note
 msgid "Note"
 msgstr ""
 
@@ -6759,6 +6782,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_paid_wizard__run_id
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_review__run_id
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_bas_baseline_wizard__run_id
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_account__run_id
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__run_id
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_wizard__run_id
 msgid "Run"
 msgstr ""
 
@@ -7097,6 +7123,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_rule__sequence
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_tier__sequence
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_salesperson_profile_client_split__sequence
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_account__sequence
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__sequence
 msgid "Sequence"
 msgstr ""
 
@@ -9045,6 +9073,7 @@ msgstr ""
 
 #. module: KSW_commissions
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.hr_leave_view_form_inherit_ksw_commission_entries
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_form
 msgid "by"
 msgstr ""
 
@@ -10258,6 +10287,7 @@ msgstr ""
 
 #. module: KSW_commissions
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_settlement_item_search
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_form
 msgid "Voucher"
 msgstr ""
 
@@ -10390,6 +10420,7 @@ msgstr ""
 
 #. module: KSW_commissions
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_bas_baseline_wizard_form
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_bas_compare_wizard_form
 msgid "26008282"
 msgstr ""
 
@@ -10415,6 +10446,7 @@ msgstr ""
 
 #. module: KSW_commissions
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_bas_baseline_wizard__voucher_number
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_wizard__voucher_number
 msgid "BAS Voucher Number"
 msgstr ""
 
@@ -10816,6 +10848,7 @@ msgstr ""
 
 #. module: KSW_commissions
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_settlement__bas_check_report
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_form
 msgid "Comparison with BAS"
 msgstr ""
 
@@ -10952,4 +10985,336 @@ msgstr ""
 #. module: KSW_commissions
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_partner_form_ksw_commission
 msgid "BAS account no., e.g. 120301080"
+msgstr ""
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_form
+msgid ""
+",\n"
+"                                    read"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_account__code
+msgid "Account"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_account__name
+msgid "Account Name"
+msgstr ""
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_pay_run_bas_compare.py:0
+msgid ""
+"Also in the voucher, not part of this month (e.g. sales commission): debit "
+"%(debit).2f · credit %(credit).2f"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__bas_amount
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_form
+msgid "BAS Commission"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_account__bas_credit
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_form
+msgid "BAS Credit"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_account__bas_debit
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_form
+msgid "BAS Debit"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__bas_deduction
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_form
+msgid "BAS Deductions"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__label
+msgid "BAS Description"
+msgstr ""
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_form
+msgid ""
+"BAS credits each person's accrual after what\n"
+"                                was deducted from him (Dr expense, Cr advance,\n"
+"                                Cr accrual for the rest). The Odoo columns are\n"
+"                                laid out the same way, so they compare account\n"
+"                                by account."
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,help:KSW_commissions.field_ksw_pay_run_bas_compare_line__diff_amount
+#: model:ir.model.fields,help:KSW_commissions.field_ksw_pay_run_bas_compare_line__diff_deduction
+msgid "BAS minus Odoo."
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,help:KSW_commissions.field_ksw_pay_run_bas_compare_account__diff_credit
+#: model:ir.model.fields,help:KSW_commissions.field_ksw_pay_run_bas_compare_account__diff_debit
+msgid "BAS minus Odoo. Positive: BAS holds more."
+msgstr ""
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_pay_run_bas_compare.py:0
+msgid "BAS voucher %(number)s"
+msgstr ""
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_form
+msgid "By Account"
+msgstr ""
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_form
+msgid "By Person"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_pay_run_bas_compare_account__section__accrual
+msgid "Commission Accrual"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__diff_amount
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_form
+msgid "Commission Difference"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_pay_run_bas_compare_account__section__expense
+msgid "Commission Expense"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model,name:KSW_commissions.model_ksw_pay_run_bas_compare_account
+msgid "Commission Month vs BAS: by Account"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model,name:KSW_commissions.model_ksw_pay_run_bas_compare_line
+msgid "Commission Month vs BAS: by Person"
+msgstr ""
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_bas_compare_wizard_form
+msgid "Compare"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model,name:KSW_commissions.model_ksw_pay_run_bas_compare_wizard
+msgid "Compare a Commission Month with BAS"
+msgstr ""
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_pay_run_bas_compare.py:0
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_bas_compare_wizard_form
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_form
+msgid "Compare with BAS"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run__x_bas_compare_by_id
+msgid "Compared By"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run__x_bas_compare_date
+msgid "Compared On"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run__x_bas_compare_voucher
+msgid "Compared With BAS Voucher"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run__x_bas_compare_note
+msgid "Comparison Summary"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run__x_bas_compare_account_ids
+msgid "Comparison by Account"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run__x_bas_compare_line_ids
+msgid "Comparison by Person"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_account__diff_credit
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_form
+msgid "Credit Difference"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_account__diff_debit
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_form
+msgid "Debit Difference"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__diff_deduction
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_form
+msgid "Deduction Difference"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_pay_run_bas_compare_account__section__advance
+msgid "Deductions (Advances)"
+msgstr ""
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_pay_run_bas_compare.py:0
+msgid "Deductions posted in another voucher, or not yet"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,help:KSW_commissions.field_ksw_pay_run_bas_compare_line__odoo_amount
+msgid ""
+"Every approved entry of the month, including the part already paid on a "
+"vacation payslip."
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,help:KSW_commissions.field_ksw_pay_run_bas_compare_line__label
+msgid "For a BAS line that names no one the month knows: its own description."
+msgstr ""
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_pay_run_bas_compare.py:0
+msgid "In BAS only, not in the month"
+msgstr ""
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_pay_run_bas_compare.py:0
+msgid "Names no one in Odoo"
+msgstr ""
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_pay_run_bas_compare.py:0
+msgid "No advance account in BAS"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_pay_run_bas_compare_account__section__other
+msgid "Not Part of the Month"
+msgstr ""
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_pay_run_bas_compare.py:0
+msgid "Not in this BAS voucher"
+msgstr ""
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_pay_run_bas_compare.py:0
+msgid "Not on the register"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__odoo_amount
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_form
+msgid "Odoo Commission"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_account__odoo_credit
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_form
+msgid "Odoo Credit"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_account__odoo_debit
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_form
+msgid "Odoo Debit"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__odoo_deduction
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_form
+msgid "Odoo Deductions"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__odoo_vacation
+msgid "Of Which on Vacation Payslip"
+msgstr ""
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_form
+msgid "On Vacation Payslip"
+msgstr ""
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_pay_run_bas_compare.py:0
+msgid "Only an approved or paid month can be compared with BAS."
+msgstr ""
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_pay_run_bas_compare.py:0
+msgid "Paid on vacation payslip"
+msgstr ""
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_form
+msgid ""
+"Reads the month's voucher from BAS (nothing is\n"
+"                                written to BAS) and lays it beside the month:\n"
+"                                totals by account, then one line per person."
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_account__section
+msgid "Section"
+msgstr ""
+
+#. module: KSW_commissions
+#: model:ir.model.fields,help:KSW_commissions.field_ksw_pay_run_bas_compare_wizard__voucher_number
+msgid "The month's voucher in BAS, e.g. 26008282."
+msgstr ""
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_bas_compare_wizard_form
+msgid ""
+"The voucher is read from BAS (nothing is written to BAS)\n"
+"                    and laid beside the month. The month itself does not\n"
+"                    change."
+msgstr ""
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_pay_run_bas_compare.py:0
+msgid "This month in BAS: debit %(debit).2f · credit %(credit).2f"
+msgstr ""
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_pay_run_bas_compare.py:0
+msgid "This month in Odoo: debit %(debit).2f · credit %(credit).2f"
+msgstr ""
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_pay_settlement.py:0
+msgid "PAID on vacation payslip"
 msgstr ""

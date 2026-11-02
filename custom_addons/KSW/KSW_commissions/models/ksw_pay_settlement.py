@@ -15,6 +15,8 @@ items, and every item is one fact keyed for life:
 * ``deduction:<installment>`` — a deduction taken from it, whenever charged;
 * ``unlinked:<register line>`` — a legacy offset with no installment;
 * ``payment:<register line>`` — the transfer;
+* ``vacation:<run>:<employee>:<payslip>`` — the part of the month a
+  vacation payslip paid instead: Dr accrual / Cr the bank it was paid from;
 * ``bas:<voucher>:<serial>`` — a line of a BAS voucher loaded as the
   starting point that matches nothing in Odoo (so the next file reverses it).
 
@@ -196,9 +198,25 @@ class KswPaySettlement(models.Model):
         return runs.sudo().filtered(lambda r: r.state in SETTLED_RUN_STATES)
 
     @api.model
+    def _vacation_runs(self, runs=None):
+        """The months a confirmed vacation payslip paid part of — whatever
+        their state: that part is issued and paid at once, in the middle of
+        the month, without waiting for the month (the user, 2026-11-02)."""
+        found = self.env['ksw.pay.entry'].sudo().search([
+            ('x_vacation_payslip_id.state', '=', 'done'),
+        ]).batch_id.run_id
+        return found if runs is None else found & runs.sudo()
+
+    @api.model
     def _desired_events(self, runs=None):
         """``{key: item values}`` — everything BAS should hold today for
-        ``runs`` (every approved or paid month when None)."""
+        ``runs`` (every approved or paid month, and every month a vacation
+        payslip paid part of, when None).
+
+        A month's own figures count once it is approved. The part a vacation
+        payslip paid counts from the day the payslip is confirmed: the normal
+        order is issue, then disburse; a mid-month payment is both at once.
+        """
         # A key carries the pay type's wording, so it must not depend on who
         # is looking: always BAS's language, as the file itself is written.
         lang = self._voucher_lang()
@@ -211,31 +229,9 @@ class KswPaySettlement(models.Model):
             month_end = run._bas_journal_date()
             lines = run.line_ids
             line_of = {l.employee_id.id: l for l in lines}
-            # The right — the register's own figures, one per pay type.
-            for employee_id, by_component in run._bas_component_totals().items():
-                employee = self.env['hr.employee'].sudo().browse(employee_id)
-                for detail in run._bas_detail_lines(by_component):
-                    if not round(detail['amount'], 2):
-                        continue
-                    comp = detail['component']
-                    key = 'accrual:%d:%d:%s|%s|%s' % (
-                        run.id, employee_id, comp.x_bas_expense_code or '',
-                        comp.x_bas_accrual_code or '', detail['label'])
-                    events[key] = {
-                        'key': key, 'kind': 'accrual', 'run_id': run.id,
-                        'run_line_id': line_of.get(employee_id, lines[:0]).id,
-                        'employee_id': employee_id,
-                        'label': detail['label'],
-                        'expense_code': comp.x_bas_expense_code,
-                        'expense_name': comp.x_bas_expense_name,
-                        'accrual_code': comp.x_bas_accrual_code,
-                        'accrual_name': comp.x_bas_accrual_name,
-                        # The truck, never the driver's own cost centre.
-                        'cost_center': (employee.x_bas_equipment_code or ''
-                                        if comp.x_bas_use_cost_center else ''),
-                        'event_date': month_end,
-                        'amount': round(detail['amount'], 2),
-                    }
+            # The right, one per pay type — the register's own figures.
+            self._add_accrual_events(events, run,
+                                     run._bas_component_totals(), line_of)
             if not lines:
                 continue
             # Every deduction taken out of it, whenever it was charged.
@@ -285,7 +281,54 @@ class KswPaySettlement(models.Model):
                                         or run.x_salary_bank_account_id).id,
                     'event_date': paid_on, 'amount': amount,
                 }
+        # What a vacation payslip paid: issued and disbursed together, in
+        # its month whatever the month's state.
+        for run in self._vacation_runs(runs):
+            by_employee = {}
+            for (employee, _slip), by_component in (
+                    run._vacation_slip_totals().items()):
+                mine = by_employee.setdefault(employee.id, {})
+                for component, amount in by_component.items():
+                    mine[component] = mine.get(component, 0.0) + amount
+            self._add_accrual_events(events, run, by_employee, {})
+            events.update(self._vacation_payment_events(run))
         return events
+
+    @api.model
+    def _add_accrual_events(self, events, run, totals, line_of):
+        """Add ``totals`` (``{employee_id: {component: riyals}}``) to the
+        month's accrual events — one per man, pay type and accounts."""
+        Employee = self.env['hr.employee'].sudo()
+        month_end = run._bas_journal_date()
+        for employee_id, by_component in totals.items():
+            employee = Employee.browse(employee_id)
+            for detail in run._bas_detail_lines(by_component):
+                if not round(detail['amount'], 2):
+                    continue
+                comp = detail['component']
+                key = 'accrual:%d:%d:%s|%s|%s' % (
+                    run.id, employee_id, comp.x_bas_expense_code or '',
+                    comp.x_bas_accrual_code or '', detail['label'])
+                if key in events:
+                    events[key]['amount'] = round(
+                        events[key]['amount'] + detail['amount'], 2)
+                    continue
+                line = line_of.get(employee_id)
+                events[key] = {
+                    'key': key, 'kind': 'accrual', 'run_id': run.id,
+                    'run_line_id': line.id if line else False,
+                    'employee_id': employee_id,
+                    'label': detail['label'],
+                    'expense_code': comp.x_bas_expense_code,
+                    'expense_name': comp.x_bas_expense_name,
+                    'accrual_code': comp.x_bas_accrual_code,
+                    'accrual_name': comp.x_bas_accrual_name,
+                    # The truck, never the driver's own cost centre.
+                    'cost_center': (employee.x_bas_equipment_code or ''
+                                    if comp.x_bas_use_cost_center else ''),
+                    'event_date': month_end,
+                    'amount': round(detail['amount'], 2),
+                }
 
     def _booked(self):
         """``{key: (amount, last item)}`` over every voucher but this one.
@@ -316,58 +359,102 @@ class KswPaySettlement(models.Model):
             return False
         return self.env['ksw.bas.journal'].voucher_lang()
 
-    @api.model
-    def _vacation_parts(self, runs):
-        """``{key: amount}`` — the part of each pay type already paid on a
-        vacation payslip (and settled in BAS by that payslip's own entry)."""
-        lang = self._voucher_lang()
-        if lang and self.env.context.get('lang') != lang:
-            return self.with_context(lang=lang)._vacation_parts(
-                runs.with_context(lang=lang))
-        parts = defaultdict(float)
-        for run in runs:
-            for employee, (_entries, by_component) in (
-                    run._vacation_settled_totals().items()):
-                for detail in run._bas_detail_lines(by_component):
-                    comp = detail['component']
-                    key = 'accrual:%d:%d:%s|%s|%s' % (
-                        run.id, employee.id, comp.x_bas_expense_code or '',
-                        comp.x_bas_accrual_code or '', detail['label'])
-                    parts[key] += round(detail['amount'], 2)
-        return parts
+    def _vacation_payment_events(self, run):
+        """``{key: item values}`` — each vacation payslip's disbursement of
+        the month: Dr accrual / Cr the bank the payslip was paid from.
+
+        The accounting team pays the vacation payslip; this records the
+        commission half of that transfer, so the accrual the month proved is
+        cleared in BAS and in Odoo alike (the user, 2026-11-02). It clears
+        what is *left* of his accrual: a deduction BAS was already told came
+        out of this month (Dr accrual / Cr his advance) and that the same
+        payslip then collected is not cleared a second time — KSWCO PE00260,
+        113 SAR in CST/2026/0009 before SLIP/14580 took his August.
+        """
+        Item = self.env['ksw.pay.settlement.item'].sudo()
+        events = {}
+        for (employee, slip), by_component in run._vacation_slip_totals().items():
+            right = round(sum(by_component.values()), 2)
+            domain = [
+                ('state', '!=', 'cancel'), ('kind', '=', 'deduction'),
+                ('run_id', '=', run.id), ('employee_id', '=', employee.id),
+                ('deduction_line_id.payslip_id', '=', slip.id),
+            ]
+            if self.ids:
+                domain.append(('settlement_id', 'not in', self.ids))
+            taken = round(sum(Item.search(domain).mapped('amount')), 2)
+            amount = round(right - taken, 2)
+            if amount <= 0.0:
+                continue
+            key = 'vacation:%d:%d:%d' % (run.id, employee.id, slip.id)
+            events[key] = {
+                'key': key, 'kind': 'payment', 'run_id': run.id,
+                'run_line_id': False,     # paid off the register
+                'employee_id': employee.id,
+                'label': slip.number or slip.name or '',
+                'bank_account_id': slip.x_paid_bank_account_id.id,
+                'event_date': fields.Datetime.context_timestamp(
+                    self, slip.create_date).date(),
+                'amount': amount,
+            }
+        return events
 
     def _pending_deltas(self, runs=None, employees=None):
         """``[item values]`` — what BAS does not hold yet.
 
         ``runs`` limits it to those months, ``employees`` to those men. A
-        month not approved or paid right now (reopened for a correction) is
-        frozen: none of its items is offered, so nothing is reversed while it
-        is being corrected.
+        month not approved or paid right now (open, or reopened for a
+        correction) is frozen: none of its own items is offered, so nothing
+        is reversed while it is being corrected. Only what a vacation
+        payslip paid in it is offered — issued and paid together, mid-month.
         """
-        scope = self._settled_runs(runs)
+        settled = self._settled_runs(runs)
+        booked_all = self._booked()
+        vacation_runs = self._vacation_runs(runs) | self.env[
+            'ksw.pay.run'].sudo().browse(sorted({
+                last.run_id.id for key, (_amt, last) in booked_all.items()
+                if key.startswith('vacation:')
+                and (runs is None or last.run_id in runs)}))
+        frozen = vacation_runs - settled
+        scope = settled | frozen
         desired = self._desired_events(scope)
-        booked = {k: v for k, v in self._booked().items()
+        booked = {k: v for k, v in booked_all.items()
                   if v[1].run_id in scope}
         registers = {run.id: set(run.line_ids.employee_id.ids) for run in scope}
-        vacation = self._vacation_parts(scope)
+        # In a frozen month, only the men a vacation payslip paid (or whose
+        # vacation disbursement BAS holds) are anyone's business.
+        vacation_men = defaultdict(set)
+        for key, event in desired.items():
+            if key.startswith('vacation:'):
+                vacation_men[event['run_id']].add(event['employee_id'])
+        for key, (_amt, last) in booked.items():
+            if key.startswith('vacation:'):
+                vacation_men[last.run_id.id].add(last.employee_id.id)
         deltas = []
         for key in list(desired) + [k for k in booked if k not in desired]:
             event = desired.get(key)
             posted, last = booked.get(key, (0.0, None))
-            if not event and last.employee_id.id not in registers.get(
-                    last.run_id.id, ()):
-                # BAS holds it; the month's register no longer has him (paid
-                # on his vacation payslip, held, never entered here). He was
-                # settled somewhere else, by an entry of its own: not ours to
-                # reverse, nor to show.
+            run_id = event['run_id'] if event else last.run_id.id
+            employee_id = event['employee_id'] if event else last.employee_id.id
+            if run_id in frozen.ids and (
+                    not key.startswith(('accrual:', 'vacation:'))
+                    or employee_id not in vacation_men[run_id]):
+                continue
+            if (not event and not key.startswith('vacation:')
+                    and last.employee_id.id not in registers.get(
+                        last.run_id.id, ())):
+                # BAS holds it; the month's register no longer has him (held,
+                # never entered here). Not ours to reverse, nor to show. A
+                # vacation disbursement is ours: a cancelled payslip's
+                # disbursement is reversed.
                 continue
             target = event['amount'] if event else 0.0
-            if event and event['kind'] == 'accrual' and vacation.get(key):
-                # Part of this pay type was paid on his vacation payslip: what
-                # BAS holds for that part stays where it is.
-                target += min(max(posted - target, 0.0), vacation[key])
             delta = round(target - posted, 2)
             if abs(delta) < 0.005:
+                continue
+            if run_id in frozen.ids and key.startswith('accrual:') and delta < 0:
+                # A frozen month's own right is not taken back mid-correction;
+                # it comes out once the month is approved again.
                 continue
             if event:
                 vals = dict(event, amount=delta)
@@ -765,6 +852,15 @@ class KswPaySettlement(models.Model):
             run_items = items.filtered(lambda i, r=run: i.run_id == r)
             month = Journal.month_label(run.period)
             bank_totals = defaultdict(float)
+            # A man paid in full on his vacation payslip: every line of his
+            # says so, so the accountant does not transfer it again (the
+            # user, 2026-11-02). Before his name, never after the month —
+            # the BAS reader keys on «<name> شهر <month>» ending the line.
+            on_register = set(run.line_ids.employee_id.ids)
+            paid_on = defaultdict(list)
+            for employee, slip in run._vacation_slip_totals():
+                if employee.id not in on_register:
+                    paid_on[employee.id].append(slip.number or slip.name or '')
             people = [(e, run_items.filtered(lambda i, e=e: i.employee_id == e))
                       for e in self._employees_in_order(run, run_items)]
             orphans = run_items.filtered(lambda i: not i.employee_id)
@@ -794,6 +890,9 @@ class KswPaySettlement(models.Model):
                     if not amount:
                         continue
                     label = _('Monthly commissions')
+                    if employee and paid_on.get(employee.id):
+                        label = Journal.ref(label, '-', self._paid_note(
+                            '، '.join(paid_on[employee.id])))
                     if amount < 0:
                         label = Journal.ref(_('Reversal'), label)
                     rows.append(line(code, names[code], -amount,
@@ -834,24 +933,38 @@ class KswPaySettlement(models.Model):
                         if round(amount, 2):
                             rows.append(line(code, counter_names[code],
                                              -round(amount, 2), ref))
-                # 3. The transfer.
+                # 3. The transfer — the month's, or his vacation payslip's.
                 for item in mine.filtered(lambda i: i.kind == 'payment'):
                     sign = 1 if item.amount > 0 else -1
-                    bank_totals[item.bank_account_id.sudo()] += item.amount
-                    ref = ref_for(item, _('Commission paid'))
+                    slip = item.label if item.key.startswith('vacation:') else ''
+                    bank_totals[(item.bank_account_id.sudo(), slip,
+                                 who if slip else '')] += item.amount
+                    ref = ref_for(item, self._paid_note(slip)
+                                  if slip else _('Commission paid'))
                     for code, name, amt in splits[item.id]:
                         rows.append(line(code, name, sign * amt, ref))
-            for bank, amount in bank_totals.items():
+            # The bank once per paying account and month; a vacation payslip
+            # is its own transfer, so its own line.
+            for (bank, slip, who), amount in bank_totals.items():
                 amount = round(amount, 2)
                 if not amount:
                     continue
-                ref = run._bas_ref(
-                    Journal.ref(_('Commission transfer'),
-                                bank.acc_number or ''), '', month)
+                label = (self._paid_note(slip) if slip else Journal.ref(_('Commission transfer'),
+                                                  bank.acc_number or ''))
+                if slip and amount < 0:
+                    label = Journal.ref(_('Reversal'), label)
+                ref = run._bas_ref(label, who, month)
                 rows.append(line(bank.x_bas_account_code,
                                  bank.x_bas_account_name, -amount, ref))
         Journal.check_balanced(rows)
         return rows
+
+    @api.model
+    def _paid_note(self, slips):
+        """«PAID on vacation payslip SLIP/…» — on every line of a month
+        a vacation payslip paid instead of the bank transfer."""
+        return self.env['ksw.bas.journal'].ref(
+            _('PAID on vacation payslip'), slips)
 
     @api.model
     def _employees_in_order(self, run, items):
@@ -878,19 +991,35 @@ class KswPaySettlement(models.Model):
             payment = desired.get('payment:%d' % line.id)
             if payment:
                 sequence.append((payment['key'], payment['amount']))
-            for key, amount in sequence:
-                taken, left = [], round(amount, 2)
-                for group in groups:
-                    if left <= 0.0:
-                        break
-                    take = round(min(group[2], left), 2)
-                    if take <= 0.0:
-                        continue
-                    taken.append((group[0], group[1], take))
-                    group[2] = round(group[2] - take, 2)
-                    left = round(left - take, 2)
-                if key:
-                    allocations[key] = taken
+            allocations.update(self._allocate(groups, sequence))
+        # A vacation payslip's disbursement draws on the pay types it paid.
+        for (employee, slip), by_component in run._vacation_slip_totals().items():
+            event = desired.get('vacation:%d:%d:%d' % (run.id, employee.id,
+                                                      slip.id))
+            if event:
+                allocations.update(self._allocate(
+                    self._accrual_groups(run, by_component),
+                    [(event['key'], event['amount'])]))
+        return allocations
+
+    @api.model
+    def _allocate(self, groups, sequence):
+        """``{key: [(code, name, amount)]}`` — ``sequence``'s amounts taken
+        from ``groups``' accrual pools in order."""
+        allocations = {}
+        for key, amount in sequence:
+            taken, left = [], round(amount, 2)
+            for group in groups:
+                if left <= 0.0:
+                    break
+                take = round(min(group[2], left), 2)
+                if take <= 0.0:
+                    continue
+                taken.append((group[0], group[1], take))
+                group[2] = round(group[2] - take, 2)
+                left = round(left - take, 2)
+            if key:
+                allocations[key] = taken
         return allocations
 
     @api.model
@@ -1106,9 +1235,10 @@ class KswPayRun(models.Model):
         is_accountant = self.env.user.has_group(ACCOUNTANT)
         for rec in self:
             rec.x_bas_unsettled_count = (
+                # An open month too: what a vacation payslip paid in it is
+                # due in BAS now, not when the month is approved.
                 Settlement.sudo()._pending_count(rec)
-                if is_accountant and rec.id and rec.state in SETTLED_RUN_STATES
-                else 0)
+                if is_accountant and rec.id else 0)
 
     def _mark_lines_paid(self, lines, journal_number='', voucher_date=None):
         """Mark Paid, and post the payment to BAS in the same step.

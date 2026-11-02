@@ -14,6 +14,8 @@ this test asserts the 194-character row contract and the field reads, not just
 Hit on KSWCO 2026-09-24 by the accountant, on the August run.
 """
 import io
+
+import openpyxl
 from datetime import date
 
 from odoo.tests.common import TransactionCase
@@ -268,6 +270,39 @@ class TestWpsTxtExport(TestKawtharTxtExport):
         self.assertIn('SA4420000001234567891234', row, "the employee's IBAN")
         self.assertIn(str(90000).zfill(15), row, 'the net in halalas')
         self.assertIn('2098765432', row)
+
+    def test_wps_txt_breakdown_adds_up_to_the_net(self):
+        """The bank refuses a row whose basic + housing + other − deductions
+        is not its net (KSWCO August 2026: all 19 Kawther WPS records)."""
+        if self.skip_reason:
+            self.skipTest(self.skip_reason)
+        self.wps_line.sudo().loan_offset = 200.0
+        text = self._wps_wizard('specific_txt')._make_wps_txt(
+            self.wps_bank, self.wps_line)
+        row = text.rstrip('\n').split('\n')[1]
+        start = 12 + 4 + 8 + 24 + 11 + 50   # number, swift, IBAN, name
+        net = int(row[start:start + 15])
+        start += 15 + 10 + 5                # net, national id, filler
+        basic = int(row[start:start + 13])
+        housing = int(row[start + 13:start + 25])
+        other = int(row[start + 25:start + 37])
+        deductions = int(row[start + 37:start + 49])
+        self.assertEqual((net, basic, housing, other, deductions),
+                         (70000, 90000, 0, 0, 20000))
+        self.assertEqual(basic + housing + other - deductions, net)
+
+    def test_wps_sheet_counts_the_commission_once(self):
+        if self.skip_reason:
+            self.skipTest(self.skip_reason)
+        self.wps_line.sudo().loan_offset = 200.0
+        wizard = self._wps_wizard('specific_excel')
+        book = openpyxl.load_workbook(io.BytesIO(wizard._make_wps_excel(
+            {self.wps_bank: self.wps_line}, all_settled=False)))
+        sheet = next(ws for ws in book.worksheets if ws.cell(6, 7).value == 'Basic')
+        amount, basic, hra, other, deductions = (
+            sheet.cell(7, c).value for c in range(6, 11))
+        self.assertEqual(basic + hra + other - deductions, amount)
+        self.assertEqual(other, 0.0)
 
     def test_all_txt_includes_the_wps_bank(self):
         if self.skip_reason:

@@ -18,6 +18,7 @@ from . import ksw_pay_sub_batch           # some employees handed over early
 from . import ksw_pay_employee_review     # one employee's handover, section per component
 from . import ksw_pay_run                 # the month, its approval and the register
 from . import ksw_pay_run_journal        # the month as a BAS journal entry
+from . import ksw_pay_run_bas_compare    # the month beside its voucher in BAS
 from . import ksw_pay_settlement        # what happened to it afterwards, posted once
 from . import ksw_pay_settlement_bas_check  # each posted file read back from BAS
 from . import res_partner_bank           # the BAS bank account behind a paying account

@@ -287,6 +287,89 @@
                             </div>
                         </page>
 
+                        <!-- The month beside its voucher in BAS, read back
+                             on demand: what the accountant otherwise adds
+                             up from a pasted voucher. -->
+                        <page string="Comparison with BAS" name="bas_compare"
+                              groups="KSW_commissions.group_commission_accountant"
+                              invisible="state not in ['approved', 'paid']">
+                            <div class="d-flex align-items-center gap-3 mb-2">
+                                <button name="action_open_bas_compare_wizard"
+                                        type="object" string="Compare with BAS"
+                                        class="btn-primary" icon="fa-balance-scale"/>
+                                <span class="text-muted"
+                                      invisible="not x_bas_compare_voucher">
+                                    Voucher <field name="x_bas_compare_voucher"
+                                                   class="fw-bold"/>,
+                                    read <field name="x_bas_compare_date"/>
+                                    by <field name="x_bas_compare_by_id"
+                                              options="{'no_open': True}"/>
+                                </span>
+                            </div>
+                            <div class="text-muted mb-2"
+                                 invisible="x_bas_compare_voucher">
+                                Reads the month's voucher from BAS (nothing is
+                                written to BAS) and lays it beside the month:
+                                totals by account, then one line per person.
+                            </div>
+                            <field name="x_bas_compare_note" nolabel="1"
+                                   class="font-monospace"
+                                   invisible="not x_bas_compare_voucher"/>
+                            <div class="alert alert-info mt-2" role="status"
+                                 invisible="not x_bas_compare_voucher">
+                                BAS credits each person's accrual after what
+                                was deducted from him (Dr expense, Cr advance,
+                                Cr accrual for the rest). The Odoo columns are
+                                laid out the same way, so they compare account
+                                by account.
+                            </div>
+                            <separator string="By Account"
+                                       invisible="not x_bas_compare_voucher"/>
+                            <field name="x_bas_compare_account_ids" nolabel="1"
+                                   readonly="1"
+                                   invisible="not x_bas_compare_voucher">
+                                <list create="false" delete="false"
+                                      decoration-muted="section == 'other'"
+                                      decoration-danger="section != 'other' and (diff_debit != 0 or diff_credit != 0)">
+                                    <field name="section"/>
+                                    <field name="code"/>
+                                    <field name="name"/>
+                                    <field name="bas_debit" sum="BAS Debit"/>
+                                    <field name="odoo_debit" sum="Odoo Debit"/>
+                                    <field name="diff_debit" sum="Debit Difference"/>
+                                    <field name="bas_credit" sum="BAS Credit"/>
+                                    <field name="odoo_credit" sum="Odoo Credit"/>
+                                    <field name="diff_credit" sum="Credit Difference"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                </list>
+                            </field>
+                            <separator string="By Person"
+                                       invisible="not x_bas_compare_voucher"/>
+                            <field name="x_bas_compare_line_ids" nolabel="1"
+                                   readonly="1"
+                                   invisible="not x_bas_compare_voucher">
+                                <list create="false" delete="false"
+                                      default_order="sequence, diff_amount desc"
+                                      decoration-danger="diff_amount != 0"
+                                      decoration-warning="diff_amount == 0 and diff_deduction != 0">
+                                    <field name="sequence" column_invisible="1"/>
+                                    <field name="employee_id"
+                                           options="{'no_open': True}"/>
+                                    <field name="label" optional="show"/>
+                                    <field name="odoo_amount" sum="Odoo Commission"/>
+                                    <field name="odoo_vacation" optional="show"
+                                           sum="On Vacation Payslip"/>
+                                    <field name="bas_amount" sum="BAS Commission"/>
+                                    <field name="diff_amount" sum="Commission Difference"/>
+                                    <field name="odoo_deduction" sum="Odoo Deductions"/>
+                                    <field name="bas_deduction" sum="BAS Deductions"/>
+                                    <field name="diff_deduction" sum="Deduction Difference"/>
+                                    <field name="note"/>
+                                    <field name="currency_id" column_invisible="1"/>
+                                </list>
+                            </field>
+                        </page>
+
                         <page string="Bank Export" name="bank"
                               groups="KSW_commissions.group_commission_accountant">
                             <group>

@@ -32,7 +32,11 @@ class TestStatementsUi(HttpCase):
             const t0 = Date.now();
             const tick = () => {
                 const field = document.querySelector('.modal div[name="partner_ids"]');
-                if (field && document.querySelector('.modal button[name="button_export_html"]')) {
+                // Both sides and the year-to-date period are preselected.
+                const both = document.querySelector('.modal div[name="account_type"] input[data-value="all"]');
+                const year = document.querySelector('.modal div[name="x_date_range"] input[data-value="year"]');
+                if (field && both && both.checked && year && year.checked
+                        && document.querySelector('.modal button[name="button_export_html"]')) {
                     console.log('test successful');
                 } else if (Date.now() - t0 > 20000) {
                     console.error('statement dialog or partner field missing');

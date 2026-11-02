@@ -435,6 +435,18 @@ class TestPayEntryUX(PayEntryCommon):
         self.assertEqual(str(defaults.get('date')), '2028-07-03')
         self.assertEqual(defaults.get('employee_id'), self.emp.id)
 
+    def test_05b_new_line_does_not_copy_a_handed_over_row(self):
+        """A row sent early is not the next line's template: copying its
+        employee made every new line of the component his."""
+        batch = self._batch()
+        entry = self._entry(batch, quantity=4.0, reason='Sent early')
+        entry.sudo().write({'state': 'approved'})
+        defaults = self.env['ksw.pay.entry'].with_context(
+            default_batch_id=batch.id).default_get(
+                ['employee_id', 'quantity', 'reason'])
+        self.assertFalse(defaults.get('employee_id'))
+        self.assertFalse(defaults.get('reason'))
+
     def test_06_first_line_of_a_batch_has_nothing_to_copy(self):
         batch = self._batch()
         defaults = self.env['ksw.pay.entry'].with_context(

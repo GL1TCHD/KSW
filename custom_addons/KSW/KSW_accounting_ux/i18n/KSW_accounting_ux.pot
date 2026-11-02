@@ -1831,3 +1831,43 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:KSW_accounting_ux.view_account_invoice_filter_ksw_bas_info
 msgid "Cash / Credit"
 msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_activity_statement_wizard__x_date_range
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_detailed_activity_statement_wizard__x_date_range
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_outstanding_statement_wizard__x_date_range
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_statement_common_wizard__x_date_range
+msgid "Period"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__activity_statement_wizard__x_date_range__history
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__detailed_activity_statement_wizard__x_date_range__history
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__outstanding_statement_wizard__x_date_range__history
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__statement_common_wizard__x_date_range__history
+msgid "Full History"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__activity_statement_wizard__x_date_range__year
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__detailed_activity_statement_wizard__x_date_range__year
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__outstanding_statement_wizard__x_date_range__year
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__statement_common_wizard__x_date_range__year
+msgid "Start of Year"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__activity_statement_wizard__x_date_range__custom
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__detailed_activity_statement_wizard__x_date_range__custom
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__outstanding_statement_wizard__x_date_range__custom
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__statement_common_wizard__x_date_range__custom
+msgid "Specific Range"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__activity_statement_wizard__account_type__all
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__detailed_activity_statement_wizard__account_type__all
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__outstanding_statement_wizard__account_type__all
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__statement_common_wizard__account_type__all
+msgid "Receivable and Payable"
+msgstr ""

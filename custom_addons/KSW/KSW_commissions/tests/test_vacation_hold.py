@@ -25,7 +25,7 @@ from odoo.tests.common import TransactionCase
 from odoo.addons.KSW_commissions.models.ksw_commission_lock import (
     gm_for_department)
 from odoo.addons.KSW_commissions.models.ksw_vacation_hold import (
-    vacation_hold,
+    hold_blocks, vacation_hold,
 )
 
 AUG = date(2026, 8, 1)
@@ -148,6 +148,31 @@ class TestVacationHoldPredicate(VacationHoldCommon):
         self.assertTrue(hold)
         self.assertEqual(hold.kind, 'partial')
         self.assertEqual(hold.payable_from, date(2026, 9, 17))
+
+    def test_leaving_and_returning_in_one_month_is_payable_from_the_return(self):
+        """KSWCO batch 115: away 1 Oct, back 26 Oct. The settlement paid up
+        to the day he left; 26-31 Oct was never on it."""
+        self._leave(date(2026, 10, 1), date(2026, 10, 25),
+                    return_date=date(2026, 10, 26))
+        hold = vacation_hold(self.env, self.emp, OCT)
+        self.assertTrue(hold)
+        self.assertEqual(hold.kind, 'partial')
+        self.assertEqual(hold.payable_from, date(2026, 10, 26))
+
+    def test_leaving_mid_month_and_returning_in_it_is_payable_from_the_return(self):
+        """The days before he left were settled too — still held."""
+        self._leave(date(2026, 10, 10), date(2026, 10, 20),
+                    return_date=date(2026, 10, 21))
+        hold = vacation_hold(self.env, self.emp, OCT)
+        self.assertEqual(hold.kind, 'partial')
+        self.assertTrue(hold_blocks(hold, date(2026, 10, 5)))
+        self.assertTrue(hold_blocks(hold, date(2026, 10, 15)))
+        self.assertFalse(hold_blocks(hold, date(2026, 10, 21)))
+
+    def test_leaving_in_a_month_without_a_confirmed_return_holds_it_whole(self):
+        self._leave(date(2026, 10, 1), date(2026, 10, 25))
+        hold = vacation_hold(self.env, self.emp, OCT)
+        self.assertEqual(hold.kind, 'full')
 
     def test_a_month_inside_the_vacation_is_held_whole(self):
         self._leave(date(2026, 8, 11), date(2026, 10, 4),
@@ -275,11 +300,20 @@ class TestSettledOnALaterVacation(VacationHoldCommon):
 
     def test_being_away_outranks_being_settled_later(self):
         """Two requests, one month: the better explanation wins."""
+        self._leave(date(2026, 8, 16), date(2026, 8, 31),
+                    return_date=date(2026, 9, 1))
+        self._leave(date(2026, 9, 3), date(2026, 12, 1))
+        hold = vacation_hold(self.env, self.emp, AUG)
+        self.assertEqual(hold.kind, 'full')
+
+    def test_a_same_month_return_is_still_paid_by_a_later_settlement(self):
+        """Back 21 Aug, so 21-31 Aug was payable — and the 3 Sep departure
+        settled everything still owed, August included."""
         self._leave(date(2026, 8, 16), date(2026, 8, 20),
                     return_date=date(2026, 8, 21))
         self._leave(date(2026, 9, 3), date(2026, 12, 1))
         hold = vacation_hold(self.env, self.emp, AUG)
-        self.assertEqual(hold.kind, 'full')
+        self.assertEqual(hold.kind, 'settled_later')
 
 
 class TestVacationHoldOnEntries(VacationHoldCommon):
@@ -311,6 +345,16 @@ class TestVacationHoldOnEntries(VacationHoldCommon):
         self.assertTrue(entry.exists())
         self.assertFalse(entry.x_vacation_hold,
                          'A day he really worked is not a warning.')
+
+    def test_a_same_month_return_takes_entries_after_the_return_only(self):
+        self._leave(date(2026, 10, 1), date(2026, 10, 25),
+                    return_date=date(2026, 10, 26))
+        batch = self._batch(OCT)
+        entry = self._entry(batch, day=date(2026, 10, 27))
+        self.assertTrue(entry.exists())
+        self.assertFalse(entry.x_vacation_hold)
+        with self.assertRaises(UserError):
+            self._entry(batch, day=date(2026, 10, 20))
 
     def test_moving_an_entry_back_into_the_vacation_is_refused(self):
         self._leave(date(2026, 8, 11), date(2026, 9, 16),

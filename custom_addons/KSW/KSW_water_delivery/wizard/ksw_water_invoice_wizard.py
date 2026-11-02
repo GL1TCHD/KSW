@@ -37,13 +37,13 @@ class KswWaterInvoiceWizard(models.TransientModel):
     invoice_date = fields.Date(string='Invoice Date',
                                default=fields.Date.context_today)
     # Summary is the default: the printed invoice shows one line per product.
-    # Ticking this prints every delivery note under its product instead. The
-    # notes are on the invoice either way; this only decides what is printed,
-    # and it can be changed on the invoice afterwards.
+    # Ticking this adds the list of delivery notes after the totals. The
+    # invoice bills the notes in one line per product either way; this only
+    # decides what is printed, and it can be changed on the invoice afterwards.
     show_notes = fields.Boolean(
         string='Show Each Delivery Note',
-        help='Print every delivery note on the invoice, under its product. '
-             'Unticked, the invoice prints one line per product.',
+        help='Print the list of delivery notes the invoice bills, after the '
+             'totals. Unticked, the invoice prints one line per product only.',
     )
 
     # Relational + domain, not a dynamic selection: the options vary per

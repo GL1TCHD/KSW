@@ -348,7 +348,9 @@ class Replay:
         heads = [h for h in self.fetch_notes(branch, date_from, date_to)
                  if not any(k in done for k in self._line_keys(h))]
         for h in (heads[:limit] if limit else heads):
-            self.run_one(h['key'], self.note, h)
+            if self.run_one(h['key'], self.note, h):
+                self.env.cr.execute("DELETE FROM ksw_replay_problem WHERE key = %s", (h['key'],))
+                self.commit()
         self.commit()
         _logger.info('replay %s %s..%s: %s notes in %.0fs, %s', branch, date_from, date_to,
                      len(heads), time.time() - t0, dict(self.log))
@@ -581,7 +583,8 @@ class Replay:
     def issue_skipped(self, date_from, date_to, branches=BRANCHES):
         """Every note of the period that was skipped: issued now, unlinked."""
         cr = self.env.cr
-        cr.execute("""SELECT key FROM ksw_replay_problem WHERE step = 'note'""")
+        cr.execute("""SELECT p.key FROM ksw_replay_problem p WHERE p.step = 'note' AND NOT EXISTS
+                      (SELECT 1 FROM stock_picking sp WHERE sp.x_bas_key LIKE p.key || '#%%')""")
         keys = {k for (k,) in cr.fetchall()}
         for b in branches:
             mine = {k for k in keys if k.split('/')[2] == b}
@@ -1064,7 +1067,10 @@ class Replay:
             key, k, lines, None, accounts, self.partner_by_code, self.product_by_code, t15, t0,
             self.imp._journal(k[0], self.company), self.company, self.problems[k[0]])
         if vals is None:
-            raise UserError('%s not convertible: %s' % (k[0], self.problems[k[0]][-1:] or ''))
+            # Not a sale to a customer (e.g. a fixed asset sold, counterpart
+            # 1208...): BAS's voucher as a journal entry, as BAS posted it.
+            accs = {a.x_bas_code: a.id for a in self.env['account.account'].search([('x_bas_code', '!=', False)])}
+            return self._voucher(key, k, lines, accs)
         self.at(lines[0]['FDATE'] - KSA)
         billing = self.billing_user(lines[0]['USER_NO'])
         move = self.env['account.move'].with_user(billing).sudo().create(vals)

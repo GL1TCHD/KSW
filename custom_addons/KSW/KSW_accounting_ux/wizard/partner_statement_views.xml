@@ -10,8 +10,38 @@
                 <group name="ksw_partners">
                     <field name="partner_ids" widget="many2many_tags" required="1"
                            options="{'no_create': True}"
-                           domain="[('customer_rank', '&gt;', 0)] if account_type == 'asset_receivable' else [('supplier_rank', '&gt;', 0)]"/>
+                           domain="[('customer_rank', '&gt;', 0)] if account_type == 'asset_receivable' else ([('supplier_rank', '&gt;', 0)] if account_type == 'liability_payable' else ['|', ('customer_rank', '&gt;', 0), ('supplier_rank', '&gt;', 0)])"/>
                 </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Period choice for the two statements that have a start date -->
+    <record id="activity_statement_view_ksw_period" model="ir.ui.view">
+        <field name="name">activity.statement.wizard.form.ksw.period</field>
+        <field name="model">activity.statement.wizard</field>
+        <field name="inherit_id" ref="partner_statement.activity_statement_wizard_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_start']" position="before">
+                <field name="x_date_range" widget="radio"/>
+            </xpath>
+            <xpath expr="//field[@name='date_start']" position="attributes">
+                <attribute name="readonly">x_date_range != 'custom'</attribute>
+                <attribute name="force_save">1</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="detailed_activity_statement_view_ksw_period" model="ir.ui.view">
+        <field name="name">detailed.activity.statement.wizard.form.ksw.period</field>
+        <field name="model">detailed.activity.statement.wizard</field>
+        <field name="inherit_id" ref="partner_statement.detailed_activity_statement_wizard_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='date_start']" position="before">
+                <field name="x_date_range" widget="radio"/>
+            </xpath>
+            <xpath expr="//field[@name='date_start']" position="attributes">
+                <attribute name="readonly">x_date_range != 'custom'</attribute>
+                <attribute name="force_save">1</attribute>
             </xpath>
         </field>
     </record>

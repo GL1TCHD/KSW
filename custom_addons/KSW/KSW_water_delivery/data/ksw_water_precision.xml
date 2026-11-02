@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- A month-end sales line bills many notes, so their vehicle / branch /
+         driver cost centres become one split on it. At 2 decimals a 3.33 %
+         share of a 16,497 SAR line is 0.55 SAR off; at 4 it is 0.02 at most.
+         A write, not a record override: the record is analytic's (gotcha #2). -->
+    <function model="decimal.precision" name="write">
+        <value eval="[ref('analytic.decimal_percentage_analytic')]"/>
+        <value eval="{'digits': 4}"/>
+    </function>
+
+</odoo>

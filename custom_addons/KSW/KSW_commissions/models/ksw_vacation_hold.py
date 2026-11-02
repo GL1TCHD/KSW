@@ -7,8 +7,8 @@ still owed (``hr.leave.x_commission_line_ids``) and they ride out on the
 vacation payslip, together with the balance and whatever he owes.  He walks
 away with everything he had earned up to the day he left.
 
-So the month he left in has already been paid, in full, on the leave — and
-the monthly pay run must not pay it a second time.
+So the month he left in has already been paid on the leave, up to the day
+he left — and the monthly pay run must not pay it a second time.
 
 This is the commissions twin of ``hr.payslip._check_unresolved_vacation``,
 with one deliberate difference.  Payroll asks a **state** question — "has
@@ -21,8 +21,10 @@ exactly the month the settlement already paid.  The question has to be about
 the **period**:
 
   * he left during the month            → the whole month was settled → hold
+    (unless he also came back inside it — see the next-but-one line)
   * the month sits inside the vacation  → nothing was earned there    → hold
-  * he came back during the month       → payable from the return date on
+  * he came back during the month       → payable from the return date on,
+    whether he left before the month or during it
   * **he left AFTER the month ended, and the month had not been paid yet**
     → hold: it was still owed to him that day, so it went out with the
     settlement (a driver who left on 3 September was paid his August the
@@ -240,13 +242,17 @@ def _hold_for(leave, month_start, month_end, already_paid):
         if already_paid:
             return None
         return VacationHold('settled_later', None, leave)
-    if (leave.request_date_from >= month_start
-            or away_until is None
-            or away_until >= month_end):
-        # He left during the month (settled whole), or the month sits
-        # entirely inside the vacation, or nobody has said he is back.
+    if away_until is None or away_until >= month_end:
+        # The rest of the month sits inside the vacation, or nobody has
+        # said he is back.
         return VacationHold('full', None, leave)
-    # He was away from before the month and came back inside it.
+    # He came back inside the month — whether he left before it or during
+    # it. The settlement paid what he had earned up to the day he left;
+    # what he did after he walked back in was never on it. Holding the
+    # month whole because he *left* in it too cost every same-month
+    # return his last days, and only a GM release could pay them (KSWCO
+    # batch 115: away 1 Oct, back 26 Oct). Everything dated before the
+    # return — the settled days and the days away alike — stays held.
     return VacationHold('partial', away_until + timedelta(days=1), leave)
 
 

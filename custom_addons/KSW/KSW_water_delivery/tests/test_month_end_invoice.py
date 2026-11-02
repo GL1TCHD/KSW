@@ -9,8 +9,9 @@ from .test_water_delivery import STUB_SIGNATURE, WaterDeliveryCommon
 
 @tagged('post_install', '-at_install')
 class TestMonthEndInvoice(WaterDeliveryCommon):
-    """A client's delivered notes for a period become one invoice, with a
-    section per product and one line per note underneath."""
+    """A client's delivered notes for a period become one invoice: one sales
+    line per product, rate and revenue account, linked to every note it
+    bills."""
 
     @classmethod
     def setUpClass(cls):
@@ -48,7 +49,7 @@ class TestMonthEndInvoice(WaterDeliveryCommon):
         return self.env['account.move'].browse(action['res_id'])
 
     # --- the invoice ------------------------------------------------------------
-    def test_two_products_become_two_sections_one_line_per_note(self):
+    def test_two_products_become_two_lines_linked_to_their_notes(self):
         a1 = self._note(partner_id=self.multi_customer.id, product_id=self.water.id,
                         entered_qty=10.0)
         a2 = self._note(partner_id=self.multi_customer.id, product_id=self.water.id,
@@ -73,23 +74,43 @@ class TestMonthEndInvoice(WaterDeliveryCommon):
         self.assertEqual(invoice.partner_id, self.multi_customer)
         self.assertAlmostEqual(invoice.amount_total, (16 * 150.0 + 4 * 90.0) * 1.15)
 
-        sections = invoice.invoice_line_ids.filtered(
-            lambda l: l.display_type == 'line_section')
+        self.assertFalse(invoice.invoice_line_ids.filtered(
+            lambda l: l.display_type == 'line_section'))
         products = invoice.invoice_line_ids.filtered(
             lambda l: l.display_type == 'product')
-        self.assertEqual(len(sections), 2)
-        self.assertEqual(len(products), 3, 'one invoice line per delivery note')
-        # Each note's line is linked to that note's own order line -- the
-        # property every native consequence hangs off.
-        for note in (a1, a2, b1):
-            line = products.filtered(lambda l: note.name in l.name)
-            self.assertEqual(line.sale_line_ids, note.sale_id.order_line)
+        self.assertEqual(len(products), 2, 'one sales line per product')
+        water = products.filtered(lambda l: l.product_id == self.water)
+        self.assertEqual(water.quantity, 16.0)
+        self.assertEqual(water.sale_line_ids,
+                         (a1 | a2).sale_id.order_line.filtered(lambda l: not l.display_type))
+        # Each note reads exactly what it delivered as invoiced -- not the
+        # whole line -- which is what every native consequence hangs off.
+        for note, qty in ((a1, 10.0), (a2, 6.0), (b1, 4.0)):
+            order_line = note.sale_id.order_line.filtered(lambda l: not l.display_type)
+            self.assertEqual(order_line.qty_invoiced, qty)
+            self.assertEqual(order_line.qty_to_invoice, 0.0)
             self.assertEqual(note.x_invoice_id, invoice)
             self.assertEqual(note.x_invoice_status, 'invoiced')
-        # Lines sit under their own product's section.
-        for line in products:
-            self.assertEqual(line.parent_id.display_type, 'line_section')
-            self.assertIn(line.product_id.display_name, line.parent_id.name)
+        self.assertEqual(invoice.x_water_note_ids, a1 | a2 | b1)
+        [(_f, _op, ids)] = invoice.action_view_water_notes()['domain']
+        self.assertEqual(set(ids), set((a1 | a2 | b1).ids))
+
+    def test_the_entry_is_client_sales_and_vat(self):
+        notes = self.env['stock.picking']
+        for _i in range(5):
+            notes |= self._note(entered_qty=32.0)
+        invoice = self._invoice(self.customer).sudo()
+        invoice.action_post()
+        kinds = sorted(invoice.line_ids.mapped('display_type'))
+        self.assertEqual(kinds, ['payment_term', 'product', 'tax'])
+        sales = invoice.line_ids.filtered(lambda l: l.display_type == 'product')
+        self.assertAlmostEqual(sales.credit, 5 * 32 * 200.0)
+        self.assertIn('5 delivery notes', sales.name)
+        # Posted, each note's share of the line is its own amount.
+        for note in notes:
+            order_line = note.sale_id.order_line.filtered(lambda l: not l.display_type)
+            self.assertAlmostEqual(order_line.untaxed_amount_invoiced, 32 * 200.0)
+            self.assertAlmostEqual(order_line.amount_invoiced, 32 * 200.0 * 1.15)
 
     def test_the_client_terms_and_delivery_date_are_carried(self):
         note = self._note(entered_qty=2.0)
@@ -99,14 +120,13 @@ class TestMonthEndInvoice(WaterDeliveryCommon):
         self.assertEqual(invoice.delivery_date, note.x_delivery_date)
         self.assertEqual(invoice.invoice_date, self.today)
 
-    def test_a_rate_change_inside_the_period_is_its_own_section(self):
+    def test_a_rate_change_inside_the_period_is_its_own_line(self):
         self._note(entered_qty=1.0)
         self.rate.fixed_price = 220.0
         self._note(entered_qty=1.0)
         invoice = self._invoice(self.customer)
-        sections = invoice.invoice_line_ids.filtered(
-            lambda l: l.display_type == 'line_section')
-        self.assertEqual(len(sections), 2)
+        lines = invoice.invoice_line_ids.filtered(lambda l: l.display_type == 'product')
+        self.assertEqual(sorted(lines.mapped('price_unit')), [200.0, 220.0])
         self.assertAlmostEqual(invoice.amount_untaxed, 420.0)
 
     # --- summary by default, detail on request --------------------------------
@@ -115,16 +135,14 @@ class TestMonthEndInvoice(WaterDeliveryCommon):
         self._note(entered_qty=3.0)
         invoice = self._invoice(self.customer)
         self.assertTrue(invoice.x_water_summary)
-        # Printed: one row for the product, nothing per note.
-        self.assertFalse(invoice._get_move_lines_to_report().filtered(
-            lambda l: l.x_water_section or l.parent_id.x_water_section))
+        # Printed: one row for the product, in place of the line.
+        self.assertFalse(invoice._get_move_lines_to_report().filtered('x_water_grouped'))
         [row] = invoice._water_summary_rows()
         self.assertEqual(row['quantity'], '5')
         self.assertEqual(row['price_unit'], 200.0)
         self.assertAlmostEqual(row['price_subtotal'], invoice.amount_untaxed)
-        # The notes are still on the invoice, one line each.
         self.assertEqual(len(invoice.invoice_line_ids.filtered(
-            lambda l: l.display_type == 'product')), 2)
+            lambda l: l.display_type == 'product')), 1)
 
     def test_ticking_show_notes_prints_every_note(self):
         a, b = self._note(), self._note()
@@ -132,9 +150,7 @@ class TestMonthEndInvoice(WaterDeliveryCommon):
         form.show_notes = True
         invoice = self.env['account.move'].browse(form.save().action_create_invoice()['res_id'])
         self.assertFalse(invoice.x_water_summary)
-        printed = invoice._get_move_lines_to_report().mapped('name')
-        self.assertTrue(any(a.name in n for n in printed))
-        self.assertTrue(any(b.name in n for n in printed))
+        self.assertEqual({r['name'] for r in invoice._water_note_rows()}, {a.name, b.name})
 
     def test_the_printed_invoice_follows_the_choice(self):
         note = self._note()
@@ -168,10 +184,10 @@ class TestMonthEndInvoice(WaterDeliveryCommon):
         [row] = invoice._water_summary_rows()
         self.assertEqual((row['quantity'], row['uom'], row['price_unit']), ('2', trip.display_name, 6400.0))
         self.assertAlmostEqual(row['price_subtotal'], 12800.0)
-        # The money did not go through the conversion: the lines are still m³.
-        lines = invoice.invoice_line_ids.filtered(lambda l: l.display_type == 'product')
-        self.assertEqual(set(lines.mapped('product_uom_id')), {self.uom_m3})
-        self.assertEqual(set(lines.mapped('quantity')), {32.0})
+        # The money did not go through the conversion: the line is still m³.
+        line = invoice.invoice_line_ids.filtered(lambda l: l.display_type == 'product')
+        self.assertEqual((line.product_uom_id, line.quantity), (self.uom_m3, 64.0))
+        self.assertEqual(line.x_display_uom_id, trip)
 
     def test_a_part_load_is_an_exact_fraction_of_a_trip(self):
         trip = self._trip(32)
@@ -233,18 +249,28 @@ class TestMonthEndInvoice(WaterDeliveryCommon):
         self.assertFalse(note.x_invoice_id)
         self.assertEqual(len(self._wizard(self.customer).picking_ids), 1)
 
+    def test_a_full_credit_note_reopens_every_note(self):
+        a, b = self._note(entered_qty=1.0), self._note(entered_qty=3.0)
+        invoice = self._invoice(self.customer).sudo()
+        invoice.action_post()
+        refund = invoice._reverse_moves()
+        refund.action_post()
+        self.assertEqual((a.x_invoice_status, b.x_invoice_status), ('to invoice', 'to invoice'))
+        for note in (a, b):
+            self.assertEqual(note.sale_id.order_line.filtered(
+                lambda l: not l.display_type).qty_invoiced, 0.0)
+
     def test_a_credit_note_for_one_note_reopens_only_that_note(self):
         kept = self._note(entered_qty=1.0)
         disputed = self._note(entered_qty=3.0)
         invoice = self._invoice(self.customer).sudo()
         invoice.action_post()
 
-        disputed_line = invoice.invoice_line_ids.filtered(lambda l: disputed.name in l.name)
+        disputed_line = disputed.sale_id.order_line.filtered(lambda l: not l.display_type)
         refund = invoice._reverse_moves()
-        # Credit only the disputed note: drop the other line from the refund.
-        refund.invoice_line_ids.filtered(
-            lambda l: l.display_type == 'product'
-            and l.sale_line_ids != disputed_line.sale_line_ids).unlink()
+        # Credit only the disputed note: its own line, linked to it alone.
+        line = refund.invoice_line_ids.filtered(lambda l: l.display_type == 'product')
+        line.write({'quantity': 3.0, 'sale_line_ids': [(6, 0, disputed_line.ids)]})
         refund.action_post()
 
         self.assertEqual(disputed.x_invoice_status, 'to invoice')
@@ -373,3 +399,64 @@ class TestMonthEndInvoice(WaterDeliveryCommon):
         with form.line_ids.edit(0) as row:
             row.display_uom_id = self._trip(32)
             self.assertEqual(row.display_price, 530.0)
+
+    # --- two branches, one invoice ------------------------------------------
+    def test_two_revenue_accounts_are_two_sales_lines(self):
+        first = self.env['account.account'].create({
+            'name': 'Sales, branch A (test)', 'code': '4999173', 'account_type': 'income'})
+        second = self.env['account.account'].create({
+            'name': 'Sales, branch B (test)', 'code': '4999174', 'account_type': 'income'})
+        Revenue = self.env['ksw.water.revenue.account']
+        Revenue.create({'branch_code': '172', 'product_id': self.water.id,
+                        'account_id': first.id})
+        Revenue.create({'branch_code': '173', 'product_id': self.water.id,
+                        'account_id': second.id})
+        a = self._note(entered_qty=2.0)
+        b = self._note(entered_qty=3.0)
+        b.x_branch_code = '173'   # a note of the client's other branch
+        invoice = self._invoice(self.customer)
+        lines = invoice.invoice_line_ids.filtered(lambda l: l.display_type == 'product')
+        by_account = {l.account_id: l for l in lines}
+        self.assertEqual(set(by_account), {first, second})
+        self.assertEqual(by_account[first].quantity, 2.0)
+        self.assertEqual(by_account[second].quantity, 3.0)
+        self.assertEqual((a | b).mapped('x_invoice_status'), ['invoiced', 'invoiced'])
+
+    # --- invoices made one line per note, before grouping -------------------
+    def _old_shape_invoice(self, notes):
+        """An invoice as the builder made it until 19.0.1.26.0: a section per
+        product and one line per note under it."""
+        lines = notes._water_invoice_lines()
+        commands = [(0, 0, {'display_type': 'line_section', 'sequence': 1,
+                            'name': 'Water (%s notes)' % len(notes), 'x_water_section': True})]
+        for i, line in enumerate(lines, start=2):
+            note = line.order_id.picking_ids[:1]
+            commands.append((0, 0, line._prepare_invoice_line(
+                sequence=i, name='%s · %s' % (note.name, note.x_delivery_date))))
+        vals = lines.order_id[0]._prepare_invoice()
+        vals.update(invoice_line_ids=commands, x_water_summary=True)
+        return self.env['account.move'].create(vals)
+
+    def test_an_old_paid_invoice_is_regrouped_without_moving_money(self):
+        notes = self._note(entered_qty=32.0) | self._note(entered_qty=30.0) \
+            | self._note(entered_qty=32.0)
+        invoice = self._old_shape_invoice(notes)
+        invoice.action_post()
+        total = invoice.amount_total
+        self.env['account.payment.register'].with_context(
+            active_model='account.move', active_ids=invoice.ids).create({})._create_payments()
+        self.assertEqual(invoice.payment_state, 'paid')
+
+        invoice._water_regroup_note_lines()
+
+        self.assertEqual(invoice.state, 'posted')
+        self.assertEqual(invoice.payment_state, 'paid')
+        self.assertAlmostEqual(invoice.amount_total, total)
+        self.assertEqual(sorted(invoice.line_ids.mapped('display_type')),
+                         ['payment_term', 'product', 'tax'])
+        line = invoice.invoice_line_ids
+        self.assertEqual(line.quantity, 94.0)
+        self.assertIn(str(min(notes.mapped('x_delivery_date'))), line.name)
+        for note in notes:
+            self.assertEqual(note.x_invoice_status, 'invoiced')
+        self.assertFalse(invoice._water_regroup_note_lines(), 'a second pass has nothing to do')

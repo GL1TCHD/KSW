@@ -97,3 +97,6 @@ access_ksw_sc_bas_line_entry,ksw.sales.commission.bas.line entry,model_ksw_sales
 access_ksw_sc_bas_line_officer,ksw.sales.commission.bas.line officer,model_ksw_sales_commission_bas_line,group_commission_officer,1,1,1,1
 access_ksw_sp_type_rule_user,ksw.salesperson.profile.type.rule read,model_ksw_salesperson_profile_type_rule,base.group_user,1,0,0,0
 access_ksw_sp_type_rule_officer,ksw.salesperson.profile.type.rule officer,model_ksw_salesperson_profile_type_rule,group_commission_officer,1,1,1,1
+access_ksw_pay_run_bas_compare_account_accountant,ksw.pay.run.bas.compare.account accountant,model_ksw_pay_run_bas_compare_account,group_commission_accountant,1,0,0,0
+access_ksw_pay_run_bas_compare_line_accountant,ksw.pay.run.bas.compare.line accountant,model_ksw_pay_run_bas_compare_line,group_commission_accountant,1,0,0,0
+access_ksw_pay_run_bas_compare_wizard_accountant,ksw.pay.run.bas.compare.wizard accountant,model_ksw_pay_run_bas_compare_wizard,group_commission_accountant,1,1,1,0
