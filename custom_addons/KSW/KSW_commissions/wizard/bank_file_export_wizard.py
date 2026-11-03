@@ -582,8 +582,12 @@ class KswCommissionBankExportWizard(models.TransientModel):
         The card is the EMPLOYEE's account (`primary_bank_account_id`),
         stored as CIC(5) + card number(14); `bank` is the company account
         the file is paid from and only decides which file a line lands in.
+        Same balance rule as the WPS file: basic + housing + other −
+        deductions = net, so the commission is written once, as basic.
+        (It was written as basic *and* as other, and the November Raj card
+        file came back refused.)
         """
-        op = (self.operation_code or '2')[:1]
+        op =(self.operation_code or '2')[:1]
         vd = (self.value_date or fields.Date.context_today(self)).strftime('%Y%m%d')
 
         valid = lines.filtered(
@@ -612,7 +616,7 @@ class KswCommissionBankExportWizard(models.TransientModel):
                 ' ' * 20,
                 self._pz(self._halalas(line.earnings), 12),
                 self._pz(0, 12),  # housing: not part of a commission
-                self._pz(self._halalas(line.earnings), 12),
+                self._pz(0, 12),  # other: the commission is the basic above
                 self._pz(self._halalas(line.loan_offset), 12),
             ])
             assert len(row) == 194, f"Row length {len(row)} != 194"

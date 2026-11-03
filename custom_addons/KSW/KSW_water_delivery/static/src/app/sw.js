@@ -36,10 +36,23 @@ self.addEventListener("install", (event) => {
             // Individually, not addAll: addAll is all-or-nothing, so one asset
             // 404ing after a rename would leave the driver with no app at all
             // rather than with a missing icon.
+            //
+            // Not cache.add either: it follows redirects, so a phone whose
+            // session had expired stored the LOGIN page as "/water/" — and
+            // Chrome refuses a redirected response for a navigation, so every
+            // launch after that was ERR_FAILED (Nov 2026). Only a direct 200
+            // is a shell.
             await Promise.all(
-                SHELL.map((url) =>
-                    cache.add(new Request(url, { cache: "reload" })).catch(() => {})
-                )
+                SHELL.map(async (url) => {
+                    try {
+                        const response = await fetch(new Request(url, { cache: "reload" }));
+                        if (isShell(response)) {
+                            await cache.put(url, response);
+                        }
+                    } catch {
+                        // offline at install: the next launch with signal fills it
+                    }
+                })
             );
             await self.skipWaiting();
         })()
@@ -55,10 +68,28 @@ self.addEventListener("activate", (event) => {
                     .filter((name) => name.startsWith("ksw-water-shell-") && name !== SHELL_CACHE)
                     .map((name) => caches.delete(name))
             );
+            // A login page cached by an older worker under this same name.
+            await purgeRedirectedShell(await caches.open(SHELL_CACHE));
             await self.clients.claim();
         })()
     );
 });
+
+// How long a launch waits for the server before falling back to the cached
+// shell. No signal fails at once; this only bounds one bar of signal.
+const NAVIGATION_TIMEOUT_MS = 4000;
+
+const isShell = (response) =>
+    Boolean(response) && response.ok && !response.redirected && response.type === "basic";
+
+async function purgeRedirectedShell(cache) {
+    const cached = await cache.match("/water/");
+    if (cached && !isShell(cached)) {
+        await cache.delete("/water/");
+        return null;
+    }
+    return cached || null;
+}
 
 const isDataCall = (url) =>
     url.pathname === "/water/sync" ||
@@ -75,22 +106,35 @@ self.addEventListener("fetch", (event) => {
         return;
     }
 
-    // A navigation to /water/ must work with the radio off, so the cache
-    // answers first and the network only refreshes it for next time.
+    // A navigation to /water/ must work with the radio off, so the cached
+    // shell is the fallback. The server is asked first, briefly, because only
+    // it can say the session has expired: its answer is then a redirect to the
+    // login page, which goes straight to the browser. Cache-first served the
+    // shell instead, whose "sign in" banner had nowhere to sign in.
     if (request.mode === "navigate") {
         event.respondWith(
             (async () => {
                 const cache = await caches.open(SHELL_CACHE);
-                const cached = await cache.match("/water/");
+                const cached = await purgeRedirectedShell(cache);
                 const network = fetch(request)
                     .then((response) => {
-                        if (response.ok) {
+                        if (isShell(response)) {
                             cache.put("/water/", response.clone());
                         }
                         return response;
                     })
                     .catch(() => null);
-                return cached || (await network) || Response.error();
+                const answer = cached
+                    ? await Promise.race([
+                          network,
+                          new Promise((resolve) => setTimeout(() => resolve(null), NAVIGATION_TIMEOUT_MS)),
+                      ])
+                    : await network;
+                // opaqueredirect = signed out: let the browser follow it to /web/login.
+                if (answer && (answer.ok || answer.type === "opaqueredirect")) {
+                    return answer;
+                }
+                return cached || answer || Response.error();
             })()
         );
         return;
