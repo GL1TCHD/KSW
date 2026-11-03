@@ -724,7 +724,7 @@ class Replay:
             FROM vou10 WHERE FTYPE='002' AND FTYPE2=3 AND FDATE>=%s AND FDATE<%s
               AND RTRIM(ISNULL(FCODE,'')) LIKE '1203%%' ORDER BY FDATE, NUMBER1""",
             (date_from, date_to))
-        done = set(self.env['account.move'].search([('x_bas_key', 'like', '002/3/%')]).mapped('x_bas_key'))
+        done = {k.split('#')[0] for k in self.env['account.move'].search([('x_bas_key', 'like', '002/3/%')]).mapped('x_bas_key')}
         seen, jobs = set(), []
         for h in heads:
             key = bas_key('002', 3, h['CODE2'], h['NUMBER1'])
@@ -753,6 +753,11 @@ class Replay:
                 wanted[r['TCODE']] += float(r['AMOUNT'])
         partner = self.partner_by_code.get(h['FCODE'])
         when = h['FDATE'] - KSA
+        customers = [r for r in rows if r['FCODE'].startswith('1203') and float(r['AMOUNT'] or 0) > 0]
+        if len({r['FCODE'] for r in customers}) > 1:
+            # One BAS 002 for several customer accounts (International Energy's
+            # sites). In Odoo each site is its own client, so one invoice each.
+            return self._invoice_002_per_site(key, h, customers, wanted, when)
         notes = self._notes_for(partner, wanted, when) if partner else self.env['stock.picking']
         self.at(when)
         billing = self.billing_user(h['USER_NO'])
@@ -763,12 +768,14 @@ class Replay:
                               'ref': 'BAS 002/3 #%.0f' % h['NUMBER1']})
         invoice.with_user(billing).sudo().action_post()
         bas_total = round(sum(float(r['AMOUNT'] or 0) for r in rows if r['FCODE'].startswith('1203')), 2)
-        extra = self._residual_invoice(key, h, partner, wanted, invoice, billing)
-        if extra:
-            invoice |= extra
-        if abs(invoice.amount_total - bas_total) > 0.05:
+        # In-close the fill in _notes_for already took every open note it
+        # could; a supplementary invoice is only for closed months (patch).
+        total = invoice.amount_total
+        if bas_total - total > 0.05:
+            total += self._rest_as_bas(key, h, partner, bas_total - total, wanted, billing)
+        if abs(total - bas_total) > 0.05:
             self._record_problem(key + '/diff', 'invoice total', 'Odoo %.2f vs BAS %.2f (%d notes)' % (
-                invoice.amount_total, bas_total, len(notes)))
+                total, bas_total, len(notes)))
         self.log['month-end invoice'] += 1
 
     # ------------------------------------------------------------------
@@ -873,8 +880,8 @@ class Replay:
             invoiced[line.account_id.code] += line.price_subtotal
         codes = [p.x_bas_code for p in self.env['res.partner'].with_context(active_test=False).search(
             [('commercial_partner_id', '=', partner.commercial_partner_id.id), ('x_bas_code', '!=', False)])]
-        short_by = {code: round(amount - invoiced.get(code, 0.0), 2) for code, amount in wanted.items()}
-        short_by = {c: v for c, v in short_by.items() if v > 0.05}
+        short = round(sum(wanted.values()) - sum(invoiced.values()), 2)
+        short_by = {'_shortfall': short} if short > 0.05 else {}
         if short_by:
             notes = self._notes_for(partner, short_by, h['FDATE'] - KSA)
             if notes:
@@ -954,6 +961,63 @@ class Replay:
         self._residual_invoice(inv.x_bas_key, h, self.partner_by_code.get(head['FCODE']), wanted, inv,
                                self.billing_user(head['USER_NO']))
 
+    def _rest_as_bas(self, key, h, partner, short_total, wanted, billing):
+        """What BAS billed on this 002 beyond the notes Odoo has for it
+        (deliveries before 1 Jan 2026, price or VAT rounding): one line, as BAS."""
+        account = self.env['account.account'].search([('code', '=', max(wanted, key=wanted.get))], limit=1) \
+            if wanted else partner.property_account_receivable_id
+        untaxed = round(short_total / 1.15, 2)
+        inv = self.env['account.move'].with_user(billing).sudo().create({
+            'move_type': 'out_invoice', 'partner_id': partner.id, 'invoice_date': h['FDATE'].date(),
+            'ref': 'BAS 002/3 #%.0f: amount not covered by notes in Odoo' % h['NUMBER1'],
+            'x_bas_key': key + '#rest',
+            'invoice_line_ids': [Command.create({
+                'name': 'BAS 002/3 #%.0f: amount not covered by notes in Odoo '
+                        '(earlier deliveries, price or VAT rounding)' % h['NUMBER1'],
+                'account_id': account.id, 'quantity': 1, 'price_unit': untaxed,
+                'tax_ids': [Command.set(self._sale_tax15().ids)]})],
+        })
+        inv.action_post()
+        self.log['rest as BAS'] += 1
+        return inv.amount_total
+
+    def _invoice_002_per_site(self, key, h, customers, wanted, when):
+        self.at(when)
+        billing = self.billing_user(h['USER_NO'])
+        Move = self.env['account.move'].with_user(billing).sudo()
+        account = self.env['account.account'].search(
+            [('code', '=', max(wanted, key=wanted.get))], limit=1) if wanted else None
+        per_site = defaultdict(float)
+        for r in customers:
+            per_site[r['FCODE']] += float(r['AMOUNT'])
+        customers = [{'FCODE': code, 'AMOUNT': amount} for code, amount in per_site.items()]
+        for r in customers:
+            site = self.partner_by_code.get(r['FCODE'])
+            if not site:
+                raise UserError('no partner for %s' % r['FCODE'])
+            untaxed = round(float(r['AMOUNT']) / 1.15, 2)
+            notes = self._notes_for(site, {'_site': untaxed}, when)
+            if notes:
+                inv = notes.with_user(billing).sudo()._water_create_invoice(invoice_date=h['FDATE'].date())
+            else:
+                inv = Move.create({
+                    'move_type': 'out_invoice', 'partner_id': site.id, 'invoice_date': h['FDATE'].date(),
+                    'invoice_line_ids': [Command.create({
+                        'name': 'BAS 002/3 #%.0f' % h['NUMBER1'], 'account_id': account.id,
+                        'quantity': 1, 'price_unit': untaxed,
+                        'tax_ids': [Command.set(self._sale_tax15().ids)]})]})
+            inv.sudo().write({'x_bas_key': '%s#%s' % (key, r['FCODE']), 'x_bas_branch': h['CODE2'],
+                              'ref': 'BAS 002/3 #%.0f' % h['NUMBER1']})
+            inv.with_user(billing).sudo().action_post()
+            if float(r['AMOUNT']) - inv.amount_total > 0.05:
+                self._rest_as_bas('%s#%s' % (key, r['FCODE']), h, site,
+                                  float(r['AMOUNT']) - inv.amount_total, wanted, billing)
+                continue
+            if abs(inv.amount_total - float(r['AMOUNT'])) > 0.05:
+                self._record_problem('%s#%s/diff' % (key, r['FCODE']), 'invoice total',
+                                     'Odoo %.2f vs BAS %.2f (%d notes)' % (inv.amount_total, float(r['AMOUNT']), len(notes)))
+        self.log['month-end invoice (per site)'] += len(customers)
+
     def _note_account(self, note):
         line = note.sale_id.order_line[:1]
         Rev = self.env['ksw.water.revenue.account']
@@ -962,8 +1026,11 @@ class Replay:
                 or line.product_id.product_tmpl_id._get_product_accounts()['income'])
 
     def _notes_for(self, partner, wanted, when):
+        # The BAS customer itself (a site is its own 1203 account), never its
+        # siblings under the same parent company: pooling by the parent let one
+        # site's 002 take another site's notes, which were then billed twice.
         open_notes = self.env['stock.picking'].search([
-            ('partner_id', 'child_of', partner.commercial_partner_id.id),
+            ('partner_id', 'child_of', partner.ids),
             ('x_is_water_delivery', '=', True), ('state', '=', 'done'),
             ('x_invoice_status', '=', 'to invoice'), ('date_done', '<=', when),
         ], order='date_done, id')
@@ -983,6 +1050,16 @@ class Replay:
                     break
                 chosen |= note
                 run += note.x_amount_untaxed
+        # Still short: the client's other open notes, whatever account Odoo's
+        # rule gives them (BAS can post the same water to another revenue line,
+        # e.g. Nabiya by Isuzu). The total follows BAS; the account, Odoo.
+        left = sum(wanted.values()) - sum(chosen.mapped('x_amount_untaxed'))
+        for note in open_notes - chosen:
+            if left <= 0.05:
+                break
+            if note.x_amount_untaxed <= left + 0.05:
+                chosen |= note
+                left -= note.x_amount_untaxed
         return chosen
 
     def _invoice_002_by_link(self, key, h):
@@ -1223,6 +1300,10 @@ class Replay:
     def close_month(self, date_from, date_to):
         """Invoices, collections and entries of the period, in BAS order, so
         a receipt only ever meets the invoices that existed on its day."""
+        import os
+        hold = os.path.expanduser('~/native_replay_logs/hold_close')
+        while os.path.exists(hold) and not self.env.context.get('ignore_hold'):
+            time.sleep(60)
         self.issue_skipped(date_from, date_to)
         jobs = self.month_end_invoices(date_from, date_to) + self.vouchers(date_from, date_to)
         for _when, key, fn, args in sorted(jobs, key=lambda j: (j[0], j[1])):

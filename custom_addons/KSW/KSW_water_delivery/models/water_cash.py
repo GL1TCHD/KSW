@@ -403,7 +403,7 @@ class KswWaterDispatch(models.Model):
             'x_signed_by': dispatch.x_pickup_driver or dispatch.x_buyer_name or False,
         })
         picking.move_ids.write({'quantity': qty, 'picked': True})
-        picking.with_context(skip_backorder=True).button_validate()
+        picking.with_context(skip_backorder=True, skip_sms=True).button_validate()
         if collector:
             picking.message_post(body=Markup('<strong>%(title)s</strong> %(who)s') % {
                 'title': _("Collected by the customer's tanker:"), 'who': collector})

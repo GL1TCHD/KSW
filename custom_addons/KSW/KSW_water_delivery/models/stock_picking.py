@@ -662,7 +662,11 @@ class StockPicking(models.Model):
             return picking
 
         picking.move_ids.write({'quantity': quantity, 'picked': True})
-        picking.with_context(skip_backorder=True).button_validate()
+        # skip_sms: for a client with a phone, stock_sms answers button_validate
+        # with a "text the customer?" wizard instead of validating -- the note
+        # silently stayed Ready and was never billed (34 BAS-replay notes, one
+        # Jubail client). Nobody is at a screen to answer it here.
+        picking.with_context(skip_backorder=True, skip_sms=True).button_validate()
         self._water_apply_signature(picking, payload)
         return picking
 

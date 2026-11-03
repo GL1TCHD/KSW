@@ -477,7 +477,7 @@ class KswWaterCapture(models.Model):
             quantity = self.env['stock.picking']._water_quantity_in_product_uom(
                 capture.vehicle_id, capture.entered_qty, capture.entered_uom)
             picking.move_ids.write({'quantity': quantity, 'picked': True})
-            picking.with_context(skip_backorder=True).button_validate()
+            picking.with_context(skip_backorder=True, skip_sms=True).button_validate()
             self.env['stock.picking']._water_apply_signature(picking, capture._payload())
             # The flag is cleared because a human has now confirmed it; the
             # note keeps `x_issued_offline` and `x_captured_at` forever,
