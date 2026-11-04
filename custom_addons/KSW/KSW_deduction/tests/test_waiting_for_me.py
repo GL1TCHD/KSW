@@ -222,5 +222,7 @@ class TestWaitingForMe(DeductionCommon):
         self.assertEqual(ded.state, 'active')
         for user in (self.user_dm, self.user_hr, self.user_officer):
             self.assertFalse(self._flag_for(ded, user))
+        # No approval request goes out (the DM is told by plain email
+        # instead, see TestDmNotifyNonLoan).
         new = self._new_messages(ded, before)
         self.assertFalse(new.filtered(lambda m: m.partner_ids))

@@ -1130,6 +1130,7 @@ class KswDeduction(models.Model):
                     ),
                     subtype_xmlid='mail.mt_note',
                 )
+                rec._notify_dm_deduction_applied()
 
     def action_cancel(self):
         """Cancel a deduction.
@@ -1610,6 +1611,75 @@ class KswDeduction(models.Model):
             )
             rec._notify_pending_approvers('pending_disbursement')
             rec._notify_requester_disbursement()
+
+    _DM_NOTIFY_PARAM = 'KSW_deduction.notify_dm_non_loan'
+
+    @api.model
+    def _dm_non_loan_notify_enabled(self):
+        """On unless switched off in Settings. A missing parameter means
+        on, so the switch is stored as an explicit 'True'/'False'."""
+        return self.env['ir.config_parameter'].sudo().get_param(
+            self._DM_NOTIFY_PARAM, 'True') != 'False'
+
+    def _notify_dm_deduction_applied(self):
+        """Email the employee's direct manager that a non-loan deduction
+        is now being taken from their subordinate.
+
+        Non-loan types have no approval chain: Submit is their approval
+        and activates them on the spot (``action_submit``), so this is
+        the one moment to tell the manager. Sent as a plain email (not an
+        Odoo inbox notification, whatever the manager's own preference),
+        queued so it leaves with the transaction. Skipped when the manager
+        has no email address, or submitted it himself.
+        """
+        self.ensure_one()
+        if self.is_loan or not self._dm_non_loan_notify_enabled():
+            return
+        # sudo: the submitter (accounting data entry) cannot read the
+        # manager's employee record.
+        manager = self.employee_id.sudo().parent_id
+        email = manager.work_email or manager.user_id.email
+        if not email or (manager.user_id
+                         and manager.user_id == self.env.user):
+            return
+        emp = self.employee_id.sudo()
+        link = '%s/odoo/ksw.deduction/%d' % (
+            self.get_base_url(), self.id)
+        body = Markup(
+            '<p>Dear %(mgr)s,</p>'
+            '<p>A deduction has been applied to your team member '
+            '<b>%(emp)s</b>:</p>'
+            '<p><b>Reference:</b> %(ref)s<br/>'
+            '<b>Type:</b> %(type)s<br/>'
+            '<b>Amount:</b> %(amt).2f SAR over %(inst)d installment(s) '
+            'starting %(start)s<br/>'
+            '<b>Reason:</b> %(reason)s</p>'
+            '<p><a href="%(link)s">Open the deduction</a></p>'
+        ) % {
+            'mgr': manager.name,
+            'emp': emp.name,
+            'ref': self.name,
+            'type': self.type_id.name,
+            'amt': self.amount,
+            'inst': self.installments,
+            'start': self.start_month or '—',
+            'reason': self.reason or '—',
+            'link': link,
+        }
+        self.env['mail.mail'].sudo().create({
+            'subject': 'Deduction applied to %s (%s)' % (emp.name, self.name),
+            'body_html': body,
+            'email_to': email,
+            'model': self._name,
+            'res_id': self.id,
+            'auto_delete': True,
+        })
+        self.sudo().message_post(
+            body=Markup(
+                '&#9993; Direct manager %(mgr)s notified by email (%(email)s).'
+            ) % {'mgr': manager.name, 'email': email},
+            subtype_xmlid='mail.mt_note',
+        )
 
     def _notify_requester_disbursement(self):
         """Notify whoever requested the loan (the creator — the employee or the

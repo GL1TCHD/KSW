@@ -27,3 +27,4 @@ from . import test_draft_payslip_refresh
 from . import test_reschedule_wizard
 from . import test_revision_request_disbursement
 from . import test_single_installment
+from . import test_dm_notify_non_loan

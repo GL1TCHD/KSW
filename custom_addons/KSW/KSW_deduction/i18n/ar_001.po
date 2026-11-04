@@ -1352,6 +1352,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:KSW_deduction.hr_employee_view_form_inherit_ksw_deduction
 #: model_terms:ir.ui.view,arch_db:KSW_deduction.ksw_deduction_view_graph
 #: model_terms:ir.ui.view,arch_db:KSW_deduction.ksw_deduction_view_pivot
+#: model_terms:ir.ui.view,arch_db:KSW_deduction.res_config_settings_view_form_ksw_deduction
 msgid "Deductions"
 msgstr "الخصومات"
 
@@ -4868,3 +4869,18 @@ msgstr "شهر الاستحقاق"
 #: model_terms:ir.ui.view,arch_db:KSW_deduction.report_annual_vacation_deduction_picture
 msgid "Amount (SAR)"
 msgstr "المبلغ (ريال)"
+
+#. module: KSW_deduction
+#: model:ir.model.fields,field_description:KSW_deduction.field_res_config_settings__ksw_notify_dm_non_loan
+msgid "Notify Direct Manager of Deductions"
+msgstr "إشعار المدير المباشر بالخصومات"
+
+#. module: KSW_deduction
+#: model:ir.model.fields,help:KSW_deduction.field_res_config_settings__ksw_notify_dm_non_loan
+msgid "When a deduction other than a personal loan is applied to an employee, send a notification to the employee's direct manager. Applies to every employee."
+msgstr "عند تطبيق خصم غير السلفة الشخصية على موظف، يُرسل إشعار إلى مديره المباشر. يسري على جميع الموظفين."
+
+#. module: KSW_deduction
+#: model_terms:ir.ui.view,arch_db:KSW_deduction.res_config_settings_view_form_ksw_deduction
+msgid "When a deduction other than a personal loan (advance,\n                                penalty, spare parts and so on) is applied to an employee,\n                                notify the employee's direct manager."
+msgstr "عند تطبيق خصم غير السلفة الشخصية (سلفة راتب، غرامة، قطع غيار وغيرها) على موظف، يُرسل إشعار إلى مديره المباشر."
