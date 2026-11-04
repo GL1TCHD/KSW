@@ -1621,6 +1621,14 @@ class KswDeduction(models.Model):
         return self.env['ir.config_parameter'].sudo().get_param(
             self._DM_NOTIFY_PARAM, 'True') != 'False'
 
+    @staticmethod
+    def _email_text(text):
+        """Plain multi-line text as escaped HTML, keeping its line breaks."""
+        text = (text or '').strip()
+        if not text:
+            return Markup('—')
+        return Markup('<br/>').join(text.splitlines())
+
     def _notify_dm_deduction_applied(self):
         """Email the employee's direct manager that a non-loan deduction
         is now being taken from their subordinate.
@@ -1645,29 +1653,39 @@ class KswDeduction(models.Model):
         emp = self.employee_id.sudo()
         link = '%s/odoo/ksw.deduction/%d' % (
             self.get_base_url(), self.id)
+        applied = self.x_charge_date or fields.Date.context_today(self)
+        # The body is the Details tab: Reason, then Notes when there are any.
         body = Markup(
             '<p>Dear %(mgr)s,</p>'
             '<p>A deduction has been applied to your team member '
-            '<b>%(emp)s</b>:</p>'
-            '<p><b>Reference:</b> %(ref)s<br/>'
-            '<b>Type:</b> %(type)s<br/>'
-            '<b>Amount:</b> %(amt).2f SAR over %(inst)d installment(s) '
-            'starting %(start)s<br/>'
-            '<b>Reason:</b> %(reason)s</p>'
-            '<p><a href="%(link)s">Open the deduction</a></p>'
+            '<b>%(emp)s</b>.</p>'
+            '<p><b>Reason:</b><br/>%(reason)s</p>'
         ) % {
             'mgr': manager.name,
             'emp': emp.name,
+            'reason': self._email_text(self.reason),
+        }
+        if (self.description or '').strip():
+            body += Markup('<p><b>Notes:</b><br/>%(notes)s</p>') % {
+                'notes': self._email_text(self.description)}
+        body += Markup(
+            '<p><b>Reference:</b> %(ref)s<br/>'
+            '<b>Type:</b> %(type)s<br/>'
+            '<b>Date:</b> %(date)s<br/>'
+            '<b>Amount:</b> %(amt).2f SAR over %(inst)d installment(s) '
+            'starting %(start)s</p>'
+            '<p><a href="%(link)s">Open the deduction</a></p>'
+        ) % {
             'ref': self.name,
             'type': self.type_id.name,
+            'date': applied,
             'amt': self.amount,
             'inst': self.installments,
             'start': self.start_month or '—',
-            'reason': self.reason or '—',
             'link': link,
         }
         self.env['mail.mail'].sudo().create({
-            'subject': 'Deduction applied to %s (%s)' % (emp.name, self.name),
+            'subject': '%s - %s - %s' % (emp.name, self.type_id.name, applied),
             'body_html': body,
             'email_to': email,
             'model': self._name,

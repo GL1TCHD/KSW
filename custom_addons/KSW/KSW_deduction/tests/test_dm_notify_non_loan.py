@@ -34,6 +34,19 @@ class TestDmNotifyNonLoan(DeductionCommon):
         self.assertFalse(ded.message_ids.filtered(
             lambda m: self.mgr_user.partner_id in m.partner_ids))
 
+    def test_subject_and_details(self):
+        ded = self._make_deduction(
+            ded_type=self.type_gov_pen,
+            reason='Traffic fine\nRiyadh <ring road>')
+        ded.description = 'Paid by company on 1 Nov'
+        self._activate(ded)
+        mail = self._mails(ded)
+        self.assertEqual(mail.subject, '%s - %s - %s' % (
+            self.employee.name, self.type_gov_pen.name, ded.x_charge_date))
+        self.assertIn('Traffic fine<br>Riyadh &lt;ring road&gt;',
+                      mail.body_html.replace('<br/>', '<br>'))
+        self.assertIn('Paid by company on 1 Nov', mail.body_html)
+
     def test_manager_without_user_still_emailed(self):
         boss = self.env['hr.employee'].create({
             'name': 'KSWDED No-User Boss', 'work_email': 'boss@example.com'})
