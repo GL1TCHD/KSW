@@ -1228,7 +1228,63 @@ class HrPayslip(models.Model):
                 res += self._worked_day_lines_biometric(
                     version, employee, attendances, eff_from, eff_to)
 
+        # The loop above only looks inside each contract's dates, so days of
+        # the window before a mid-month hire (or after a contract ended) were
+        # neither attended nor absent, while BASIC = contract.wage still paid
+        # the whole month (KSWCO SLIP/14977: hired 15 Oct, paid all October).
+        # Deduct them like absent days, at the same daily rate.
+        if d_from <= d_to:
+            for employee in versions.employee_id:
+                outside = self._days_outside_contract(employee, d_from, d_to)
+                if not outside:
+                    continue
+                emp_version = versions.filtered(
+                    lambda v: v.employee_id == employee)[:1]
+                self._add_pre_return_absent_days(
+                    res, outside, emp_version, period_date=d_from)
+                att_abs = next(
+                    d for d in res if d.get('code') == 'ATT_ABS')
+                att_abs['name'] = _(
+                    'Absent Days (incl. %(days)s outside contract)',
+                    days=outside)
+                if not any(d.get('code') == 'WORK100' for d in res):
+                    res.insert(0, {
+                        'name': _('Attended Days'),
+                        'sequence': 1,
+                        'code': 'WORK100',
+                        'number_of_days': 0.0,
+                        'number_of_hours': 0.0,
+                        'version_id': emp_version.id,
+                    })
+
         return res
+
+    def _days_outside_contract(self, employee, date_from, date_to):
+        """Days in [date_from, date_to] covered by none of the employee's
+        contracts.
+
+        Every version counts, not just the payslip's: a renewal ends one
+        contract the day before the next begins (KSWCO SARFARAZ ELAHI,
+        28 → 29 Sep) and must not lose the days of the old one. A version
+        with no start date is treated as covering everything, and an
+        employee with no version is never docked; neither tells us when
+        he was hired.
+        """
+        versions = self.env['hr.version'].sudo().search([
+            ('employee_id', '=', employee.id),
+        ])
+        if not versions:
+            return 0
+        covered = set()
+        for v in versions:
+            if not v.contract_date_start:
+                return 0
+            start = max(date_from, v.contract_date_start)
+            end = min(date_to, v.contract_date_end or date_to)
+            while start <= end:
+                covered.add(start)
+                start += timedelta(days=1)
+        return (date_to - date_from).days + 1 - len(covered)
 
     # ------------------------------------------------------------------
     # Scheduled Saturday hours (for short-shift overtime reclassification)

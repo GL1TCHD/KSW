@@ -699,6 +699,12 @@ msgid "Absent Days"
 msgstr "أيام الغياب"
 
 #. module: KSW_payroll
+#. odoo-python
+#: code:addons/KSW_payroll/models/hr_payslip.py:0
+msgid "Absent Days (incl. %(days)s outside contract)"
+msgstr "أيام الغياب (منها %(days)s يوم خارج فترة العقد)"
+
+#. module: KSW_payroll
 #: model_terms:ir.ui.view,arch_db:KSW_payroll.view_ksw_payslip_revision_request_form
 msgid "Accept & Issue Revision"
 msgstr "قبول وإصدار التعديل"
