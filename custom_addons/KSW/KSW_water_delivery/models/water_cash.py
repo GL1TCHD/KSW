@@ -295,7 +295,7 @@ class KswWaterDispatch(models.Model):
         self.ensure_one()
         product = self.product_id._origin or self.product_id
         return (self.env['ksw.water.revenue.account']._account_for_branch(
-                    self.picking_type_id, product)
+                    self.picking_type_id, product, self.vehicle_id)
                 or product.product_tmpl_id.sudo()._get_product_accounts().get('income'))
 
     def _water_income_problem(self):

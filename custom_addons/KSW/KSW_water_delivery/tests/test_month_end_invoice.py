@@ -383,6 +383,26 @@ class TestMonthEndInvoice(WaterDeliveryCommon):
         line = invoice.invoice_line_ids.filtered(lambda l: l.display_type == 'product')
         self.assertEqual(line.account_id, self.water.property_account_income_id)
 
+    def test_a_tankers_own_row_wins_inside_its_branch(self):
+        """BAS books Tariq's trucks to their own revenue line at Isuzu Sector:
+        a tanker row beats the branch row for the same product, only for that
+        tanker and only in that branch."""
+        own = self.env['account.account'].create({
+            'name': 'Sales (truck, test)', 'code': '4999002', 'account_type': 'income'})
+        branch = self.env['account.account'].create({
+            'name': 'Sales (branch, test)', 'code': '4999003', 'account_type': 'income'})
+        Revenue = self.env['ksw.water.revenue.account']
+        Revenue.create({'branch_code': '172', 'product_id': self.water.id, 'account_id': branch.id})
+        Revenue.create({'branch_code': '172', 'product_id': self.water.id, 'account_id': own.id,
+                        'vehicle_id': self.vehicle.id})
+        self._note()
+        invoice = self._invoice(self.customer)
+        line = invoice.invoice_line_ids.filtered(lambda l: l.display_type == 'product')
+        self.assertEqual(line.account_id, own)
+        other = self.env['ksw.fleet.vehicle'].sudo().create({'name': 'OTHER-1'})
+        self.assertEqual(Revenue._account_for('172', self.water, other), branch)
+        self.assertFalse(Revenue._account_for('180', self.water, self.vehicle))
+
     def test_editing_an_imported_row_takes_it_over(self):
         account = self.env['account.account'].create({
             'name': 'Sales (test)', 'code': '4999001', 'account_type': 'income'})

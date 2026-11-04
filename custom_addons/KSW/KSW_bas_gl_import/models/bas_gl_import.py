@@ -1367,8 +1367,16 @@ class BasGlImport(models.Model):
         if cache is not None and cash_acc.id in cache:
             return self.env['account.journal'].browse(cache[cash_acc.id])
         J = self.env['account.journal']
+        # By the till's own account first. The code is only the last four
+        # digits, and those collide: 1201010001 (main till) and 1201020001
+        # (Nabiya) are both C0001 -- matching on the code re-pointed Nabiya's
+        # journal at the main till below, and every Nabiya cash receipt after
+        # that posted to the wrong till.
+        j = J.search([('company_id', '=', company.id), ('type', '=', 'cash'),
+                      ('default_account_id', '=', cash_acc.id)], limit=1)
         code = ('C' + (cash_acc.x_bas_code or '')[-4:])[:5]
-        j = J.search([('company_id', '=', company.id), ('code', '=', code)], limit=1)
+        if not j and J.search_count([('company_id', '=', company.id), ('code', '=', code)]):
+            code = 'T' + (cash_acc.x_bas_code or '')[-4:]
         if not j:
             j = J.create({
                 'name': cash_acc.with_context(lang='ar_001').name or code,

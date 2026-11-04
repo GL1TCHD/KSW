@@ -575,7 +575,11 @@ class Replay:
         dispatch = self.env['ksw.water.dispatch'].with_user(desk).create(vals)
         dispatch._water_sell_pickup()
         picking = dispatch.sudo().picking_id
-        picking.sudo().write({'note': text})
+        vals = {'note': text}
+        vehicle = self.vehicle_for(h['VEH']) if h.get('VEH') else None
+        if vehicle:
+            vals['x_vehicle_id'] = vehicle.id   # the truck is known even if the driver is not
+        picking.sudo().write(vals)
         picking.sudo().message_post(body=text)
         dispatch.sudo().message_post(body=text)
         return picking

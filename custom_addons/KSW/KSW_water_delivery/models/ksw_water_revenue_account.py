@@ -41,6 +41,15 @@ class KswWaterRevenueAccount(models.Model):
         'product.product', string='Product', required=True, index=True,
         ondelete='cascade',
     )
+    # A tanker's own line inside a branch. BAS books the Isuzu Sector's sales to
+    # «مبيعات قطاع الايسوزو (المندوب طارق)» when one of Tariq's trucks delivered
+    # them, whatever the client -- but the same trucks working another branch
+    # post to that branch's account. So the tanker refines a branch row and is
+    # never a rule of its own (Nov 2026).
+    vehicle_id = fields.Many2one(
+        'ksw.fleet.vehicle', string='Tanker', index=True, ondelete='cascade',
+        help='Only notes delivered by this tanker in this branch. Empty: every '
+             'tanker of the branch.')
     # Empty when BAS's account does not exist in this chart of accounts: the
     # row is kept so the gap is visible, and the line falls back to core.
     account_id = fields.Many2one(
@@ -62,8 +71,8 @@ class KswWaterRevenueAccount(models.Model):
     )
 
     _branch_product_uniq = models.Constraint(
-        'unique(branch_code, product_id, company_id)',
-        'This branch already has a revenue account for this product.',
+        'unique nulls not distinct (branch_code, product_id, vehicle_id, company_id)',
+        'This branch already has a revenue account for this product (and tanker).',
     )
 
     def write(self, vals):
@@ -74,21 +83,24 @@ class KswWaterRevenueAccount(models.Model):
         return super().write(vals)
 
     @api.model
-    def _account_for(self, branch_code, product):
+    def _account_for(self, branch_code, product, vehicle=None):
+        """The branch's row for this product, the tanker's own row first."""
         if not (branch_code and product):
             return self.env['account.account']
-        return self.sudo().search([
+        rows = self.sudo().search([
             ('branch_code', '=', branch_code), ('product_id', '=', product.id),
             ('company_id', '=', self.env.company.id), ('account_id', '!=', False),
-        ], limit=1).account_id
+            ('vehicle_id', 'in', [vehicle.id, False] if vehicle else [False]),
+        ])
+        return (rows.filtered('vehicle_id') or rows)[:1].account_id
 
     @api.model
-    def _account_for_branch(self, branch, product):
+    def _account_for_branch(self, branch, product, vehicle=None):
         """The income account for `product` sold by `branch`: a Revenue Account
         line for the branch's code and this product, else the branch's own
         Sales Account. Empty means the product's own income account applies."""
         branch = branch.sudo()
-        return self._account_for(branch.x_branch_code, product) or branch.x_sales_account_id
+        return self._account_for(branch.x_branch_code, product, vehicle) or branch.x_sales_account_id
 
     def action_import_from_bas(self):
         user = self.env.user
@@ -176,7 +188,7 @@ class SaleOrderLine(models.Model):
         note = self.order_id.picking_ids.filtered('x_is_water_delivery')[:1]
         if note:
             account = self.env['ksw.water.revenue.account']._account_for(
-                note.x_branch_code, self.product_id) \
+                note.x_branch_code, self.product_id, note.x_vehicle_id.sudo()) \
                 or note.picking_type_id.sudo().x_sales_account_id
             if account:
                 res['account_id'] = account.id
