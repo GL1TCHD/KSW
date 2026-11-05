@@ -196,6 +196,46 @@ class TestPayslipBankFreeze(TransactionCase):
             self.run.action_unlink_with_payslips()
         self.assertTrue(self.slip.exists())
 
+    def _release_wizard(self, user, **vals):
+        return self.env['ksw.payslip.bank.release.wizard'].with_user(
+            user).with_context(active_model='hr.payslip.run',
+                               active_id=self.run.id).create(vals)
+
+    def test_manager_releases_frozen_payslip_then_deletes(self):
+        self._freeze()
+        wizard = self._release_wizard(
+            self.manager, reason='Bank rejected the row',
+            confirm_not_paid=True)
+        self.assertEqual(wizard.slip_ids, self.slip)
+        wizard.action_release()
+        self.assertFalse(self.slip.x_bank_frozen)
+        self.assertFalse(self.slip.x_bank_exported_by)
+        self.assertEqual(self.run.x_frozen_slip_count, 0)
+        self.slip.unlink()
+        self.assertFalse(self.slip.exists())
+
+    def test_release_needs_manager_and_confirmation(self):
+        self._freeze()
+        with self.assertRaises(UserError):
+            self._release_wizard(
+                self.manager, reason='x').action_release()
+        with self.assertRaises(UserError):
+            self.env['ksw.payslip.bank.release.wizard'].with_user(
+                self.officer).sudo(False).new({
+                    'slip_ids': [(6, 0, self.slip.ids)], 'reason': 'x',
+                    'confirm_not_paid': True}).action_release()
+        self.assertTrue(self.slip.x_bank_frozen)
+
+    def test_release_dismisses_pending_change(self):
+        self._freeze()
+        self._late_change()
+        self.slip.compute_sheet()
+        self.assertTrue(self._pending())
+        self._release_wizard(self.manager, reason='Not paid',
+                             confirm_not_paid=True).action_release()
+        self.assertFalse(self._pending())
+        self.assertEqual(self.run.x_pending_change_ids.state, 'dismissed')
+
     def test_superseded_frozen_slip_is_kept_and_warned_once(self):
         self._freeze()
         self.patch(RunBase, '_ksw_superseded_slip_reasons',

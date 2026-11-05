@@ -1273,3 +1273,39 @@ class TestPayslipRevisionRequest(TransactionCase):
         with self.assertRaises(UserError):
             bank_file.with_user(self.user_acc).write(
                 {'leave_line_ids': [(5, 0, 0)]})
+
+    def test_new_file_through_the_form_shows_and_saves_the_settlement(self):
+        """The browser path: onchange as the accountant, then save what the
+        client sends back. Creating the file in code hid that every column
+        arrived blank and the payslip link was lost."""
+        slip = self._leave_settlement()
+        File = self.BankFile.with_user(self.user_acc).with_context(
+            ksw_offcycle_prefill_leaves=True)
+        line_spec = {
+            'payslip_key': {},
+            'employee_id': {'fields': {'display_name': {}}},
+            'kind': {}, 'slip_ref': {}, 'date_from': {},
+            'confirmed_date': {}, 'paying_bank_label': {}, 'amount': {}}
+        result = File.onchange({}, [], {
+            'value_date': {}, 'total_amount': {},
+            'request_ids': {'fields': {'name': {}}},
+            'leave_line_ids': {'fields': line_spec}})
+        lines = [c[2] for c in result['value']['leave_line_ids']
+                 if c[0] == 0 and c[2].get('payslip_key') == slip.id]
+        self.assertEqual(len(lines), 1, result['value']['leave_line_ids'])
+        shown = lines[0]
+        self.assertEqual(shown['employee_id']['id'], self.employee.id)
+        self.assertEqual(shown['slip_ref'], slip.number or slip.name)
+        self.assertAlmostEqual(shown['amount'], slip.x_net_wage)
+        self.assertGreater(result['value']['total_amount'], 0)
+
+        # Save exactly what the client posts back.
+        sent = {k: (v['id'] if isinstance(v, dict) else v)
+                for k, v in shown.items()}
+        bank_file = File.create({
+            'value_date': date(2026, 11, 5),
+            'leave_line_ids': [(0, 0, sent)]})
+        self.assertEqual(bank_file.leave_line_ids.payslip_id, slip)
+        bank_file.action_generate()
+        self.assertEqual(slip.x_offcycle_bank_file_id, bank_file)
+

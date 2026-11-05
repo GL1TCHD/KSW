@@ -1,7 +1,7 @@
 {
     'name': 'KSW - Odoo 19 HR Payroll',
     'category': 'Human Resources/Payroll',
-    'version': '19.0.1.30.0',
+    'version': '19.0.1.30.1',
     'sequence': 1,
     'author': 'Mohammed Albadr',
     'summary': 'HR Payroll Management for Odoo 19 Community Edition',
@@ -54,6 +54,7 @@ Extends om_hr_payroll with:
         # Before hr_payslip_views.xml: it only inherits the stock forms, and
         # an older copy of it must be replaced before those are validated.
         'views/payslip_bank_freeze_views.xml',
+        'wizard/payslip_bank_release_wizard_views.xml',
         'views/hr_payslip_views.xml',
         'views/ksw_payslip_revision_request_views.xml',
         'views/ksw_revision_bank_file_views.xml',

@@ -5,3 +5,4 @@ from . import payslip_employees
 
 from . import ksw_revision_request_reason_wizard
 from . import payslip_run_done_wizard
+from . import payslip_bank_release_wizard

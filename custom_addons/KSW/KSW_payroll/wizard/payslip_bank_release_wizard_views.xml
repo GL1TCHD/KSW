@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Release payslips from the bank freeze
+         (wizard/payslip_bank_release_wizard.py). -->
+    <record id="ksw_payslip_bank_release_wizard_form" model="ir.ui.view">
+        <field name="name">ksw.payslip.bank.release.wizard.form</field>
+        <field name="model">ksw.payslip.bank.release.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Release from Bank Freeze">
+                <div class="alert alert-warning" role="alert">
+                    Only release payslips the bank did <strong>not</strong> pay.
+                    Once released they can be recomputed or deleted, and the bank
+                    file already exported for them no longer matches Odoo.
+                </div>
+                <group>
+                    <field name="slip_ids" widget="many2many_tags"
+                           options="{'no_create': True}"/>
+                    <field name="reason"
+                           placeholder="e.g. Bank rejected these rows; employee left before payday."/>
+                    <field name="confirm_not_paid"/>
+                </group>
+                <footer>
+                    <button name="action_release" type="object"
+                            string="Release" class="btn-primary"
+                            invisible="not confirm_not_paid"/>
+                    <button string="Discard" class="btn-secondary"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ksw_payslip_bank_release" model="ir.actions.act_window">
+        <field name="name">Release from Bank Freeze</field>
+        <field name="res_model">ksw.payslip.bank.release.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="om_hr_payroll.model_hr_payslip"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="group_ids" eval="[(4, ref('om_hr_payroll.group_hr_payroll_manager'))]"/>
+    </record>
+
+    <record id="hr_payslip_run_form_bank_release" model="ir.ui.view">
+        <field name="name">hr.payslip.run.form.bank.release</field>
+        <field name="model">hr.payslip.run</field>
+        <field name="inherit_id" ref="om_hr_payroll.hr_payslip_run_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/field[@name='state']" position="before">
+                <button name="%(KSW_payroll.action_ksw_payslip_bank_release)d"
+                        type="action" string="Release from Bank Freeze"
+                        icon="fa-unlock-alt"
+                        groups="om_hr_payroll.group_hr_payroll_manager"
+                        invisible="not x_frozen_slip_count"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_hr_payslip_form_bank_release" model="ir.ui.view">
+        <field name="name">hr.payslip.form.bank.release</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="om_hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/field[@name='state']" position="before">
+                <button name="%(KSW_payroll.action_ksw_payslip_bank_release)d"
+                        type="action" string="Release from Bank Freeze"
+                        icon="fa-unlock-alt"
+                        groups="om_hr_payroll.group_hr_payroll_manager"
+                        invisible="not x_bank_frozen"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

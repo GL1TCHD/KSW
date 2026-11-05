@@ -823,34 +823,44 @@ class HrPayslipRun(models.Model):
                                  'before uploading'))
             c.font = Font(bold=True, size=11, color='9C6500')
             ri += 2
-        rows = [(
-            _('Total written to the bank file (%s rows)', payable_count),
-            payable_net,
-        )]
-        if cancelled_count:
-            rows.append((
-                _('Cancelled after export — not paid (%s rows)',
-                  cancelled_count),
-                cancelled_net,
-            ))
-            rows.append((
-                _('Originally exported to the bank (%s rows)',
-                  payable_count + cancelled_count),
-                payable_net + cancelled_net,
-            ))
+        # Read top to bottom as a calculation that ends on the amount the
+        # bank debits. Excluded rows are mostly negative NET, so the batch
+        # total is BELOW the bank total; printed last, it read as "the total
+        # after exclusion" and accounts took the smaller figure for the
+        # transfer.
+        rows = []
         if excluded_count:
-            rows.append((
-                _('Excluded from the bank file (%s rows)', excluded_count),
-                excluded_net,
-            ))
             rows.append((
                 _('Batch total (all %s rows)',
                   payable_count + excluded_count + cancelled_count),
                 payable_net + excluded_net + cancelled_net,
             ))
-        for label, amount in rows:
+            rows.append((
+                _('Excluded from the bank file (%s rows)', excluded_count),
+                excluded_net,
+            ))
+        if cancelled_count:
+            rows.append((
+                _('Originally exported to the bank (%s rows)',
+                  payable_count + cancelled_count),
+                payable_net + cancelled_net,
+            ))
+            rows.append((
+                _('Cancelled after export — not paid (%s rows)',
+                  cancelled_count),
+                cancelled_net,
+            ))
+        rows.append((
+            _('Total written to the bank file (%s rows)', payable_count),
+            payable_net,
+        ))
+        final_fill = PatternFill('solid', fgColor='C6EFCE')
+        for i, (label, amount) in enumerate(rows):
             ws.cell(ri, 1, label).font = bold
             ws.cell(ri, money_col, amount).font = bold
+            if i == len(rows) - 1 and len(rows) > 1:
+                ws.cell(ri, 1).fill = final_fill
+                ws.cell(ri, money_col).fill = final_fill
             ri += 1
         return ri - 1
 

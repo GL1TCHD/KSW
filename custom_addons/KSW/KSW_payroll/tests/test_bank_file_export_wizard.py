@@ -991,6 +991,26 @@ class TestBankFileExportWizard(TransactionCase):
             self._totals_row(ws, 'Batch total', 15), 10610,
         )
 
+    def test_totals_end_on_the_bank_amount(self):
+        """Read top-down: batch total, minus excluded, = what the bank pays.
+
+        With the bank total first, the smaller batch total (a negative NET
+        row nets it down) sat last and was read as the amount to transfer.
+        """
+        self._add_wps_employee('OVER DEDUCTED', '917', '9009009017', net=-390)
+        for sheet, col in (('Payroll Summary', 15), ('WPS Bank File', 6)):
+            ws = self._export_wb('specific_excel', self.wps_bank)[sheet]
+            totals = [
+                (ws.cell(r, 1).value, ws.cell(r, col).value)
+                for r in range(1, ws.max_row + 1)
+                if isinstance(ws.cell(r, 1).value, str)
+                and ws.cell(r, 1).value.startswith(
+                    ('Batch total', 'Excluded from the bank file (',
+                     'Total written to the bank file'))
+            ]
+            self.assertEqual([amt for _label, amt in totals],
+                             [10610, -390, 11000], sheet)
+
     def test_bank_sheet_totals_carry_the_review_only_banner(self):
         """Totals on an upload sheet must be flagged as rows to delete."""
         self._add_wps_employee('OVER DEDUCTED', '916', '9009009016', net=-390)

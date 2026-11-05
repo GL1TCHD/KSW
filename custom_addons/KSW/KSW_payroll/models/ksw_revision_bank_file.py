@@ -119,8 +119,14 @@ class KswRevisionBankFile(models.Model):
         if ('leave_line_ids' in fields_list and not res.get('leave_line_ids')
                 and self.env.context.get('ksw_offcycle_prefill_leaves')):
             slips = self.env['hr.payslip']._ksw_offcycle_pending_leave_slips()
+            # Every display column is sent here, and the payslip travels as
+            # a plain integer: the web client keeps only the fields its view
+            # asks for, and the accountant cannot read hr.payslip, so a
+            # payslip_id here would arrive back at create() empty.
+            Line = self.env['ksw.revision.bank.file.leave.line']
             res['leave_line_ids'] = [
-                (0, 0, {'payslip_id': s.id}) for s in slips]
+                (0, 0, dict(Line._line_vals(s), payslip_key=s.id))
+                for s in slips]
         return res
 
     @api.model_create_multi
@@ -311,6 +317,9 @@ class KswRevisionBankFileLeaveLine(models.Model):
     payslip_id = fields.Many2one(
         'hr.payslip', string='Payslip', required=True, ondelete='restrict',
         index=True)
+    # The payslip id as the form carries it (see default_get). Whatever it
+    # names must still pass the pending check at generation.
+    payslip_key = fields.Integer(string='Payslip Key')
     employee_id = fields.Many2one(
         'hr.employee', string='Employee', readonly=True)
     kind = fields.Selection(
@@ -351,6 +360,8 @@ class KswRevisionBankFileLeaveLine(models.Model):
         self.env['ksw.revision.bank.file']._check_accounting()
         Payslip = self.env['hr.payslip'].sudo()
         for vals in vals_list:
+            if not vals.get('payslip_id') and vals.get('payslip_key'):
+                vals['payslip_id'] = vals['payslip_key']
             if vals.get('payslip_id'):
                 for key, value in self._line_vals(
                         Payslip.browse(vals['payslip_id'])).items():

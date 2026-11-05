@@ -52,3 +52,4 @@ access_ksw_revision_bank_file_acc,ksw.revision.bank.file.acc,model_ksw_revision_
 access_ksw_revision_bank_file_officer,ksw.revision.bank.file.officer,model_ksw_revision_bank_file,om_hr_payroll.group_hr_payroll_user,1,0,0,0
 access_ksw_revision_bank_file_leave_line_acc,ksw.revision.bank.file.leave.line.acc,model_ksw_revision_bank_file_leave_line,KSW_annual_leave.group_annual_leave_acc,1,1,1,1
 access_ksw_revision_bank_file_leave_line_officer,ksw.revision.bank.file.leave.line.officer,model_ksw_revision_bank_file_leave_line,om_hr_payroll.group_hr_payroll_user,1,0,0,0
+access_ksw_payslip_bank_release_wizard_manager,ksw.payslip.bank.release.wizard.manager,model_ksw_payslip_bank_release_wizard,om_hr_payroll.group_hr_payroll_manager,1,1,1,1
