@@ -8,13 +8,13 @@
         <field name="name">ksw.revision.bank.file.form</field>
         <field name="model">ksw.revision.bank.file</field>
         <field name="arch" type="xml">
-            <form string="Revision Bank File">
+            <form string="Off-Cycle Bank File">
                 <header>
                     <button name="action_generate" type="object"
                             string="Generate Bank File" class="btn-primary"
                             invisible="state != 'draft'"
                             groups="KSW_annual_leave.group_annual_leave_acc"
-                            confirm="Generate one Excel and one TXT bank file for the requests listed, and mark every one of them as paid?"/>
+                            confirm="Generate one Excel and one TXT bank file for everything listed, and record every transfer as sent?"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
@@ -25,7 +25,8 @@
                         <group>
                             <field name="value_date"
                                    readonly="state != 'draft'"/>
-                            <field name="request_count" string="Requests"/>
+                            <field name="request_count" string="Salary Revisions"/>
+                            <field name="leave_count" string="Vacation &amp; EOS"/>
                             <field name="total_amount" decoration-bf="1"/>
                         </group>
                         <group invisible="state == 'draft'">
@@ -37,17 +38,21 @@
                     </group>
                     <div class="alert alert-info" role="alert"
                          invisible="state != 'draft'">
-                        These are the revisions waiting for a bank file. Remove
-                        any that should wait; they stay pending for the next
+                        These are the salary revisions and the vacation / EOS
+                        settlements waiting for a bank transfer. Remove any
+                        that should wait; they stay pending for the next
                         file. <strong>Generate Bank File</strong> produces one
-                        Excel and one TXT for the requests listed (a zip, one
+                        Excel and one TXT for everything listed (a zip, one
                         file per paying bank, when more than one bank is
-                        involved) and marks them paid.
+                        involved). Vacation and EOS payslips are already paid
+                        from GM final approval; the file only records the
+                        transfer.
                     </div>
                     <group string="Bank Files" invisible="state == 'draft'">
                         <field name="attachment_ids" widget="many2many_binary"
                                nolabel="1" colspan="2"/>
                     </group>
+                    <separator string="Salary Revisions"/>
                     <field name="request_ids" readonly="state != 'draft'"
                            options="{'no_create': True}">
                         <list>
@@ -64,6 +69,18 @@
                                    optional="hide"/>
                         </list>
                     </field>
+                    <separator string="Vacation &amp; EOS Settlements"/>
+                    <field name="leave_line_ids" readonly="state != 'draft'">
+                        <list create="0" edit="0" delete="1">
+                            <field name="employee_id"/>
+                            <field name="kind"/>
+                            <field name="slip_ref"/>
+                            <field name="date_from" optional="show"/>
+                            <field name="confirmed_date" optional="show"/>
+                            <field name="paying_bank_label"/>
+                            <field name="amount" sum="Total"/>
+                        </list>
+                    </field>
                 </sheet>
                 <chatter/>
             </form>
@@ -74,11 +91,12 @@
         <field name="name">ksw.revision.bank.file.list</field>
         <field name="model">ksw.revision.bank.file</field>
         <field name="arch" type="xml">
-            <list string="Revision Bank Files"
+            <list string="Off-Cycle Bank Files"
                   decoration-info="state == 'draft'">
                 <field name="name"/>
                 <field name="value_date"/>
-                <field name="request_count" string="Requests"/>
+                <field name="request_count" string="Salary Revisions"/>
+                <field name="leave_count" string="Vacation &amp; EOS"/>
                 <field name="total_amount"/>
                 <field name="generated_by_id" optional="show"/>
                 <field name="generated_date" optional="hide"/>
@@ -90,17 +108,19 @@
     </record>
 
     <record id="action_ksw_revision_bank_files" model="ir.actions.act_window">
-        <field name="name">Revision Bank Files</field>
+        <field name="name">Off-Cycle Bank Files</field>
         <field name="res_model">ksw.revision.bank.file</field>
         <field name="view_mode">list,form</field>
+        <field name="context">{'ksw_offcycle_prefill_leaves': True}</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-                No revision bank files yet
+                No off-cycle bank files yet
             </p>
             <p>
-                A salary revision paid by bank transfer waits in
-                <b>Pending Bank File</b> after Confirm &amp; Pay. Create a
-                bank file here to pay any number of them in one upload.
+                Salary revisions paid by bank transfer, and vacation / EOS
+                settlements confirmed at GM final approval, wait here for a
+                transfer. Create a bank file to send any number of them in
+                one upload.
             </p>
         </field>
     </record>
@@ -143,11 +163,14 @@
               sequence="40"
               groups="KSW_annual_leave.group_annual_leave_acc,om_hr_payroll.group_hr_payroll_user"/>
 
+    <!-- Its own section under Payroll: it now pays vacation and EOS
+         settlements too, which nobody would look for under Salary
+         Revisions. Payroll root is visible to both groups below. -->
     <menuitem id="menu_ksw_revision_bank_files"
-              name="Bank Files"
-              parent="menu_ksw_revision_requests_root"
+              name="Off-Cycle Bank Files"
+              parent="om_hr_payroll.menu_hr_payroll_root"
               action="action_ksw_revision_bank_files"
-              sequence="50"
+              sequence="16"
               groups="KSW_annual_leave.group_annual_leave_acc,om_hr_payroll.group_hr_payroll_user"/>
 
 </odoo>

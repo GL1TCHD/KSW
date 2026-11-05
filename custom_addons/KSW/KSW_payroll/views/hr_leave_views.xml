@@ -75,6 +75,14 @@
                       invisible="not x_annual_approval_state"
                       groups="om_hr_payroll.group_hr_payroll_user,KSW_annual_leave.group_annual_leave_hr,KSW_annual_leave.group_annual_leave_acc,KSW_annual_leave.group_annual_leave_gm">
 
+                    <field name="x_settlement_transfer_status" invisible="1"/>
+                    <div class="alert alert-info" role="alert"
+                         invisible="not x_settlement_transfer_status">
+                        <strong>Bank transfer:</strong>
+                        <field name="x_settlement_transfer_status"
+                               class="d-block" nolabel="1"/>
+                    </div>
+
                     <div class="alert alert-warning" role="alert"
                          invisible="not x_vacation_calc_is_preview">
                         <strong>Provisional figures.</strong>

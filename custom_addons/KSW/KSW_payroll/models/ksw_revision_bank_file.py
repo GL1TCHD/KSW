@@ -8,8 +8,15 @@ from odoo.exceptions import UserError
 from .ksw_payslip_revision_request import ACC_GROUP
 
 
+PAYROLL_MANAGER_GROUP = 'om_hr_payroll.group_hr_payroll_manager'
+
+
 class KswRevisionBankFile(models.Model):
-    """One bank transfer file for several salary revisions.
+    """One bank transfer file for every off-cycle payment.
+
+    Off-cycle means paid outside a monthly batch: salary revisions, and the
+    vacation / EOS / unpaid-leave settlement payslips confirmed at GM final
+    approval (``leave_line_ids``).  The model keeps its historical name.
 
     Before this, every revision paid by bank produced its own Excel + TXT at
     Confirm & Pay, so ten approved revisions meant ten uploads to the bank.
@@ -24,7 +31,7 @@ class KswRevisionBankFile(models.Model):
     """
 
     _name = 'ksw.revision.bank.file'
-    _description = 'Salary Revision Bank File'
+    _description = 'Off-Cycle Bank File'
     _inherit = ['mail.thread']
     _order = 'id desc'
 
@@ -55,7 +62,17 @@ class KswRevisionBankFile(models.Model):
         help='The approved bank-transfer revisions this file pays. Remove '
              'any that should wait for a later file.',
     )
+    # A line model rather than a Many2many to hr.payslip: the accounting
+    # group has no payslip access, and its leave rules are department-scoped,
+    # so neither record would render for the person preparing the file.
+    leave_line_ids = fields.One2many(
+        'ksw.revision.bank.file.leave.line', 'bank_file_id',
+        string='Vacation & EOS Settlements', copy=False,
+        help='Vacation / EOS payslips confirmed at GM final approval whose '
+             'transfer has not been sent yet. Remove any that should wait.',
+    )
     request_count = fields.Integer(compute='_compute_totals')
+    leave_count = fields.Integer(compute='_compute_totals')
     total_amount = fields.Float(
         string='Total', compute='_compute_totals', digits=(16, 2))
 
@@ -74,11 +91,14 @@ class KswRevisionBankFile(models.Model):
     generated_date = fields.Datetime(
         string='Generated On', readonly=True, copy=False)
 
-    @api.depends('request_ids')
+    @api.depends('request_ids', 'leave_line_ids.amount')
     def _compute_totals(self):
         for rec in self:
             rec.request_count = len(rec.request_ids)
-            rec.total_amount = sum(rec.request_ids.mapped('difference_amount'))
+            rec.leave_count = len(rec.leave_line_ids)
+            rec.total_amount = (
+                sum(rec.request_ids.mapped('difference_amount'))
+                + sum(rec.leave_line_ids.mapped('amount')))
 
     @api.model
     def default_get(self, fields_list):
@@ -94,6 +114,13 @@ class KswRevisionBankFile(models.Model):
             else:
                 pending = Request.search([('state', '=', 'pending_bank_file')])
             res['request_ids'] = [(6, 0, pending.ids)]
+        # Only from the Off-Cycle Bank Files menu: a file started from
+        # selected revision rows is about those rows.
+        if ('leave_line_ids' in fields_list and not res.get('leave_line_ids')
+                and self.env.context.get('ksw_offcycle_prefill_leaves')):
+            slips = self.env['hr.payslip']._ksw_offcycle_pending_leave_slips()
+            res['leave_line_ids'] = [
+                (0, 0, {'payslip_id': s.id}) for s in slips]
         return res
 
     @api.model_create_multi
@@ -109,7 +136,8 @@ class KswRevisionBankFile(models.Model):
         if not self.env.su:
             self._check_accounting()
             if self.filtered(lambda r: r.state != 'draft') and (
-                    set(vals) & {'request_ids', 'value_date', 'state'}):
+                    set(vals) & {'request_ids', 'leave_line_ids',
+                                 'value_date', 'state'}):
                 raise UserError(_(
                     'A generated bank file cannot be changed: it is what was '
                     'sent to the bank.'))
@@ -126,7 +154,8 @@ class KswRevisionBankFile(models.Model):
     def _check_accounting(self):
         if not self.env.su and not self.env.user.has_group(ACC_GROUP):
             raise UserError(_(
-                'Only the accounting team may prepare a revision bank file.'))
+                'Only the accounting team may prepare an off-cycle bank '
+                'file.'))
 
     # ------------------------------------------------------------------
 
@@ -142,9 +171,21 @@ class KswRevisionBankFile(models.Model):
         if self.state != 'draft':
             raise UserError(_('This bank file has already been generated.'))
         requests = self.request_ids.sudo()
-        if not requests:
+        leave_slips = self.leave_line_ids.sudo().payslip_id
+        if not requests and not leave_slips:
             raise UserError(_(
-                'Add at least one revision request pending a bank file.'))
+                'Add at least one salary revision or vacation / EOS '
+                'settlement waiting for a bank file.'))
+        stale_leave = leave_slips - leave_slips._ksw_offcycle_pending_filter()
+        if stale_leave:
+            raise UserError(_(
+                'These settlements are no longer waiting for a bank transfer '
+                '(already in another file, recorded as paid by hand, '
+                'cancelled, or with nothing to pay). Remove them and '
+                'generate again:\n%(rows)s',
+                rows='\n'.join('• %s — %s' % (s.number or s.name,
+                                               s.employee_id.name)
+                               for s in stale_leave)))
         stale = requests.filtered(
             lambda r: r.state != 'pending_bank_file'
             or r.payment_method != 'bank' or r.bank_file_id)
@@ -164,6 +205,7 @@ class KswRevisionBankFile(models.Model):
                 rows='\n'.join('• %s — %s' % (r.name, r.employee_id.name)
                                for r in unconfirmed)))
 
+        slips |= leave_slips
         run = self._make_payment_batch(slips)
         attachments = self.env['ir.attachment']
         for mode in ('all_excel', 'all_txt'):
@@ -185,12 +227,18 @@ class KswRevisionBankFile(models.Model):
             'generated_by_id': self.env.uid,
             'generated_date': fields.Datetime.now(),
         })
+        slips.sudo().write({'x_offcycle_bank_file_id': self.id})
         requests._mark_paid_by_bank_file(self)
+        self.leave_line_ids._notify_leave_paid()
         rows = Markup('').join(
             Markup('<li>%(ref)s — %(emp)s: %(amt).2f SAR</li>') % {
                 'ref': r.name, 'emp': r.employee_id.name,
                 'amt': r.difference_amount}
-            for r in requests)
+            for r in requests) + Markup('').join(
+            Markup('<li>%(ref)s — %(emp)s: %(amt).2f SAR</li>') % {
+                'ref': ln.slip_ref, 'emp': ln.employee_id.name,
+                'amt': ln.amount}
+            for ln in self.leave_line_ids)
         self.sudo().message_post(
             body=Markup(
                 '<strong>🏦 Bank file generated</strong><br/>'
@@ -205,14 +253,14 @@ class KswRevisionBankFile(models.Model):
 
     def _make_payment_batch(self, slips):
         """The ``hr.payslip.run`` the exporter needs, holding exactly these
-        revision payslips.  Same shape as the single-request batch the
+        off-cycle payslips.  Same shape as the single-request batch the
         request used to build (``_ensure_payment_batch``)."""
         self.ensure_one()
         slips = slips.sudo()
         run = self.env['hr.payslip.run'].sudo().create({
             # No slashes or em dashes: the name becomes the file name via
             # the export wizard's _batch_label().
-            'name': _('Salary Revisions %(ref)s',
+            'name': _('Off-Cycle Payments %(ref)s',
                       ref=self.name.replace('/', '-')),
             'date_start': min(slips.mapped('date_from')),
             'date_end': max(slips.mapped('date_to')),
@@ -243,3 +291,207 @@ class KswRevisionBankFile(models.Model):
             int(match.group(1)))
         attachment.write({'res_model': self._name, 'res_id': self.id})
         return attachment
+
+
+class KswRevisionBankFileLeaveLine(models.Model):
+    """One vacation / EOS settlement payslip carried by an off-cycle file.
+
+    The display columns are copied from the payslip when the line is made,
+    so the accountant's form reads only this model (no payslip or leave
+    access needed), and a generated file keeps showing what it paid.
+    """
+
+    _name = 'ksw.revision.bank.file.leave.line'
+    _description = 'Off-Cycle Bank File: Leave Settlement'
+    _order = 'employee_id, id'
+
+    bank_file_id = fields.Many2one(
+        'ksw.revision.bank.file', required=True, ondelete='cascade',
+        index=True)
+    payslip_id = fields.Many2one(
+        'hr.payslip', string='Payslip', required=True, ondelete='restrict',
+        index=True)
+    employee_id = fields.Many2one(
+        'hr.employee', string='Employee', readonly=True)
+    kind = fields.Selection(
+        [('vacation', 'Vacation'), ('eos', 'End of Service'),
+         ('unpaid', 'Unpaid Leave')],
+        string='Settlement', readonly=True)
+    slip_ref = fields.Char(string='Payslip Ref.', readonly=True)
+    date_from = fields.Date(string='Period', readonly=True)
+    confirmed_date = fields.Date(string='GM Final Approval', readonly=True)
+    paying_bank_label = fields.Char(string='Paying Bank', readonly=True)
+    amount = fields.Float(string='Net', readonly=True, digits=(16, 2))
+
+    @api.model
+    def _line_vals(self, slip):
+        slip = slip.sudo()
+        leave = slip.x_leave_id
+        if getattr(leave, 'x_is_eos_leave', False):
+            kind = 'eos'
+        elif getattr(leave.holiday_status_id, 'is_unpaid_leave', False):
+            kind = 'unpaid'
+        else:
+            kind = 'vacation'
+        bank = self.env['hr.payslip.run']._resolve_slip_bank_account(slip)
+        return {
+            'employee_id': slip.employee_id.id,
+            'kind': kind,
+            'slip_ref': slip.number or slip.name,
+            'date_from': slip.date_from,
+            'confirmed_date': leave.x_gm_final_approved_date and (
+                leave.x_gm_final_approved_date.date()),
+            'paying_bank_label': bank and ' - '.join(filter(None, [
+                bank.bank_id.name, bank.acc_number])) or False,
+            'amount': self.env['hr.payslip']._get_net_total(slip),
+        }
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        self.env['ksw.revision.bank.file']._check_accounting()
+        Payslip = self.env['hr.payslip'].sudo()
+        for vals in vals_list:
+            if vals.get('payslip_id'):
+                for key, value in self._line_vals(
+                        Payslip.browse(vals['payslip_id'])).items():
+                    vals.setdefault(key, value)
+        return super().create(vals_list)
+
+    def write(self, vals):
+        if not self.env.su:
+            raise UserError(_(
+                'A settlement line is copied from its payslip. Remove it '
+                'and let the file add it again instead.'))
+        return super().write(vals)
+
+    def unlink(self):
+        if not self.env.su and self.filtered(
+                lambda ln: ln.bank_file_id.state != 'draft'):
+            raise UserError(_(
+                'A generated bank file cannot be changed: it is what was '
+                'sent to the bank.'))
+        return super().unlink()
+
+    def _notify_leave_paid(self):
+        """Chatter note on each leave once its transfer is in a file."""
+        for line in self.sudo():
+            leave = line.payslip_id.x_leave_id
+            if not leave:
+                continue
+            leave.message_post(
+                body=Markup(
+                    '<strong>🏦 Settlement transfer sent</strong><br/>'
+                    '%(amt).2f SAR (%(slip)s) included in bank file '
+                    '%(file)s, value date %(date)s, generated by '
+                    '%(user)s.') % {
+                        'amt': line.amount, 'slip': line.slip_ref,
+                        'file': line.bank_file_id.name,
+                        'date': line.bank_file_id.value_date,
+                        'user': self.env.user.name},
+                subtype_xmlid='mail.mt_note',
+            )
+
+
+class HrPayslip(models.Model):
+    _inherit = 'hr.payslip'
+
+    # No model-level groups=: written by sudo flows only, and the leave
+    # form reads them through a sudo compute.
+    x_offcycle_bank_file_id = fields.Many2one(
+        'ksw.revision.bank.file', string='Paid by Bank File', readonly=True,
+        copy=False, index=True,
+        help='The off-cycle bank file whose transfer paid this payslip.')
+    x_paid_outside_bank_file = fields.Boolean(
+        string='Transfer Made by Hand', readonly=True, copy=False,
+        help='This settlement was transferred before off-cycle bank files '
+             'covered vacation and EOS payslips, so it is not offered to '
+             'a bank file again.')
+
+    @api.model
+    def _ksw_offcycle_pending_domain(self):
+        """Vacation / EOS / unpaid-leave settlements whose transfer has not
+        been sent.  The payslip itself has been ``done`` since GM final
+        approval; this is only about the money leaving the bank."""
+        return [
+            ('state', '=', 'done'),
+            ('x_leave_id', '!=', False),
+            ('x_is_revision', '=', False),
+            ('x_is_vacation_preview', '=', False),
+            ('x_net_wage', '>', 0),
+            ('x_offcycle_bank_file_id', '=', False),
+            ('x_paid_outside_bank_file', '=', False),
+        ]
+
+    @api.model
+    def _ksw_offcycle_pending_leave_slips(self):
+        return self.sudo().search(
+            self._ksw_offcycle_pending_domain(), order='date_from, id')
+
+    def _ksw_offcycle_pending_filter(self):
+        return self.sudo().filtered_domain(
+            self._ksw_offcycle_pending_domain())
+
+    def write(self, vals):
+        # The transfer has left the bank: moving the payslip out of done
+        # would release its installments and let a later run pay or collect
+        # the month again (the leave reversal routes all do this through
+        # sudo()).  Only a Payroll Manager, by hand, may do it, e.g. when
+        # the bank returned the transfer.
+        if 'state' in vals and vals['state'] != 'done':
+            sent = self.sudo().filtered(
+                lambda s: s.state == 'done' and (
+                    s.x_offcycle_bank_file_id or s.x_paid_outside_bank_file))
+            if sent and (self.env.su or not self.env.user.has_group(
+                    PAYROLL_MANAGER_GROUP)):
+                by_hand = _('transferred by hand')
+                raise UserError(_(
+                    'These payslips have already been transferred to the '
+                    'employee, so they cannot be cancelled or reset:\n'
+                    '%(rows)s\n\nIf the bank returned the transfer, a '
+                    'Payroll Manager must cancel the payslip by hand first.',
+                    rows='\n'.join(
+                        '• %s — %s (%s)' % (
+                            s.number or s.name, s.employee_id.name,
+                            s.x_offcycle_bank_file_id.name or by_hand)
+                        for s in sent)))
+        return super().write(vals)
+
+
+class HrLeave(models.Model):
+    _inherit = 'hr.leave'
+
+    # Ungated sudo compute: shown to accounting / HR / GM on the leave,
+    # none of whom need payslip access to read it.
+    x_settlement_transfer_status = fields.Char(
+        string='Settlement Transfer',
+        compute='_compute_settlement_transfer_status', compute_sudo=True)
+
+    @api.depends('x_vacation_payslip_ids.state',
+                 'x_vacation_payslip_ids.x_offcycle_bank_file_id',
+                 'x_vacation_payslip_ids.x_paid_outside_bank_file')
+    def _compute_settlement_transfer_status(self):
+        for leave in self:
+            slips = leave.x_vacation_payslip_ids.filtered(
+                lambda s: s.state == 'done' and not s.x_is_revision
+                and not s.x_is_vacation_preview)
+            parts = []
+            for slip in slips:
+                ref = slip.number or slip.name
+                if slip.x_offcycle_bank_file_id:
+                    parts.append(_(
+                        '%(slip)s: sent in bank file %(file)s '
+                        '(value date %(date)s)', slip=ref,
+                        file=slip.x_offcycle_bank_file_id.name,
+                        date=slip.x_offcycle_bank_file_id.value_date))
+                elif slip.x_paid_outside_bank_file:
+                    parts.append(_('%(slip)s: transferred by hand', slip=ref))
+                elif slip.x_net_wage > 0:
+                    parts.append(_(
+                        '%(slip)s: paid, transfer of %(amt)s SAR waiting '
+                        'for the next off-cycle bank file', slip=ref,
+                        amt='{:,.2f}'.format(slip.x_net_wage)))
+                else:
+                    parts.append(_(
+                        '%(slip)s: nothing to transfer (net %(amt)s)',
+                        slip=ref, amt='{:,.2f}'.format(slip.x_net_wage)))
+            leave.x_settlement_transfer_status = '\n'.join(parts) or False

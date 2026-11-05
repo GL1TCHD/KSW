@@ -1105,3 +1105,171 @@ class TestPayslipRevisionRequest(TransactionCase):
         self._generate(req)
         with self.assertRaises(UserError):
             req.with_user(self.user_acc).action_export_bank_txt()
+
+    # ==================================================================
+    # 10. Vacation / EOS settlements in the same off-cycle file
+    # ==================================================================
+
+    def _leave_settlement(self, month=10, amount=None, leave_day=5):
+        """A confirmed leave-linked payslip, as GM final approval leaves
+        it: ``done`` and auto-confirmed, its transfer not yet sent."""
+        leave_type = self.env['hr.leave.type'].sudo().create({
+            'name': 'Offcycle Test Vacation',
+            'requires_allocation': False,
+            'leave_validation_type': 'no_validation',
+        })
+        leave = self.env['hr.leave'].sudo().create({
+            'employee_id': self.employee.id,
+            'holiday_status_id': leave_type.id,
+            # October: the test calendar works Mondays/Tuesdays here.
+            'request_date_from': date(2026, 10, leave_day),
+            'request_date_to': date(2026, 10, leave_day + 1),
+        })
+        slip = self.env['hr.payslip'].sudo().create({
+            'employee_id': self.employee.id,
+            'name': 'Vacation Payslip',
+            'date_from': date(2026, month, 1),
+            'date_to': date(2026, month, 1) + relativedelta(
+                months=1, days=-1),
+            'struct_id': self.structure.id,
+            'version_id': self.version.id,
+            'x_leave_id': leave.id,
+        })
+        if amount is not None:
+            self.env['hr.payslip.input'].sudo().create({
+                'payslip_id': slip.id, 'version_id': self.version.id,
+                'name': 'Adjust', 'code': 'ADDITIONAL_COMMISSIONS',
+                'amount': amount,
+            })
+        slip.compute_sheet()
+        slip._ksw_auto_confirm_leave_payslip()
+        return slip
+
+    def _menu_defaults(self):
+        return self.BankFile.with_user(self.user_acc).with_context(
+            ksw_offcycle_prefill_leaves=True,
+        ).default_get(['request_ids', 'leave_line_ids'])
+
+    def _menu_file(self):
+        defaults = self._menu_defaults()
+        return self.BankFile.with_user(self.user_acc).create({
+            'request_ids': defaults['request_ids'],
+            'leave_line_ids': defaults['leave_line_ids'],
+            'value_date': date(2026, 11, 5),
+        })
+
+    def test_settlement_is_paid_before_any_bank_file(self):
+        """GM final approval is the payment; the file only sends it."""
+        slip = self._leave_settlement()
+        self.assertEqual(slip.state, 'done')
+        self.assertTrue(slip.x_vacation_auto_confirmed)
+        self.assertGreater(slip.x_net_wage, 0)
+        self.assertIn(slip, slip._ksw_offcycle_pending_leave_slips())
+        self.assertIn('waiting', slip.x_leave_id.x_settlement_transfer_status)
+
+    def test_one_file_carries_revisions_and_settlements(self):
+        req = self._at_bank_file(7)
+        slip = self._leave_settlement()
+        bank_file = self._menu_file()
+        self.assertIn(req, bank_file.request_ids)
+        self.assertEqual(bank_file.leave_line_ids.payslip_id, slip)
+        line = bank_file.leave_line_ids
+        self.assertEqual(line.kind, 'vacation')
+        self.assertEqual(line.employee_id, self.employee)
+        self.assertAlmostEqual(line.amount, slip.x_net_wage)
+        self.assertAlmostEqual(
+            bank_file.total_amount, req.difference_amount + line.amount)
+
+        bank_file.action_generate()
+
+        self.assertEqual(bank_file.state, 'done')
+        self.assertEqual(req.state, 'paid')
+        run = bank_file.sudo().payslip_run_id
+        self.assertEqual(run.slip_ids,
+                         (req.revision_payslip_id | slip).sudo())
+        self.assertEqual(slip.x_offcycle_bank_file_id, bank_file)
+        self.assertEqual(slip.state, 'done')
+        self.assertEqual(len(bank_file.attachment_ids), 2)
+        self.assertNotIn(slip, slip._ksw_offcycle_pending_leave_slips())
+        slip.x_leave_id.invalidate_recordset()
+        self.assertIn(bank_file.name,
+                      slip.x_leave_id.x_settlement_transfer_status)
+
+    def test_settlements_alone_make_a_file(self):
+        slip = self._leave_settlement()
+        bank_file = self._menu_file()
+        bank_file.action_generate()
+        self.assertEqual(slip.x_offcycle_bank_file_id, bank_file)
+
+    def test_nothing_to_transfer_is_not_offered(self):
+        by_hand = self._leave_settlement(month=9, leave_day=12)
+        by_hand.sudo().x_paid_outside_bank_file = True
+        owes = self._leave_settlement(month=10, amount=-100000)
+        self.assertLessEqual(owes.x_net_wage, 0)
+        pending = self.env['hr.payslip']._ksw_offcycle_pending_leave_slips()
+        self.assertNotIn(by_hand, pending)
+        self.assertNotIn(owes, pending)
+        self.assertIn('by hand', by_hand.x_leave_id.x_settlement_transfer_status)
+
+    def test_file_from_selected_revisions_leaves_settlements_out(self):
+        req = self._at_bank_file(7)
+        self._leave_settlement()
+        defaults = self.BankFile.with_user(self.user_acc).with_context(
+            active_model=self.Request._name, active_ids=req.ids,
+        ).default_get(['request_ids', 'leave_line_ids'])
+        self.assertFalse(defaults.get('leave_line_ids'))
+
+    def test_a_settlement_cannot_go_out_in_two_files(self):
+        self._leave_settlement()
+        first = self._menu_file()
+        late = self._menu_file()
+        first.action_generate()
+        with self.assertRaises(UserError):
+            late.action_generate()
+        self.assertEqual(late.state, 'draft')
+
+    def test_sent_settlement_survives_a_leave_reversal(self):
+        """The reversal routes cancel through sudo(); once the transfer
+        has left, that would pay or collect the month a second time."""
+        slip = self._leave_settlement()
+        self._menu_file().action_generate()
+        with self.assertRaises(UserError):
+            slip.sudo().write({'state': 'cancel'})
+        by_hand = self._leave_settlement(month=9, leave_day=12)
+        by_hand.sudo().x_paid_outside_bank_file = True
+        with self.assertRaises(UserError):
+            by_hand.sudo().write({'state': 'cancel'})
+        # A Payroll Manager, by hand, when the bank returned it.
+        manager = self.env['res.users'].create({
+            'name': 'Offcycle Payroll Manager', 'login': 'offcycle_pm',
+            'group_ids': [(6, 0, [
+                self.env.ref('base.group_user').id,
+                self.env.ref('om_hr_payroll.group_hr_payroll_manager').id,
+                self.env.ref('hr.group_hr_manager').id])],
+        })
+        slip.with_user(manager).action_payslip_cancel()
+        self.assertEqual(slip.state, 'cancel')
+
+    def test_accounting_reads_the_file_without_payslip_access(self):
+        self._leave_settlement()
+        bank_file = self._menu_file()
+        with self.assertRaises(AccessError):
+            self.env['hr.payslip'].with_user(self.user_acc).check_access(
+                'read')
+        data = bank_file.with_user(self.user_acc).web_read({
+            'leave_line_ids': {'fields': {
+                'employee_id': {'fields': {'display_name': {}}},
+                'kind': {}, 'slip_ref': {}, 'paying_bank_label': {},
+                'amount': {}}},
+        })
+        self.assertEqual(len(data[0]['leave_line_ids']), 1)
+
+    def test_generated_file_keeps_its_settlements(self):
+        self._leave_settlement()
+        bank_file = self._menu_file()
+        bank_file.action_generate()
+        with self.assertRaises(UserError):
+            bank_file.leave_line_ids.with_user(self.user_acc).unlink()
+        with self.assertRaises(UserError):
+            bank_file.with_user(self.user_acc).write(
+                {'leave_line_ids': [(5, 0, 0)]})
