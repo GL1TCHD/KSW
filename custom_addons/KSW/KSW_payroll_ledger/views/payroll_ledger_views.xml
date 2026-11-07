@@ -13,9 +13,13 @@
                         groups="om_hr_payroll.group_hr_payroll_manager,account.group_account_manager"/>
             </xpath>
             <xpath expr="//field[@name='slip_ids']" position="before">
-                <group invisible="not x_ledger_move_ids and not x_ledger_error">
+                <!-- The entries are account.move records: only accounting users may read them.
+                     Payroll users still see the count gate and any posting problem. -->
+                <group invisible="not x_ledger_move_count and not x_ledger_error">
                     <field name="x_ledger_unposted_count" invisible="1"/>
-                    <field name="x_ledger_move_ids" widget="many2many_tags" readonly="1"/>
+                    <field name="x_ledger_move_count" invisible="1"/>
+                    <field name="x_ledger_move_ids" widget="many2many_tags" readonly="1"
+                           groups="account.group_account_readonly,account.group_account_invoice"/>
                     <field name="x_ledger_error" readonly="1" invisible="not x_ledger_error"
                            class="text-danger"/>
                 </group>

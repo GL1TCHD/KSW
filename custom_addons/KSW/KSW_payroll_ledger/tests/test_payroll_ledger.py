@@ -157,3 +157,20 @@ class TestPayrollLedger(BasJournalPayrollCommon):
         codes = {r['code'] for r in self.batch._bas_journal_rows()}
         self.assertIn('3101010002', codes)
         self.assertNotIn(self.housing.code, codes)
+
+    def test_11_payroll_user_without_accounting_opens_the_batch(self):
+        """a.mahmoud (Nov 2026): Mark As Done for the pending banks, no accounting rights.
+
+        The entries are account.move records; the form must not read them for him."""
+        user = self.env['res.users'].sudo().create({
+            'name': 'Ledger Payroll Only', 'login': 'ledger_payroll_only',
+            'group_ids': [(6, 0, [self.env.ref('base.group_user').id,
+                                  self.env.ref('om_hr_payroll.group_hr_payroll_manager').id])]})
+        self.assertFalse(user.has_group('account.group_account_readonly'))
+        self._payslip([(self.rule_basic, 5000.0), (self.rule_net, 5000.0)])
+        self.assertTrue(self._confirm())
+        Run = self.env['hr.payslip.run'].with_user(user)
+        arch = Run.get_views([(False, 'form')])['views']['form']['arch']
+        self.assertNotIn('name="x_ledger_move_ids"', arch)
+        Run.browse(self.batch.id).web_read({
+            'x_ledger_move_count': {}, 'x_ledger_unposted_count': {}, 'x_ledger_error': {}})

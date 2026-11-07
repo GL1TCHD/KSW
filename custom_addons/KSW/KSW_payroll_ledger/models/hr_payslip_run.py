@@ -48,6 +48,7 @@ class HrPayslipRun(models.Model):
         'account.move', string='Ledger Entries', compute='_compute_ledger_moves',
         help="The batch in Odoo's ledger (journal Payroll), one entry per confirmation "
              "and bank account. Not the BAS export.")
+    x_ledger_move_count = fields.Integer(compute='_compute_ledger_moves')
     x_ledger_unposted_count = fields.Integer(compute='_compute_ledger_moves')
     x_ledger_error = fields.Text(string='Ledger Posting Problem', readonly=True, copy=False)
 
@@ -56,6 +57,7 @@ class HrPayslipRun(models.Model):
         for run in self:
             slips = run.slip_ids
             run.x_ledger_move_ids = slips.x_ledger_move_id
+            run.x_ledger_move_count = len(slips.x_ledger_move_id)
             run.x_ledger_unposted_count = len(slips.filtered(
                 lambda s: s.state == 'done' and not s.x_ledger_move_id and not s.x_ledger_nothing))
 
@@ -127,7 +129,8 @@ class HrPayslipRun(models.Model):
     def _ksw_ledger_reverse(self, slip):
         """A booked payslip taken back: its own lines, the other way round."""
         Ledger = self.env['ksw.payroll.ledger']
-        move = slip.x_ledger_move_id
+        # sudo: the payroll user cancelling a payslip need not read journal entries.
+        move = slip.x_ledger_move_id.sudo()
         if not self:
             slip.sudo().write({'x_ledger_move_id': False})
             return
