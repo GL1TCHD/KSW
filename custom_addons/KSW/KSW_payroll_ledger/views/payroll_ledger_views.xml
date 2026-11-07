@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Payslip batch: its entry in Odoo's ledger, next to (not inside) the BAS export. -->
+    <record id="view_hr_payslip_run_form_ledger" model="ir.ui.view">
+        <field name="name">hr.payslip.run.form.ledger</field>
+        <field name="model">hr.payslip.run</field>
+        <field name="inherit_id" ref="om_hr_payroll.hr_payslip_run_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_ksw_ledger_post" type="object" string="Post to Ledger"
+                        invisible="not x_ledger_unposted_count"
+                        groups="om_hr_payroll.group_hr_payroll_manager,account.group_account_manager"/>
+            </xpath>
+            <xpath expr="//field[@name='slip_ids']" position="before">
+                <group invisible="not x_ledger_move_ids and not x_ledger_error">
+                    <field name="x_ledger_unposted_count" invisible="1"/>
+                    <field name="x_ledger_move_ids" widget="many2many_tags" readonly="1"/>
+                    <field name="x_ledger_error" readonly="1" invisible="not x_ledger_error"
+                           class="text-danger"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_ksw_pay_run_form_ledger" model="ir.ui.view">
+        <field name="name">ksw.pay.run.form.ledger</field>
+        <field name="model">ksw.pay.run</field>
+        <field name="inherit_id" ref="KSW_commissions.view_ksw_pay_run_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="action_ksw_ledger_post" type="object" string="Post to Ledger"
+                        invisible="state != 'paid' or x_ledger_move_id"
+                        groups="KSW_commissions.group_commission_accountant,account.group_account_manager"/>
+            </xpath>
+            <xpath expr="//field[@name='gm_id']" position="after">
+                <field name="x_ledger_move_id" readonly="1" invisible="not x_ledger_move_id"/>
+                <field name="x_ledger_error" readonly="1" invisible="not x_ledger_error"
+                       class="text-danger"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_hr_salary_rule_form_ledger" model="ir.ui.view">
+        <field name="name">hr.salary.rule.form.ledger</field>
+        <field name="model">hr.salary.rule</field>
+        <field name="inherit_id" ref="KSW_payroll.view_hr_salary_rule_form_bas"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='x_bas_posting']" position="after">
+                <field name="x_ledger_account_id" options="{'no_create': True}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_department_form_ledger" model="ir.ui.view">
+        <field name="name">hr.department.form.ledger</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='parent_id']" position="after">
+                <field name="x_wage_account_id" options="{'no_create': True}"
+                       groups="om_hr_payroll.group_hr_payroll_user,account.group_account_manager"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_employee_form_ledger" model="ir.ui.view">
+        <field name="name">hr.employee.form.ledger</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='department_id']" position="after">
+                <field name="x_wage_account_id" options="{'no_create': True}"
+                       groups="om_hr_payroll.group_hr_payroll_manager"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_config_settings_view_form_ledger" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.ksw.payroll.ledger</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="KSW_payroll.res_config_settings_view_form_ksw_payroll"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='ksw_gosi_settings']" position="after">
+                <h2>Ledger (parallel run)</h2>
+                <div class="row mt16 o_settings_container" id="ksw_ledger_settings">
+                    <div class="col-lg-6 col-12 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <label for="ksw_ledger_start_date"/>
+                            <div class="text-muted">
+                                Payslip batches and paid commission months from this date are
+                                posted to the ledger. Months already exported to BAS stay out.
+                            </div>
+                            <div class="content-group mt16">
+                                <field name="ksw_ledger_start_date"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -275,22 +275,41 @@ class KswStockMovementWizard(models.TransientModel):
             'amount_total': taxes['total_included'],
         }
 
+    def _order_line(self, move):
+        """(order line, invoice type) behind a delivery or a receipt. Neither
+        sale_stock nor purchase_stock is a dependency: the report runs without
+        them and simply has nothing to say about invoicing there."""
+        if 'sale_line_id' in move._fields and move.sale_line_id:
+            return move.sale_line_id.sudo(), 'out_invoice'
+        if 'purchase_line_id' in move._fields and move.purchase_line_id:
+            return move.purchase_line_id.sudo(), 'in_invoice'
+        return False, False
+
     def _invoice_vals(self, move):
-        """The customer invoice that billed this delivery, if any: a posted
-        one before a draft, the latest of each."""
-        line = move['sale_line_id'] if 'sale_line_id' in move._fields else False
+        """The invoice that billed this delivery, or the vendor bill of this
+        receipt, if any: a posted one before a draft, the latest of each."""
+        line, move_type = self._order_line(move)
         if not line:
             return {}
-        invoices = line.sudo().invoice_lines.move_id.filtered(
-            lambda m: m.move_type == 'out_invoice' and m.state != 'cancel')
+        invoices = line.invoice_lines.move_id.filtered(
+            lambda m: m.move_type == move_type and m.state != 'cancel')
         invoice = (invoices.filtered(lambda m: m.state == 'posted') or invoices).sorted('id')[-1:]
-        return {'invoice_move_id': invoice.id, 'invoice_name': invoice.display_name} if invoice else {}
+        if not invoice:
+            return {}
+        return {'invoice_move_id': invoice.id, 'invoice_name': invoice.display_name,
+                'invoice_date': invoice.invoice_date, 'invoice_ref': invoice.ref or False}
 
     def _invoice_status(self, move):
-        # sale_stock is not a dependency: the report runs without Sales, and
-        # simply has nothing to say about invoicing there.
-        line = move['sale_line_id'] if 'sale_line_id' in move._fields else False
-        return line.invoice_status if line else False
+        line, move_type = self._order_line(move)
+        if not line:
+            return False
+        if move_type == 'out_invoice':
+            return line.invoice_status
+        # A purchase line has no invoice status of its own: billed when its
+        # billed quantity covers what was received.
+        if not line.qty_received:
+            return 'no'
+        return 'invoiced' if line.qty_invoiced >= line.qty_received else 'to invoice'
 
     def _opening_vals(self, scope, start):
         """Per item and location: done in minus done out before the period."""

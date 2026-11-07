@@ -305,7 +305,9 @@ class BasGlImport(models.Model):
             'company_id': company.id,
             'invoice_date': day,
             'date': day,
-            'ref': f'BAS {ftype}/{ftype2} br{code2} #{number1}',
+            # BAS numbers a credit purchase with the supplier's invoice number
+            # («ف6295» in its description): that is the vendor reference.
+            'ref': f'{number1}',
             'x_bas_key': bas_key,
             'x_bas_ftype': f'{ftype}/{ftype2}',
             'x_bas_branch': code2,

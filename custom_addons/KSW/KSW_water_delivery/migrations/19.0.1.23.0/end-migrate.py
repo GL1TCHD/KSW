@@ -10,10 +10,10 @@ end-migrate, not post: the warehouses' BAS codes (`x_bas_code`) belong to
 KSW_inventory and the branch names to KSW_bas_gl_import, neither a dependency
 (KSW gotcha #45).
 
-Refuses (aborting the upgrade) when two branches would share one warehouse
-with different settings: that is a database without a warehouse per branch
-(production before its inventory setup), and folding twelve branches into one
-warehouse would lose their settings. Set the warehouses up first.
+A database without a warehouse per branch (production before its inventory
+setup) would fold every branch into one warehouse and lose their settings, so
+each coded branch gets the warehouse BAS gives it (120 -> W20) instead. Only
+branches with no code to tell them apart still abort the upgrade.
 """
 import logging
 from collections import defaultdict
@@ -47,20 +47,44 @@ def migrate(cr, version):
     for row in rows:
         code = (row['x_branch_code'] or '').strip()
         warehouse = Warehouse.browse(row['warehouse_id'])
-        if has_bas and len(code) == 3:
-            warehouse = Warehouse.search([('x_bas_code', '=', code[1:])], limit=1) or warehouse
+        if len(code) == 3:
+            found = has_bas and Warehouse.search([('x_bas_code', '=', code[1:])], limit=1)
+            # BAS's own code (W20), when the warehouse exists without KSW_inventory
+            found = found or Warehouse.search([('code', '=', 'W' + code[1:]),
+                                               ('company_id', '=', warehouse.company_id.id)], limit=1)
+            warehouse = found or warehouse
         target[row['id']] = warehouse
 
     shared = defaultdict(list)
     for row in rows:
         shared[target[row['id']].id].append(row)
+    created = 0
     for warehouse_id, branch_rows in shared.items():
-        if len({tuple(r[c] for c in cols) for r in branch_rows}) > 1:
-            names = ', '.join(Type.browse(r['id']).name for r in branch_rows)
+        if len({tuple(r[c] for c in cols) for r in branch_rows}) <= 1:
+            continue
+        # A database that never set its warehouses up (production, Nov 2026):
+        # each coded branch gets the warehouse BAS gives it, 120 -> W20, which
+        # KSW_inventory's BAS warehouse import later adopts.
+        for row in branch_rows:
+            code = (row['x_branch_code'] or '').strip()
+            if len(code) != 3:
+                continue
+            ptype = Type.browse(row['id'])
+            vals = {'name': ptype.with_context(lang='en_US').name, 'code': 'W' + code[1:],
+                    'company_id': ptype.company_id.id or env.company.id}
+            if has_bas:
+                vals.update(x_bas_code=code[1:], x_bas_kind='warehouse')
+            target[row['id']] = Warehouse.create(vals)
+            created += 1
+        left = [r for r in branch_rows if target[r['id']].id == warehouse_id]
+        if len({tuple(r[c] for c in cols) for r in left}) > 1:
+            names = ', '.join(Type.browse(r['id']).name for r in left)
             raise UserError(
-                'Water branches %s would share warehouse %s with different settings. '
-                'Give every branch its own warehouse first (the BAS warehouses of '
-                'KSW_inventory), then upgrade again.' % (names, Warehouse.browse(warehouse_id).name))
+                'Water branches %s would share warehouse %s with different settings and '
+                'have no BAS branch code to give them their own. Give every branch its own '
+                'warehouse first, then upgrade again.' % (names, Warehouse.browse(warehouse_id).name))
+    if created:
+        _logger.info('KSW_water_delivery: %s branch warehouses created (BAS codes).', created)
 
     moved = 0
     for row in rows:

@@ -43,6 +43,8 @@
                        groups="account.group_account_invoice,account.group_account_readonly"/>
                 <field name="invoice_name" optional="show"
                        groups="!account.group_account_invoice,!account.group_account_readonly"/>
+                <field name="invoice_date" optional="show"/>
+                <field name="invoice_ref" optional="show"/>
             </list>
         </field>
     </record>

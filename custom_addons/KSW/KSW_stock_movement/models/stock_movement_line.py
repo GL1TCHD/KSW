@@ -81,6 +81,11 @@ class KswStockMovementLine(models.TransientModel):
     # his screen. The Invoice button is shown to accounting only.
     invoice_move_id = fields.Integer(string='Invoice ID', readonly=True)
     invoice_name = fields.Char(string='Invoice', readonly=True)
+    # A receipt's vendor bill as well as a delivery's customer invoice: the
+    # date and the reference (the supplier's / BAS number) are what a clerk
+    # matches the paper against.
+    invoice_date = fields.Date(string='Invoice Date', readonly=True)
+    invoice_ref = fields.Char(string='Invoice Reference', readonly=True)
 
     invoice_status = fields.Selection([
         ('invoiced', 'Invoiced'),
@@ -88,8 +93,8 @@ class KswStockMovementLine(models.TransientModel):
         ('upselling', 'Upselling Opportunity'),
         ('no', 'Nothing to Invoice'),
     ], string='Invoice Status', readonly=True,
-        help='For a delivery made from a sales order: whether that order line '
-             'has been invoiced yet.')
+        help='For a delivery made from a sales order, or a receipt from a '
+             'purchase order: whether that order line has been invoiced (billed) yet.')
 
     # ------------------------------------------------------------------
     # Open the document behind the row, in a pop-up that can be expanded

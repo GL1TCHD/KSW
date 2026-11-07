@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- BAS9 VOU_SETTING.NAME1 for the types the migration carries; 018 and 015
+         have no row there and take the names finance uses for them. -->
+    <record id="bas_doc_001_0" model="ksw.bas.document.type"><field name="ftype">001</field><field name="ftype2">0</field><field name="name">بيع نقدا</field></record>
+    <record id="bas_doc_001_3" model="ksw.bas.document.type"><field name="ftype">001</field><field name="ftype2">3</field><field name="name">بيع نقدي لسند اذن تسليم</field></record>
+    <record id="bas_doc_002_0" model="ksw.bas.document.type"><field name="ftype">002</field><field name="ftype2">0</field><field name="name">بيع اجل</field></record>
+    <record id="bas_doc_002_3" model="ksw.bas.document.type"><field name="ftype">002</field><field name="ftype2">3</field><field name="name">بيع اجل لاذونات تسليم</field></record>
+    <record id="bas_doc_006_0" model="ksw.bas.document.type"><field name="ftype">006</field><field name="ftype2">0</field><field name="name">شراء اجل</field></record>
+    <record id="bas_doc_015_0" model="ksw.bas.document.type"><field name="ftype">015</field><field name="ftype2">0</field><field name="name">سند قبض بنكي</field></record>
+    <record id="bas_doc_018_0" model="ksw.bas.document.type"><field name="ftype">018</field><field name="ftype2">0</field><field name="name">سند قيد</field></record>
+    <record id="bas_doc_101_0" model="ksw.bas.document.type"><field name="ftype">101</field><field name="ftype2">0</field><field name="name">فاتورة صرف</field></record>
+    <record id="bas_doc_600_2" model="ksw.bas.document.type"><field name="ftype">600</field><field name="ftype2">2</field><field name="name">اذون تسليم نقدي</field></record>
+    <record id="bas_doc_600_3" model="ksw.bas.document.type"><field name="ftype">600</field><field name="ftype2">3</field><field name="name">اذن تسليم الاجل</field></record>
+    <!-- After the names exist: labels computed on install ran without them. -->
+    <function model="ksw.bas.document.type" name="_relabel_documents"/>
+</odoo>

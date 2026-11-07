@@ -6,3 +6,5 @@ access_ksw_bas_fixed_asset_event_read,ksw.bas.fixed.asset.event.read,model_ksw_b
 access_ksw_bas_fixed_asset_event_mgr,ksw.bas.fixed.asset.event.manager,model_ksw_bas_fixed_asset_event,account.group_account_manager,1,1,1,1
 access_ksw_bas_branch_user,ksw.bas.branch.user,model_ksw_bas_branch,base.group_user,1,0,0,0
 access_ksw_bas_branch_mgr,ksw.bas.branch.manager,model_ksw_bas_branch,account.group_account_manager,1,1,1,1
+access_ksw_bas_document_type_read,ksw.bas.document.type.read,model_ksw_bas_document_type,base.group_user,1,0,0,0
+access_ksw_bas_document_type_mgr,ksw.bas.document.type.manager,model_ksw_bas_document_type,account.group_account_manager,1,1,1,1

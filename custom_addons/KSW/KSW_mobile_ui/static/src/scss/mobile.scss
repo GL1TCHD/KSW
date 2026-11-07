@@ -38,19 +38,52 @@
     // sub-menu entries included (they were small and grey).
     // (entries are <li>s: top level li.py-3, sub-menu entries li.py-2 in a
     // nested list)
+    // A page carries data-menu-xmlid on its <li>; a heading that holds
+    // pages of its own (Accounting > Accounting > Management) carries it on
+    // an inner <div> and nests a <ul>. The row style is for pages only: on
+    // a heading, `display: flex` laid the title and its pages side by side.
     .o_burger_menu_content {
         > ul > li {
             font-size: 1.05rem;
         }
-        ul ul > li {
+        ul ul > li[data-menu-xmlid] {
             min-height: 48px;
             display: flex;
             align-items: center;
             padding-top: 0.75rem !important;
             padding-bottom: 0.75rem !important;
+            padding-inline-start: 0.25rem !important;
+            text-indent: 0 !important;
             font-size: 1rem;
             color: $body-color !important;
             border-top: 1px solid $border-color;
+        }
+        ul ul > li:not([data-menu-xmlid]) {
+            display: block;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            text-indent: 0 !important;
+            border-top: 1px solid $border-color;
+            // The heading: a small label, so it does not read as a page.
+            > div {
+                padding: 1rem 0.25rem 0.4rem !important;
+                text-indent: 0 !important;
+                font-size: 0.8rem;
+                font-weight: 700;
+                letter-spacing: 0.03em;
+                text-transform: uppercase;
+                color: $text-muted;
+            }
+            // Its pages: underneath, indented, with a guide line.
+            > ul {
+                margin-inline-start: 0.5rem;
+                margin-bottom: 0.5rem;
+                padding-inline-start: 0.75rem !important;
+                border-inline-start: 2px solid $border-color;
+                > li:first-child {
+                    border-top: 0;
+                }
+            }
         }
     }
 

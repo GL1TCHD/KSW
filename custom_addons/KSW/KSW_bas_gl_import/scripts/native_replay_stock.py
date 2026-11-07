@@ -141,7 +141,9 @@ class StockReplay(Replay):
         PO = self.env['purchase.order'].with_user(user).sudo()
         po = PO.create({
             'partner_id': supplier.id, 'date_order': when, 'picking_type_id': wh.in_type_id.id,
-            'partner_ref': 'BAS 006 #%s' % key.split('/')[-1],
+            # BAS numbers a credit purchase with the supplier's invoice number
+            # («ف6295» in its description): that is the vendor reference.
+            'partner_ref': key.split('/')[-1],
             'order_line': [Command.create({
                 'product_id': self.products[r['ICODE']].id, 'product_qty': r['QUAN'],
                 'price_unit': r['AMOUNT'] / r['QUAN'] if r['QUAN'] else r['PRICE'],
@@ -156,8 +158,7 @@ class StockReplay(Replay):
         receipt.with_context(skip_backorder=True, skip_sms=True).button_validate()
         po.action_create_invoice()
         bill = po.invoice_ids
-        bill.write({'invoice_date': rows[0]['FDATE'].date(), 'ref': 'BAS 006 #%s' % key.split('/')[-1],
-                    'x_bas_key': key})
+        bill.write({'invoice_date': rows[0]['FDATE'].date(), 'ref': key.split('/')[-1], 'x_bas_key': key})
         bill.action_post()
         if abs(bill.amount_total - bas_total) > 0.05:
             self._record_problem(key + '/diff', 'purchase total',
@@ -185,7 +186,7 @@ class StockReplay(Replay):
         picking = Picking.create({
             'picking_type_id': ptype.id, 'location_id': wh.lot_stock_id.id,
             'location_dest_id': self.consumption.id, 'x_bas_key': key,
-            'origin': 'BAS 101 #%s %s' % (key.split('/')[-1], name or ''),
+            'origin': name or False,     # what it was issued for: the vehicle
             'x_issue_account_id': charge.id if charge else False,
             'move_ids': [Command.create({
                 'product_id': self.products[r['ICODE']].id, 'product_uom_qty': r['QUAN'],

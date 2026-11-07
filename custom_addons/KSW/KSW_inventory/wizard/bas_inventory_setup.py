@@ -157,8 +157,15 @@ class KswBasInventorySetup(models.TransientModel):
             if (kind, r['code']) in have:
                 continue
             name = r['name'] if kind == 'warehouse' else f"معرض {r['code']} - {r['name']}"
+            code = ('W' if kind == 'warehouse' else 'S') + r['code']
+            # A water branch's warehouse made before this setup (W20) is BAS's own.
+            own = Warehouse.search([('code', '=', code), ('company_id', '=', self.company_id.id),
+                                    ('x_bas_code', '=', False)], limit=1)
+            if own:
+                own.write({'x_bas_code': r['code'], 'x_bas_kind': kind})
+                continue
             Warehouse.create({
-                'name': name, 'code': ('W' if kind == 'warehouse' else 'S') + r['code'],
+                'name': name, 'code': code,
                 'company_id': self.company_id.id, 'x_bas_code': r['code'], 'x_bas_kind': kind,
             })
             created += 1

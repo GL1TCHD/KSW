@@ -152,3 +152,35 @@ class TestStockMovement(TransactionCase):
         rows, _action = self._rows()
         self.assertFalse(rows.price_unit)
         self.assertFalse(rows.amount_untaxed)
+
+    def test_a_receipt_shows_its_vendor_bill(self):
+        if 'purchase.order' not in self.env:
+            self.skipTest('purchase_stock is not installed')
+        vendor = self.env['res.partner'].create({'name': 'KSW Test Supplier'})
+        # The bill line needs an account; dev's chart gives a bare product none.
+        expense = self.env['account.account'].search([('account_type', '=', 'expense')], limit=1)
+        self.product.product_tmpl_id.property_account_expense_id = expense
+        po = self.env['purchase.order'].create({
+            'partner_id': vendor.id, 'partner_ref': 'SUP-77',
+            'order_line': [(0, 0, {'product_id': self.product.id, 'product_qty': 5.0, 'price_unit': 20.0})],
+        })
+        po.button_confirm()
+        receipt = po.picking_ids
+        receipt.move_ids.write({'quantity': 5.0, 'picked': True})
+        receipt.button_validate()
+        rows, _action = self._rows(location_ids=[(6, 0, receipt.location_dest_id.ids)])
+        row = rows.filtered(lambda r: r.picking_id == receipt)
+        self.assertEqual(row.invoice_status, 'to invoice')
+        self.assertFalse(row.invoice_name)
+        po.action_create_invoice()
+        bill = po.invoice_ids
+        bill.write({'invoice_date': fields.Date.today(), 'ref': 'BAS 006 #123'})
+        bill.action_post()
+        rows, _action = self._rows(location_ids=[(6, 0, receipt.location_dest_id.ids)])
+        row = rows.filtered(lambda r: r.picking_id == receipt)
+        self.assertEqual(row.invoice_move_id, bill.id)
+        self.assertEqual(row.invoice_name, bill.display_name)
+        self.assertEqual(row.invoice_date, bill.invoice_date)
+        self.assertEqual(row.invoice_ref, 'BAS 006 #123')
+        self.assertEqual(row.invoice_status, 'invoiced')
+        self.assertEqual(row.amount_untaxed, 100.0)

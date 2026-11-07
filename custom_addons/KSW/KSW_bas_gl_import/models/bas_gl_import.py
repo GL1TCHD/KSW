@@ -734,8 +734,10 @@ class BasGlImport(models.Model):
             target = max(raw, key=lambda x: max(x[1], x[2]))
             target[side] = round(target[side] + abs(resid), 2)
 
-        items = [(0, 0, {'account_id': a, 'debit': d, 'credit': c,
-                         'name': f'BAS {ftype}/{ftype2} {number1:.0f}'})
+        # The BAS document, in BAS's words («سند قيد 010/26001047»), labels the
+        # lines; Reference stays free for the other party's number.
+        label = self.env['ksw.bas.document.type']._label(bas_key)
+        items = [(0, 0, {'account_id': a, 'debit': d, 'credit': c, 'name': label})
                  for a, d, c in raw]
 
         return {
@@ -743,7 +745,6 @@ class BasGlImport(models.Model):
             'journal_id': self._journal(ftype, company).id,
             'company_id': company.id,
             'date': lines[0]['FDATE'].date() if lines[0]['FDATE'] else self.date_from,
-            'ref': f'BAS {ftype}/{ftype2} br{code2} #{number1:.0f}',
             'x_bas_key': bas_key,
             'x_bas_ftype': f'{ftype}/{ftype2}',
             'x_bas_branch': code2,
@@ -1326,7 +1327,6 @@ class BasGlImport(models.Model):
             'company_id': company.id,
             'invoice_date': vlines[0]['FDATE'].date() if vlines[0]['FDATE'] else False,
             'date': vlines[0]['FDATE'].date() if vlines[0]['FDATE'] else False,
-            'ref': f'BAS {ftype}/{ftype2} br{code2} #{number1:.0f}',
             'x_bas_key': bas_key,
             'x_bas_ftype': f'{ftype}/{ftype2}',
             'x_bas_branch': code2,
@@ -2076,7 +2076,7 @@ class BasGlImport(models.Model):
                 'partner_id': partner.id, 'picking_type_id': ptype.id,
                 'location_id': src.id, 'location_dest_id': dest.id,
                 'scheduled_date': h['FDATE'], 'date_done': h['FDATE'],
-                'origin': f'BAS {ftype}/{ftype2} br{code2} #{number1:.0f}',
+                'origin': self.env['ksw.bas.document.type']._label(bas_key),
                 'company_id': company.id,
                 'x_bas_key': bas_key, 'x_bas_branch': code2,
                 'move_ids': moves,   # Odoo 19 removed move_ids_without_package

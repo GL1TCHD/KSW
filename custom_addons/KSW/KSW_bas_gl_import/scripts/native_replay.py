@@ -768,8 +768,7 @@ class Replay:
         if not notes:
             return self._invoice_001(key, ('002', 3, h['CODE2'], h['NUMBER1']), rows)
         invoice = notes.with_user(billing).sudo()._water_create_invoice(invoice_date=h['FDATE'].date())
-        invoice.sudo().write({'x_bas_key': key, 'x_bas_branch': h['CODE2'],
-                              'ref': 'BAS 002/3 #%.0f' % h['NUMBER1']})
+        invoice.sudo().write({'x_bas_key': key, 'x_bas_branch': h['CODE2']})
         invoice.with_user(billing).sudo().action_post()
         bas_total = round(sum(float(r['AMOUNT'] or 0) for r in rows if r['FCODE'].startswith('1203')), 2)
         # In-close the fill in _notes_for already took every open note it
@@ -890,8 +889,7 @@ class Replay:
             notes = self._notes_for(partner, short_by, h['FDATE'] - KSA)
             if notes:
                 extra = notes.with_user(billing).sudo()._water_create_invoice(invoice_date=h['FDATE'].date())
-                extra.sudo().write({'x_bas_key': key + '#notes', 'x_bas_branch': h.get('CODE2') or False,
-                                    'ref': 'BAS 002/3 #%.0f (notes issued later)' % h['NUMBER1']})
+                extra.sudo().write({'x_bas_key': key + '#notes', 'x_bas_branch': h.get('CODE2') or False})
                 extra.with_user(billing).sudo().action_post()
                 self.log['supplementary invoice'] += 1
                 return extra
@@ -922,7 +920,6 @@ class Replay:
         extra = self.env['account.move'].with_user(billing).sudo().create({
             'move_type': 'out_invoice', 'partner_id': invoice.partner_id.id,
             'invoice_date': h['FDATE'].date(), 'journal_id': invoice.journal_id.id,
-            'ref': 'BAS 002/3 #%.0f: notes not issued in Odoo' % h['NUMBER1'],
             'invoice_line_ids': lines, 'x_bas_key': key + '#notes',
         })
         extra.action_post()
@@ -973,11 +970,9 @@ class Replay:
         untaxed = round(short_total / 1.15, 2)
         inv = self.env['account.move'].with_user(billing).sudo().create({
             'move_type': 'out_invoice', 'partner_id': partner.id, 'invoice_date': h['FDATE'].date(),
-            'ref': 'BAS 002/3 #%.0f: amount not covered by notes in Odoo' % h['NUMBER1'],
             'x_bas_key': key + '#rest',
             'invoice_line_ids': [Command.create({
-                'name': 'BAS 002/3 #%.0f: amount not covered by notes in Odoo '
-                        '(earlier deliveries, price or VAT rounding)' % h['NUMBER1'],
+                'name': 'المبلغ غير المغطى بإذونات تسليم في Odoo (إذونات قبل 2026 أو فروقات سعر/ضريبة)',
                 'account_id': account.id, 'quantity': 1, 'price_unit': untaxed,
                 'tax_ids': [Command.set(self._sale_tax15().ids)]})],
         })
@@ -1007,11 +1002,10 @@ class Replay:
                 inv = Move.create({
                     'move_type': 'out_invoice', 'partner_id': site.id, 'invoice_date': h['FDATE'].date(),
                     'invoice_line_ids': [Command.create({
-                        'name': 'BAS 002/3 #%.0f' % h['NUMBER1'], 'account_id': account.id,
+                        'name': self.env['ksw.bas.document.type']._label(key), 'account_id': account.id,
                         'quantity': 1, 'price_unit': untaxed,
                         'tax_ids': [Command.set(self._sale_tax15().ids)]})]})
-            inv.sudo().write({'x_bas_key': '%s#%s' % (key, r['FCODE']), 'x_bas_branch': h['CODE2'],
-                              'ref': 'BAS 002/3 #%.0f' % h['NUMBER1']})
+            inv.sudo().write({'x_bas_key': '%s#%s' % (key, r['FCODE']), 'x_bas_branch': h['CODE2']})
             inv.with_user(billing).sudo().action_post()
             if float(r['AMOUNT']) - inv.amount_total > 0.05:
                 self._rest_as_bas('%s#%s' % (key, r['FCODE']), h, site,
@@ -1085,7 +1079,7 @@ class Replay:
         self.at(when)
         billing = self.billing_user(h['USER_NO'])
         invoice = notes.with_user(billing).sudo()._water_create_invoice(invoice_date=h['FDATE'].date())
-        invoice.sudo().write({'x_bas_key': key, 'x_bas_branch': h['CODE2'], 'ref': 'BAS 002/3 #%.0f' % h['NUMBER1']})
+        invoice.sudo().write({'x_bas_key': key, 'x_bas_branch': h['CODE2']})
         invoice.with_user(billing).sudo().action_post()
         bas_total = round(float(h['AMOUNT'] or 0), 2)
         if abs(invoice.amount_total - bas_total) > 0.05:
