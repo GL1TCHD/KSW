@@ -8,3 +8,5 @@ from . import test_cost_centre_columns
 from . import test_cost_centre_statement
 from . import test_bas_supplier_payment
 from . import test_bas_document_number
+from . import test_account_tree
+from . import test_account_tree_ui

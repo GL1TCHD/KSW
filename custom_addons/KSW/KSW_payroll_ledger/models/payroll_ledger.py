@@ -58,11 +58,25 @@ class HrEmployee(models.Model):
 class ResConfigSettings(models.TransientModel):
     _inherit = 'res.config.settings'
 
+    # No config_parameter=: res.config.settings refuses it on a Date field, so
+    # the parameter is read and written by hand as 'YYYY-MM-DD'.
     ksw_ledger_start_date = fields.Date(
-        string='Post payroll and commissions from', config_parameter=PARAM_START,
+        string='Post payroll and commissions from',
         help='Batches ending and commission months on or after this date are posted '
              'to the ledger. Earlier ones were exported to BAS and are never posted. '
              'Empty: nothing is posted.')
+
+    @api.model
+    def get_values(self):
+        res = super().get_values()
+        value = self.env['ir.config_parameter'].sudo().get_param(PARAM_START)
+        res['ksw_ledger_start_date'] = fields.Date.to_date(value) if value else False
+        return res
+
+    def set_values(self):
+        super().set_values()
+        self.env['ir.config_parameter'].sudo().set_param(
+            PARAM_START, fields.Date.to_string(self.ksw_ledger_start_date) or False)
 
 
 class KswPayrollLedger(models.AbstractModel):

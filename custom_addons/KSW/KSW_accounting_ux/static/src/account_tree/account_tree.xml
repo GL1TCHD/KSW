@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="KSW_accounting_ux.AccountTree">
+        <div class="o_action o_ksw_tree h-100 d-flex flex-column">
+            <div t-if="state.loading" class="d-flex flex-grow-1 align-items-center justify-content-center text-muted">
+                <i class="fa fa-circle-o-notch fa-spin fa-2x"/>
+            </div>
+            <t t-else="">
+                <!-- Toolbar -->
+                <div class="o_ksw_tree_head px-3 pt-3 pb-2 border-bottom">
+                    <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+                        <h4 class="mb-0 me-2"><i class="fa fa-sitemap me-2 text-primary"/><t t-esc="labels.title"/></h4>
+                        <span class="badge rounded-pill text-bg-light border" t-esc="data.company"/>
+                        <span class="text-muted small">
+                            <t t-esc="totals.groups"/> <t t-esc="labels.groups"/> ·
+                            <t t-esc="totals.accounts"/> <t t-esc="labels.accounts"/>
+                        </span>
+                        <div class="ms-auto">
+                            <button class="btn btn-sm btn-light border" t-on-click="openList">
+                                <i class="fa fa-list me-1"/><t t-esc="labels.listView"/>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="d-flex flex-wrap align-items-center gap-2">
+                        <div class="o_ksw_tree_search position-relative flex-grow-1">
+                            <i class="fa fa-search position-absolute text-muted o_ksw_tree_search_icon"/>
+                            <input t-ref="search" type="search" class="form-control"
+                                   t-att-placeholder="labels.search" t-att-value="state.query"
+                                   t-on-input="onSearchInput"/>
+                            <span t-if="state.query.trim()" class="o_ksw_tree_search_count small text-muted">
+                                <t t-esc="matchCount"/> <t t-esc="labels.matches"/>
+                            </span>
+                        </div>
+                        <div class="btn-group btn-group-sm" role="group">
+                            <span class="btn btn-sm disabled border-0 text-muted pe-1" t-esc="labels.expandTo"/>
+                            <button t-foreach="levels" t-as="level" t-key="level"
+                                    class="btn btn-light border" t-att-title="labels.level + ' ' + level"
+                                    t-on-click="() => this.expandToLevel(level)" t-esc="level"/>
+                            <button class="btn btn-light border" t-on-click="expandAll" t-esc="labels.all"/>
+                        </div>
+                        <button class="btn btn-sm btn-light border" t-on-click="collapseAll" t-att-title="labels.collapse">
+                            <i class="fa fa-compress"/>
+                        </button>
+                        <div t-if="data.show_balance" class="form-check form-switch mb-0 ms-1">
+                            <input class="form-check-input" type="checkbox" id="ksw_tree_bal"
+                                   t-model="state.showBalance"/>
+                            <label class="form-check-label small" for="ksw_tree_bal" t-esc="labels.balance"/>
+                        </div>
+                    </div>
+                    <!-- Where the selected row sits -->
+                    <div class="o_ksw_tree_path small mt-2 text-muted" t-if="selectedPath.length">
+                        <t t-foreach="selectedPath" t-as="step" t-key="step.key">
+                            <i t-if="!step_first" class="fa fa-angle-right mx-1 o_ksw_tree_sep"/>
+                            <span class="o_ksw_tree_crumb" t-on-click="() => this.onRowClick(step)">
+                                <b t-if="step.code" t-esc="step.code"/> <t t-esc="step.name"/>
+                            </span>
+                        </t>
+                    </div>
+                </div>
+
+                <!-- Column header -->
+                <div class="o_ksw_tree_row o_ksw_tree_colhead small text-muted text-uppercase">
+                    <span class="o_ksw_tree_label"><t t-esc="labels.code"/> / <t t-esc="labels.name"/></span>
+                    <span class="o_ksw_tree_type" t-esc="labels.type"/>
+                    <span t-if="state.showBalance" class="o_ksw_tree_bal" t-esc="labels.balance"/>
+                    <span class="o_ksw_tree_actions"/>
+                </div>
+
+                <!-- Rows -->
+                <div class="o_ksw_tree_body flex-grow-1 overflow-auto">
+                    <t t-set="visible" t-value="rows"/>
+                    <div t-if="!visible.length" class="text-center text-muted py-5">
+                        <i class="fa fa-search fa-2x d-block mb-2 opacity-50"/>
+                        <t t-esc="labels.noMatch"/> «<t t-esc="state.query"/>»
+                    </div>
+                    <div t-foreach="visible" t-as="node" t-key="node.key"
+                         t-att-class="'o_ksw_tree_row ' + levelClass(node) + (state.selected === node.key ? ' o_ksw_tree_selected' : '') + (matchInfo and matchInfo.matched.has(node.key) ? ' o_ksw_tree_hit' : '')"
+                         t-on-click="() => this.onRowClick(node)"
+                         t-on-dblclick="() => node.kind === 'account' and this.openJournalItems(node)">
+                        <span class="o_ksw_tree_label">
+                            <!-- One guide per ancestor level -->
+                            <span t-foreach="node.guides" t-as="i" t-key="i" class="o_ksw_tree_guide"/>
+                            <t t-if="node.kind === 'group'">
+                                <i t-att-class="'fa fa-fw o_ksw_tree_chevron ' + (isExpanded(node) ? 'fa-caret-down' : 'fa-caret-right')"/>
+                                <i t-att-class="'fa fa-fw me-1 o_ksw_tree_icon ' + (node.virtual ? 'fa-question-circle-o' : isExpanded(node) ? 'fa-folder-open' : 'fa-folder')"/>
+                            </t>
+                            <t t-else="">
+                                <i class="fa fa-fw o_ksw_tree_chevron"/>
+                                <i class="fa fa-fw fa-file-text-o me-1 o_ksw_tree_icon"/>
+                            </t>
+                            <span t-if="node.code" class="o_ksw_tree_code me-2">
+                                <t t-foreach="highlight(node.code)" t-as="part" t-key="part_index"><mark t-if="part.hit" t-esc="part.text"/><t t-else="" t-esc="part.text"/></t>
+                            </span>
+                            <span class="o_ksw_tree_name text-truncate">
+                                <t t-foreach="highlight(node.name)" t-as="part" t-key="part_index"><mark t-if="part.hit" t-esc="part.text"/><t t-else="" t-esc="part.text"/></t>
+                            </span>
+                            <span t-if="node.kind === 'group'" class="o_ksw_tree_count ms-2">
+                                <t t-if="node.nGroups"><t t-esc="node.nGroups"/> <t t-esc="node.nGroups === 1 ? labels.group : labels.groups"/> · </t>
+                                <t t-esc="node.nAccounts"/> <t t-esc="node.nAccounts === 1 ? labels.account : labels.accounts"/>
+                            </span>
+                        </span>
+                        <span class="o_ksw_tree_type">
+                            <span t-if="node.kind === 'account' and node.type" class="badge rounded-pill o_ksw_tree_pill" t-esc="node.type"/>
+                        </span>
+                        <span t-if="state.showBalance"
+                              t-att-class="'o_ksw_tree_bal font-monospace' + (node.balance &lt; 0 ? ' o_ksw_tree_neg' : '')"
+                              t-esc="amount(node.balance)"/>
+                        <span class="o_ksw_tree_actions">
+                            <button t-if="!node.virtual or node.children.length" class="btn btn-link btn-sm p-0 px-1"
+                                    t-att-title="labels.journalItems" t-on-click.stop="() => this.openJournalItems(node)">
+                                <i class="fa fa-list-ul"/>
+                            </button>
+                            <button t-if="node.kind === 'account'" class="btn btn-link btn-sm p-0 px-1"
+                                    t-att-title="labels.openAccount" t-on-click.stop="() => this.openAccount(node)">
+                                <i class="fa fa-external-link"/>
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>

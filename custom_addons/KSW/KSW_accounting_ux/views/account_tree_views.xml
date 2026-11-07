@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Chart of Accounts as a tree: BAS levels 1-4 open one at a time down to the leaves -->
+    <record id="action_ksw_account_tree" model="ir.actions.client">
+        <field name="name">Chart of Accounts (Tree)</field>
+        <field name="tag">ksw_account_tree</field>
+        <field name="path">account-tree</field>
+    </record>
+
+    <!-- Same parent and rights as core's Chart of Accounts, right under it -->
+    <menuitem id="menu_ksw_account_tree" name="Chart of Accounts (Tree)" sequence="1"
+              parent="account.account_account_menu" action="action_ksw_account_tree"
+              groups="account.group_account_readonly"/>
+
+    <!-- Chart of Accounts list: a button to switch to the tree -->
+    <record id="view_account_list_ksw_tree_button" model="ir.ui.view">
+        <field name="name">account.account.list.ksw.tree.button</field>
+        <field name="model">account.account</field>
+        <field name="inherit_id" ref="account.view_account_list"/>
+        <field name="arch" type="xml">
+            <xpath expr="//list" position="inside">
+                <header>
+                    <button name="%(action_ksw_account_tree)d" type="action" string="Tree View"
+                            icon="fa-sitemap" class="btn-secondary" display="always"/>
+                </header>
+            </xpath>
+        </field>
+    </record>
+</odoo>

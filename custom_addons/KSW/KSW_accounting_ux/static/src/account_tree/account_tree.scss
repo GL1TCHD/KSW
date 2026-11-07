@@ -1,0 +1,224 @@
+// Chart of Accounts tree. Colours are Bootstrap SCSS variables, which Odoo
+// compiles separately for its light and dark bundles (the --bs-primary family
+// of CSS variables is empty in the backend); RTL is handled by rtlcss
+// (logical left/right flip) and Odoo's own caret flip under .o_rtl.
+.o_ksw_tree {
+    --ksw-tree-indent: 22px;
+    --ksw-tree-row: 34px;
+    background: $body-bg;
+
+    .o_ksw_tree_head {
+        background: $body-bg;
+    }
+
+    .o_ksw_tree_search {
+        max-width: 520px;
+        min-width: 220px;
+
+        .form-control {
+            padding-left: 2.1rem;
+            border-radius: 2rem;
+        }
+    }
+    .o_ksw_tree_search_icon {
+        left: 0.85rem;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .o_ksw_tree_search_count {
+        position: absolute;
+        right: 2.4rem;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+    }
+
+    .o_ksw_tree_crumb {
+        cursor: pointer;
+        &:hover {
+            color: $primary;
+        }
+    }
+
+    // Grid: label grows, the rest keep their width
+    .o_ksw_tree_row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 190px auto 64px;
+        align-items: center;
+        column-gap: 12px;
+        min-height: var(--ksw-tree-row);
+        padding: 0 16px;
+        border-bottom: 1px solid $border-color;
+    }
+    .o_ksw_tree_colhead {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        min-height: 30px;
+        letter-spacing: 0.04em;
+        font-size: 0.72rem;
+        background: $body-tertiary-bg;
+        border-bottom: 1px solid $border-color;
+    }
+    .o_ksw_tree_body .o_ksw_tree_row {
+        cursor: pointer;
+        transition: background-color 0.08s;
+
+        &:hover {
+            background: $body-secondary-bg;
+            .o_ksw_tree_actions {
+                opacity: 1;
+            }
+        }
+    }
+
+    .o_ksw_tree_label {
+        display: flex;
+        align-items: center;
+        min-width: 0;
+        height: 100%;
+    }
+    .o_ksw_tree_guide {
+        flex: 0 0 var(--ksw-tree-indent);
+        align-self: stretch;
+        position: relative;
+        &::before {
+            content: "";
+            position: absolute;
+            left: 9px;
+            top: 0;
+            bottom: 0;
+            border-left: 1px solid $border-color;
+        }
+    }
+    .o_ksw_tree_chevron {
+        flex: 0 0 auto;
+        color: $text-muted;
+    }
+    .o_ksw_tree_icon {
+        flex: 0 0 auto;
+    }
+    .o_ksw_tree_code {
+        flex: 0 0 auto;
+        font-family: $font-family-monospace;
+        font-size: 0.86em;
+        padding: 1px 6px;
+        border-radius: 4px;
+        background: $body-tertiary-bg;
+        color: $body-emphasis-color;
+    }
+    .o_ksw_tree_name {
+        min-width: 0;
+    }
+    .o_ksw_tree_count {
+        flex: 0 0 auto;
+        font-size: 0.75rem;
+        color: $text-muted;
+        white-space: nowrap;
+    }
+    .o_ksw_tree_type {
+        min-width: 0;
+        overflow: hidden;
+    }
+    .o_ksw_tree_pill {
+        font-weight: 500;
+        max-width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        background: $body-secondary-bg;
+        color: $text-muted;
+        border: 1px solid $border-color;
+    }
+    .o_ksw_tree_bal {
+        min-width: 130px;
+        text-align: right;
+        white-space: nowrap;
+        font-size: 0.9em;
+    }
+    .o_ksw_tree_neg {
+        color: $danger;
+    }
+    .o_ksw_tree_actions {
+        text-align: right;
+        white-space: nowrap;
+        opacity: 0;
+        transition: opacity 0.1s;
+    }
+
+    // Levels: the roots read as headings, each level a step lighter
+    .o_ksw_tree_l1 {
+        min-height: 40px;
+        font-weight: 700;
+        font-size: 1.02rem;
+        background: $body-tertiary-bg;
+        .o_ksw_tree_icon {
+            color: $primary;
+        }
+        .o_ksw_tree_code {
+            background: $primary;
+            color: #fff;
+        }
+    }
+    .o_ksw_tree_l2 {
+        font-weight: 600;
+        .o_ksw_tree_icon {
+            color: $info;
+        }
+    }
+    .o_ksw_tree_l3 {
+        font-weight: 600;
+        .o_ksw_tree_icon {
+            color: $success;
+        }
+    }
+    .o_ksw_tree_l4,
+    .o_ksw_tree_l5 {
+        font-weight: 500;
+        .o_ksw_tree_icon {
+            color: $warning;
+        }
+    }
+    .o_ksw_tree_leaf {
+        .o_ksw_tree_icon {
+            color: $text-muted;
+        }
+        .o_ksw_tree_code {
+            background: transparent;
+            color: $text-muted;
+        }
+    }
+    .o_ksw_tree_l1 .o_ksw_tree_bal,
+    .o_ksw_tree_l2 .o_ksw_tree_bal {
+        font-weight: 700;
+    }
+
+    .o_ksw_tree_body .o_ksw_tree_selected {
+        background: rgba($primary, 0.1);
+        box-shadow: inset 3px 0 0 $primary;
+    }
+    mark {
+        padding: 0 1px;
+        border-radius: 2px;
+        background: rgba($warning, 0.45);
+        color: inherit;
+    }
+
+    // Phone: drop the type column, keep code, name and balance
+    @media (max-width: 767.98px) {
+        .o_ksw_tree_row {
+            grid-template-columns: minmax(0, 1fr) auto 52px;
+            padding: 0 8px;
+        }
+        .o_ksw_tree_type,
+        .o_ksw_tree_count {
+            display: none;
+        }
+        .o_ksw_tree_bal {
+            min-width: 90px;
+        }
+        .o_ksw_tree_actions {
+            opacity: 1;
+        }
+        --ksw-tree-indent: 14px;
+    }
+}
