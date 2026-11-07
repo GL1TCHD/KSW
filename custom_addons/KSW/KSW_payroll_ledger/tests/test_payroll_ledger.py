@@ -172,5 +172,6 @@ class TestPayrollLedger(BasJournalPayrollCommon):
         Run = self.env['hr.payslip.run'].with_user(user)
         arch = Run.get_views([(False, 'form')])['views']['form']['arch']
         self.assertNotIn('name="x_ledger_move_ids"', arch)
+        self.env.invalidate_all()  # the compute must run as him, not come from the cache
         Run.browse(self.batch.id).web_read({
             'x_ledger_move_count': {}, 'x_ledger_unposted_count': {}, 'x_ledger_error': {}})

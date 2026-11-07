@@ -44,12 +44,14 @@ class HrPayslip(models.Model):
 class HrPayslipRun(models.Model):
     _inherit = 'hr.payslip.run'
 
+    # compute_sudo: assigning account.move records to a m2m checks read access on them,
+    # and payroll users who confirm the batch have no accounting rights.
     x_ledger_move_ids = fields.Many2many(
-        'account.move', string='Ledger Entries', compute='_compute_ledger_moves',
+        'account.move', string='Ledger Entries', compute='_compute_ledger_moves', compute_sudo=True,
         help="The batch in Odoo's ledger (journal Payroll), one entry per confirmation "
              "and bank account. Not the BAS export.")
-    x_ledger_move_count = fields.Integer(compute='_compute_ledger_moves')
-    x_ledger_unposted_count = fields.Integer(compute='_compute_ledger_moves')
+    x_ledger_move_count = fields.Integer(compute='_compute_ledger_moves', compute_sudo=True)
+    x_ledger_unposted_count = fields.Integer(compute='_compute_ledger_moves', compute_sudo=True)
     x_ledger_error = fields.Text(string='Ledger Posting Problem', readonly=True, copy=False)
 
     @api.depends('slip_ids.x_ledger_move_id', 'slip_ids.x_ledger_nothing', 'slip_ids.state')
