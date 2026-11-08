@@ -1311,6 +1311,60 @@ class HrPayslip(models.Model):
                         total += span
         return max(0.0, total)
 
+    def _saturday_weekend_extension(self, employee, calendar, date_from,
+                                    date_to):
+        """Saturdays in the window whose unscheduled hours are granted like
+        a Friday, and the granted hours per Saturday.
+
+        On a short-Saturday calendar (``x_saturday_short_overtime``) the
+        hours between the scheduled Saturday shift and a full 8h day are a
+        weekend extension of Friday, not a deduction: they are simply never
+        deducted.  A Saturday the employee attended needs nothing here (its
+        late/early minutes are measured against the short shift already).
+        An absent or unpresented Saturday loses only its scheduled hours
+        when Thursday or Sunday was attended, the same adjacent-workday
+        rule as the Friday grant; absent on all three, the whole 8h day is
+        lost.  Attended means a real punch or a leave-covered absence, as
+        in ``_generate_weekend_records``.
+
+        Returns ``(dates, hours_per_saturday)``; empty when the calendar is
+        not flagged or the Saturday shift is already a full day.
+        """
+        if not calendar or not calendar.x_saturday_short_overtime \
+                or calendar.x_saturday_required:
+            return set(), 0.0
+        grant_h = max(
+            0.0, DAILY_HOURS - self._scheduled_saturday_hours(calendar))
+        if grant_h <= 0:
+            return set(), 0.0
+        saturdays = [
+            date_from + timedelta(days=i)
+            for i in range((date_to - date_from).days + 1)
+            if (date_from + timedelta(days=i)).weekday() == 5
+        ]
+        if not saturdays:
+            return set(), 0.0
+
+        # Thursday and Sunday can fall outside the payslip window.
+        recs = self.env['hr.attendance'].sudo().search([
+            ('employee_id', '=', employee.id),
+            ('check_in', '>=', datetime.combine(
+                saturdays[0] - timedelta(days=2), time.min)),
+            ('check_in', '<=', datetime.combine(
+                saturdays[-1] + timedelta(days=1), time.max)),
+        ])
+        attended = {
+            a.check_in.date() for a in recs
+            if not a.x_is_weekend and not a.x_net_is_absent
+        }
+        granted = {
+            sat for sat in saturdays
+            if sat not in attended
+            and (sat - timedelta(days=2) in attended
+                 or sat + timedelta(days=1) in attended)
+        }
+        return granted, grant_h
+
     # ------------------------------------------------------------------
     # Attendance-sheet employees (attended / absent only)
     # ------------------------------------------------------------------
@@ -1376,12 +1430,12 @@ class HrPayslip(models.Model):
             absent_count = max(0, calendar_days - attended_count)
             sat_absent_count = 0
 
-        # NOTE: the Saturday short-shift overtime reclassification
-        # (x_saturday_short_overtime) is deliberately NOT applied to
-        # attendance-sheet employees — their days are marked manually by a
-        # supervisor, not derived from real punches, so there is no short
-        # Saturday shift to deduct-and-credit.  The full-day
-        # x_saturday_required behaviour below is unchanged.
+        # NOTE: the short-Saturday weekend extension
+        # (x_saturday_short_overtime, see _saturday_weekend_extension) is
+        # deliberately NOT applied to attendance-sheet employees — their
+        # days are marked manually by a supervisor as whole days, not
+        # derived from real punches.  The full-day x_saturday_required
+        # behaviour below is unchanged.
 
         if absent_count > 0:
             absent_hours = round(absent_count * DAILY_HOURS, 2)
@@ -1561,26 +1615,15 @@ class HrPayslip(models.Model):
                     sat_absent_count += 1
                 cur += timedelta(days=1)
 
-        # Saturday short-shift overtime reclassification (net-zero):
-        # Saturday is scheduled <8h; deduct the (8h - actual Saturday hours)
-        # gap and credit the same amount back as overtime.  Only Saturdays
-        # the employee actually worked (short shift present) count.
-        sat_short = bool(bio_calendar and bio_calendar.x_saturday_short_overtime)
-        sat_short_amount = 0
-        sat_short_count = 0
-        sat_short_hours = 0.0
-        if sat_short and daily_rate > 0:
-            sched_sat = self._scheduled_saturday_hours(bio_calendar)
-            shortfall_h = max(0.0, DAILY_HOURS - sched_sat)
-            if shortfall_h > 0:
-                cur = date_from
-                while cur <= date_to:
-                    if cur.weekday() == 5 and cur in attended_dates:
-                        sat_short_count += 1
-                    cur += timedelta(days=1)
-                sat_short_hours = shortfall_h * sat_short_count
-                sat_short_amount = round(
-                    (daily_rate / DAILY_HOURS) * sat_short_hours)
+        # Short Saturday = weekend extension of Friday: an absent or
+        # unpresented Saturday loses only its scheduled hours while Thursday
+        # or Sunday was attended (see _saturday_weekend_extension).  The
+        # rest of the day is taken off the absence below, never deducted.
+        sat_grant_dates, sat_grant_h = self._saturday_weekend_extension(
+            employee, bio_calendar, date_from, date_to)
+        sat_grant_hours = sat_grant_h * len(sat_grant_dates)
+        sat_grant_amount = round(
+            (daily_rate / DAILY_HOURS) * sat_grant_hours)
 
         # WORK100 — Actually worked days
         lines.append({
@@ -1598,7 +1641,8 @@ class HrPayslip(models.Model):
         record_absent_deduction = round(sum(
             a.x_deduction_amount or 0.0 for a in absent))
         total_absent_count = record_absent_count + unpresented_count
-        total_absent_deduction = record_absent_deduction + unpresented_deduction
+        total_absent_deduction = (
+            record_absent_deduction + unpresented_deduction - sat_grant_amount)
 
         if total_absent_count > 0:
             lines.append({
@@ -1606,7 +1650,8 @@ class HrPayslip(models.Model):
                 'sequence': 2,
                 'code': 'ATT_ABS',
                 'number_of_days': total_absent_count,
-                'number_of_hours': round(total_absent_count * DAILY_HOURS, 2),
+                'number_of_hours': round(
+                    total_absent_count * DAILY_HOURS - sat_grant_hours, 2),
                 'amount': total_absent_deduction,
                 'version_id': version.id,
             })
@@ -1652,16 +1697,17 @@ class HrPayslip(models.Model):
                 'version_id': version.id,
             })
 
-        # ATT_DED — Aggregated monetary deduction (records + unpresented +
-        # the Saturday short-shift gap, which is credited back via SAT_OT).
+        # ATT_DED — Aggregated monetary deduction (records + unpresented,
+        # less the granted part of absent short Saturdays).
         record_deduction = round(sum(
             a.x_deduction_amount or 0.0 for a in attendances))
-        deduction_total = record_deduction + unpresented_deduction + sat_short_amount
+        deduction_total = (
+            record_deduction + unpresented_deduction - sat_grant_amount)
         if deduction_total > 0:
             record_ded_days = len(
                 attendances.filtered(
                     lambda a: (a.x_deduction_amount or 0.0) > 0))
-            deduction_days = record_ded_days + unpresented_count + sat_short_count
+            deduction_days = record_ded_days + unpresented_count
             lines.append({
                 'name': _('Attendance Deduction'),
                 'sequence': 15,
@@ -1683,18 +1729,16 @@ class HrPayslip(models.Model):
                 'version_id': version.id,
             })
 
-        # Saturday overtime credit — full-day (x_saturday_required) and/or
-        # short-shift (x_saturday_short_overtime) folded into one SAT_OT line,
+        # Saturday overtime credit for x_saturday_required calendars,
         # 1:1 offset of the matching ATT_DED portion (net-zero).
-        sat_credit = round(daily_rate * sat_absent_count) + sat_short_amount
+        sat_credit = round(daily_rate * sat_absent_count)
         if sat_credit > 0:
             lines.append({
                 'name': _('Saturday Overtime Credit'),
                 'sequence': 17,
                 'code': 'SAT_OT',
-                'number_of_days': sat_absent_count + sat_short_count,
-                'number_of_hours': round(
-                    sat_absent_count * DAILY_HOURS + sat_short_hours, 2),
+                'number_of_days': sat_absent_count,
+                'number_of_hours': round(sat_absent_count * DAILY_HOURS, 2),
                 'amount': sat_credit,
                 'version_id': version.id,
             })
@@ -1828,33 +1872,18 @@ class HrPayslip(models.Model):
                 })
             current += timedelta(days=1)
 
-        # Saturday short-shift overtime gap (present Saturdays scheduled <8h).
-        # The (8h - actual) gap is folded into ATT_DED and credited back 1:1
-        # as Saturday overtime (net zero); add matching rows so the breakdown
-        # total reconciles with ATT_DED.  Biometric employees only — sheet
-        # (supervisor-marked) employees are excluded, matching the worked-day
-        # builder.
-        calendar = self.env['ksw.attendance.sheet']._get_employee_calendar(
-            employee)
-        if (not is_sheet and calendar
-                and calendar.x_saturday_short_overtime and daily_rate > 0):
-            shortfall_h = max(
-                0.0, DAILY_HOURS - self._scheduled_saturday_hours(calendar))
-            if shortfall_h > 0:
-                gap = (daily_rate / DAILY_HOURS) * shortfall_h
-                current = eff_from
-                while current <= d_to:
-                    if current.weekday() == 5 and current in attended_dates:
-                        rows.append({
-                            'date': current.strftime('%Y-%m-%d'),
-                            'day': day_names[current.weekday()],
-                            'late_min': 0,
-                            'early_min': 0,
-                            'is_absent': False,
-                            'deduction': gap,
-                            'type': 'sat_short',
-                        })
-                    current += timedelta(days=1)
+        # Absent short Saturdays lose only their scheduled hours (weekend
+        # extension of Friday), matching the biometric worked-day builder.
+        if not is_sheet and not absence_only and daily_rate > 0:
+            calendar = self.env['ksw.attendance.sheet']._get_employee_calendar(
+                employee)
+            sat_dates, sat_h = self._saturday_weekend_extension(
+                employee, calendar, eff_from, d_to)
+            granted = (daily_rate / DAILY_HOURS) * sat_h
+            for row in rows:
+                if row['is_absent'] and row['type'] in ('absent', 'unpresented') \
+                        and date.fromisoformat(row['date']) in sat_dates:
+                    row['deduction'] = max(0.0, row['deduction'] - granted)
 
         # Sort by date
         rows.sort(key=lambda r: r['date'])

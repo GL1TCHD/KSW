@@ -194,7 +194,7 @@ msgstr ""
 
 #. module: KSW_working_schedule
 #: model:ir.model.fields,field_description:KSW_working_schedule.field_resource_calendar__x_saturday_short_overtime
-msgid "Saturday Short-Shift Overtime"
+msgid "Short Saturday (Weekend Extension)"
 msgstr ""
 
 #. module: KSW_working_schedule
@@ -250,12 +250,7 @@ msgstr ""
 
 #. module: KSW_working_schedule
 #: model:ir.model.fields,help:KSW_working_schedule.field_resource_calendar__x_saturday_short_overtime
-msgid ""
-"When set, Saturday is a short shift (<8h). The gap between a full 8h day and"
-" the actual Saturday hours is deducted and credited back 1:1 as overtime on "
-"the payslip (net-zero reclassification, like the full-day Saturday Required "
-"option). Used for schedules such as \"Standard 44 hours/week\" (Sat 3h) and "
-"\"Abdullah Mutawa Special Shift\" (Sat 4h)."
+msgid "When set, Saturday is a short shift (<8h) and the rest of the 8h day is a weekend extension of Friday: it is never deducted. An absent Saturday loses only its scheduled hours while Thursday or Sunday was attended; absent on all three, the full 8h day is deducted. Used for schedules such as \"Standard 44 hours/week\" (Sat 3h) and \"Abdullah Mutawa Special Shift\" (Sat 4h)."
 msgstr ""
 
 #. module: KSW_working_schedule

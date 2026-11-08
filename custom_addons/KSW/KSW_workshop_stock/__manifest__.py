@@ -23,7 +23,10 @@ production (0 items, 0 lines on KSWCO, 2026-10-06).
         'views/workshop_views.xml',
     ],
     'post_init_hook': 'post_init_hook',
-    'auto_install': True,
+    # Not automatic (2026-11-08): on KSWCO the workshop records vehicle parts on
+    # its own parts list (631 items), which are not stock products; the bridge
+    # would leave technicians nothing to pick. Install it when they are.
+    'auto_install': False,
     'installable': True,
     'license': 'LGPL-3',
 }

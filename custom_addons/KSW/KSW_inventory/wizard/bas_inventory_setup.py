@@ -124,12 +124,13 @@ class KswBasInventorySetup(models.TransientModel):
         out.append("Item classes: perpetual valuation, weighted average, BAS stock and issue accounts")
 
     def _enable_cost_centres(self, out):
-        # Cost centres must be visible to whoever issues stock (they are required).
+        # Cost centres must be visible to whoever issues stock (they are
+        # required): the stock users, not every internal user.
         analytic = self.env.ref('analytic.group_analytic_accounting')
-        user_group = self.env.ref('base.group_user')
-        if analytic not in user_group.implied_ids:
-            user_group.write({'implied_ids': [(4, analytic.id)]})
-            out.append("Analytic accounting (cost centres) enabled for internal users")
+        stock_users = self.env.ref('stock.group_stock_user')
+        if analytic not in stock_users.implied_ids:
+            stock_users.write({'implied_ids': [(4, analytic.id)]})
+            out.append("Analytic accounting (cost centres) enabled for inventory users")
 
     def _sync_items(self, out):
         """Classify BAS items, create the missing ones, fix taxes on stock items."""

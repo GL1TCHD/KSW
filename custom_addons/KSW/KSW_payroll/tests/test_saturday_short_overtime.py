@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 """Tests for the two changes introduced together:
 
-1. Saturday short-shift overtime reclassification (net-zero) for calendars
-   flagged ``x_saturday_short_overtime`` (e.g. Standard 44 hours/week — Sat 3h,
-   Abdullah Mutawa Special Shift — Sat 4h).  The (8h - actual Saturday hours)
-   gap is deducted via ATT_DED and credited back 1:1 via SAT_OT → take-home
-   unchanged, payslip shows an overtime line.
+1. Short Saturday as a weekend extension of Friday, for calendars flagged
+   ``x_saturday_short_overtime`` (e.g. Standard 44 hours/week — Sat 3h,
+   Abdullah Mutawa Special Shift — Sat 4h).  The (8h - scheduled Saturday
+   hours) are never deducted and no SAT_OT line appears.  An absent Saturday
+   loses only its scheduled hours while Thursday or Sunday was attended;
+   absent on all three it loses the full 8h day.
 
 2. Daily-wage / deduction divisor = actual number of days in the month
    (not a fixed 30).
@@ -88,12 +89,15 @@ class TestSaturdayShortOvertime(TransactionCase):
         emp._compute_current_version_id()
         return emp, ver
 
-    def _cover_week(self, emp):
+    def _cover_week(self, emp, skip=(), sunday_after=False):
         """Clean attendance for every day 2026-03-01(Sun)..03-07(Sat) so
         there are no unpresented days.  Weekdays 08:00-16:30, Saturday
         10:00-13:00 (times in UTC = local - 3h for Riyadh... actually +3;
         local 08:00 = 05:00 UTC)."""
-        for d in range(1, 8):
+        days = [d for d in range(1, 8) if d not in skip]
+        if sunday_after:
+            days.append(8)               # Sunday after the window
+        for d in days:
             day = date(2026, 3, d)
             if day.weekday() == 5:       # Saturday short shift 10:00-13:00 local
                 ci, co = dt(2026, 3, d, 7, 0), dt(2026, 3, d, 10, 0)
@@ -143,44 +147,101 @@ class TestSaturdayShortOvertime(TransactionCase):
         self.assertEqual(P._scheduled_saturday_hours(self.cal_48), 8.5)
 
     # ==================================================================
-    # Part A — net-zero reclassification
+    # Part A — Saturday as a weekend extension of Friday
+    # daily_rate = 6200/31 = 200, hourly = 25.  Week = Sun 1 .. Sat 7 Mar
+    # 2026; Thursday = 5 Mar, Sunday after = 8 Mar (outside the window).
     # ==================================================================
-    def test_std44_net_zero_five_hours(self):
-        """Standard-44 (Sat 3h): one worked Saturday → 5h gap.
-        daily_rate = 6200/31 = 200; hourly = 25; gap = 5 × 25 = 125.
-        SAT_OT credit == the Saturday portion of ATT_DED → net zero."""
+    def _absent(self, emp, d):
+        return self.env['hr.attendance'].create({
+            'employee_id': emp.id, 'check_in': dt(2026, 3, d, 5, 0),
+            'check_out': dt(2026, 3, d, 5, 0), 'x_is_absent': True,
+        })
+
+    def test_std44_attended_saturday_no_deduction_no_credit(self):
+        """Std-44 (Sat 3h) worked: the 5h rest of the day is simply not
+        deducted — no ATT_DED and no SAT_OT reclassification any more."""
         emp, ver = self._employee(self.cal_44)
         self._cover_week(emp)
         wd = self._wd(ver)
-        self.assertIn('SAT_OT', wd)
-        self.assertIn('ATT_DED', wd)
-        self.assertEqual(wd['SAT_OT']['amount'], 125)
-        # No other deductions (all days clean, full coverage) → ATT_DED is
-        # exactly the Saturday gap, i.e. equal to the SAT_OT credit → net zero.
-        self.assertEqual(wd['ATT_DED']['amount'], wd['SAT_OT']['amount'])
-        self.assertEqual(wd['SAT_OT']['number_of_hours'], 5.0)
+        self.assertNotIn('SAT_OT', wd)
+        self.assertNotIn('ATT_DED', wd)
 
-    def test_abdullah_net_zero_four_hours(self):
-        """Abdullah (Sat 4h): 4h gap → 4 × 25 = 100."""
+    def test_abdullah_attended_saturday_no_deduction_no_credit(self):
         emp, ver = self._employee(self.cal_abd)
         self._cover_week(emp)
         wd = self._wd(ver)
-        self.assertEqual(wd['SAT_OT']['amount'], 100)
-        self.assertEqual(wd['ATT_DED']['amount'], wd['SAT_OT']['amount'])
-        self.assertEqual(wd['SAT_OT']['number_of_hours'], 4.0)
+        self.assertNotIn('SAT_OT', wd)
+        self.assertNotIn('ATT_DED', wd)
+
+    def test_std44_unpresented_saturday_loses_scheduled_hours_only(self):
+        """No Saturday record, Thursday attended → only 3h × 25 = 75."""
+        emp, ver = self._employee(self.cal_44)
+        self._cover_week(emp, skip=(7,))
+        wd = self._wd(ver)
+        self.assertNotIn('SAT_OT', wd)
+        self.assertEqual(wd['ATT_DED']['amount'], 75)
+        self.assertEqual(wd['ATT_ABS']['amount'], 75)
+        self.assertEqual(wd['ATT_ABS']['number_of_days'], 1)
+        self.assertEqual(wd['ATT_ABS']['number_of_hours'], 3.0)
+
+    def test_abdullah_absent_saturday_record_loses_four_hours(self):
+        """Absence row on Saturday (deducted 200 on the row), Thursday
+        attended → payslip keeps only the 4h scheduled: 100."""
+        emp, ver = self._employee(self.cal_abd)
+        self._cover_week(emp, skip=(7,))
+        self._absent(emp, 7)
+        wd = self._wd(ver)
+        self.assertEqual(wd['ATT_DED']['amount'], 100)
+        self.assertEqual(wd['ATT_ABS']['number_of_hours'], 4.0)
+
+    def test_sunday_after_window_counts(self):
+        """Thursday and Saturday absent, Sunday 8 Mar (next payslip)
+        attended → Saturday still loses only 3h: 200 (Thu) + 75 = 275."""
+        emp, ver = self._employee(self.cal_44)
+        self._cover_week(emp, skip=(5, 7), sunday_after=True)
+        wd = self._wd(ver)
+        self.assertEqual(wd['ATT_DED']['amount'], 275)
+
+    def test_thursday_saturday_sunday_absent_loses_full_day(self):
+        """Absent Thursday, Saturday and Sunday → Saturday loses the full
+        8h: 200 (Thu) + 200 (Sat) = 400."""
+        emp, ver = self._employee(self.cal_44)
+        self._cover_week(emp, skip=(5, 7))
+        self._absent(emp, 8)
+        wd = self._wd(ver)
+        self.assertEqual(wd['ATT_DED']['amount'], 400)
+
+    def test_breakdown_reconciles_with_att_ded(self):
+        emp, ver = self._employee(self.cal_44)
+        self._cover_week(emp, skip=(7,))
+        slip = self.env['hr.payslip'].create({
+            'employee_id': emp.id, 'version_id': ver.id,
+            'date_from': date(2026, 3, 1), 'date_to': date(2026, 3, 7),
+            'struct_id': ver.struct_id.id,
+        })
+        rows = slip.get_deduction_breakdown()
+        self.assertEqual(len(rows), 1)
+        self.assertAlmostEqual(rows[0]['deduction'], 75.0, places=2)
 
     def test_48h_no_reclassification(self):
-        """Full 8h Saturday, unflagged → no SAT_OT, no gap deduction."""
+        """Full 8h Saturday, unflagged → no SAT_OT, no gap deduction; an
+        unpresented Saturday loses the whole day."""
         emp, ver = self._employee(self.cal_48)
         self._cover_week(emp)
         wd = self._wd(ver)
         self.assertNotIn('SAT_OT', wd)
         self.assertNotIn('ATT_DED', wd)
 
+    def test_48h_unpresented_saturday_full_day(self):
+        emp, ver = self._employee(self.cal_48)
+        self._cover_week(emp, skip=(7,))
+        wd = self._wd(ver)
+        self.assertEqual(wd['ATT_DED']['amount'], 200)
+
     def test_sheet_employee_excluded(self):
         """Attendance-sheet employees are supervisor-marked, so the Saturday
         short-shift deduction/overtime must NOT apply even on a flagged
-        calendar (Standard 44).  No SAT_OT, no gap ATT_DED.
+        calendar (Standard 44).  No SAT_OT, no ATT_DED.
 
         The sheet must be confirmed: payroll reads an unreleased month as
         zero attendance, which would produce an ATT_DED for the whole

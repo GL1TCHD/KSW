@@ -4,8 +4,9 @@ from odoo import api, fields, models
 class ResourceCalendar(models.Model):
     _inherit = 'resource.calendar'
 
-    # Schedules whose Saturday is a short shift (<8h) and should have the gap
-    # to a full 8h day reclassified as overtime (net-zero).  Set on install/
+    # Schedules whose Saturday is a short shift (<8h); the rest of the 8h day
+    # is a weekend extension of Friday (see KSW_payroll
+    # hr.payslip._saturday_weekend_extension).  Set on install/
     # upgrade via the data <function> call.  Admins can also tick the boolean
     # manually on any other schedule.
     _SATURDAY_SHORT_OVERTIME_NAMES = (
@@ -38,11 +39,12 @@ class ResourceCalendar(models.Model):
     )
 
     x_saturday_short_overtime = fields.Boolean(
-        string='Saturday Short-Shift Overtime',
-        help='When set, Saturday is a short shift (<8h). The gap between a '
-             'full 8h day and the actual Saturday hours is deducted and '
-             'credited back 1:1 as overtime on the payslip (net-zero '
-             'reclassification, like the full-day Saturday Required option). '
+        string='Short Saturday (Weekend Extension)',
+        help='When set, Saturday is a short shift (<8h) and the rest of the '
+             '8h day is a weekend extension of Friday: it is never deducted. '
+             'An absent Saturday loses only its scheduled hours while '
+             'Thursday or Sunday was attended; absent on all three, the full '
+             '8h day is deducted. '
              'Used for schedules such as "Standard 44 hours/week" (Sat 3h) '
              'and "Abdullah Mutawa Special Shift" (Sat 4h).',
     )

@@ -195,8 +195,8 @@ msgstr "السبت المطلوب (خصم + تعويض الإضافي)"
 
 #. module: KSW_working_schedule
 #: model:ir.model.fields,field_description:KSW_working_schedule.field_resource_calendar__x_saturday_short_overtime
-msgid "Saturday Short-Shift Overtime"
-msgstr "العمل الإضافي لوردية السبت القصيرة"
+msgid "Short Saturday (Weekend Extension)"
+msgstr "السبت القصير (امتداد لعطلة الجمعة)"
 
 #. module: KSW_working_schedule
 #: model:ir.model.fields,field_description:KSW_working_schedule.field_resource_calendar_group_line__sequence
@@ -251,17 +251,8 @@ msgstr "الأربعاء"
 
 #. module: KSW_working_schedule
 #: model:ir.model.fields,help:KSW_working_schedule.field_resource_calendar__x_saturday_short_overtime
-msgid ""
-"When set, Saturday is a short shift (<8h). The gap between a full 8h day and"
-" the actual Saturday hours is deducted and credited back 1:1 as overtime on "
-"the payslip (net-zero reclassification, like the full-day Saturday Required "
-"option). Used for schedules such as \"Standard 44 hours/week\" (Sat 3h) and "
-"\"Abdullah Mutawa Special Shift\" (Sat 4h)."
-msgstr ""
-"عند التفعيل، يكون السبت وردية قصيرة (أقل من 8 ساعات). يُخصَم الفرق بين يوم "
-"العمل الكامل (8 ساعات) والساعات المجدولة الفعلية من قسيمة الراتب ثم يُردُّ "
-"كرصيد إضافي للسبت — مما يُحقق تأثيراً صفرياً على الأجر مع التصنيف الصحيح "
-"للوقت."
+msgid "When set, Saturday is a short shift (<8h) and the rest of the 8h day is a weekend extension of Friday: it is never deducted. An absent Saturday loses only its scheduled hours while Thursday or Sunday was attended; absent on all three, the full 8h day is deducted. Used for schedules such as \"Standard 44 hours/week\" (Sat 3h) and \"Abdullah Mutawa Special Shift\" (Sat 4h)."
+msgstr "عند التفعيل، يكون السبت دواماً قصيراً (أقل من 8 ساعات) وباقي ساعات اليوم امتداد لعطلة الجمعة لا يُخصم. عند الغياب يوم السبت يُخصم عدد ساعات دوامه المجدولة فقط إذا حضر الموظف يوم الخميس أو الأحد، وإن غاب عن الأيام الثلاثة يُخصم اليوم كاملاً (8 ساعات)."
 
 #. module: KSW_working_schedule
 #: model:ir.model.fields,help:KSW_working_schedule.field_resource_calendar__x_saturday_required
