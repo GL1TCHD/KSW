@@ -6,3 +6,4 @@ from . import test_bas_links
 from . import test_bas_voucher_lines
 from . import test_one_bas_code
 from . import test_bas_document
+from . import test_asset_removal

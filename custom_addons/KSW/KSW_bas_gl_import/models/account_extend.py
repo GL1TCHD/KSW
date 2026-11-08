@@ -132,3 +132,38 @@ class AccountAssetLine(models.Model):
             account = asset.x_bas_depreciation_account_id
         return super()._setup_move_line_data(
             depreciation_date, account, ml_type, move)
+
+
+class AccountAssetRemove(models.TransientModel):
+    _inherit = 'account.asset.remove'
+
+    def _get_removal_data(self, asset, residual_value):
+        """Retire the asset from its OWN BAS accounts, not the profile's.
+
+        The removal entry reverses cost and accumulated depreciation off
+        ``profile.account_asset_id`` / ``account_depreciation_id`` -- for a BAS
+        profile that is the group's first leaf (one specific vehicle), so
+        selling any other vehicle would credit that one's cost account.  Cost
+        sits on the 19xx account whose BAS code is the asset's ``code``; the
+        accumulated side is the same per-asset 24xx account depreciation posts to.
+        """
+        commands = super()._get_removal_data(asset, residual_value)
+        profile = asset.profile_id
+        cost_account = asset.code and self.env['account.account'].search(
+            [('x_bas_code', '=', asset.code)], limit=1)
+        remap = {}
+        if cost_account:
+            remap[profile.account_asset_id.id] = cost_account.id
+        if asset.x_bas_depreciation_account_id:
+            remap[profile.account_depreciation_id.id] = \
+                asset.x_bas_depreciation_account_id.id
+        # super() emits the reversal lines first -- accumulated depreciation
+        # (only when there is any) then cost -- and only after them the
+        # proceeds / gain / loss / residual lines on accounts the user picked in
+        # this wizard, which may coincide with a profile account; never move those.
+        reversal = 2 if asset.depreciation_base - residual_value else 1
+        for command in commands[:reversal]:
+            vals = command[2]
+            if vals.get('account_id') in remap:
+                vals['account_id'] = remap[vals['account_id']]
+        return commands
