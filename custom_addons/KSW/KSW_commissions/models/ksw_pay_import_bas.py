@@ -43,6 +43,12 @@ saying how many. Only lines on the **new** side of the cutover can be
 ⚠️ **BAS stopped writing ``TAXES_5`` on 6 Sep 2026**, which made every
 September load look unweighted (Sep 2026 Tabuk: 0 of 114 loads weighted
 against BAS's 211.25). ``PHRDIS`` was never interrupted.
+
+**Reverted from 1 Oct 2026 (decided 2026-11-08).** The business went back
+to «الرد المضاعف» (``cod10.FACTORE``) from ``INVOICE_FACTOR_UNTIL_DEFAULT``
+on. «رد الفاتورة» is now a closed window, 6 Sep – 30 Sep 2026: September
+was paid on it and stays exactly as paid; every load before or after the
+window is weighted on the customer rate.
 """
 import calendar
 import logging
@@ -83,6 +89,15 @@ INVOICE_FACTOR_COLUMN = 'h.PHRDIS'
 #: (YYYY-MM-DD). Set it to a past date to re-base history, or far in the
 #: future to stay entirely on the old basis.
 INVOICE_FACTOR_FROM_DEFAULT = '2026-09-06'
+
+#: The day «الرد المضاعف» comes back. Loads invoiced **on or after** it are
+#: weighted on `cod10.FACTORE` again, so «رد الفاتورة» only ever applies
+#: in ``[INVOICE_FACTOR_FROM_DEFAULT, INVOICE_FACTOR_UNTIL_DEFAULT)``.
+#: Same rule as the start: a date, judged per invoice line.
+#:
+#: Override with `ir.config_parameter` `ksw_commissions.invoice_factor_until`
+#: (YYYY-MM-DD).
+INVOICE_FACTOR_UNTIL_DEFAULT = '2026-10-01'
 
 
 class KswPayBatchBasImport(models.Model):
@@ -695,24 +710,34 @@ class KswPayBatchBasImport(models.Model):
         return float(min(
             cap, round(base * (worked_days or 0) / float(days_in_month))))
 
-    def _invoice_factor_cutover(self):
-        """The date from which «رد الفاتورة» replaces «الرد المضاعف».
+    def _invoice_factor_date(self, key, default):
+        """A cutover date from `ir.config_parameter`, or its default.
 
-        Returns a ``date``. A blank or unparseable parameter falls back to
-        the default rather than disabling the cutover: an unreadable
-        setting must not silently re-base every month ever imported.
+        A blank or unparseable parameter falls back to the default rather
+        than disabling the cutover: an unreadable setting must not silently
+        re-base every month ever imported.
         """
         raw = (self.env['ir.config_parameter'].sudo().get_param(
-            'ksw_commissions.invoice_factor_from') or '').strip()
+            key) or '').strip()
         try:
-            return fields.Date.to_date(raw) or fields.Date.to_date(
-                INVOICE_FACTOR_FROM_DEFAULT)
+            return fields.Date.to_date(raw) or fields.Date.to_date(default)
         except (ValueError, TypeError):
             _logger.warning(
-                'KSW commissions: ksw_commissions.invoice_factor_from is '
-                '%r, which is not a date — falling back to %s.',
-                raw, INVOICE_FACTOR_FROM_DEFAULT)
-            return fields.Date.to_date(INVOICE_FACTOR_FROM_DEFAULT)
+                'KSW commissions: %s is %r, which is not a date — falling '
+                'back to %s.', key, raw, default)
+            return fields.Date.to_date(default)
+
+    def _invoice_factor_cutover(self):
+        """The date from which «رد الفاتورة» replaces «الرد المضاعف»."""
+        return self._invoice_factor_date(
+            'ksw_commissions.invoice_factor_from', INVOICE_FACTOR_FROM_DEFAULT)
+
+    def _invoice_factor_until(self):
+        """The date from which «الرد المضاعف» applies again (exclusive end
+        of the «رد الفاتورة» window)."""
+        return self._invoice_factor_date(
+            'ksw_commissions.invoice_factor_until',
+            INVOICE_FACTOR_UNTIL_DEFAULT)
 
     def _bas_cost_centres(self, employee):
         """Every BAS cost centre whose loads belong to this driver.
@@ -807,17 +832,19 @@ class KswPayBatchBasImport(models.Model):
                 # No bands configured: leave every line exactly as it was.
                 cash_accounts, is_cash = (), '1 = 0'
                 band_case = '0'
+            # «رد الفاتورة» applies only inside [from, until); before and
+            # after it, «الرد المضاعف».
+            in_window = "(h.FDATE >= %s AND h.FDATE < %s)"
             factor_expr = (
                 "CASE WHEN " + is_cash + " THEN " + band_case + " "
-                "     WHEN h.FDATE >= %s THEN ISNULL(" + col + ", 0) "
+                "     WHEN " + in_window + " THEN ISNULL(" + col + ", 0) "
                 "     ELSE ISNULL(c.FACTORE, 0) END")
 
             # Both bases, chosen per line by the invoice's own date:
-            # before the cutover the customer's current multiplier
-            # («الرد المضاعف», cod10.FACTORE), from it on the multiplier
-            # recorded on the invoice («رد الفاتورة»). `missing` counts
-            # only lines judged on the NEW basis — a pre-cutover line has
-            # nothing to be missing.
+            # inside the window the multiplier recorded on the invoice
+            # («رد الفاتورة»), outside it the customer's current one
+            # («الرد المضاعف», cod10.FACTORE). `missing` counts only lines
+            # judged on «رد الفاتورة» — any other line has nothing to miss.
             sql = (
                 "SELECT h.COST_CENTER2 AS driver_cc, "
                 "       COUNT(*) AS loads, "
@@ -825,10 +852,10 @@ class KswPayBatchBasImport(models.Model):
                 # 'missing' is about «رد الفاتورة» only, so a cash line can
                 # never be missing — its factor came from the band.
                 "       SUM(CASE WHEN NOT (" + is_cash + ") "
-                "                 AND h.FDATE >= %s "
+                "                 AND " + in_window + " "
                 "                 AND ISNULL(" + col + ", 0) = 0 "
                 "                THEN 1 ELSE 0 END) AS missing, "
-                "       SUM(CASE WHEN h.FDATE >= %s THEN 1 ELSE 0 END) "
+                "       SUM(CASE WHEN " + in_window + " THEN 1 ELSE 0 END) "
                 "           AS new_basis, "
                 # What the cash lines are, and what they would have been
                 # worth on the till's own rate — so the change can be
@@ -851,13 +878,14 @@ class KswPayBatchBasImport(models.Model):
                 "  AND h.COST_CENTER2 IS NOT NULL AND h.COST_CENTER2 <> '' "
                 "GROUP BY h.COST_CENTER2"
             )
-            cutover = fields.Date.to_string(self._invoice_factor_cutover())
+            window = [fields.Date.to_string(self._invoice_factor_cutover()),
+                      fields.Date.to_string(self._invoice_factor_until())]
             cash = list(cash_accounts)
             params = tuple(
                 # order matters: every %s in the SELECT, left to right
-                cash + [cutover]                 # mult
-                + cash + [cutover]               # missing
-                + [cutover]                      # new_basis
+                cash + window                    # mult
+                + cash + window                  # missing
+                + window                         # new_basis
                 + cash                           # cash_loads
                 + cash                           # cash_at_till
                 + cash                           # cash_at_band

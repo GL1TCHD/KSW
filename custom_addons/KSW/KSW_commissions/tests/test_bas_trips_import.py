@@ -591,6 +591,33 @@ class TestInvoiceFactorSource(BasTripsImportCommon):
         self.assertEqual(self._batch()._invoice_factor_cutover(),
                          _date(2026, 9, 6))
 
+    def test_the_old_basis_returns_on_1_october_2026(self):
+        """Reverted 2026-11-08: «رد الفاتورة» is only 6 Sep – 30 Sep 2026;
+        from 1 Oct 2026 the loads are weighted on «الرد المضاعف» again."""
+        from datetime import date as _date
+        self.assertEqual(self._batch()._invoice_factor_until(),
+                         _date(2026, 10, 1))
+
+    def test_the_end_of_the_window_is_configurable(self):
+        from datetime import date as _date
+        ICP = self.env['ir.config_parameter'].sudo()
+        batch = self._batch()
+        ICP.set_param('ksw_commissions.invoice_factor_until', '2027-01-01')
+        self.assertEqual(batch._invoice_factor_until(), _date(2027, 1, 1))
+        ICP.set_param('ksw_commissions.invoice_factor_until', 'garbage')
+        self.assertEqual(batch._invoice_factor_until(),
+                         _date(2026, 10, 1))
+
+    def test_the_query_closes_the_invoice_factor_window(self):
+        """The new basis must be bounded on both sides, or October would
+        stay on «رد الفاتورة»."""
+        import inspect
+        from odoo.addons.KSW_commissions.models import ksw_pay_import_bas
+        src = inspect.getsource(
+            ksw_pay_import_bas.KswPayBatchBasImport._bas_fetch_orood)
+        self.assertIn('h.FDATE < %s', src.split('in_window =')[1].split('\n')[0])
+        self.assertIn('_invoice_factor_until()', src)
+
     def test_august_is_costed_on_the_old_basis(self):
         """The batch period is before the cutover, so every load is
         weighted on «الرد المضاعف» and nothing can be 'missing'."""
