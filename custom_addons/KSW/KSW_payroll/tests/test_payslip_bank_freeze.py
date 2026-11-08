@@ -248,3 +248,19 @@ class TestPayslipBankFreeze(TransactionCase):
         warnings = self.run.x_skip_line_ids.filtered(
             lambda l: l.line_type == 'warning')
         self.assertEqual(len(warnings), 1)
+
+    def test_superseded_frozen_slip_with_zero_net_is_dropped(self):
+        """Nothing was paid, so nothing to recover: dropped, and Mark As
+        Done no longer trips the one-confirmed-payslip-per-period guard."""
+        self._freeze()
+        self.slip.line_ids.filtered(lambda l: l.code == 'NET').write(
+            {'amount': 0.0, 'quantity': 1.0, 'rate': 100.0})
+        self.assertEqual(self.slip._ksw_net_amount(), 0.0)
+        self.patch(RunBase, '_ksw_superseded_slip_reasons',
+                   lambda run, slips: {s: 'Vacation settles July.'
+                                       for s in slips})
+        self.run._ksw_drop_superseded_slips()
+        self.assertEqual(self.slip.state, 'cancel')
+        self.assertFalse(self.slip.payslip_run_id)
+        self.assertFalse(self.run.x_skip_line_ids.filtered(
+            lambda l: l.line_type == 'warning'))

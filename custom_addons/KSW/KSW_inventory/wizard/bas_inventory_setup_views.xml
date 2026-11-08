@@ -19,6 +19,8 @@
                 </div>
                 <group>
                     <field name="year" options="{'format': false}"/>
+                    <field name="warehouse_codes" placeholder="15,50,65"/>
+                    <field name="stock_items_only"/>
                 </group>
                 <field name="company_id" invisible="1"/>
                 <field name="log" nolabel="1" invisible="not log" class="o_ksw_log"/>

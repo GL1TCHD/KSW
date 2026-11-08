@@ -1,4 +1,4 @@
-"""Tyres and RO membranes, Jan-Sep 2026, replayed through the native stock flows.
+"""Tyres, RO membranes and desalination spares, 2026, replayed through the native stock flows.
 
 Runs after native_replay.py, on odoo_bas_native only. BAS keeps item lines for
 purchases (din10, 006) and stock issues (bin10, 101); KSW_inventory's BAS setup
@@ -7,7 +7,9 @@ wizard reads both, and its readers are reused here.
 * Opening, 31 Dec 2025: per item and store, BAS's quantity today minus every
   2026 purchase plus every 2026 issue (din10/bin10 hold the whole year), at the
   item's first 2026 BAS cost. Loaded without posting: the ledger's opening entry
-  already carries the 1206 balances.
+  already carries the 1206 balances. Items that hold stock but did not move in
+  2026 open at today's quantity. Re-run safe per item: an item with any stock
+  move is left alone.
 * A purchase: BAS's journal entry is removed and its user raises the purchase
   order, receives it into the store and posts the vendor bill.
 * An issue: the journal entry is removed and its user validates a Stock Issue to
@@ -16,14 +18,14 @@ wizard reads both, and its readers are reused here.
 
     >>> exec(open('custom_addons/KSW/KSW_bas_gl_import/scripts/native_replay.py').read())
     >>> exec(open('custom_addons/KSW/KSW_bas_gl_import/scripts/native_replay_stock.py').read())
-    >>> S = StockReplay(env); S.opening(); S.replay('2026-01-01', '2026-10-01')
+    >>> S = StockReplay(env); S.opening(); S.replay('2026-01-01', '2027-01-01')
 """
 from collections import defaultdict
 from datetime import datetime
 
 from odoo.addons.KSW_inventory.wizard.bas_history_replay import _norm as _inv_norm
 
-PREFIXES = ('31', '33')            # RO membranes, tyres
+PREFIXES = ('15', '31', '33')      # desalination spares, RO membranes, tyres
 STORE_COST_CENTRE = {'15': '1200030001', '50': '120006', '65': '11120001'}
 STOCK_GROUPS = ('purchase.group_purchase_user', 'stock.group_stock_user',
                 'account.group_account_invoice')
@@ -61,9 +63,8 @@ class StockReplay(Replay):
     def opening(self):
         """Today's BAS quantity, backed out to 1 January; nothing posted."""
         Quant = self.env['stock.quant'].sudo()
-        if Quant.search_count([('product_id', 'in', [p.id for p in self.products.values()]),
-                               ('location_id.usage', '=', 'internal')]):
-            return 'opening already loaded'
+        moved_ids = set(self.env['stock.move'].sudo().search(
+            [('product_id', 'in', [p.id for p in self.products.values()])]).product_id.ids)
         flow = defaultdict(float)
         first_cost = {}
         for r in sorted(self.purchases + self.issues, key=lambda r: r['FDATE']):
@@ -71,11 +72,18 @@ class StockReplay(Replay):
             flow[(r['ICODE'], r['CODE2'][1:])] += sign * r['QUAN']
             if r['QUAN'] and r['ICODE'] not in first_cost:
                 first_cost[r['ICODE']] = r['AMOUNT'] / r['QUAN']
-        now = self.W._bas_quantities_now({c for c, _w in flow})
+        items = {r['code'] for r in self.W._fetch(
+            "SELECT RTRIM(ICODE) code FROM ITM10 WHERE LEFT(RTRIM(ICODE), 2) IN (%s)"
+            % ','.join(["'%s'" % p for p in PREFIXES]))}
+        now = self.W._bas_quantities_now(items)
+        for key in now:
+            flow.setdefault(key, 0.0)      # stock on hand, no 2026 movement
         self.at(datetime(2025, 12, 31, 20, 0))
         self.categs.write({'property_valuation': 'periodic'})
         loaded, negative = [], []
         for (code, wh_code), moved in sorted(flow.items()):
+            if code not in self.products or self.products[code].id in moved_ids:
+                continue
             wh = self.whs.get(wh_code)
             qty = now.get((code, wh_code), 0.0) - moved
             if not wh:
@@ -93,7 +101,8 @@ class StockReplay(Replay):
                     'inventory_quantity': qty,
                 })._apply_inventory()
                 loaded.append((code, wh.code, qty, product.standard_price))
-        self.env['stock.move'].search([('is_inventory', '=', True), ('date', '>=', '2026-01-01')]).write(
+        self.env['stock.move'].search([('is_inventory', '=', True), ('date', '>=', '2026-01-01'),
+                                       ('product_id.default_code', 'in', [c for c, *_r in loaded])]).write(
             {'date': datetime(2025, 12, 31, 20, 0)})
         self.categs.write({'property_valuation': 'real_time'})
         self.commit()

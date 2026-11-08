@@ -1,4 +1,5 @@
 from odoo import fields
+from unittest.mock import patch
 from odoo.exceptions import UserError
 from odoo.tests import TransactionCase, tagged
 
@@ -100,3 +101,44 @@ class TestStockIssue(TransactionCase):
         self.assertEqual(classify('666')[0], 'service')
         self.assertEqual(classify('9001')[0], 'service')
         self.assertEqual(classify('XYZ'), (False, False))
+
+    def test_books_in_bas_issue_posts_nothing_but_keeps_cost_centre(self):
+        """Stock accounting in BAS: the issue moves stock, keeps its cost centre
+        and posts no journal entry, even on a perpetual class."""
+        self.company.x_stock_books_in_bas = True
+        picking = self._issue()
+        picking.button_validate()
+        self.assertEqual(picking.state, 'done')
+        self.assertFalse(picking.move_ids.account_move_id)
+        self.assertEqual(self.product.with_context(location=self.wh.lot_stock_id.id).qty_available, 7.0)
+        # The line keeps its cost centre for the accountant booking it in BAS.
+        self.assertEqual(picking.move_ids.analytic_distribution, {str(self.cost_centre.id): 100})
+
+    def test_books_in_bas_still_requires_a_cost_centre(self):
+        self.company.x_stock_books_in_bas = True
+        picking = self._issue(analytic=False)
+        with self.assertRaises(UserError):
+            picking.button_validate()
+
+    def test_setup_limits_to_listed_warehouses_and_stock_items(self):
+        """KSWCO go-live: only the listed BAS warehouses, only stock items."""
+        rows = {
+            'wshow': [{'code': '915', 'name': 'Store 915', 'kind': '1'},
+                      {'code': '920', 'name': 'Store 920', 'kind': '1'},
+                      {'code': '901', 'name': 'Showroom 901', 'kind': '2'}],
+            'itm10': [{'code': '33901', 'name': 'Test tyre', 'unit': '', 'cost': 1, 'stop': False},
+                      {'code': '11901', 'name': 'Test water', 'unit': 'cubic m', 'cost': 0, 'stop': False}],
+        }
+        Setup = self.env['ksw.bas.inventory.setup']
+        wizard = Setup.create({'warehouse_codes': '915, 965', 'stock_items_only': True})
+        fetch = lambda sql, params=(): rows['wshow'] if 'WSHOW' in sql else rows['itm10']
+        out = []
+        with patch.object(type(Setup), '_fetch', lambda self, sql, params=(): fetch(sql, params)):
+            wizard._import_warehouses(out)
+            wizard._sync_items(out)
+        Warehouse = self.env['stock.warehouse']
+        self.assertTrue(Warehouse.search([('x_bas_code', '=', '915'), ('x_bas_kind', '=', 'warehouse')]))
+        self.assertFalse(Warehouse.search([('x_bas_code', 'in', ('920', '901'))]))
+        Product = self.env['product.template']
+        self.assertTrue(Product.search([('default_code', '=', '33901')]).is_storable)
+        self.assertFalse(Product.search([('default_code', '=', '11901')]))

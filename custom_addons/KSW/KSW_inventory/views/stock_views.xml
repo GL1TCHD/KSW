@@ -96,4 +96,17 @@
                Validating posts Dr the issue account, Cr the stock account.</p>
         </field>
     </record>
+    <record id="res_config_settings_view_form_ksw_stock_books" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.ksw.stock.books</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="stock.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//block[@name='warehouse_setting_container']" position="inside">
+                <setting id="ksw_stock_books_in_bas" company_dependent="1"
+                         help="Odoo runs receipts and issues; no stock journal entry is posted, BAS keeps the books">
+                    <field name="x_stock_books_in_bas"/>
+                </setting>
+            </xpath>
+        </field>
+    </record>
 </odoo>

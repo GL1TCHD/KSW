@@ -2,6 +2,24 @@ from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
+class ResCompany(models.Model):
+    _inherit = 'res.company'
+
+    x_stock_books_in_bas = fields.Boolean(
+        'Stock Accounting in BAS',
+        help="Odoo runs the stock operations (quantities, receipts, issues, "
+             "3-way match) and posts no stock journal entry; the accountant "
+             "books them in BAS from the Odoo document. Every issue line still "
+             "carries its cost centre.")
+
+
+class ResConfigSettings(models.TransientModel):
+    _inherit = 'res.config.settings'
+
+    x_stock_books_in_bas = fields.Boolean(
+        related='company_id.x_stock_books_in_bas', readonly=False)
+
+
 class StockWarehouse(models.Model):
     _inherit = 'stock.warehouse'
 
@@ -106,6 +124,12 @@ class StockMove(models.Model):
                 or self.product_id.categ_id.property_account_expense_categ_id
                 or self.location_dest_id.valuation_account_id
                 or self.location_id.valuation_account_id)
+
+    def _should_create_account_move(self):
+        # Stock accounting in BAS: nothing posts here, whatever a category says.
+        if self.company_id.x_stock_books_in_bas:
+            return False
+        return super()._should_create_account_move()
 
     def _get_account_move_line_vals(self):
         """Issue into / return from a consumption location: swap the location's

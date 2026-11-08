@@ -18,7 +18,7 @@ from markupsafe import Markup
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
-from odoo.tools import float_compare
+from odoo.tools import float_compare, float_is_zero
 
 TXT_MODES = ('all_txt', 'specific_txt')
 
@@ -368,9 +368,17 @@ class HrPayslipRun(models.Model):
         It stays in the batch and is flagged instead, once, as a warning —
         the vacation / EOS payslip settles the same month, so this is a
         double payment to recover, not a slip to make disappear.
+
+        Unless its NET is zero: then nothing left in that file, there is
+        nothing to recover, and it is dropped like any other superseded
+        slip. Kept, Mark As Done would try to confirm a second payslip for
+        a paid period and refuse the whole bank group (KSWCO SLIP/15137,
+        October already paid by vacation payslip SLIP/15326).
         """
         reasons = super()._ksw_superseded_slip_reasons(slips)
-        frozen = [s for s in reasons if s._ksw_is_bank_frozen()]
+        frozen = [s for s in reasons if s._ksw_is_bank_frozen()
+                  and not float_is_zero(s._ksw_net_amount(),
+                                        precision_digits=2)]
         if not frozen:
             return reasons
         Skip = self.env['ksw.payslip.run.skip.line'].sudo()

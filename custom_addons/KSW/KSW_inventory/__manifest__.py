@@ -1,6 +1,6 @@
 {
     'name': 'KSW Inventory',
-    'version': '19.0.1.1.0',
+    'version': '19.0.1.2.0',
     'author': 'Mohammed Albadr',
     'category': 'Inventory/Inventory',
     'summary': 'BAS warehouses and item classes, perpetual stock valuation, stock issues to an account and cost centre',

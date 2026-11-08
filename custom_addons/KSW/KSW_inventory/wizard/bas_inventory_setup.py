@@ -34,6 +34,14 @@ class KswBasInventorySetup(models.TransientModel):
     _description = 'BAS Inventory Setup'
 
     company_id = fields.Many2one('res.company', required=True, default=lambda s: s.env.company)
+    warehouse_codes = fields.Char(
+        'Only These Warehouses',
+        help="BAS warehouse codes, comma separated (e.g. 15,50,65). Empty: every "
+             "BAS warehouse and showroom.")
+    stock_items_only = fields.Boolean(
+        'Stock Items Only',
+        help="Create only stock items (tyres, membranes, desalination spares) "
+             "from BAS; water and service products are left alone.")
     log = fields.Text(readonly=True)
 
     # ------------------------------------------------------------------ helpers
@@ -70,6 +78,9 @@ class KswBasInventorySetup(models.TransientModel):
         finally:
             conn.close()
 
+    def _wanted_codes(self):
+        return {c.strip() for c in (self.warehouse_codes or '').split(',') if c.strip()}
+
     def _done(self, lines):
         self.log = '\n'.join(lines)
         return {'type': 'ir.actions.act_window', 'res_model': self._name, 'res_id': self.id,
@@ -79,6 +90,14 @@ class KswBasInventorySetup(models.TransientModel):
     def _setup_valuation(self, out):
         """Item classes: perpetual, weighted average, BAS stock + issue accounts."""
         company = self.company_id
+        if company.x_stock_books_in_bas:
+            # BAS keeps the books: no BAS chart needed, nothing will post.
+            for categ_xmlid, _stock, _issue in STOCK_CLASSES.values():
+                self.env.ref(categ_xmlid).with_company(company).write({
+                    'property_valuation': 'periodic', 'property_cost_method': 'average'})
+            self._enable_cost_centres(out)
+            out.append("Item classes: weighted average, no stock entries (stock accounting in BAS)")
+            return
         bas_names = {r['c']: (r['n'] or '').strip() for r in self._fetch(
             "SELECT RTRIM(DCODE1) c, RTRIM(DNAME) n FROM COD10 WHERE DCODE1 IN %s",
             (tuple(v[1] for v in STOCK_CLASSES.values()),))}
@@ -101,13 +120,16 @@ class KswBasInventorySetup(models.TransientModel):
             consumption.valuation_account_id = self._account('3102010001')
         if not company.account_stock_journal_id:
             raise UserError(self.env._("The company has no Stock Journal (Inventory Valuation)."))
+        self._enable_cost_centres(out)
+        out.append("Item classes: perpetual valuation, weighted average, BAS stock and issue accounts")
+
+    def _enable_cost_centres(self, out):
         # Cost centres must be visible to whoever issues stock (they are required).
         analytic = self.env.ref('analytic.group_analytic_accounting')
         user_group = self.env.ref('base.group_user')
         if analytic not in user_group.implied_ids:
             user_group.write({'implied_ids': [(4, analytic.id)]})
             out.append("Analytic accounting (cost centres) enabled for internal users")
-        out.append("Item classes: perpetual valuation, weighted average, BAS stock and issue accounts")
 
     def _sync_items(self, out):
         """Classify BAS items, create the missing ones, fix taxes on stock items."""
@@ -119,7 +141,7 @@ class KswBasInventorySetup(models.TransientModel):
         created = classified = 0
         for r in rows:
             kind, cls = self._classify(r['code'])
-            if not kind:
+            if not kind or (self.stock_items_only and kind != 'stock'):
                 continue
             categ = self.env.ref(cls[0] if kind == 'stock' else cls)
             tmpl = existing.get(r['code'])
@@ -151,6 +173,9 @@ class KswBasInventorySetup(models.TransientModel):
                               WHERE RTRIM(BRAN) = '10' AND FTYPE IN ('1', '2') ORDER BY FTYPE, CODE""")
         Warehouse = self.env['stock.warehouse'].with_context(active_test=False)
         have = {(w.x_bas_kind, w.x_bas_code) for w in Warehouse.search([('x_bas_code', '!=', False)])}
+        wanted = self._wanted_codes()
+        if wanted:
+            rows = [r for r in rows if r['kind'].strip() == '1' and r['code'] in wanted]
         created = 0
         for r in rows:
             kind = 'warehouse' if r['kind'].strip() == '1' else 'showroom'
@@ -265,7 +290,8 @@ class KswBasInventorySetup(models.TransientModel):
                     quant.inventory_quantity = q
                     quant.action_apply_inventory()
         finally:
-            categs.write({'property_valuation': 'real_time'})
+            if not company.x_stock_books_in_bas:
+                categs.write({'property_valuation': 'real_time'})
         value = sum(p.qty_available * p.standard_price for p in products.values())
         out.append(f"Opening stock: {len(targets)} item/warehouse quantities set from BAS, value {value:,.2f} at BAS unit cost; nothing posted")
         if skipped:

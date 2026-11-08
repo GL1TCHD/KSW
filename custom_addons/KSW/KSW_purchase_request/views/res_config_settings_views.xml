@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_purchase_request" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.ksw.purchase.request</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="purchase.res_config_settings_view_form_purchase"/>
+        <field name="arch" type="xml">
+            <xpath expr="//setting[@id='po_order_approval']" position="before">
+                <setting id="ksw_purchase_request_required" company_dependent="1"
+                         help="Orders start from an approved Purchase Request: PR, RFQ, PO, receipt, bill">
+                    <field name="x_purchase_request_required"/>
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>
