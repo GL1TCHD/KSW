@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_ksw_fleet_move_list" model="ir.ui.view">
+        <field name="name">ksw.fleet.move.list</field>
+        <field name="model">ksw.fleet.move</field>
+        <field name="arch" type="xml">
+            <list string="Vehicle Movements" create="0" edit="0" delete="0"
+                  decoration-info="state == 'in_transfer'" decoration-muted="state == 'cancelled'">
+                <header>
+                    <button name="action_receive" type="object" string="Receive Selected" class="btn-primary"
+                            confirm="Confirm the selected vehicles have arrived at your department?"/>
+                </header>
+                <field name="vehicle_id"/>
+                <field name="vehicle_type" optional="show"/>
+                <field name="kind"/>
+                <field name="from_department_id"/>
+                <field name="to_department_id"/>
+                <field name="request_id" optional="show"/>
+                <field name="source" optional="hide"/>
+                <field name="decided_by_id" optional="show"/>
+                <field name="date"/>
+                <field name="received_by_id" optional="hide"/>
+                <field name="received_date" optional="show"/>
+                <field name="workshop_request_id" optional="show"
+                       groups="KSW_fleet_allocation.group_fleet_allocation_gm,base.group_system"/>
+                <field name="workshop_state" optional="show"/>
+                <field name="state" widget="badge" decoration-info="state == 'in_transfer'"
+                       decoration-success="state == 'done'"/>
+                <field name="x_can_receive" column_invisible="True"/>
+                <field name="x_can_cancel" column_invisible="True"/>
+                <button name="action_receive" type="object" string="Received" icon="fa-check"
+                        class="btn-primary" invisible="not x_can_receive"
+                        confirm="Confirm the vehicle has arrived at your department?"/>
+                <button name="action_cancel" type="object" string="Cancel" icon="fa-times"
+                        invisible="not x_can_cancel" confirm="Cancel this transfer? The vehicle stays where it was."/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_ksw_fleet_move_form" model="ir.ui.view">
+        <field name="name">ksw.fleet.move.form</field>
+        <field name="model">ksw.fleet.move</field>
+        <field name="arch" type="xml">
+            <form string="Vehicle Movement" create="0" edit="0" delete="0">
+                <header>
+                    <field name="x_can_receive" invisible="1"/>
+                    <field name="x_can_cancel" invisible="1"/>
+                    <button name="action_receive" type="object" string="Received" class="oe_highlight"
+                            invisible="not x_can_receive"
+                            confirm="Confirm the vehicle has arrived at your department?"/>
+                    <button name="action_cancel" type="object" string="Cancel Transfer"
+                            invisible="not x_can_cancel"
+                            confirm="Cancel this transfer? The vehicle stays where it was."/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="vehicle_id"/>
+                            <field name="kind"/>
+                            <field name="from_department_id"/>
+                            <field name="to_department_id"/>
+                            <field name="request_id"/>
+                            <field name="source" invisible="not addition_line_id"/>
+                            <field name="addition_line_id" invisible="1"/>
+                        </group>
+                        <group>
+                            <field name="decided_by_id"/>
+                            <field name="date"/>
+                            <field name="received_by_id"/>
+                            <field name="received_date"/>
+                            <field name="workshop_request_id"
+                                   groups="KSW_fleet_allocation.group_fleet_allocation_gm,base.group_system"/>
+                            <field name="workshop_state" invisible="not workshop_state"/>
+                        </group>
+                    </group>
+                    <field name="note" placeholder="No note"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_ksw_fleet_move_search" model="ir.ui.view">
+        <field name="name">ksw.fleet.move.search</field>
+        <field name="model">ksw.fleet.move</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="vehicle_id"/>
+                <field name="from_department_id"/>
+                <field name="to_department_id"/>
+                <filter string="In Transfer" name="filter_in_transfer" domain="[('state', '=', 'in_transfer')]"/>
+                <filter string="Transfers" name="filter_transfer" domain="[('kind', '=', 'transfer')]"/>
+                <filter string="To Workshop" name="filter_holding" domain="[('kind', '=', 'holding')]"/>
+                <group>
+                    <filter string="Vehicle" name="groupby_vehicle" context="{'group_by': 'vehicle_id'}"/>
+                    <filter string="To" name="groupby_to" context="{'group_by': 'to_department_id'}"/>
+                    <filter string="Month" name="groupby_month" context="{'group_by': 'date:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_ksw_fleet_move" model="ir.actions.act_window">
+        <field name="name">Movement History</field>
+        <field name="res_model">ksw.fleet.move</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_ksw_fleet_move_search"/>
+    </record>
+
+    <record id="action_ksw_fleet_move_to_receive" model="ir.actions.act_window">
+        <field name="name">Transfers to Receive</field>
+        <field name="res_model">ksw.fleet.move</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_ksw_fleet_move_search"/>
+        <field name="domain">[('state', '=', 'in_transfer'), ('x_is_incoming', '=', True)]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No vehicle on its way</p>
+            <p>When the GM transfers a vehicle to your department, confirm here once it arrives.</p>
+        </field>
+    </record>
+
+    <record id="view_ksw_fleet_move_pivot" model="ir.ui.view">
+        <field name="name">ksw.fleet.move.pivot</field>
+        <field name="model">ksw.fleet.move</field>
+        <field name="arch" type="xml">
+            <pivot string="Movement Analysis" sample="1">
+                <field name="date" interval="month" type="row"/>
+                <field name="to_department_id" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_ksw_fleet_move_graph" model="ir.ui.view">
+        <field name="name">ksw.fleet.move.graph</field>
+        <field name="model">ksw.fleet.move</field>
+        <field name="arch" type="xml">
+            <graph string="Movement Analysis" type="bar" stacked="1" sample="1">
+                <field name="date" interval="month"/>
+                <field name="kind"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_ksw_fleet_move_analysis" model="ir.actions.act_window">
+        <field name="name">Movement Analysis</field>
+        <field name="res_model">ksw.fleet.move</field>
+        <field name="view_mode">graph,pivot,list</field>
+        <field name="domain">[('kind', 'in', ('transfer', 'holding')), ('state', '!=', 'cancelled')]</field>
+        <field name="search_view_id" ref="view_ksw_fleet_move_search"/>
+    </record>
+</odoo>

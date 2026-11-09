@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Overview: one card per vehicle department, like Inventory's
+         Overview. A department user sees his own; the GM sees all five. -->
+    <record id="view_department_kanban_fleet_overview" model="ir.ui.view">
+        <field name="name">hr.department.kanban.fleet.overview</field>
+        <field name="model">hr.department</field>
+        <field name="priority">90</field>
+        <field name="arch" type="xml">
+            <kanban create="0" edit="0" delete="0" can_open="0" class="o_kanban_dashboard">
+                <field name="x_fleet_incoming_count"/>
+                <field name="x_fleet_outgoing_count"/>
+                <field name="x_fleet_waiting_count"/>
+                <field name="x_fleet_draft_count"/>
+                <templates>
+                    <t t-name="card">
+                        <div class="d-flex justify-content-between align-items-baseline mb-2">
+                            <field name="name" class="fw-bold fs-4"/>
+                            <a name="action_open_fleet_vehicles" type="object" class="fs-5">
+                                <field name="x_fleet_vehicle_count"/> vehicles
+                            </a>
+                        </div>
+                        <div class="text-muted small mb-3"><field name="x_fleet_type_summary"/></div>
+                        <div class="row g-2 mb-3">
+                            <div class="col-6">
+                                <a name="action_fleet_incoming" type="object"
+                                   t-attf-class="btn w-100 #{record.x_fleet_incoming_count.raw_value ? 'btn-primary' : 'btn-light'}">
+                                    <field name="x_fleet_incoming_count"/> to receive
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a name="action_fleet_outgoing" type="object" class="btn btn-light w-100">
+                                    <field name="x_fleet_outgoing_count"/> on the way out
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a name="action_fleet_requests" type="object" class="btn btn-light w-100">
+                                    <field name="x_fleet_waiting_count"/> waiting for GM
+                                </a>
+                            </div>
+                            <div class="col-6">
+                                <a name="action_fleet_requests" type="object"
+                                   t-attf-class="btn w-100 #{record.x_fleet_draft_count.raw_value ? 'btn-warning' : 'btn-light'}">
+                                    <field name="x_fleet_draft_count"/> drafts
+                                </a>
+                            </div>
+                        </div>
+                        <div class="d-flex gap-2">
+                            <a name="action_fleet_new_release" type="object" class="btn btn-secondary flex-fill">
+                                <i class="fa fa-arrow-up me-1"/>Release Vehicles
+                            </a>
+                            <a name="action_fleet_new_addition" type="object" class="btn btn-secondary flex-fill">
+                                <i class="fa fa-plus me-1"/>Request Vehicles
+                            </a>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="action_ksw_fleet_overview" model="ir.actions.act_window">
+        <field name="name">Overview</field>
+        <field name="res_model">hr.department</field>
+        <field name="view_mode">kanban</field>
+        <field name="domain">[('x_fleet_holder', '=', True), ('x_fleet_in_my_scope', '=', True)]</field>
+        <field name="view_ids" eval="[(5, 0, 0), (0, 0, {'view_mode': 'kanban', 'view_id': ref('view_department_kanban_fleet_overview')})]"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No vehicle department is yours yet</p>
+            <p>Ask the administrator to name your departments under Vehicle Allocation ▸
+               Configuration ▸ Department Users.</p>
+        </field>
+    </record>
+</odoo>

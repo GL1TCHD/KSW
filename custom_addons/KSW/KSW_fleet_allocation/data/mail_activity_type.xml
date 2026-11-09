@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- The to-dos that appear in each user's Activities menu: the GM's
+         decisions and the receiving department's arrivals. Scheduled and
+         removed by ksw.fleet.request._ksw_fleet_sync_activities, never by hand. -->
+    <record id="mail_activity_fleet_decide" model="mail.activity.type">
+        <field name="name">Decide Vehicle Request</field>
+        <field name="icon">fa-gavel</field>
+        <field name="res_model">ksw.fleet.request</field>
+        <field name="delay_count">2</field>
+        <field name="sequence">90</field>
+    </record>
+    <record id="mail_activity_fleet_receive" model="mail.activity.type">
+        <field name="name">Confirm Vehicle Arrival</field>
+        <field name="icon">fa-truck</field>
+        <field name="res_model">ksw.fleet.request</field>
+        <field name="delay_count">1</field>
+        <field name="sequence">91</field>
+    </record>
+</odoo>

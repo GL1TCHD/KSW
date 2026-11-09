@@ -1,0 +1,11 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ksw_fleet_request_user,ksw.fleet.request.user,model_ksw_fleet_request,group_fleet_allocation_user,1,1,1,1
+access_ksw_fleet_request_system,ksw.fleet.request.system,model_ksw_fleet_request,base.group_system,1,1,1,1
+access_ksw_fleet_release_line_user,ksw.fleet.release.line.user,model_ksw_fleet_release_line,group_fleet_allocation_user,1,1,1,1
+access_ksw_fleet_release_line_system,ksw.fleet.release.line.system,model_ksw_fleet_release_line,base.group_system,1,1,1,1
+access_ksw_fleet_addition_line_user,ksw.fleet.addition.line.user,model_ksw_fleet_addition_line,group_fleet_allocation_user,1,1,1,1
+access_ksw_fleet_addition_line_system,ksw.fleet.addition.line.system,model_ksw_fleet_addition_line,base.group_system,1,1,1,1
+access_ksw_fleet_move_user,ksw.fleet.move.user,model_ksw_fleet_move,group_fleet_allocation_user,1,0,0,0
+access_ksw_fleet_move_system,ksw.fleet.move.system,model_ksw_fleet_move,base.group_system,1,1,1,1
+access_ksw_fleet_release_decision_wizard_gm,ksw.fleet.release.decision.wizard.gm,model_ksw_fleet_release_decision_wizard,group_fleet_allocation_gm,1,1,1,1
+access_ksw_fleet_allocate_wizard_gm,ksw.fleet.allocate.wizard.gm,model_ksw_fleet_allocate_wizard,group_fleet_allocation_gm,1,1,1,1

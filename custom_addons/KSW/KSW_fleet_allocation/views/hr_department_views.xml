@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_department_form_fleet_allocation" model="ir.ui.view">
+        <field name="name">hr.department.form.fleet.allocation</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_open_fleet_vehicles" type="object" class="oe_stat_button"
+                        icon="fa-truck" invisible="not x_fleet_holder"
+                        groups="KSW_fleet_allocation.group_fleet_allocation_gm,base.group_system">
+                    <field name="x_fleet_vehicle_count" widget="statinfo" string="Vehicles"/>
+                </button>
+            </xpath>
+            <field name="manager_id" position="after">
+                <field name="x_fleet_holder" groups="base.group_system"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_department_list_fleet_allocation" model="ir.ui.view">
+        <field name="name">hr.department.list.fleet.allocation</field>
+        <field name="model">hr.department</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <list string="Vehicle Departments" editable="bottom" create="0" delete="0">
+                <field name="complete_name" readonly="1"/>
+                <field name="manager_id" readonly="1" optional="show"/>
+                <field name="x_fleet_holder"/>
+                <field name="x_fleet_vehicle_count"/>
+                <button name="action_open_fleet_vehicles" type="object" string="Vehicles" icon="fa-truck"
+                        invisible="not x_fleet_holder"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_ksw_fleet_allocation_departments" model="ir.actions.act_window">
+        <field name="name">Vehicle Departments</field>
+        <field name="res_model">hr.department</field>
+        <field name="view_mode">list</field>
+        <field name="view_id" ref="view_department_list_fleet_allocation"/>
+        <field name="help" type="html">
+            <p>Tick Holds Vehicles on every department that is given vehicles.</p>
+        </field>
+    </record>
+
+</odoo>

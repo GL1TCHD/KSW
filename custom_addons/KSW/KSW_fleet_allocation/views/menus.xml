@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Odoo's own app layout: Overview, the operations, Reporting,
+         Configuration. The root opens the Overview. -->
+    <menuitem id="menu_ksw_fleet_allocation_root" name="Vehicle Allocation"
+              web_icon="KSW_fleet_allocation,static/description/icon.png"
+              action="action_ksw_fleet_overview"
+              groups="group_fleet_allocation_user,base.group_system" sequence="85"/>
+
+    <menuitem id="menu_ksw_fleet_allocation_overview" name="Overview"
+              parent="menu_ksw_fleet_allocation_root" action="action_ksw_fleet_overview" sequence="1"/>
+
+    <menuitem id="menu_ksw_fleet_allocation_requests" name="Requests"
+              parent="menu_ksw_fleet_allocation_root" sequence="10"/>
+    <menuitem id="menu_ksw_fleet_allocation_release" name="Release Vehicles"
+              parent="menu_ksw_fleet_allocation_requests" action="action_ksw_fleet_request_release" sequence="10"/>
+    <menuitem id="menu_ksw_fleet_allocation_addition" name="Request Vehicles"
+              parent="menu_ksw_fleet_allocation_requests" action="action_ksw_fleet_request_addition" sequence="20"/>
+    <menuitem id="menu_ksw_fleet_allocation_all_requests" name="All Requests"
+              parent="menu_ksw_fleet_allocation_requests" action="action_ksw_fleet_request" sequence="30"/>
+
+    <menuitem id="menu_ksw_fleet_allocation_gm" name="GM Decisions"
+              parent="menu_ksw_fleet_allocation_root" sequence="20"
+              groups="group_fleet_allocation_gm"/>
+    <menuitem id="menu_ksw_fleet_allocation_to_decide" name="Requests to Decide"
+              parent="menu_ksw_fleet_allocation_gm" action="action_ksw_fleet_request_to_decide" sequence="10"/>
+    <menuitem id="menu_ksw_fleet_allocation_released" name="Released Vehicles"
+              parent="menu_ksw_fleet_allocation_gm" action="action_ksw_fleet_release_line_open" sequence="20"/>
+    <menuitem id="menu_ksw_fleet_allocation_needs" name="Open Needs"
+              parent="menu_ksw_fleet_allocation_gm" action="action_ksw_fleet_addition_line_open" sequence="30"/>
+    <menuitem id="menu_ksw_fleet_allocation_holding" name="Holding Pool"
+              parent="menu_ksw_fleet_allocation_gm" action="action_ksw_fleet_allocation_holding" sequence="40"/>
+
+    <menuitem id="menu_ksw_fleet_allocation_transfers" name="Transfers"
+              parent="menu_ksw_fleet_allocation_root" sequence="30"/>
+    <menuitem id="menu_ksw_fleet_allocation_receive" name="To Receive"
+              parent="menu_ksw_fleet_allocation_transfers" action="action_ksw_fleet_move_to_receive" sequence="10"/>
+    <menuitem id="menu_ksw_fleet_allocation_moves" name="Movement History"
+              parent="menu_ksw_fleet_allocation_transfers" action="action_ksw_fleet_move" sequence="20"/>
+
+    <menuitem id="menu_ksw_fleet_allocation_vehicles" name="Vehicles"
+              parent="menu_ksw_fleet_allocation_root" action="action_ksw_fleet_allocation_vehicles" sequence="40"/>
+
+    <menuitem id="menu_ksw_fleet_allocation_reporting" name="Reporting"
+              parent="menu_ksw_fleet_allocation_root" sequence="80"
+              groups="group_fleet_allocation_gm,base.group_system"/>
+    <menuitem id="menu_ksw_fleet_allocation_distribution" name="Vehicle Distribution"
+              parent="menu_ksw_fleet_allocation_reporting" action="action_ksw_fleet_vehicle_distribution" sequence="10"/>
+    <menuitem id="menu_ksw_fleet_allocation_move_analysis" name="Movement Analysis"
+              parent="menu_ksw_fleet_allocation_reporting" action="action_ksw_fleet_move_analysis" sequence="20"/>
+
+    <menuitem id="menu_ksw_fleet_allocation_config" name="Configuration"
+              parent="menu_ksw_fleet_allocation_root" sequence="90" groups="base.group_system"/>
+    <menuitem id="menu_ksw_fleet_allocation_departments" name="Vehicle Departments"
+              parent="menu_ksw_fleet_allocation_config" action="action_ksw_fleet_allocation_departments" sequence="10"/>
+    <menuitem id="menu_ksw_fleet_allocation_users" name="Department Users"
+              parent="menu_ksw_fleet_allocation_config" action="action_ksw_fleet_department_users" sequence="20"/>
+
+</odoo>

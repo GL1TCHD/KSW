@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_ksw_fleet_allocate_wizard_form" model="ir.ui.view">
+        <field name="name">ksw.fleet.allocate.wizard.form</field>
+        <field name="model">ksw.fleet.allocate.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Decide Additional Vehicles">
+                <!-- In the arch so the client's record carries it (gotcha #40). -->
+                <field name="addition_line_id" invisible="1"/>
+                <field name="available_vehicle_ids" invisible="1"/>
+                <group>
+                    <group>
+                        <field name="department_id" readonly="1"/>
+                        <field name="vehicle_type" readonly="1"/>
+                        <field name="quantity" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="open_quantity" readonly="1"/>
+                        <field name="external_quantity" readonly="1" invisible="not external_quantity"/>
+                        <field name="external_waiting" readonly="1" string="External Not Yet Arrived"
+                               invisible="not external_waiting"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="mode" widget="radio"/>
+                </group>
+                <group invisible="mode not in ('internal', 'external_arrival')">
+                    <field name="include_assigned" invisible="mode != 'internal'"/>
+                    <div colspan="2" class="text-muted" invisible="mode != 'internal'">
+                        Offered: the holding pool, vehicles with no department, and vehicles other
+                        departments released and the GM has not decided yet.
+                    </div>
+                    <div colspan="2" class="text-muted" invisible="mode != 'external_arrival'">
+                        Offered: vehicles registered with no department yet. The administrator adds a
+                        purchased or rented vehicle under Vehicles first.
+                    </div>
+                </group>
+                <field name="vehicle_ids" invisible="mode not in ('internal', 'external_arrival')"
+                       options="{'no_create': True}">
+                    <list>
+                        <field name="name"/>
+                        <field name="plate_number"/>
+                        <field name="brand"/>
+                        <field name="model"/>
+                        <field name="year"/>
+                        <field name="x_department_id"/>
+                        <field name="x_allocation_state"/>
+                        <field name="x_release_request_id"/>
+                    </list>
+                </field>
+                <group invisible="mode not in ('external', 'refuse')">
+                    <field name="decide_quantity"/>
+                    <field name="external_method" invisible="mode != 'external'" required="mode == 'external'"/>
+                </group>
+                <field name="note" placeholder="Note (the reason is required when refusing)..."/>
+                <footer>
+                    <button name="action_confirm" type="object" string="Confirm Decision" class="btn-primary"/>
+                    <button string="Discard" special="cancel" class="btn-secondary"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

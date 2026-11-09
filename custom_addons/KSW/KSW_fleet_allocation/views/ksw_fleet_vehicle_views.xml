@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_ksw_fleet_vehicle_form_allocation" model="ir.ui.view">
+        <field name="name">ksw.fleet.vehicle.form.allocation</field>
+        <field name="model">ksw.fleet.vehicle</field>
+        <field name="inherit_id" ref="KSW_fleet.view_ksw_fleet_vehicle_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group" position="after">
+                <group string="Allocation" invisible="not x_is_own_fleet">
+                    <field name="x_is_own_fleet" invisible="1"/>
+                    <group>
+                        <!-- Set by the GM's decisions; only the administrator
+                             loading the starting list edits it here. -->
+                        <field name="x_department_id" options="{'no_create': True}"
+                               readonly="x_allocation_state == 'in_transfer'"
+                               groups="base.group_system"/>
+                        <field name="x_department_id" readonly="1" groups="!base.group_system"/>
+                        <field name="x_allocation_state" widget="badge"
+                               decoration-info="x_allocation_state == 'in_transfer'"
+                               decoration-warning="x_allocation_state == 'holding'"
+                               decoration-success="x_allocation_state == 'assigned'"/>
+                    </group>
+                    <group>
+                        <field name="x_pending_move_id" invisible="not x_pending_move_id"/>
+                        <field name="x_release_request_id" invisible="not x_release_request_id"/>
+                    </group>
+                </group>
+                <field name="x_move_ids" readonly="1" invisible="not x_move_ids">
+                    <list>
+                        <field name="date"/>
+                        <field name="kind"/>
+                        <field name="from_department_id"/>
+                        <field name="to_department_id"/>
+                        <field name="request_id" optional="show"/>
+                        <field name="decided_by_id" optional="show"/>
+                        <field name="received_date" optional="show"/>
+                        <field name="state" widget="badge"/>
+                    </list>
+                </field>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_ksw_fleet_vehicle_list_allocation" model="ir.ui.view">
+        <field name="name">ksw.fleet.vehicle.list.allocation</field>
+        <field name="model">ksw.fleet.vehicle</field>
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <list string="Vehicles" create="0" decoration-info="x_allocation_state == 'in_transfer'"
+                  decoration-warning="x_allocation_state == 'holding'"
+                  decoration-muted="x_allocation_state == 'unassigned'">
+                <header>
+                    <button name="action_ksw_fleet_release_selected" type="object" string="Release Selected"
+                            class="btn-primary"/>
+                </header>
+                <field name="name"/>
+                <field name="vehicle_type"/>
+                <field name="plate_number" optional="show"/>
+                <field name="brand" optional="hide"/>
+                <field name="model" optional="hide"/>
+                <field name="year" optional="hide"/>
+                <field name="driver_name" optional="show"/>
+                <field name="x_department_id"/>
+                <field name="x_allocation_state" widget="badge"
+                       decoration-info="x_allocation_state == 'in_transfer'"
+                       decoration-warning="x_allocation_state == 'holding'"
+                       decoration-success="x_allocation_state == 'assigned'"/>
+                <field name="x_release_request_id" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_ksw_fleet_vehicle_search_allocation" model="ir.ui.view">
+        <field name="name">ksw.fleet.vehicle.search.allocation</field>
+        <field name="model">ksw.fleet.vehicle</field>
+        <field name="inherit_id" ref="KSW_fleet.view_ksw_fleet_vehicle_search"/>
+        <field name="arch" type="xml">
+            <field name="plate_number" position="after">
+                <field name="x_department_id"/>
+            </field>
+            <filter name="filter_confirmed" position="after">
+                <separator/>
+                <filter string="Own Fleet" name="filter_own_fleet" domain="[('x_is_own_fleet', '=', True)]"/>
+                <filter string="Unassigned" name="filter_unassigned" domain="[('x_allocation_state', '=', 'unassigned')]"/>
+                <filter string="In Transfer" name="filter_in_transfer" domain="[('x_allocation_state', '=', 'in_transfer')]"/>
+                <filter string="Holding" name="filter_holding" domain="[('x_allocation_state', '=', 'holding')]"/>
+                <filter string="Released, Waiting for GM" name="filter_released" domain="[('x_is_released', '=', True)]"/>
+            </filter>
+            <filter name="groupby_client" position="before">
+                <filter string="Department" name="groupby_department" context="{'group_by': 'x_department_id'}"/>
+                <filter string="Allocation" name="groupby_allocation" context="{'group_by': 'x_allocation_state'}"/>
+            </filter>
+        </field>
+    </record>
+
+    <record id="action_ksw_fleet_allocation_vehicles" model="ir.actions.act_window">
+        <field name="name">Vehicles by Department</field>
+        <field name="res_model">ksw.fleet.vehicle</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_ksw_fleet_vehicle_list_allocation"/>
+        <!-- Department users: their departments only; GM and administrator: all. -->
+        <field name="domain">[('x_is_own_fleet', '=', True), ('x_in_my_scope', '=', True)]</field>
+        <field name="context">{'search_default_groupby_department': 1}</field>
+    </record>
+
+    <record id="action_ksw_fleet_allocation_holding" model="ir.actions.act_window">
+        <field name="name">Holding Pool</field>
+        <field name="res_model">ksw.fleet.vehicle</field>
+        <field name="view_mode">list,form</field>
+        <field name="view_id" ref="view_ksw_fleet_vehicle_list_allocation"/>
+        <field name="domain">[('x_is_own_fleet', '=', True), ('x_allocation_state', 'in', ('holding', 'unassigned'))]</field>
+        <field name="context">{'search_default_groupby_allocation': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">The pool is empty</p>
+            <p>Vehicles the GM sent to the workshop, and vehicles with no department yet, wait here
+               until the GM gives them to a department.</p>
+        </field>
+    </record>
+
+    <!-- Bound explicitly: KSW_workshop has its own vehicle pivot. -->
+    <record id="view_ksw_fleet_vehicle_pivot_allocation" model="ir.ui.view">
+        <field name="name">ksw.fleet.vehicle.pivot.allocation</field>
+        <field name="model">ksw.fleet.vehicle</field>
+        <field name="priority">90</field>
+        <field name="arch" type="xml">
+            <pivot string="Vehicle Distribution">
+                <field name="x_department_id" type="row"/>
+                <field name="vehicle_type" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_ksw_fleet_vehicle_graph_allocation" model="ir.ui.view">
+        <field name="name">ksw.fleet.vehicle.graph.allocation</field>
+        <field name="model">ksw.fleet.vehicle</field>
+        <field name="priority">90</field>
+        <field name="arch" type="xml">
+            <graph string="Vehicle Distribution" type="bar" stacked="1">
+                <field name="x_department_id"/>
+                <field name="vehicle_type"/>
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_ksw_fleet_vehicle_distribution" model="ir.actions.act_window">
+        <field name="name">Vehicle Distribution</field>
+        <field name="res_model">ksw.fleet.vehicle</field>
+        <field name="view_mode">pivot,graph,list</field>
+        <field name="domain">[('x_is_own_fleet', '=', True)]</field>
+        <field name="view_ids" eval="[(5, 0, 0),
+            (0, 0, {'view_mode': 'pivot', 'view_id': ref('view_ksw_fleet_vehicle_pivot_allocation')}),
+            (0, 0, {'view_mode': 'graph', 'view_id': ref('view_ksw_fleet_vehicle_graph_allocation')}),
+            (0, 0, {'view_mode': 'list', 'view_id': ref('view_ksw_fleet_vehicle_list_allocation')})]"/>
+    </record>
+</odoo>
