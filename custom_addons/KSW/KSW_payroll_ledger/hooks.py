@@ -20,6 +20,10 @@ DEPARTMENT_ACCOUNTS = {
     'Compound': '3204010001',          # رواتب واجور (كامب الجبيل)
     "Tariq's Branch": '3201010007',    # اجور ورواتب سائقين الايسوزو
     "Disouky's Branch": '3201010007',
+    # «رواتب السعوديين M»: not a nationality; the IST staff and Non-K.
+    'HR-IST': '3201010010',
+    'ALHAYAT-IST': '3201010010',
+    'Non-K': '3201010010',
 }
 
 

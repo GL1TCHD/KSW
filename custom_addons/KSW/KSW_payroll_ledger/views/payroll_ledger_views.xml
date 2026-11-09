@@ -77,6 +77,12 @@
                 <field name="x_wage_account_id" options="{'no_create': True}"
                        groups="om_hr_payroll.group_hr_payroll_manager"/>
             </xpath>
+            <xpath expr="//page[@name='hr_settings']" position="inside">
+                <separator string="Ledger" groups="om_hr_payroll.group_hr_payroll_user"/>
+                <group groups="om_hr_payroll.group_hr_payroll_user">
+                    <field name="x_separate_salary_account"/>
+                </group>
+            </xpath>
         </field>
     </record>
 

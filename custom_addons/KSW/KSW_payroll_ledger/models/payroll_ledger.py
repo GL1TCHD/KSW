@@ -3,10 +3,13 @@
 BAS books a month's salaries as one accrual voucher per paying channel, one
 block per employee (September 2026, 26009158 / 26009187):
 
-* his basic wage to the salary-expense account of who he is and where he
-  works: Saudis 3201010010, Isuzu drivers 3201010007, Jubail camp 3204010001,
-  everyone else 3201010001; a trailer driver carries his trailer as cost
-  centre;
+* his basic wage to the salary-expense account of where he works: Isuzu
+  drivers 3201010007, Jubail camp 3204010001, everyone else 3201010001; a
+  trailer driver carries his trailer as cost centre. BAS keeps some salaries
+  apart on 3201010010 («رواتب السعوديين M» — despite the name, not a
+  nationality: the IST staff, and anyone else BAS books there for its own
+  reasons). Those are the departments that carry it and the employees ticked
+  Separate Salary Account;
 * each allowance to its own account: housing 3201010002, transport
   3201010003, mobile 3201010004, other 3201010011;
 * deductions are not lines of their own: what he is paid is what is expensed;
@@ -22,10 +25,11 @@ from odoo.exceptions import UserError
 
 PARAM_START = 'ksw_payroll_ledger.start_date'
 PARAM_WAGE = 'ksw_payroll_ledger.wage_account'
-PARAM_SAUDI = 'ksw_payroll_ledger.saudi_wage_account'
+# Key kept from 19.0.1.0.0, when this was (wrongly) the Saudi-nationality account.
+PARAM_SEPARATE = 'ksw_payroll_ledger.saudi_wage_account'
 PARAM_PAYABLE = 'ksw_payroll_ledger.payable_account'
 
-DEFAULTS = {PARAM_WAGE: '3201010001', PARAM_SAUDI: '3201010010', PARAM_PAYABLE: '2107010004'}
+DEFAULTS = {PARAM_WAGE: '3201010001', PARAM_SEPARATE: '3201010010', PARAM_PAYABLE: '2107010004'}
 
 
 class HrSalaryRule(models.Model):
@@ -53,6 +57,11 @@ class HrEmployee(models.Model):
     x_wage_account_id = fields.Many2one(
         'account.account', string='Wage Expense Account', groups='hr.group_hr_user',
         help='Only for an employee BAS charges somewhere other than his department.')
+    x_separate_salary_account = fields.Boolean(
+        string='Separate Salary Account', groups='hr.group_hr_user',
+        help='His wage is booked to the separate salary account in Settings '
+             '(3201010010) instead of his department\'s, whatever the reason BAS '
+             'keeps it apart. A Wage Expense Account set on the employee still wins.')
 
 
 class ResConfigSettings(models.TransientModel):
@@ -103,18 +112,18 @@ class KswPayrollLedger(models.AbstractModel):
         return account
 
     def _wage_account(self, employee, company):
-        """Employee, then his department up the tree, then Saudi / default."""
+        """Employee's own account, the separate salary account if he is ticked,
+        his department up the tree, then the default."""
         employee = employee.sudo()
         if employee.x_wage_account_id:
             return employee.x_wage_account_id
+        if employee.x_separate_salary_account:
+            return self._account(self._param(PARAM_SEPARATE), company)
         dept = employee.department_id
         while dept:
             if dept.x_wage_account_id:
                 return dept.x_wage_account_id
             dept = dept.parent_id
-        saudi = self.env.ref('base.sa', raise_if_not_found=False)
-        if saudi and employee.country_id == saudi:
-            return self._account(self._param(PARAM_SAUDI), company)
         return self._account(self._param(PARAM_WAGE), company)
 
     def _vehicle_cost_centre(self, employee):

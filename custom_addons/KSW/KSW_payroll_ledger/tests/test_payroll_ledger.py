@@ -69,17 +69,22 @@ class TestPayrollLedger(BasJournalPayrollCommon):
         self._payslip([(self.rule_basic, 5000.0), (self.rule_net, 5000.0)])
         self.assertFalse(self._confirm())
 
-    def test_04_saudi_and_department_wage_accounts(self):
+    def test_04_separate_salary_account_and_department_wage_accounts(self):
+        """3201010010 is the ticked employee's, not the Saudi national's."""
         saudi = self.env['hr.employee'].sudo().create(
             {'name': 'Ledger Saudi', 'country_id': self.env.ref('base.sa').id})
         dept = self.env['hr.department'].sudo().create(
             {'name': 'Ledger Camp', 'x_wage_account_id': self.camp_wage.id})
         camp = self.env['hr.employee'].sudo().create({'name': 'Ledger Camp Man', 'department_id': dept.id})
+        apart = self.env['hr.employee'].sudo().create({
+            'name': 'Ledger Apart', 'department_id': dept.id, 'x_separate_salary_account': True})
         self._payslip([(self.rule_basic, 7000.0), (self.rule_net, 7000.0)], employee=saudi)
         self._payslip([(self.rule_basic, 2000.0), (self.rule_net, 2000.0)], employee=camp)
+        self._payslip([(self.rule_basic, 8250.0), (self.rule_net, 8250.0)], employee=apart)
         lines = self._lines(self._confirm())
-        self.assertIn((self.saudi_wage, 7000.0), lines)
+        self.assertIn((self.wage, 7000.0), lines)
         self.assertIn((self.camp_wage, 2000.0), lines)
+        self.assertIn((self.saudi_wage, 8250.0), lines)
 
     def test_05_one_employee_never_holds_up_the_others(self):
         self.rule_gosi.sudo().x_bas_posting = 'none'
