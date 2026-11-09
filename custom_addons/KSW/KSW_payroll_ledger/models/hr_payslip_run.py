@@ -16,7 +16,9 @@ from markupsafe import Markup
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
-from .payroll_ledger import PARAM_PAYABLE
+from .payroll_ledger import (
+    PARAM_HAYAT_CURRENT, PARAM_HAYAT_PAYABLE, PARAM_KAWTHER_CURRENT, PARAM_PAYABLE,
+)
 
 TOTAL_CODES = ('GROSS', 'NET')
 
@@ -128,6 +130,10 @@ class HrPayslipRun(models.Model):
         bank = self._resolve_slip_bank_account(slip)
         return bank.sudo().display_name if bank else ''
 
+    def _ksw_ledger_payer(self, slip):
+        """Whose money paid him: the paying account's Ledger Entity."""
+        return self._resolve_slip_bank_account(slip).sudo().x_ledger_entity or 'kawther'
+
     def _ksw_ledger_reverse(self, slip):
         """A booked payslip taken back: its own lines, the other way round."""
         Ledger = self.env['ksw.payroll.ledger']
@@ -150,7 +156,10 @@ class HrPayslipRun(models.Model):
         Earnings are debited (allowances to their rule's account, the rest to
         the employee's wage account); deductions reduce the wage line, as BAS
         expenses what is paid; loans are credited to his own loan account; the
-        net to salaries payable. Each block is checked against its NET."""
+        net to the payer's salaries payable. A Kawther employee paid by
+        Al-Hayat: his net is owed to Al-Hayat (1208010010), and Al-Hayat's side
+        of the voucher carries it against Kawther (2101030003) to its payable.
+        Each block is checked against its NET."""
         self.ensure_one()
         Journal = self.env['ksw.bas.journal']
         lang = Journal.voucher_lang()
@@ -158,7 +167,10 @@ class HrPayslipRun(models.Model):
             return self.with_context(lang=lang)._ksw_ledger_lines(slips)
         Ledger = self.env['ksw.payroll.ledger'].with_context(ksw_ledger_analytic_cache={})
         company = self.env.company
-        payable = Ledger._account(Ledger._param(PARAM_PAYABLE), company)
+        payable = {
+            'kawther': Ledger._account(Ledger._param(PARAM_PAYABLE), company),
+            'hayat': Ledger._account(Ledger._param(PARAM_HAYAT_PAYABLE), company),
+        }
         month = Journal.month_label(self.date_end)
         slips = self.slip_ids if slips is None else slips
         lines, done, problems, zero = [], self.env['hr.payslip'], [], self.env['hr.payslip']
@@ -167,28 +179,37 @@ class HrPayslipRun(models.Model):
             if not slip.line_ids:
                 continue
             employee = slip.employee_id.sudo()
+            payer = self._ksw_ledger_payer(slip)
+            label = Journal.ref(_('Salary'), Journal.employee_label(employee), month)
             try:
-                block, net = self._ksw_ledger_block(slip, employee, company, month)
+                block, net = self._ksw_ledger_block(slip, employee, company, month, payer)
+                if payer == 'hayat' and Ledger._entity(employee) != 'hayat':
+                    settle = [
+                        (Ledger._account(Ledger._param(PARAM_HAYAT_CURRENT), company), -net, label, None),
+                        (Ledger._account(Ledger._param(PARAM_KAWTHER_CURRENT), company), net, label, None),
+                        (payable['hayat'], -net, label, None),
+                    ]
+                else:
+                    settle = [(payable[payer], -net, label, None)]
             except UserError as e:
                 problems.append('%s: %s' % (employee.name, e))
                 continue
             per_account = {}
-            for account, amount, _label, _an in block + [(payable, -net, '', None)]:
+            for account, amount, _label, _an in block + settle:
                 per_account[account.id] = per_account.get(account.id, 0.0) + amount
             done |= slip
             if not any(round(v, 2) for v in per_account.values()):
                 zero |= slip
                 continue
-            lines += block
-            lines.append((payable, -net, Journal.ref(_('Salary'), Journal.employee_label(employee), month), None))
+            lines += block + settle
         return lines, done, problems, zero
 
-    def _ksw_ledger_block(self, slip, employee, company, month):
+    def _ksw_ledger_block(self, slip, employee, company, month, payer='kawther'):
         Journal = self.env['ksw.bas.journal']
         Ledger = self.env['ksw.payroll.ledger'].with_context(
             ksw_ledger_analytic_cache=self.env.context.get('ksw_ledger_analytic_cache', {}))
         who = Journal.employee_label(employee)
-        wage = Ledger._wage_account(employee, company)
+        wage, whole = Ledger._wage_account(employee, company, payer)
         cost_centre = Ledger._vehicle_cost_centre(employee)
         salary_label = Journal.ref(_('Salary'), who, month)
         block, net, unmapped = [], 0.0, []
@@ -210,7 +231,7 @@ class HrPayslipRun(models.Model):
                     continue
                 block.append((loan, amount, Journal.ref(_('Deducted from salary'), who, month), None))
             elif posting == 'expense' or rule.x_ledger_account_id:
-                account = rule.x_ledger_account_id or wage
+                account = wage if (whole and posting == 'expense') else (rule.x_ledger_account_id or wage)
                 block.append((account, amount, salary_label, cost_centre if account == wage else None))
             elif posting == 'liability':
                 block.append((wage, amount, salary_label, cost_centre))

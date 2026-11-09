@@ -16,6 +16,14 @@ block per employee (September 2026, 26009158 / 26009187):
 * his loan installment credited to his own 1205 account, the net to salaries
   payable 2107010004.
 
+Al-Hayat's staff paid from Al-Hayat's own accounts are booked in its H1
+accounts, as BAS keys them in its own voucher (26009232): wages 3205010019
+(factory; admin and ice workers on their own account), payable 2107010008.
+Paid by Al-Kawther they are 3201010010. A Kawther employee paid by Al-Hayat
+is expensed on Kawther's side against Al-Hayat's current account 1208010010,
+and Al-Hayat carries the payment against Kawther's 2101030003. Whose staff
+is the department's (Ledger Entity); whose money is the bank account's.
+
 The accounts are configuration — on the salary rule (allowances), on the
 department and the employee (the wage), in Settings (the defaults) — so a
 department BAS charges somewhere else is one field, not code.
@@ -29,7 +37,20 @@ PARAM_WAGE = 'ksw_payroll_ledger.wage_account'
 PARAM_SEPARATE = 'ksw_payroll_ledger.saudi_wage_account'
 PARAM_PAYABLE = 'ksw_payroll_ledger.payable_account'
 
-DEFAULTS = {PARAM_WAGE: '3201010001', PARAM_SEPARATE: '3201010010', PARAM_PAYABLE: '2107010004'}
+PARAM_HAYAT_WAGE = 'ksw_payroll_ledger.hayat_wage_account'
+PARAM_HAYAT_PAYABLE = 'ksw_payroll_ledger.hayat_payable_account'
+# Each side's current account with the other: in Kawther's books, Al-Hayat
+# (1208010010); in Al-Hayat's books, Al-Kawther (2101030003).
+PARAM_HAYAT_CURRENT = 'ksw_payroll_ledger.hayat_current_account'
+PARAM_KAWTHER_CURRENT = 'ksw_payroll_ledger.kawther_current_account'
+
+DEFAULTS = {
+    PARAM_WAGE: '3201010001', PARAM_SEPARATE: '3201010010', PARAM_PAYABLE: '2107010004',
+    PARAM_HAYAT_WAGE: '3205010019', PARAM_HAYAT_PAYABLE: '2107010008',
+    PARAM_HAYAT_CURRENT: '1208010010', PARAM_KAWTHER_CURRENT: '2101030003',
+}
+
+ENTITIES = [('kawther', 'Al-Kawther'), ('hayat', 'Al-Hayat')]
 
 
 class HrSalaryRule(models.Model):
@@ -49,6 +70,11 @@ class HrDepartment(models.Model):
         'account.account', string='Wage Expense Account',
         help='The salary-expense account BAS charges this department\'s basic '
              'wages to. Empty: the parent department\'s, else the default in Settings.')
+    x_ledger_entity = fields.Selection(
+        ENTITIES, string='Ledger Entity',
+        help='Whose staff this department is, for the books: Al-Hayat\'s are booked in '
+             'its H1 accounts when Al-Hayat pays them. Empty: the parent department\'s, '
+             'else Al-Kawther.')
 
 
 class HrEmployee(models.Model):
@@ -62,6 +88,15 @@ class HrEmployee(models.Model):
         help='His wage is booked to the separate salary account in Settings '
              '(3201010010) instead of his department\'s, whatever the reason BAS '
              'keeps it apart. A Wage Expense Account set on the employee still wins.')
+
+
+class ResPartnerBank(models.Model):
+    _inherit = 'res.partner.bank'
+
+    x_ledger_entity = fields.Selection(
+        ENTITIES, string='Ledger Entity',
+        help='Whose money a salary paid from this account is: Al-Hayat\'s accounts '
+             'are booked with its own payable (2107010008). Empty: Al-Kawther.')
 
 
 class ResConfigSettings(models.TransientModel):
@@ -111,20 +146,44 @@ class KswPayrollLedger(models.AbstractModel):
             raise UserError(_('Account %(code)s does not exist in the chart.', code=code))
         return account
 
-    def _wage_account(self, employee, company):
-        """Employee's own account, the separate salary account if he is ticked,
-        his department up the tree, then the default."""
+    def _entity(self, employee):
+        """Whose staff he is: his department's Ledger Entity up the tree."""
+        dept = employee.sudo().department_id
+        while dept:
+            if dept.x_ledger_entity:
+                return dept.x_ledger_entity
+            dept = dept.parent_id
+        return 'kawther'
+
+    def _wage_account(self, employee, company, payer='kawther'):
+        """``(account, whole)``: where his wage is booked when ``payer`` pays it.
+
+        ``whole``: his allowances land there too, not on their own accounts, as
+        BAS books the separate salary account and Al-Hayat's staff."""
         employee = employee.sudo()
+        separate = self._account(self._param(PARAM_SEPARATE), company)
+        if self._entity(employee) == 'hayat':
+            if payer != 'hayat':
+                return separate, True
+            account = employee.x_wage_account_id or self._department_wage_account(employee) \
+                or self._account(self._param(PARAM_HAYAT_WAGE), company)
+            return account, True
         if employee.x_wage_account_id:
-            return employee.x_wage_account_id
-        if employee.x_separate_salary_account:
-            return self._account(self._param(PARAM_SEPARATE), company)
+            account = employee.x_wage_account_id
+        elif employee.x_separate_salary_account:
+            account = separate
+        else:
+            account = self._department_wage_account(employee) \
+                or self._account(self._param(PARAM_WAGE), company)
+        return account, account == separate
+
+    def _department_wage_account(self, employee):
         dept = employee.department_id
         while dept:
             if dept.x_wage_account_id:
                 return dept.x_wage_account_id
             dept = dept.parent_id
-        return self._account(self._param(PARAM_WAGE), company)
+        return None
 
     def _vehicle_cost_centre(self, employee):
         """A driver's own vehicle, as BAS charges his wage (T102)."""

@@ -22,7 +22,7 @@ DEPARTMENT_ACCOUNTS = {
     "Disouky's Branch": '3201010007',
     # «رواتب السعوديين M»: not a nationality; the IST staff and Non-K.
     'HR-IST': '3201010010',
-    'ALHAYAT-IST': '3201010010',
+    'ALHAYAT-IST': '3205010005',      # اجور ورواتب الاداريين الحياة H1 (paid by Al-Hayat)
     'Non-K': '3201010010',
 }
 
@@ -49,4 +49,34 @@ def post_init_hook(env):
             depts = Dept.search([('name', '=', name), ('x_wage_account_id', '=', False)])
             if target and depts:
                 depts.write({'x_wage_account_id': target.id})
+        seed_hayat(env, company)
         _logger.info('KSW_payroll_ledger: journals and BAS salary mapping seeded for %s', company.name)
+
+
+# Al-Hayat's own staff and paying accounts (BAS voucher 26009232, Sep 2026).
+HAYAT_DEPARTMENTS = ('ALHAYAT',)
+HAYAT_BANK_PREFIX = 'Hayat'
+HAYAT_EMPLOYEE_ACCOUNTS = {
+    '50070': '3205010005',   # SUAD ALMAQHAWI: admin, اجور ورواتب الاداريين الحياة H1
+    '50047': '3205010026',   # RENJITH: ice factory, العاملين التلج H1
+}
+
+
+def seed_hayat(env, company):
+    """Only where nothing is set: after this it is configuration."""
+    env = env(context=dict(env.context, active_test=False, lang='en_US'))
+    env['hr.department'].sudo().search([
+        ('name', 'in', HAYAT_DEPARTMENTS), ('x_ledger_entity', '=', False),
+    ]).write({'x_ledger_entity': 'hayat'})
+    # Filtered here, not searched: res.partner.bank searches acc_number on its
+    # sanitised form, which for Hayat WPS is the IBAN, not the label.
+    env['res.partner.bank'].sudo().search([
+        ('partner_id', '=', company.partner_id.id), ('x_ledger_entity', '=', False),
+    ]).filtered(lambda b: (b.acc_number or '').lower().startswith(HAYAT_BANK_PREFIX.lower())).write(
+        {'x_ledger_entity': 'hayat'})
+    Account = env['account.account'].sudo()
+    for number, code in HAYAT_EMPLOYEE_ACCOUNTS.items():
+        account = Account.search([('company_ids', 'in', company.id), ('code', '=', code)], limit=1)
+        employee = env['hr.employee'].sudo().search([('x_employee_no', '=', number)])
+        if account and len(employee) == 1 and not employee.x_wage_account_id:
+            employee.x_wage_account_id = account

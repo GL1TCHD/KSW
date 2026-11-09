@@ -1,0 +1,260 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* KSW_payroll_ledger
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-09 08:16+0000\n"
+"PO-Revision-Date: 2026-11-09 08:16+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields.selection,name:KSW_payroll_ledger.selection__hr_department__x_ledger_entity__hayat
+#: model:ir.model.fields.selection,name:KSW_payroll_ledger.selection__res_partner_bank__x_ledger_entity__hayat
+msgid "Al-Hayat"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields.selection,name:KSW_payroll_ledger.selection__hr_department__x_ledger_entity__kawther
+#: model:ir.model.fields.selection,name:KSW_payroll_ledger.selection__res_partner_bank__x_ledger_entity__kawther
+msgid "Al-Kawther"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model,name:KSW_payroll_ledger.model_res_partner_bank
+msgid "Bank Accounts"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_res_config_settings__ksw_ledger_start_date
+msgid ""
+"Batches ending and commission months on or after this date are posted to the"
+" ledger. Earlier ones were exported to BAS and are never posted. Empty: "
+"nothing is posted."
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model,name:KSW_payroll_ledger.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_payslip__x_ledger_nothing
+msgid ""
+"Confirmed with every figure netting to zero (e.g. a full attendance "
+"deduction): BAS books nothing for it, and neither does the ledger."
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model,name:KSW_payroll_ledger.model_hr_department
+msgid "Department"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_department__display_name
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_employee__display_name
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip__display_name
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip_run__display_name
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_salary_rule__display_name
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_pay_run__display_name
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_ledger__display_name
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_res_partner_bank__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model,name:KSW_payroll_ledger.model_hr_employee
+msgid "Employee"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_employee__x_separate_salary_account
+msgid ""
+"His wage is booked to the separate salary account in Settings (3201010010) "
+"instead of his department's, whatever the reason BAS keeps it apart. A Wage "
+"Expense Account set on the employee still wins."
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_department__id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_employee__id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip__id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip_run__id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_salary_rule__id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_pay_run__id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_ledger__id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_res_config_settings__id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_res_partner_bank__id
+msgid "ID"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model,name:KSW_payroll_ledger.model_ksw_pay_run
+msgid "KSW Monthly Pay Run"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_employee_form_ledger
+msgid "Ledger"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.res_config_settings_view_form_ledger
+msgid "Ledger (parallel run)"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip_line__x_ledger_account_id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_salary_rule__x_ledger_account_id
+msgid "Ledger Account"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_account_setup_bank_manual_config__x_ledger_entity
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_department__x_ledger_entity
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_res_partner_bank__x_ledger_entity
+msgid "Ledger Entity"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip_run__x_ledger_move_ids
+msgid "Ledger Entries"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip__x_ledger_move_id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_pay_run__x_ledger_move_id
+msgid "Ledger Entry"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip_run__x_ledger_error
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_pay_run__x_ledger_error
+msgid "Ledger Posting Problem"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip__x_ledger_nothing
+msgid "Nothing to Post"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_employee__x_wage_account_id
+msgid "Only for an employee BAS charges somewhere other than his department."
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model,name:KSW_payroll_ledger.model_hr_payslip
+msgid "Pay Slip"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model,name:KSW_payroll_ledger.model_ksw_payroll_ledger
+msgid "Payroll and Commissions in the Ledger"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model,name:KSW_payroll_ledger.model_hr_payslip_run
+msgid "Payslip Batches"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.res_config_settings_view_form_ledger
+msgid ""
+"Payslip batches and paid commission months from this date are\n"
+"                                posted to the ledger. Months already exported to BAS stay out."
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_res_config_settings__ksw_ledger_start_date
+msgid "Post payroll and commissions from"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_hr_payslip_run_form_ledger
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_pay_run_form_ledger
+msgid "Post to Ledger"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model,name:KSW_payroll_ledger.model_hr_salary_rule
+msgid "Salary Rule"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_employee__x_separate_salary_account
+msgid "Separate Salary Account"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_payslip_run__x_ledger_move_ids
+msgid ""
+"The batch in Odoo's ledger (journal Payroll), one entry per confirmation and"
+" bank account. Not the BAS export."
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_payslip__x_ledger_move_id
+msgid ""
+"The entry this payslip was booked in (journal Payroll). Not the BAS export."
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_ksw_pay_run__x_ledger_move_id
+msgid "The month in Odoo's ledger (journal Commissions). Not the BAS export."
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_department__x_wage_account_id
+msgid ""
+"The salary-expense account BAS charges this department's basic wages to. "
+"Empty: the parent department's, else the default in Settings."
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_department__x_wage_account_id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_employee__x_wage_account_id
+msgid "Wage Expense Account"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_payslip_line__x_ledger_account_id
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_salary_rule__x_ledger_account_id
+msgid ""
+"Where this figure lands in Odoo's ledger (parallel run). Empty on an "
+"earning: the employee's wage account. Separate from the BAS export mapping."
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_account_setup_bank_manual_config__x_ledger_entity
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_res_partner_bank__x_ledger_entity
+msgid ""
+"Whose money a salary paid from this account is: Al-Hayat's accounts are "
+"booked with its own payable (2107010008). Empty: Al-Kawther."
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_department__x_ledger_entity
+msgid ""
+"Whose staff this department is, for the books: Al-Hayat's are booked in its "
+"H1 accounts when Al-Hayat pays them. Empty: the parent department's, else "
+"Al-Kawther."
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip_run__x_ledger_move_count
+msgid "X Ledger Move Count"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip_run__x_ledger_unposted_count
+msgid "X Ledger Unposted Count"
+msgstr ""

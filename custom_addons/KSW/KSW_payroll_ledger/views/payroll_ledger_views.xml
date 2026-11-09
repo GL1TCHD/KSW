@@ -64,6 +64,8 @@
             <xpath expr="//field[@name='parent_id']" position="after">
                 <field name="x_wage_account_id" options="{'no_create': True}"
                        groups="om_hr_payroll.group_hr_payroll_user,account.group_account_manager"/>
+                <field name="x_ledger_entity"
+                       groups="om_hr_payroll.group_hr_payroll_user,account.group_account_manager"/>
             </xpath>
         </field>
     </record>
@@ -82,6 +84,18 @@
                 <group groups="om_hr_payroll.group_hr_payroll_user">
                     <field name="x_separate_salary_account"/>
                 </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_partner_bank_form_ledger" model="ir.ui.view">
+        <field name="name">res.partner.bank.form.ledger</field>
+        <field name="model">res.partner.bank</field>
+        <field name="inherit_id" ref="base.view_partner_bank_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='acc_number']" position="after">
+                <field name="x_ledger_entity"
+                       groups="om_hr_payroll.group_hr_payroll_manager,account.group_account_manager"/>
             </xpath>
         </field>
     </record>

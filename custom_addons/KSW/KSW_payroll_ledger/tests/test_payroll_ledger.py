@@ -32,6 +32,23 @@ class TestPayrollLedger(BasJournalPayrollCommon):
         params.set_param('ksw_payroll_ledger.saudi_wage_account', cls.saudi_wage.code)
         params.set_param('ksw_payroll_ledger.payable_account', cls.payable.code)
         params.set_param('ksw_payroll_ledger.start_date', '2026-03-01')
+        cls.hayat_wage = acc('9925010019')
+        cls.hayat_payable = acc('9917010008', 'liability_current')
+        cls.hayat_current = acc('9908010010', 'asset_current')
+        cls.kawther_current = acc('9901030003', 'liability_current')
+        params.set_param('ksw_payroll_ledger.hayat_wage_account', cls.hayat_wage.code)
+        params.set_param('ksw_payroll_ledger.hayat_payable_account', cls.hayat_payable.code)
+        params.set_param('ksw_payroll_ledger.hayat_current_account', cls.hayat_current.code)
+        params.set_param('ksw_payroll_ledger.kawther_current_account', cls.kawther_current.code)
+        Bank = env['res.partner.bank'].sudo()
+        partner = env.company.partner_id
+        cls.kawther_bank = Bank.create({'acc_number': 'LEDGER Kawther Cards', 'partner_id': partner.id})
+        cls.hayat_bank = Bank.create({'acc_number': 'LEDGER Hayat Cards', 'partner_id': partner.id,
+                                      'x_ledger_entity': 'hayat'})
+        cls.hayat_dept = env['hr.department'].sudo().create(
+            {'name': 'Ledger Hayat', 'x_ledger_entity': 'hayat'})
+        cls.hayat_sub = env['hr.department'].sudo().create(
+            {'name': 'Ledger Hayat IST', 'parent_id': cls.hayat_dept.id})
         cls.rule_hra.sudo().x_ledger_account_id = cls.housing
 
     def _lines(self, move):
@@ -85,6 +102,49 @@ class TestPayrollLedger(BasJournalPayrollCommon):
         self.assertIn((self.wage, 7000.0), lines)
         self.assertIn((self.camp_wage, 2000.0), lines)
         self.assertIn((self.saudi_wage, 8250.0), lines)
+
+    def _employee(self, name, bank, dept=None):
+        return self.env['hr.employee'].sudo().create({
+            'name': name, 'department_id': dept.id if dept else False,
+            'x_salary_bank_account_id': bank.id})
+
+    def _all_lines(self):
+        return {(l.account_id, round(l.balance, 2)) for l in self.batch.x_ledger_move_ids.line_ids}
+
+    def test_04b_hayat_staff_paid_by_hayat(self):
+        """Al-Hayat's own: its wage account, allowances included, its payable."""
+        worker = self._employee('Ledger Hayat Worker', self.hayat_bank, self.hayat_sub)
+        self._payslip([(self.rule_basic, 4000.0), (self.rule_hra, 1000.0),
+                       (self.rule_gosi, -390.0), (self.rule_net, 4610.0)], employee=worker)
+        self.assertEqual(self._lines(self._confirm()), {
+            (self.hayat_wage, 4610.0), (self.hayat_payable, -4610.0)})
+
+    def test_04c_hayat_staff_paid_by_kawther(self):
+        """Paid from Kawther's account: the separate salary account, unticked."""
+        worker = self._employee('Ledger Hayat On Kawther', self.kawther_bank, self.hayat_dept)
+        self._payslip([(self.rule_basic, 1500.0), (self.rule_hra, 300.0),
+                       (self.rule_net, 1800.0)], employee=worker)
+        self.assertEqual(self._lines(self._confirm()), {
+            (self.saudi_wage, 1800.0), (self.payable, -1800.0)})
+
+    def test_04d_kawther_staff_paid_by_hayat(self):
+        """Expensed by Kawther, owed to Al-Hayat; Al-Hayat pays it against Kawther."""
+        clerk = self._employee('Ledger Kawther On Hayat', self.hayat_bank)
+        self._payslip([(self.rule_basic, 6745.0), (self.rule_hra, 500.0),
+                       (self.rule_net, 7245.0)], employee=clerk)
+        self.assertEqual(self._lines(self._confirm()), {
+            (self.wage, 6745.0), (self.housing, 500.0),
+            (self.hayat_current, -7245.0), (self.kawther_current, 7245.0),
+            (self.hayat_payable, -7245.0)})
+
+    def test_04e_separate_salary_account_takes_the_allowances(self):
+        """BAS books a separate salary in one line, allowances included."""
+        apart = self.env['hr.employee'].sudo().create(
+            {'name': 'Ledger Apart Whole', 'x_separate_salary_account': True})
+        self._payslip([(self.rule_basic, 12000.0), (self.rule_hra, 2500.0),
+                       (self.rule_net, 14500.0)], employee=apart)
+        self.assertEqual(self._lines(self._confirm()), {
+            (self.saudi_wage, 14500.0), (self.payable, -14500.0)})
 
     def test_05_one_employee_never_holds_up_the_others(self):
         self.rule_gosi.sudo().x_bas_posting = 'none'
