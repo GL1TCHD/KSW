@@ -33,6 +33,12 @@
                                    placeholder="All types"/>
                             <field name="client_id" options="{'no_create': True}"
                                    invisible="report_type == 'vehicle'" placeholder="All clients"/>
+                            <!-- For the GM and administrator, who read every
+                                 workshop. A workshop's own manager can pick it too,
+                                 but his record rules only ever return his own. -->
+                            <field name="workshop_id" options="{'no_create': True}"
+                                   groups="KSW_workshop.group_workshop_reviewer"
+                                   placeholder="All workshops"/>
                             <field name="state_scope"/>
                         </group>
                         <group string="Which Period">

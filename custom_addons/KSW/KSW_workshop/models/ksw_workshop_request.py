@@ -70,6 +70,10 @@ class KswWorkshopRequest(models.Model):
         'x_cash_plate_number', 'x_cash_driver_name', 'x_cash_brand', 'x_cash_model', 'x_cash_year',
     }
     _MANAGER_ONLY_FIELDS = {'is_cash_customer'}
+    # Which workshop does the job. Derived at creation; only a workshop manager
+    # sends it elsewhere (and the record rules let him do so only from a
+    # workshop of his own).
+    _ROUTING_FIELDS = {'workshop_id'}
     # Tags are the workshop's own classification, not the requester's — they
     # are derived from his words, and corrected by the people who did the work.
     _CLASSIFICATION_FIELDS = {'request_type_ids'}
@@ -91,6 +95,17 @@ class KswWorkshopRequest(models.Model):
     x_on_behalf_of_id = fields.Many2one(
         'res.users', string='On Behalf Of', readonly=True, copy=False, index=True,
         help='The workshop requester this request was raised for by his assistant.')
+    # A snapshot set by create() from the department of the supervisor whose
+    # truck it is (_workshop_for_requester), not a compute: a supervisor who
+    # moves department later must not move his old repairs to another
+    # workshop. Not required at the column level only because rows predating
+    # the 19.0.13.0.0 migration had none; create() always fills it.
+    workshop_id = fields.Many2one(
+        'ksw.workshop', string='Workshop', tracking=True, index=True,
+        ondelete='restrict', copy=False,
+        default=lambda self: self._default_workshop_id(),
+        help="The workshop doing the job: the home workshop of the requester's "
+             "department. A workshop manager can send it to another workshop.")
 
     # The four original values keep their keys; the rest were added once the
     # 17k imported descriptions showed what the workshop actually does — tyres
@@ -627,10 +642,34 @@ class KswWorkshopRequest(models.Model):
             if assistant_managers:
                 vals['x_on_behalf_of_id'] = self._pick_on_behalf(
                     assistant_managers, vals.get('vehicle_id')).id
+        for vals in vals_list:
+            if not is_manager or not vals.get('workshop_id'):
+                vals['workshop_id'] = self._workshop_for_requester(
+                    self.env['res.users'].browse(vals.get('x_on_behalf_of_id')),
+                    self.env['hr.employee'].browse(vals.get('employee_id'))).id
         requests = super().create(vals_list)
         for request in requests:
             request._notify_workshop_managers()
         return requests
+
+    @api.model
+    def _workshop_for_requester(self, on_behalf_of, employee):
+        """The home workshop of the supervisor whose truck it is: the
+        department of the requester an assistant raised it for, otherwise of
+        the requester himself. No department, or none with a home workshop up
+        its tree: the main workshop."""
+        department = on_behalf_of.sudo().employee_id.department_id if on_behalf_of \
+            else employee.sudo().department_id
+        return self.env['ksw.workshop']._for_department(department)
+
+    @api.model
+    def _default_workshop_id(self):
+        # What create() will choose, so the form shows it before saving. An
+        # assistant's request is his own manager's unless the truck says
+        # otherwise; create() settles it.
+        user = self.env.user
+        assisted = self.env['res.users'].browse(user._ksw_workshop_assisted_manager_ids()[:1])
+        return self._workshop_for_requester(assisted, user.employee_id).id
 
     @api.model
     def _assistant_managers_or_raise(self):
@@ -695,6 +734,9 @@ class KswWorkshopRequest(models.Model):
 
             if touched & (self._STATE_FIELDS | self._INTERNAL_NOTE_FIELDS) and not is_manager:
                 raise UserError(_('Only the workshop manager can do this.'))
+
+            if touched & self._ROUTING_FIELDS and not is_manager:
+                raise UserError(_('Only the workshop manager can send a request to another workshop.'))
 
             if touched & self._MANAGER_ONLY_FIELDS:
                 if not is_manager:
@@ -848,6 +890,9 @@ class KswWorkshopRequest(models.Model):
         for xmlid in ('base.user_admin', 'base.user_root'):
             technical |= self.env.ref(xmlid, raise_if_not_found=False) or self.env['res.users']
         users = (group.user_ids - technical) if group else self.env['res.users']
+        # Only the managers of the workshop doing the job: the Tabuk manager is
+        # not told about Nabiya's requests.
+        users = users.filtered(lambda u: self.workshop_id.id in u._ksw_workshop_scope_ids())
         partner_ids = users.mapped('partner_id').ids
         if not partner_ids:
             return

@@ -32,6 +32,7 @@
                 <field name="name" string="Ref."/>
                 <field name="vehicle_id"/>
                 <field name="vehicle_type" optional="hide"/>
+                <field name="workshop_id" optional="hide"/>
                 <field name="client_id" optional="hide"/>
                 <field name="driver_id" optional="hide"/>
                 <field name="employee_id" optional="hide"/>

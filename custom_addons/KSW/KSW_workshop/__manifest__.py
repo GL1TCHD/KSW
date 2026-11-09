@@ -1,6 +1,6 @@
 {
     'name': 'KSW Workshop',
-    'version': '19.0.12.23.0',
+    'version': '19.0.13.0.0',
     'summary': 'Workshop service requests: submission, triage, and repair report',
     'description': """
 Workshop Service Requests
@@ -44,6 +44,7 @@ is the lighter thing asked for instead, not a resumption of that design.
         'security/security.xml',
         'security/ir.model.access.csv',
         'data/sequence.xml',
+        'data/workshops.xml',
         'data/workshop_technician.xml',
         'data/request_types.xml',
         'wizard/ksw_workshop_return_wizard_views.xml',
@@ -52,6 +53,7 @@ is the lighter thing asked for instead, not a resumption of that design.
         'views/ksw_workshop_request_views.xml',
         'views/res_users_views.xml',
         'views/ksw_workshop_technician_views.xml',
+        'views/ksw_workshop_views.xml',
         'views/ksw_workshop_request_type_views.xml',
         'views/ksw_workshop_keyword_suggestion_views.xml',
         'views/hr_employee_views.xml',

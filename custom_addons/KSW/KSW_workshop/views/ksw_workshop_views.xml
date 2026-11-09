@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_ksw_workshop_list" model="ir.ui.view">
+        <field name="name">ksw.workshop.list</field>
+        <field name="model">ksw.workshop</field>
+        <field name="arch" type="xml">
+            <list string="Workshops">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="is_main"/>
+                <field name="user_ids" widget="many2many_tags"/>
+                <field name="department_ids" widget="many2many_tags" optional="show"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_ksw_workshop_form" model="ir.ui.view">
+        <field name="name">ksw.workshop.form</field>
+        <field name="model">ksw.workshop</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_view_requests" type="object" class="oe_stat_button" icon="fa-wrench">
+                            <field name="request_count" widget="statinfo" string="Requests"/>
+                        </button>
+                    </div>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    <div class="oe_title">
+                        <h1><field name="name" placeholder="e.g. Tabuk"/></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code"/>
+                            <field name="is_main"/>
+                            <field name="active" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Managers &amp; Staff" name="users">
+                            <field name="user_ids" options="{'no_create': True}">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="login"/>
+                                </list>
+                            </field>
+                            <div class="text-muted">
+                                Workshop Managers named here triage this workshop's requests and are
+                                notified of new ones. Technicians are placed through Configuration ▸
+                                Technicians.
+                            </div>
+                        </page>
+                        <page string="Departments Served" name="departments">
+                            <field name="department_ids" readonly="1">
+                                <list>
+                                    <field name="complete_name"/>
+                                    <field name="manager_id"/>
+                                </list>
+                            </field>
+                            <div class="text-muted">
+                                Set on each department as its Home Workshop. A request goes to the home
+                                workshop of the requester's department (or its nearest parent's); with
+                                none, to the main workshop.
+                            </div>
+                        </page>
+                        <page string="Technicians" name="technicians">
+                            <field name="technician_ids" readonly="1">
+                                <list>
+                                    <field name="name"/>
+                                    <field name="employee_id"/>
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ksw_workshop" model="ir.actions.act_window">
+        <field name="name">Workshops</field>
+        <field name="res_model">ksw.workshop</field>
+        <field name="view_mode">list,form</field>
+    </record>
+
+    <!-- Under Configuration, which is Manager-gated; this one is the
+         administrator's (staffing a workshop is granting its scope), and in
+         prod the administrator holds Workshop Manager. -->
+    <menuitem id="menu_ksw_workshop_workshops" name="Workshops"
+              parent="menu_ksw_workshop_configuration"
+              action="action_ksw_workshop" sequence="5"
+              groups="base.group_system"/>
+
+    <!-- Department: which workshop repairs its vehicles. -->
+    <record id="view_department_form_ksw_workshop" model="ir.ui.view">
+        <field name="name">hr.department.form.ksw.workshop</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form"/>
+        <field name="arch" type="xml">
+            <field name="parent_id" position="after">
+                <field name="x_workshop_id" options="{'no_create': True}"
+                       placeholder="Parent's, else the main workshop"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>

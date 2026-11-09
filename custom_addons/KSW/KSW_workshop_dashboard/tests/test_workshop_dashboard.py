@@ -125,3 +125,52 @@ class TestWorkshopDashboard(TransactionCase):
         self.assertNotIn(entry, Dashboard.with_user(self.technician).search([]))
         self.assertNotIn(entry, Dashboard.with_user(self.requester).search([]))
 
+
+
+@tagged('post_install', '-at_install')
+class TestWorkshopDashboardSites(TransactionCase):
+    """Nabiya / Tabuk / Al-Hayat: the GM switches between all and one; a
+    workshop's own manager is offered no switcher and sees only his."""
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.nabiya = cls.env.ref('KSW_workshop.workshop_nabiya')
+        cls.tabuk = cls.env.ref('KSW_workshop.workshop_tabuk')
+        Users = cls.env['res.users'].with_context(no_reset_password=True)
+
+        def _user(login, groups, workshops=()):
+            user = Users.create({'name': login, 'login': login, 'email': f'{login}@dash.test',
+                                 'group_ids': [(6, 0, [cls.env.ref(g).id for g in groups])],
+                                 'x_workshop_ids': [(6, 0, [w.id for w in workshops])]})
+            cls.env['hr.employee'].create({'name': login, 'user_id': user.id})
+            return user
+
+        cls.gm = _user('dash_site_gm', ('KSW_workshop.group_workshop_reviewer',))
+        cls.mgr_tabuk = _user('dash_site_mgr', ('KSW_workshop.group_workshop_manager',), [cls.tabuk])
+        requester = _user('dash_site_req', ('KSW_workshop.group_workshop_requester',))
+        vehicle = cls.env['ksw.fleet.vehicle'].create({'name': 'DASH-S1', 'vehicle_type': 'isuzu',
+                                                       'driver_id': requester.employee_id.id})
+        cls.requests = cls.env['ksw.workshop.request'].with_user(requester).create([{
+            'vehicle_type': 'isuzu', 'vehicle_id': vehicle.id,
+            'driver_id': requester.employee_id.id, 'description': 'Oil change'} for _i in range(3)]).sudo()
+        cls.requests[0].workshop_id = cls.tabuk
+
+    def _open_new(self, user, workshop=False):
+        data = self.env['ksw.workshop.dashboard'].with_user(user).get_workshop_data('month', workshop)
+        return data, self.env['ksw.workshop.request'].with_user(user).search(
+            data['new']['domain'] + [('id', 'in', self.requests.ids)])
+
+    def test_gm_switches_between_all_and_one(self):
+        data, found = self._open_new(self.gm)
+        self.assertGreater(len(data['workshops']), 1)
+        self.assertEqual(found, self.requests)
+        data, found = self._open_new(self.gm, self.tabuk.id)
+        self.assertEqual(data['workshop_id'], self.tabuk.id)
+        self.assertEqual(found, self.requests[0])
+
+    def test_workshop_manager_sees_only_his(self):
+        data, found = self._open_new(self.mgr_tabuk, self.nabiya.id)
+        self.assertEqual([w['id'] for w in data['workshops']], [self.tabuk.id])
+        self.assertFalse(data['workshop_id'], 'a workshop outside his scope is ignored')
+        self.assertEqual(found, self.requests[0])

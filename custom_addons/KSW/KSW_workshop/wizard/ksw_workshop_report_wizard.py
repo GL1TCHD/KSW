@@ -66,6 +66,7 @@ class KswWorkshopReportWizard(models.TransientModel):
         lambda self: self.env['ksw.workshop.request']._fields['vehicle_type'].selection,
         string='Vehicle Type')
     client_id = fields.Many2one('res.partner', string='Client')
+    workshop_id = fields.Many2one('ksw.workshop', string='Workshop')
     request_type_ids = fields.Many2many(
         'ksw.workshop.request.type', string='Repair Types',
         help="Leave empty for every type, including requests nobody classified.")
@@ -408,6 +409,8 @@ class KswWorkshopReportWizard(models.TransientModel):
             domain.append(('vehicle_type', '=', self.vehicle_type))
         if self.client_id:
             domain.append(('client_id', '=', self.client_id.id))
+        if self.workshop_id:
+            domain.append(('workshop_id', '=', self.workshop_id.id))
         if self.report_type == 'repair_type' and self.request_type_ids:
             domain.append(('request_type_ids', 'in', self.request_type_ids.ids))
         return domain
@@ -566,6 +569,8 @@ class KswWorkshopReportWizard(models.TransientModel):
             lines.append((_('Vehicle Type'), self._selection_label(self._name, 'vehicle_type', self.vehicle_type)))
         if self.client_id:
             lines.append((_('Client'), self.client_id.display_name))
+        if self.workshop_id:
+            lines.append((_('Workshop'), self.workshop_id.display_name))
         if self.report_type == 'repair_type':
             lines.append((_('Repair Types'), ', '.join(self.request_type_ids.mapped('name')) or _('All, including unclassified')))
         if self.report_type == 'spare_part':
@@ -773,6 +778,8 @@ class KswWorkshopReportWizard(models.TransientModel):
             domain.append(('request_id.vehicle_type', '=', self.vehicle_type))
         if self.client_id:
             domain.append(('client_id', '=', self.client_id.id))
+        if self.workshop_id:
+            domain.append(('request_id.workshop_id', '=', self.workshop_id.id))
         return domain
 
     def _line_group_key(self, line):

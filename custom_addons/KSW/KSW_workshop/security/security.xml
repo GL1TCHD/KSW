@@ -108,6 +108,15 @@
     <!-- Layer 3: Record Rules                                         -->
     <!-- ============================================================ -->
     <!--
+        Three workshops (Nov 2026): Nabiya, Tabuk, Al-Hayat. Every manager,
+        technician and reviewer rule below is scoped by workshop through
+        res.users._ksw_workshop_scope_ids (his own workshops; every one for
+        an administrator) and _ksw_workshop_review_ids (every one for a pure
+        Reviewer such as the GM). The Reviewer rule is scoped too because the
+        Manager role implies Reviewer: unscoped, it would let the Tabuk
+        manager read Nabiya.
+    -->
+    <!--
         The Driver picker offers the requester's reporting line
         (ksw.workshop.request._workshop_driver_ids), but it searches as the
         user. Anyone holding an Employees group reads hr.employee, not the
@@ -134,25 +143,25 @@
     </record>
 
     <record id="rule_ksw_workshop_request_technician" model="ir.rule">
-        <field name="name">Workshop Request: technician sees in-progress + own assignments</field>
+        <field name="name">Workshop Request: technician sees his workshops' in-progress + own assignments</field>
         <field name="model_id" ref="model_ksw_workshop_request"/>
-        <field name="domain_force">['|', ('state', '=', 'in_progress'),
+        <field name="domain_force">['|', '&amp;', ('state', '=', 'in_progress'), ('workshop_id', 'in', user._ksw_workshop_scope_ids()),
                                     '|', ('technician_id.user_id', '=', user.id),
                                          ('labor_line_ids.technician_id.employee_id.user_id', '=', user.id)]</field>
         <field name="groups" eval="[(4, ref('group_workshop_technician'))]"/>
     </record>
 
     <record id="rule_ksw_workshop_request_manager" model="ir.rule">
-        <field name="name">Workshop Request: manager sees all</field>
+        <field name="name">Workshop Request: manager sees his workshops</field>
         <field name="model_id" ref="model_ksw_workshop_request"/>
-        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="domain_force">[('workshop_id', 'in', user._ksw_workshop_scope_ids())]</field>
         <field name="groups" eval="[(4, ref('group_workshop_manager'))]"/>
     </record>
 
     <record id="rule_ksw_workshop_request_reviewer" model="ir.rule">
-        <field name="name">Workshop Request: reviewer reads all</field>
+        <field name="name">Workshop Request: reviewer reads his workshops (every one for the GM)</field>
         <field name="model_id" ref="model_ksw_workshop_request"/>
-        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="domain_force">[('workshop_id', 'in', user._ksw_workshop_review_ids())]</field>
         <field name="groups" eval="[(4, ref('group_workshop_reviewer'))]"/>
         <field name="perm_read" eval="True"/>
         <field name="perm_write" eval="False"/>
@@ -199,25 +208,25 @@
         <field name="perm_unlink" eval="False"/>
     </record>
     <record id="rule_ksw_workshop_part_line_technician" model="ir.rule">
-        <field name="name">Workshop Part Line: technician sees in-progress + own assignments</field>
+        <field name="name">Workshop Part Line: technician sees his workshops' in-progress + own assignments</field>
         <field name="model_id" ref="model_ksw_workshop_part_line"/>
-        <field name="domain_force">['|', ('request_id.state', '=', 'in_progress'),
+        <field name="domain_force">['|', '&amp;', ('request_id.state', '=', 'in_progress'), ('request_id.workshop_id', 'in', user._ksw_workshop_scope_ids()),
                                     '|', ('request_id.technician_id.user_id', '=', user.id),
                                          ('request_id.labor_line_ids.technician_id.employee_id.user_id', '=', user.id)]</field>
         <field name="groups" eval="[(4, ref('group_workshop_technician'))]"/>
     </record>
 
     <record id="rule_ksw_workshop_part_line_manager" model="ir.rule">
-        <field name="name">Workshop Part Line: manager sees all</field>
+        <field name="name">Workshop Part Line: manager sees his workshops</field>
         <field name="model_id" ref="model_ksw_workshop_part_line"/>
-        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="domain_force">[('request_id.workshop_id', 'in', user._ksw_workshop_scope_ids())]</field>
         <field name="groups" eval="[(4, ref('group_workshop_manager'))]"/>
     </record>
 
     <record id="rule_ksw_workshop_part_line_reviewer" model="ir.rule">
-        <field name="name">Workshop Part Line: reviewer reads all</field>
+        <field name="name">Workshop Part Line: reviewer reads his workshops (every one for the GM)</field>
         <field name="model_id" ref="model_ksw_workshop_part_line"/>
-        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="domain_force">[('request_id.workshop_id', 'in', user._ksw_workshop_review_ids())]</field>
         <field name="groups" eval="[(4, ref('group_workshop_reviewer'))]"/>
         <field name="perm_read" eval="True"/>
         <field name="perm_write" eval="False"/>
@@ -238,24 +247,24 @@
     </record>
 
     <record id="rule_ksw_workshop_labor_line_technician" model="ir.rule">
-        <field name="name">Workshop Labor Line: technician sees in-progress + own assignments</field>
+        <field name="name">Workshop Labor Line: technician sees his workshops' in-progress + own assignments</field>
         <field name="model_id" ref="model_ksw_workshop_labor_line"/>
-        <field name="domain_force">['|', ('request_id.state', '=', 'in_progress'),
+        <field name="domain_force">['|', '&amp;', ('request_id.state', '=', 'in_progress'), ('request_id.workshop_id', 'in', user._ksw_workshop_scope_ids()),
                                     ('technician_id.employee_id.user_id', '=', user.id)]</field>
         <field name="groups" eval="[(4, ref('group_workshop_technician'))]"/>
     </record>
 
     <record id="rule_ksw_workshop_labor_line_manager" model="ir.rule">
-        <field name="name">Workshop Labor Line: manager sees all</field>
+        <field name="name">Workshop Labor Line: manager sees his workshops</field>
         <field name="model_id" ref="model_ksw_workshop_labor_line"/>
-        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="domain_force">[('request_id.workshop_id', 'in', user._ksw_workshop_scope_ids())]</field>
         <field name="groups" eval="[(4, ref('group_workshop_manager'))]"/>
     </record>
 
     <record id="rule_ksw_workshop_labor_line_reviewer" model="ir.rule">
-        <field name="name">Workshop Labor Line: reviewer reads all</field>
+        <field name="name">Workshop Labor Line: reviewer reads his workshops (every one for the GM)</field>
         <field name="model_id" ref="model_ksw_workshop_labor_line"/>
-        <field name="domain_force">[(1, '=', 1)]</field>
+        <field name="domain_force">[('request_id.workshop_id', 'in', user._ksw_workshop_review_ids())]</field>
         <field name="groups" eval="[(4, ref('group_workshop_reviewer'))]"/>
         <field name="perm_read" eval="True"/>
         <field name="perm_write" eval="False"/>

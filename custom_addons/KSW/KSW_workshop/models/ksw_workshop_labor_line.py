@@ -1,4 +1,5 @@
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class KswWorkshopLaborLine(models.Model):
@@ -26,6 +27,18 @@ class KswWorkshopLaborLine(models.Model):
         'ksw.workshop.technician', string='Technician', ondelete='restrict',
         help="A workshop technician, or External Service Location when the job was "
              "sent outside.")
+
+    # The picker already offers only this workshop's technicians (view
+    # domain); this is the same rule for any other write path.
+    @api.constrains('technician_id', 'request_id')
+    def _check_technician_workshop(self):
+        for line in self:
+            technician = line.technician_id.sudo()
+            if technician.workshop_id and technician.workshop_id != line.request_id.sudo().workshop_id:
+                raise ValidationError(_(
+                    '%(technician)s works at %(theirs)s, not %(ours)s.',
+                    technician=technician.name, theirs=technician.workshop_id.name,
+                    ours=line.request_id.sudo().workshop_id.name))
 
     @api.depends('sequence', 'request_id.labor_line_ids', 'request_id.labor_line_ids.sequence')
     def _compute_line_no(self):

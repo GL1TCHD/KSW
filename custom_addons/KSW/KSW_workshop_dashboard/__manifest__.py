@@ -1,6 +1,6 @@
 {
     'name': 'KSW Workshop Dashboard',
-    'version': '19.0.1.1.0',
+    'version': '19.0.1.2.0',
     'author': 'Mohammed Albadr',
     'category': 'Human Resources',
     'summary': 'Workshop overview for reviewers: open work and its age, throughput, turnaround, '

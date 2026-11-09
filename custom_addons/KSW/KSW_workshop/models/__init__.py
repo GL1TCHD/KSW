@@ -1,3 +1,4 @@
+from . import ksw_workshop
 from . import ksw_workshop_client
 from . import res_partner
 from . import ksw_workshop_request_type

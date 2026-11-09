@@ -56,7 +56,11 @@ class HrEmployee(models.Model):
                 if existing:
                     existing.active = True
                 else:
-                    Technician.create({'employee_id': employee.id})
+                    Technician.create({
+                        'employee_id': employee.id,
+                        'workshop_id': self.env['ksw.workshop']._for_department(
+                            employee.department_id).id,
+                    })
             elif existing:
                 existing.active = False
 

@@ -17,6 +17,17 @@
     <t t-name="KSW_workshop_dashboard.Workshop">
         <div class="o_ksw_dashboard o_action">
             <t t-call="KSW_erp_dashboard.Header"/>
+            <!-- Nabiya / Tabuk / Al-Hayat, for whoever reads more than one. -->
+            <div t-if="state.data and state.data.workshops.length > 1" class="btn-group btn-group-sm mb-3" role="group">
+                <button type="button" class="btn"
+                        t-att-class="!state.workshopId ? 'btn-primary' : 'btn-outline-secondary'"
+                        t-on-click="() => this.setWorkshop(false)" t-esc="allWorkshopsLabel"/>
+                <t t-foreach="state.data.workshops" t-as="w" t-key="w.id">
+                    <button type="button" class="btn"
+                            t-att-class="state.workshopId === w.id ? 'btn-primary' : 'btn-outline-secondary'"
+                            t-on-click="() => this.setWorkshop(w.id)" t-esc="w.name"/>
+                </t>
+            </div>
             <div t-if="state.loading and !state.data" class="o_ksw_empty">Loading…</div>
             <t t-if="state.data">
                 <t t-set="d" t-value="state.data"/>

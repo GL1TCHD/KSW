@@ -27,18 +27,27 @@ export class KswWorkshopDashboard extends Component {
             day: _t("Received and completed, by day"), week: _t("Received and completed, by week"),
             month: _t("Received and completed, by month"),
         };
-        this.state = useState({ period: "month", data: null, loading: true });
+        this.allWorkshopsLabel = _t("All workshops");
+        this.state = useState({ period: "month", workshopId: false, data: null, loading: true });
         onWillStart(() => this.load());
     }
 
     async load() {
         this.state.loading = true;
-        this.state.data = await this.orm.call("ksw.workshop.dashboard", "get_workshop_data", [this.state.period]);
+        this.state.data = await this.orm.call("ksw.workshop.dashboard", "get_workshop_data", [
+            this.state.period,
+            this.state.workshopId,
+        ]);
         this.state.loading = false;
     }
 
     setPeriod(period) {
         this.state.period = period;
+        this.load();
+    }
+
+    setWorkshop(workshopId) {
+        this.state.workshopId = workshopId;
         this.load();
     }
 

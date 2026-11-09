@@ -54,6 +54,11 @@
                                  is the column a requester fills in. -->
                             <field name="employee_id" readonly="1"/>
                             <field name="x_on_behalf_of_id" invisible="not x_on_behalf_of_id"/>
+                            <!-- Set from the requester's department; the requester
+                                 sees where it goes, only the workshop manager
+                                 (x_can_toggle_cash_customer is his flag) moves it. -->
+                            <field name="workshop_id" options="{'no_create': True, 'no_open': True}"
+                                   readonly="not x_can_toggle_cash_customer or state == 'completed'"/>
                             <!-- Imported requests have no chatter, so the form is
                                  the only place their dates can be read. -->
                             <field name="create_date" string="Requested On"
@@ -188,7 +193,10 @@
                                         <field name="sequence" widget="handle"/>
                                         <field name="line_no" string="#"/>
                                         <field name="description"/>
-                                        <field name="technician_id" options="{'no_create': True}"/>
+                                        <!-- This workshop's technicians, plus External
+                                             Service Location (no workshop). -->
+                                        <field name="technician_id" options="{'no_create': True}"
+                                               domain="['|', ('workshop_id', '=', False), ('workshop_id', '=', parent.workshop_id)]"/>
                                     </list>
                                 </field>
                             </group>
@@ -291,6 +299,8 @@
                 <field name="create_date" string="Date"/>
                 <field name="employee_id"/>
                 <field name="x_on_behalf_of_id" optional="hide"/>
+                <field name="workshop_id" optional="show"
+                       groups="KSW_workshop.group_workshop_reviewer"/>
                 <field name="client_id"/>
                 <field name="vehicle_id" class="o_ksw_vehicle_cell"/>
                 <field name="request_type_ids" widget="many2many_tags"
@@ -348,6 +358,7 @@
             <search string="Workshop Requests">
                 <field name="name"/>
                 <field name="employee_id"/>
+                <field name="workshop_id"/>
                 <field name="client_id"/>
                 <field name="vehicle_id"/>
                 <field name="description"/>
@@ -385,6 +396,7 @@
                 <filter string="Unclassified Type" name="filter_no_request_type"
                         domain="[('request_type_ids', '=', False)]"/>
                 <group>
+                    <filter string="Workshop" name="groupby_workshop" context="{'group_by': 'workshop_id'}"/>
                     <filter string="Vehicle" name="groupby_vehicle" context="{'group_by': 'vehicle_id'}"/>
                     <filter string="Request Type" name="groupby_request_type" context="{'group_by': 'request_type_ids'}"/>
                     <filter string="Technician" name="groupby_technician" context="{'group_by': 'technician_label'}"/>

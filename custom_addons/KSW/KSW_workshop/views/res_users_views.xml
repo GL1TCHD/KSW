@@ -32,6 +32,8 @@
                         on their vehicles only.
                     </div>
                     <group>
+                        <field name="x_workshop_ids" widget="many2many_tags" options="{'no_create': True}"
+                               placeholder="Empty: the main workshop (Reviewer: every workshop)"/>
                         <field name="x_workshop_notify_in_odoo"/>
                     </group>
                     <div class="text-muted">

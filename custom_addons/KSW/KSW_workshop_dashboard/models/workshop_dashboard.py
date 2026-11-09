@@ -31,7 +31,7 @@ class KswWorkshopDashboard(models.AbstractModel):
     _description = 'Workshop Overview'
 
     @api.model
-    def get_workshop_data(self, period='month'):
+    def get_workshop_data(self, period='month', workshop_id=False):
         # A Technician's rule only reaches in-progress and his own jobs, so his
         # figures would be silently partial: the page is the Reviewer's.
         if not self.env.su and not self.env.user.has_group('KSW_workshop.group_workshop_reviewer'):
@@ -42,21 +42,31 @@ class KswWorkshopDashboard(models.AbstractModel):
         span = self.env['ksw.erp.dashboard']._datetime_span
         Req = self.env['ksw.workshop.request']
 
+        # Nabiya, Tabuk, Al-Hayat: the record rules already narrow a workshop's
+        # own manager to his; the switcher lets whoever reads several (GM,
+        # administrator) look at all of them or one. Every domain below starts
+        # with `base`, so a click-through opens exactly what the figure counted.
+        workshops = self.env['ksw.workshop'].browse(self.env.user._ksw_workshop_review_ids()).exists()
+        if workshop_id not in workshops.ids:
+            workshop_id = False
+        base = [('workshop_id', '=', workshop_id)] if workshop_id else []
+
         def count(domain):
             return Req.search_count(domain)
 
-        received = span(start, end, 'create_date')
-        completed = [('state', '=', 'completed')] + span(start, end, 'completion_date')
-        prev_completed = [('state', '=', 'completed')] + span(pstart, pend, 'completion_date')
+        received = base + span(start, end, 'create_date')
+        completed_core = [('state', '=', 'completed')] + span(start, end, 'completion_date')
+        completed = base + completed_core
+        prev_completed = base + [('state', '=', 'completed')] + span(pstart, pend, 'completion_date')
 
         def avg_days(domain):
             return Req._read_group(domain, [], ['duration_days:avg'])[0][0] or 0.0
 
         # Backlog: what is open now, and how long it has been waiting.
-        open_dom = [('state', 'in', _OPEN)]
-        new_dom = [('state', '=', 'new')]
+        open_dom = base + [('state', 'in', _OPEN)]
+        new_dom = base + [('state', '=', 'new')]
         stale_new = new_dom + [('create_date', '<', now - timedelta(days=2))]
-        in_progress = [('state', '=', 'in_progress')]
+        in_progress = base + [('state', '=', 'in_progress')]
         oldest = Req.search(in_progress, order='create_date asc', limit=1)
         age_buckets = []
         for key, label, low, high in (('0_2', self.env._('0–2 days'), 0, 2), ('3_7', self.env._('3–7 days'), 3, 7),
@@ -67,7 +77,7 @@ class KswWorkshopDashboard(models.AbstractModel):
                 dom.append(('create_date', '>', now - timedelta(days=high + 1)))
             age_buckets.append({'key': key, 'label': label, 'count': count(dom), 'domain': dom})
         by_state = [{'key': s, 'label': dict(Req._fields['state']._description_selection(self.env))[s],
-                     'count': count([('state', '=', s)]), 'domain': [('state', '=', s)]} for s in _OPEN]
+                     'count': count(base + [('state', '=', s)]), 'domain': base + [('state', '=', s)]} for s in _OPEN]
 
         # In and out across the period: by day, week or month.
         trend_unit, buckets = _trend_buckets(period, today)
@@ -85,7 +95,7 @@ class KswWorkshopDashboard(models.AbstractModel):
         earlier = defaultdict(list)
         if done:
             first = min(r['create_date'] for r in done)
-            for r in Req.search_read([('state', '=', 'completed'),
+            for r in Req.search_read(base + [('state', '=', 'completed'),
                                       ('vehicle_id', 'in', list({r['vehicle_id'][0] for r in done})),
                                       ('completion_date', '>=', first - timedelta(days=_REPEAT_DAYS))],
                                      ['vehicle_id', 'completion_date', 'request_type_ids']):
@@ -128,8 +138,8 @@ class KswWorkshopDashboard(models.AbstractModel):
                                           ['request_id:count_distinct']))
         done_by, busy = by_technician(completed), by_technician(in_progress)
         technicians = sorted(({'name': t.display_name, 'completed': done_by.get(t, 0), 'open': busy.get(t, 0),
-                               'domain': [('labor_line_ids.technician_id', '=', t.id), '|',
-                                          ('state', '=', 'in_progress'), '&', '&'] + completed}
+                               'domain': base + [('labor_line_ids.technician_id', '=', t.id), '|',
+                                                 ('state', '=', 'in_progress'), '&', '&'] + completed_core}
                               for t in set(done_by) | set(busy)),
                              key=lambda r: -(r['completed'] + r['open']))[:8]
 
@@ -146,7 +156,9 @@ class KswWorkshopDashboard(models.AbstractModel):
         return {
             'currency': {'symbol': cur.symbol, 'position': cur.position, 'digits': cur.decimal_places},
             'period': {'start': str(start), 'end': str(end)},
-            'open': {'count': count(open_dom), 'domain': open_dom, 'returned': count([('state', '=', 'returned')])},
+            'workshops': [{'id': w.id, 'name': w.display_name} for w in workshops],
+            'workshop_id': workshop_id,
+            'open': {'count': count(open_dom), 'domain': open_dom, 'returned': count(base + [('state', '=', 'returned')])},
             'new': {'count': count(new_dom), 'domain': new_dom, 'stale': count(stale_new), 'stale_domain': stale_new},
             'in_progress': {'count': count(in_progress), 'domain': in_progress,
                             'oldest_days': (now - oldest.create_date).days if oldest else 0},

@@ -8,6 +8,8 @@
             <list string="Workshop Technicians" editable="bottom">
                 <field name="name" required="1"/>
                 <field name="employee_id"/>
+                <field name="workshop_id" options="{'no_create': True}"
+                       required="not is_external" readonly="is_external"/>
                 <field name="note" optional="show"/>
                 <!-- Read-only marker on the one built-in entry; shown so it is
                      obvious why "External Service Location" has no employee. -->
@@ -28,6 +30,8 @@
                         <group>
                             <field name="name" required="1"/>
                             <field name="employee_id" invisible="is_external"/>
+                            <field name="workshop_id" options="{'no_create': True}"
+                                   invisible="is_external" required="not is_external"/>
                             <field name="note"/>
                         </group>
                         <group>
@@ -47,7 +51,11 @@
             <search string="Workshop Technicians">
                 <field name="name"/>
                 <field name="employee_id"/>
+                <field name="workshop_id"/>
                 <filter string="Archived" name="filter_inactive" domain="[('active', '=', False)]"/>
+                <group>
+                    <filter string="Workshop" name="groupby_workshop" context="{'group_by': 'workshop_id'}"/>
+                </group>
             </search>
         </field>
     </record>

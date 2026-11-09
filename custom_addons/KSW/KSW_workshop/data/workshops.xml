@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- The three workshops (Nov 2026). noupdate: names, codes and staff are
+         the administrator's from here on. Nabiya is the main one: every request
+         raised before this existed was Nabiya's, and a department with no home
+         workshop still sends its requests there. -->
+    <data noupdate="1">
+        <record id="workshop_nabiya" model="ksw.workshop">
+            <field name="name">Nabiya</field>
+            <field name="code">NAB</field>
+            <field name="sequence">10</field>
+            <field name="is_main" eval="True"/>
+        </record>
+        <record id="workshop_tabuk" model="ksw.workshop">
+            <field name="name">Tabuk</field>
+            <field name="code">TBK</field>
+            <field name="sequence">20</field>
+        </record>
+        <record id="workshop_alhayat" model="ksw.workshop">
+            <field name="name">Al-Hayat</field>
+            <field name="code">HYT</field>
+            <field name="sequence">30</field>
+        </record>
+    </data>
+</odoo>

@@ -38,6 +38,11 @@ class KswWorkshopTechnician(models.Model):
              "stands for any job sent outside the workshop.")
     active = fields.Boolean(default=True)
     note = fields.Char()
+    # Empty only on External Service Location, which every workshop may name.
+    workshop_id = fields.Many2one(
+        'ksw.workshop', string='Workshop', ondelete='restrict', index=True,
+        help="Where this technician works: he is offered on that workshop's repairs "
+             "only, and sees that workshop's in-progress jobs.")
 
     # NULLs do not collide in a Postgres unique index, so several by-name-only
     # technicians are fine; only the employee link is one-to-one.
@@ -53,6 +58,21 @@ class KswWorkshopTechnician(models.Model):
                 raise ValidationError(_(
                     'A workshop technician needs a name. Link an employee, or type one.'
                 ))
+
+    # The technician record rule reads the workshop through the user's
+    # employee (res.users._ksw_workshop_scope_ids), and rule domains are
+    # cached per user.
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        self.env.registry.clear_cache()
+        return records
+
+    def write(self, vals):
+        res = super().write(vals)
+        if {'workshop_id', 'employee_id', 'active'} & vals.keys():
+            self.env.registry.clear_cache()
+        return res
 
     @api.depends('employee_id', 'employee_id.name')
     def _compute_name(self):

@@ -13,3 +13,4 @@ from . import test_driver_picker
 from . import test_workshop_report_wizard
 from . import test_workshop_reports_ui
 from . import test_workshop_inbox_notifications
+from . import test_workshop_sites

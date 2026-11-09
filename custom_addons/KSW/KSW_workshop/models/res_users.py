@@ -38,6 +38,14 @@ class ResUsers(models.Model):
         help='The workshop requesters this user raises requests for. Starts as '
              'his own manager; add or remove requesters for the workshop only, '
              'his reporting line elsewhere is unchanged.')
+    # Which workshops this user manages or works in (Nabiya, Tabuk, Al-Hayat).
+    # Read by the record rules through _ksw_workshop_scope_ids below.
+    x_workshop_ids = fields.Many2many(
+        'ksw.workshop', 'ksw_workshop_user_rel', 'user_id', 'workshop_id',
+        string='Workshops',
+        help='Workshop Manager / Technician: the workshops whose requests he sees, '
+             'triages and is notified of; empty means the main workshop. Reviewer: '
+             'leave empty to review every workshop, or name the ones he reviews.')
     # Odoo's own notification_type is one setting for every app. This one
     # narrows it to the workshop: read by
     # ksw.workshop.request._notify_get_recipients, so the user's mail from
@@ -133,6 +141,42 @@ class ResUsers(models.Model):
         managers = self.browse(self._ksw_workshop_assisted_manager_ids())
         return (managers or self).sudo().employee_id.ids
 
+    def _ksw_workshop_scope_ids(self):
+        """The workshops whose requests this user may work on as manager or
+        technician: those named on his user, plus the one his technician
+        registration names. Every workshop for an administrator. Read by the
+        manager and technician record rules.
+
+        Naming none means the main workshop, as for a department with no home
+        workshop: a manager added the way they always were is Nabiya's, and
+        only Tabuk and Al-Hayat staff need their workshop set."""
+        self.ensure_one()
+        Workshop = self.env['ksw.workshop'].sudo().with_context(active_test=False)
+        if self.has_group('base.group_system'):
+            return Workshop.search([]).ids
+        user = self.sudo()
+        technician_workshops = self.env['ksw.workshop.technician'].sudo().search(
+            [('employee_id', 'in', user.employee_ids.ids)]).workshop_id
+        workshops = user.x_workshop_ids | technician_workshops
+        if not workshops and (self.has_group('KSW_workshop.group_workshop_manager')
+                              or self.has_group('KSW_workshop.group_workshop_technician')):
+            workshops = Workshop._main()
+        return workshops.ids
+
+    def _ksw_workshop_review_ids(self):
+        """The workshops this user reads as Reviewer. A pure reviewer (GM) reads
+        every workshop unless his user names some; anyone who also manages or
+        works in a workshop reads only his own, so the Tabuk manager does not
+        read Nabiya through the Reviewer role his Manager role implies."""
+        self.ensure_one()
+        if self.has_group('base.group_system'):
+            return self._ksw_workshop_scope_ids()
+        works_in_one = self.has_group('KSW_workshop.group_workshop_manager') \
+            or self.has_group('KSW_workshop.group_workshop_technician')
+        if works_in_one or self.sudo().x_workshop_ids:
+            return self._ksw_workshop_scope_ids()
+        return self.env['ksw.workshop'].sudo().with_context(active_test=False).search([]).ids
+
     def _get_invalidation_fields(self):
         return super()._get_invalidation_fields() | {
-            'x_workshop_assisted_manager_ids', 'x_workshop_excluded_manager_ids'}
+            'x_workshop_assisted_manager_ids', 'x_workshop_excluded_manager_ids', 'x_workshop_ids'}
