@@ -40,6 +40,58 @@ class KswFleetVehicle(models.Model):
     x_release_request_id = fields.Many2one(
         'ksw.fleet.request', compute='_compute_is_released', string='Released By')
 
+    # A vehicle sent to the workshop is only given out again once its
+    # checkup is finished: that is what sending it there was for.
+    x_checkup_request_id = fields.Many2one(
+        'ksw.workshop.request', compute='_compute_checkup', string='Checkup Request')
+    # Text, not the request itself: the GM may not read workshop requests.
+    x_checkup_label = fields.Char(string='Checkup', compute='_compute_checkup')
+    x_checkup_open = fields.Boolean(
+        string='Checkup Open', compute='_compute_checkup', search='_search_checkup_open')
+
+    def _ksw_fleet_open_checkups(self, every_vehicle=False):
+        """{vehicle id: workshop request} for these held vehicles (every
+        held vehicle with every_vehicle) whose latest checkup is not finished.
+        An empty recordset means none, never all."""
+        if not self and not every_vehicle:
+            return {}
+        domain = [('kind', '=', 'holding'), ('vehicle_id.x_allocation_state', '=', 'holding')]
+        if not every_vehicle:
+            domain.append(('vehicle_id', 'in', self.ids))
+        moves = self.env['ksw.fleet.move'].sudo().search(domain, order='id desc')
+        latest = {}
+        for move in moves:
+            latest.setdefault(move.vehicle_id.id, move.workshop_request_id)
+        return {vid: request for vid, request in latest.items()
+                if request and request.state not in self._CHECKUP_DONE_STATES}
+
+    _CHECKUP_DONE_STATES = ('completed', 'rejected')
+
+    @api.depends('x_allocation_state', 'x_move_ids.workshop_request_id.state')
+    def _compute_checkup(self):
+        held = self.filtered(lambda v: v.x_allocation_state == 'holding')
+        open_checkups = held._ksw_fleet_open_checkups() if held else {}
+        for vehicle in self:
+            last = vehicle.x_move_ids.filtered(lambda m: m.kind == 'holding').sorted('id', reverse=True)[:1] \
+                if vehicle.x_allocation_state == 'holding' else vehicle.x_move_ids.browse()
+            vehicle.x_checkup_request_id = last.workshop_request_id
+            request = last.workshop_request_id.sudo()
+            vehicle.x_checkup_label = '%s (%s)' % (
+                request.name, dict(request._fields['state']._description_selection(self.env))[request.state]
+            ) if request else False
+            vehicle.x_checkup_open = vehicle.id in open_checkups
+
+    def _search_checkup_open(self, operator, value):
+        # Odoo 19 hands a boolean condition over as in/not in (gotcha #24).
+        if operator in ('in', 'not in'):
+            wanted = (operator == 'in') == any(value)
+        elif operator in ('=', '!='):
+            wanted = (operator == '=') == bool(value)
+        else:
+            return NotImplemented
+        ids = list(self.browse()._ksw_fleet_open_checkups(every_vehicle=True))
+        return [('id', 'in' if wanted else 'not in', ids)]
+
     # "My department's vehicles". Vehicles stay readable company-wide (the
     # workshop and water-delivery pickers need them), so the Vehicle
     # Allocation menus narrow by this instead of a record rule.
@@ -173,6 +225,12 @@ class KswFleetVehicle(models.Model):
                 raise UserError(_('%s belongs to a client, not to the company fleet.', vehicle.name))
             if vehicle.x_allocation_state == 'in_transfer':
                 raise UserError(_('%s is already being transferred.', vehicle.name))
+        open_checkups = self.filtered(lambda v: v.x_allocation_state == 'holding')._ksw_fleet_open_checkups()
+        if open_checkups:
+            raise UserError(_(
+                'Still at the workshop: %s. A held vehicle is given out once its checkup is completed.',
+                ', '.join('%s (%s)' % (self.browse(vid).name, request.name)
+                          for vid, request in open_checkups.items())))
 
     def _ksw_fleet_start_transfer(self, target, note=False, addition_line=None, source='internal'):
         """GM decision: move this vehicle to `target`. The vehicle stays with
@@ -200,14 +258,14 @@ class KswFleetVehicle(models.Model):
             })
         if release_line and not self.env.context.get('ksw_fleet_batch'):
             release_line.request_id._ksw_fleet_post(Markup(
-                '<b>%(v)s</b> will be transferred to <b>%(d)s</b>.%(n)s')
+                _('<b>%(v)s</b> will be transferred to <b>%(d)s</b>.%(n)s'))
                 % {'v': self.name, 'd': target.name, 'n': _note(note)})
         self.sudo().with_context(ksw_fleet_allocation=True).write({'x_allocation_state': 'in_transfer'})
         anchor = addition_line.request_id if addition_line else release_line.request_id
         if anchor and not self.env.context.get('ksw_fleet_batch'):
             anchor._ksw_fleet_post(Markup(
-                '<b>%(v)s</b> is on its way to <b>%(d)s</b>. Confirm on its arrival under '
-                'Vehicle Allocation ▸ Transfers to Receive.%(n)s')
+                _('<b>%(v)s</b> is on its way to <b>%(d)s</b>. Confirm on its arrival under '
+                'Vehicle Allocation ▸ Transfers to Receive.%(n)s'))
                 % {'v': self.name, 'd': target.name, 'n': _note(note)})
         return move
 
@@ -249,8 +307,8 @@ class KswFleetVehicle(models.Model):
             })
         if release_line and not self.env.context.get('ksw_fleet_batch'):
             release_line.request_id._ksw_fleet_post(Markup(
-                '<b>%(v)s</b> was sent to the workshop for a checkup (%(w)s) and is now in '
-                'the Holding pool.%(n)s') % {'v': self.name, 'w': workshop_request.name, 'n': _note(note)})
+                _('<b>%(v)s</b> was sent to the workshop for a checkup (%(w)s) and is now in '
+                'the Holding pool.%(n)s')) % {'v': self.name, 'w': workshop_request.name, 'n': _note(note)})
         self.sudo().with_context(ksw_fleet_allocation=True).write({
             'x_department_id': False, 'x_allocation_state': 'holding'})
         return move

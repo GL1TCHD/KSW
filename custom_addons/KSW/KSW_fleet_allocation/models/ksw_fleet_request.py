@@ -88,7 +88,7 @@ class KswFleetRequest(models.Model):
                 lines = request.addition_line_ids
                 request.open_line_count = len(lines.filtered(lambda l: l.open_quantity > 0))
                 request.line_summary = ', '.join(
-                    '%s × %s' % (l.quantity, dict(VEHICLE_TYPES).get(l.vehicle_type)) for l in lines)
+                    '%s × %s' % (l.quantity, dict(self.env['ksw.fleet.addition.line']._fields['vehicle_type']._description_selection(self.env)).get(l.vehicle_type)) for l in lines)
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -149,8 +149,8 @@ class KswFleetRequest(models.Model):
         self.sudo().write({'state': 'submitted', 'submitted_date': fields.Datetime.now()})
         for request in self:
             request.sudo().message_post(body=Markup(
-                '<b>%(t)s</b> from <b>%(d)s</b> waits for the GM\'s decision: %(s)s<br/><i>%(r)s</i>')
-                % {'t': dict(request._fields['request_type'].selection)[request.request_type],
+                _('<b>%(t)s</b> from <b>%(d)s</b> waits for the GM\'s decision: %(s)s<br/><i>%(r)s</i>'))
+                % {'t': dict(request._fields['request_type']._description_selection(self.env))[request.request_type],
                    'd': request.department_id.name, 's': request.line_summary, 'r': request.reason},
                 subtype_xmlid='mail.mt_note')
         self._ksw_fleet_sync_activities()
@@ -172,7 +172,7 @@ class KswFleetRequest(models.Model):
                     'instead of cancelling it.', request.name))
         self.sudo().write({'state': 'cancelled'})
         for request in self:
-            request._ksw_fleet_post(Markup('Cancelled by %s.') % self.env.user.name)
+            request._ksw_fleet_post(Markup(_('Cancelled by %s.')) % self.env.user.name)
         self._ksw_fleet_sync_activities()
         return True
 
@@ -212,7 +212,7 @@ class KswFleetRequest(models.Model):
             lines = request.release_line_ids if request.request_type == 'release' else request.addition_line_ids
             if lines and all(lines.mapped('is_closed')):
                 request.state = 'done'
-                request._ksw_fleet_post(Markup('All lines are settled; the request is closed.'))
+                request._ksw_fleet_post(Markup(_('All lines are settled; the request is closed.')))
         self._ksw_fleet_sync_activities()
 
     def _ksw_fleet_sync_activities(self):
@@ -472,7 +472,7 @@ class KswFleetAdditionLine(models.Model):
         return {
             'type': 'ir.actions.act_window',
             'name': _('Decide: %(q)s × %(t)s for %(d)s', q=self.quantity,
-                      t=dict(VEHICLE_TYPES).get(self.vehicle_type), d=self.department_id.name),
+                      t=dict(self.env['ksw.fleet.addition.line']._fields['vehicle_type']._description_selection(self.env)).get(self.vehicle_type), d=self.department_id.name),
             'res_model': 'ksw.fleet.allocate.wizard',
             'view_mode': 'form',
             'target': 'new',

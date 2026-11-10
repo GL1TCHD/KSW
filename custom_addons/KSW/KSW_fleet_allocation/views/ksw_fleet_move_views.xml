@@ -22,6 +22,11 @@
                 <field name="date"/>
                 <field name="received_by_id" optional="hide"/>
                 <field name="received_date" optional="show"/>
+                <field name="received_condition" optional="show" widget="badge"
+                       decoration-success="received_condition == 'good'"
+                       decoration-warning="received_condition == 'minor'"
+                       decoration-danger="received_condition == 'damaged'"/>
+                <field name="received_odometer" optional="hide"/>
                 <field name="workshop_request_id" optional="show"
                        groups="KSW_fleet_allocation.group_fleet_allocation_gm,base.group_system"/>
                 <field name="workshop_state" optional="show"/>
@@ -70,6 +75,9 @@
                             <field name="date"/>
                             <field name="received_by_id"/>
                             <field name="received_date"/>
+                            <field name="received_condition" invisible="not received_condition"/>
+                            <field name="received_odometer" invisible="not received_odometer"/>
+                            <field name="received_note" invisible="not received_note"/>
                             <field name="workshop_request_id"
                                    groups="KSW_fleet_allocation.group_fleet_allocation_gm,base.group_system"/>
                             <field name="workshop_state" invisible="not workshop_state"/>

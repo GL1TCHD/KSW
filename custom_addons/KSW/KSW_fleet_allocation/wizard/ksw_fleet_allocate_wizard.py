@@ -45,7 +45,7 @@ class KswFleetAllocateWizard(models.TransientModel):
         for wizard in self:
             line = wizard.addition_line_id
             base = [('x_is_own_fleet', '=', True), ('vehicle_type', '=', line.vehicle_type),
-                    ('state', '=', 'confirmed')]
+                    ('state', '=', 'confirmed'), ('x_checkup_open', '=', False)]
             if wizard.mode == 'external_arrival':
                 # A newly obtained vehicle is registered without a department.
                 pool = [('x_allocation_state', '=', 'unassigned')]
@@ -77,6 +77,14 @@ class KswFleetAllocateWizard(models.TransientModel):
             outside = self.vehicle_ids - self.available_vehicle_ids
             if outside:
                 raise UserError(_('Not available: %s.', ', '.join(outside.mapped('name'))))
+            # Taking a vehicle its department never offered: say why, and that
+            # department is told (_ksw_fleet_post_summary).
+            taken = self.vehicle_ids.sudo().filtered(
+                lambda v: v.x_allocation_state == 'assigned' and not v.x_is_released)
+            if taken and not self.note:
+                raise UserError(_(
+                    '%s were not released by their department. Write the reason in the note: '
+                    'that department is told.', ', '.join(taken.mapped('name'))))
             source = 'internal' if self.mode == 'internal' else 'external'
             for vehicle in self.vehicle_ids.sudo().with_context(ksw_fleet_batch=True):
                 moves |= vehicle._ksw_fleet_start_transfer(line.department_id, self.note,
@@ -91,10 +99,10 @@ class KswFleetAllocateWizard(models.TransientModel):
                 'external_note': '\n'.join(filter(None, [line.external_note, self.note])),
             })
             request._ksw_fleet_post(Markup(
-                '%(q)s × %(t)s to be obtained outside (%(m)s). Each one is allocated to '
-                '%(d)s when it arrives.%(n)s') % {
-                'q': self.decide_quantity, 't': dict(line._fields['vehicle_type'].selection)[line.vehicle_type],
-                'm': dict(self._fields['external_method'].selection)[self.external_method],
+                _('%(q)s × %(t)s to be obtained outside (%(m)s). Each one is allocated to '
+                '%(d)s when it arrives.%(n)s')) % {
+                'q': self.decide_quantity, 't': dict(line._fields['vehicle_type']._description_selection(self.env))[line.vehicle_type],
+                'm': dict(self._fields['external_method']._description_selection(self.env))[self.external_method],
                 'd': line.department_id.name, 'n': note_part})
         else:
             if not 0 < self.decide_quantity <= line.open_quantity:
@@ -105,9 +113,9 @@ class KswFleetAllocateWizard(models.TransientModel):
                 'refused_quantity': line.refused_quantity + self.decide_quantity,
                 'refuse_reason': '\n'.join(filter(None, [line.refuse_reason, self.note])),
             })
-            request._ksw_fleet_post(Markup('%(q)s × %(t)s refused.%(n)s') % {
+            request._ksw_fleet_post(Markup(_('%(q)s × %(t)s refused.%(n)s')) % {
                 'q': self.decide_quantity,
-                't': dict(line._fields['vehicle_type'].selection)[line.vehicle_type], 'n': note_part})
+                't': dict(line._fields['vehicle_type']._description_selection(self.env))[line.vehicle_type], 'n': note_part})
         # A vehicle taken from a release settles that request too.
         (request | moves.release_line_id.request_id)._ksw_fleet_sync_state()
         return {'type': 'ir.actions.act_window_close'}

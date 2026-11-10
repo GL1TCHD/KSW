@@ -95,6 +95,30 @@
         <field name="perm_unlink" eval="False"/>
     </record>
 
+    <!-- A department the GM took a vehicle from without its releasing it
+         reads the request that took it, read only: where the message about
+         it is posted. -->
+    <record id="rule_ksw_fleet_request_user_taken_from" model="ir.rule">
+        <field name="name">Vehicle request: read requests that took a vehicle from own departments</field>
+        <field name="model_id" ref="model_ksw_fleet_request"/>
+        <field name="domain_force">[('move_ids.from_department_id', 'in', user._ksw_fleet_department_ids())]</field>
+        <field name="groups" eval="[(4, ref('group_fleet_allocation_user'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+    <record id="rule_ksw_fleet_addition_line_user_taken_from" model="ir.rule">
+        <field name="name">Vehicle addition line: read lines that took a vehicle from own departments</field>
+        <field name="model_id" ref="model_ksw_fleet_addition_line"/>
+        <field name="domain_force">[('move_ids.from_department_id', 'in', user._ksw_fleet_department_ids())]</field>
+        <field name="groups" eval="[(4, ref('group_fleet_allocation_user'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="False"/>
+        <field name="perm_create" eval="False"/>
+        <field name="perm_unlink" eval="False"/>
+    </record>
+
     <!-- A department reads the movements into and out of it: its vehicles'
          history and the transfers it has to confirm. -->
     <record id="rule_ksw_fleet_move_user" model="ir.rule">

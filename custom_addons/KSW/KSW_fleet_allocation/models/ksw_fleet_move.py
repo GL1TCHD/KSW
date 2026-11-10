@@ -39,6 +39,15 @@ class KswFleetMove(models.Model):
     received_by_id = fields.Many2one('res.users', string='Received By')
     received_date = fields.Datetime(string='Received On')
     note = fields.Text()
+    # Recorded by the receiving department at handover, so a dispute about
+    # the state it arrived in has evidence.
+    received_odometer = fields.Integer(string='Odometer at Arrival', aggregator=None)
+    received_condition = fields.Selection([
+        ('good', 'Good'),
+        ('minor', 'Minor Issues'),
+        ('damaged', 'Damaged'),
+    ], string='Condition at Arrival')
+    received_note = fields.Text(string='Arrival Note')
 
     release_line_id = fields.Many2one('ksw.fleet.release.line', string='Release Line',
                                       index=True, ondelete='set null')
@@ -113,37 +122,72 @@ class KswFleetMove(models.Model):
         requests = self.release_line_id.request_id | self.addition_line_id.request_id
         for request in requests:
             moves = self.filtered(lambda m: request in (m.release_line_id.request_id | m.addition_line_id.request_id))
-            parts = []
+            parts, partners = [], self.env['res.partner']
             for target in moves.filtered(lambda m: m.kind == 'transfer').to_department_id:
                 group = moves.filtered(lambda m: m.kind == 'transfer' and m.to_department_id == target)
-                parts.append(Markup('<b>%(v)s</b> → <b>%(d)s</b>, to confirm on arrival under '
-                                    'Vehicle Allocation ▸ Transfers to Receive.')
+                parts.append(Markup(_('<b>%(v)s</b> → <b>%(d)s</b>, to confirm on arrival under '
+                                    'Vehicle Allocation ▸ Transfers to Receive.'))
                              % {'v': ', '.join(group.vehicle_id.mapped('name')), 'd': target.name})
+            # Taken from a department that never released it: that department
+            # is told, on the request it can now read (security.xml).
+            for source in moves.filtered(
+                    lambda m: m.kind == 'transfer' and not m.release_line_id and m.from_department_id
+            ).from_department_id:
+                taken = moves.filtered(lambda m: m.kind == 'transfer' and not m.release_line_id
+                                       and m.from_department_id == source)
+                parts.append(Markup(_('Taken from <b>%(d)s</b> by the GM\'s decision: <b>%(v)s</b>.'))
+                             % {'d': source.name, 'v': ', '.join(taken.vehicle_id.mapped('name'))})
+                partners |= source._ksw_fleet_users().partner_id
             held = moves.filtered(lambda m: m.kind == 'holding')
             if held:
-                parts.append(Markup('<b>%(v)s</b> sent to the workshop for a checkup (%(w)s), now in '
-                                    'the Holding pool.')
+                parts.append(Markup(_('<b>%(v)s</b> sent to the workshop for a checkup (%(w)s), now in '
+                                    'the Holding pool.'))
                              % {'v': ', '.join(held.vehicle_id.mapped('name')),
                                 'w': ', '.join(held.workshop_request_id.mapped('name'))})
             if parts:
-                request._ksw_fleet_post(Markup('<br/>').join(parts) + note_part)
+                request._ksw_fleet_post(Markup('<br/>').join(parts) + note_part, partners=partners)
 
-    def action_receive(self):
+    def _check_can_receive(self):
         for move in self:
             if not move.x_can_receive:
                 raise UserError(_(
                     'Only the receiving department confirms that %s arrived.',
                     move.vehicle_id.name))
+
+    def action_receive(self):
+        """Opens the handover form: odometer and condition per vehicle."""
+        self._check_can_receive()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': _('Confirm Arrival'),
+            'res_model': 'ksw.fleet.receive.wizard',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': {'default_line_ids': [(0, 0, {'move_id': move.id}) for move in self]},
+        }
+
+    def _ksw_fleet_receive(self, details):
+        """Complete these transfers. `details`: {move id: {received_odometer,
+        received_condition, received_note}}."""
+        self._check_can_receive()
         now = fields.Datetime.now()
+        conditions = dict(self._fields['received_condition']._description_selection(self.env))
+        gm_partners = self.env.ref('KSW_fleet_allocation.group_fleet_allocation_gm').sudo().all_user_ids.partner_id
         for move in self.sudo():
-            move.write({'state': 'done', 'received_by_id': self.env.user.id, 'received_date': now})
+            vals = details.get(move.id, {})
+            move.write(dict(vals, state='done', received_by_id=self.env.user.id, received_date=now))
             move.vehicle_id.with_context(ksw_fleet_allocation=True).write({
                 'x_department_id': move.to_department_id.id, 'x_allocation_state': 'assigned'})
             if move.request_id:
-                move.request_id._ksw_fleet_post(Markup(
-                    '<b>%(v)s</b> received by <b>%(d)s</b> (%(u)s).')
-                    % {'v': move.vehicle_id.name, 'd': move.to_department_id.name,
-                       'u': self.env.user.name})
+                condition = move.received_condition or 'good'
+                body = Markup(_('<b>%(v)s</b> received by <b>%(d)s</b> (%(u)s). Condition: <b>%(c)s</b>%(o)s.')) % {
+                    'v': move.vehicle_id.name, 'd': move.to_department_id.name, 'u': self.env.user.name,
+                    'c': conditions[condition],
+                    'o': Markup(_(', odometer %s')) % move.received_odometer if move.received_odometer else ''}
+                if move.received_note:
+                    body += Markup('<br/><i>%s</i>') % move.received_note
+                # A vehicle that did not arrive in good order is the GM's to know.
+                move.request_id._ksw_fleet_post(body, partners=gm_partners if condition != 'good' else None)
             (move.addition_line_id.request_id | move.release_line_id.request_id)._ksw_fleet_sync_state()
         return True
 
@@ -165,7 +209,7 @@ class KswFleetMove(models.Model):
                     'decided_by_id': False, 'decided_date': False})
             requests = move.addition_line_id.request_id | move.release_line_id.request_id
             for request in requests:
-                request._ksw_fleet_post(Markup('Transfer of <b>%(v)s</b> to %(d)s cancelled by the GM.')
+                request._ksw_fleet_post(Markup(_('Transfer of <b>%(v)s</b> to %(d)s cancelled by the GM.'))
                                         % {'v': move.vehicle_id.name, 'd': move.to_department_id.name})
                 if request.state == 'done':
                     request.state = 'submitted'

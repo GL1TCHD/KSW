@@ -56,6 +56,13 @@ class TestFleetAllocation(TransactionCase):
             dict({'addition_line_id': line.id}, **vals))
         wizard.action_confirm()
 
+    def _receive(self, moves, user, **vals):
+        action = moves.with_user(user).action_receive()
+        wizard = self.env['ksw.fleet.receive.wizard'].with_user(user).with_context(**action['context']).create({})
+        if vals:
+            wizard.line_ids.write(vals)
+        wizard.action_confirm()
+
     # tests ------------------------------------------------------------
     def test_starting_assignment_is_logged(self):
         self.assertEqual(self.isuzu_a1.x_allocation_state, 'assigned')
@@ -77,7 +84,7 @@ class TestFleetAllocation(TransactionCase):
         with self.assertRaises(UserError):  # not even the GM
             move.with_user(self.gm).action_receive()
         self.assertFalse(move.with_user(self.gm).x_can_receive)
-        move.with_user(self.user_b).action_receive()
+        self._receive(move, self.user_b)
         self.assertEqual(self.isuzu_a1.x_department_id, self.dept_b)
         self.assertEqual(self.isuzu_a1.x_allocation_state, 'assigned')
         self.assertEqual(release.state, 'done')
@@ -119,7 +126,7 @@ class TestFleetAllocation(TransactionCase):
         rented = self.env['ksw.fleet.vehicle'].create({'name': 'FA-RENT', 'vehicle_type': 'isuzu'})
         self._allocate(line, mode='external_arrival', vehicle_ids=[(6, 0, rented.ids)])
         for move in line.move_ids:
-            move.with_user(self.user_b).action_receive()
+            self._receive(move, self.user_b)
         self.assertEqual(line.status, 'done')
         self.assertEqual(addition.state, 'done')
         self.assertEqual(rented.x_department_id, self.dept_b)
@@ -180,7 +187,7 @@ class TestFleetAllocation(TransactionCase):
 
     def test_cancel_refused_once_decided(self):
         release = self._release(self.user_a, self.dept_a, self.isuzu_a1 | self.isuzu_a2)
-        self._decide_release(release.release_line_ids[0], decision='keep')
+        self._decide_release(release.release_line_ids[0], decision='keep', note='Needed')
         with self.assertRaises(UserError):
             release.with_user(self.user_a).action_cancel()
 
@@ -254,7 +261,7 @@ class TestFleetAllocation(TransactionCase):
         # Counted against Bravo's request, so the to-do sits on Bravo's own request.
         self.assertTrue(self._todo(addition, receive, self.user_b))
         self.assertFalse(self._todo(addition, decide, self.gm))
-        self.isuzu_a1.x_pending_move_id.with_user(self.user_b).action_receive()
+        self._receive(self.isuzu_a1.x_pending_move_id, self.user_b)
         self.assertFalse(self._todo(addition, receive, self.user_b))
 
     def test_cancelled_request_clears_gm_todo(self):
@@ -290,3 +297,57 @@ class TestFleetAllocation(TransactionCase):
         self.assertEqual(Department.with_user(self.gm).search(domain) & (self.dept_a | self.dept_b),
                          self.dept_a | self.dept_b)
         self.assertEqual(self.dept_a.with_user(self.user_a).x_fleet_vehicle_count, 2)
+
+    def test_keep_needs_a_reason(self):
+        release = self._release(self.user_a, self.dept_a, self.isuzu_a1)
+        with self.assertRaises(UserError):
+            self._decide_release(release.release_line_ids, decision='keep')
+
+    def test_held_vehicle_waits_for_its_checkup(self):
+        release = self._release(self.user_a, self.dept_a, self.isuzu_a1)
+        self._decide_release(release.release_line_ids, decision='holding')
+        checkup = self.isuzu_a1.x_checkup_request_id
+        self.assertTrue(self.isuzu_a1.x_checkup_open)
+        addition = self._addition(self.user_b, self.dept_b, 'isuzu', 1)
+        line = addition.addition_line_ids
+        wizard = self.env['ksw.fleet.allocate.wizard'].with_user(self.gm).create(
+            {'addition_line_id': line.id, 'mode': 'internal'})
+        self.assertNotIn(self.isuzu_a1, wizard.available_vehicle_ids)
+        with self.assertRaises(UserError):  # nor through the back door
+            self.isuzu_a1.sudo()._ksw_fleet_start_transfer(self.dept_b, addition_line=line.sudo())
+        checkup.sudo().write({'state': 'completed'})
+        self.isuzu_a1.invalidate_recordset(['x_checkup_open'])
+        wizard.invalidate_recordset(['available_vehicle_ids'])
+        self.assertIn(self.isuzu_a1, wizard.available_vehicle_ids)
+        self._allocate(line, mode='internal', vehicle_ids=[(6, 0, self.isuzu_a1.ids)])
+        self.assertEqual(self.isuzu_a1.x_allocation_state, 'in_transfer')
+
+    def test_taking_an_unreleased_vehicle(self):
+        """Needs a reason, and the department that loses it is told on a
+        request it can read."""
+        addition = self._addition(self.user_b, self.dept_b, 'isuzu', 1)
+        line = addition.addition_line_ids
+        with self.assertRaises(UserError):
+            self._allocate(line, mode='internal', include_assigned=True,
+                           vehicle_ids=[(6, 0, self.isuzu_a1.ids)])
+        self._allocate(line, mode='internal', include_assigned=True, note='Bravo has a new contract',
+                       vehicle_ids=[(6, 0, self.isuzu_a1.ids)])
+        told = addition.message_ids.filtered(lambda m: self.user_a.partner_id in m.partner_ids)
+        self.assertTrue(told)
+        self.assertIn('Taken from', told[0].body)
+        self.assertIn(addition, self.env['ksw.fleet.request'].with_user(self.user_a).search([]))
+        with self.assertRaises(UserError):  # read only for Alpha
+            addition.with_user(self.user_a).action_cancel()
+
+    def test_handover_records_condition(self):
+        release = self._release(self.user_a, self.dept_a, self.isuzu_a1)
+        self._decide_release(release.release_line_ids, decision='transfer', target_department_id=self.dept_b.id)
+        move = self.isuzu_a1.x_pending_move_id
+        with self.assertRaises(UserError):  # damaged without saying what
+            self._receive(move, self.user_b, condition='damaged')
+        self.assertEqual(move.state, 'in_transfer')
+        self._receive(move, self.user_b, condition='damaged', odometer=152300, note='Cracked mirror')
+        self.assertEqual((move.received_condition, move.received_odometer, move.received_note),
+                         ('damaged', 152300, 'Cracked mirror'))
+        self.assertTrue(release.message_ids.filtered(
+            lambda m: self.gm.partner_id in m.partner_ids and 'Cracked mirror' in m.body))

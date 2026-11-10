@@ -24,7 +24,7 @@ class HrDepartment(models.Model):
         Move = self.env['ksw.fleet.move'].sudo()
         Request = self.env['ksw.fleet.request'].sudo()
         Vehicle = self.env['ksw.fleet.vehicle'].sudo()
-        types = dict(Vehicle._fields['vehicle_type'].selection)
+        types = dict(Vehicle._fields['vehicle_type']._description_selection(self.env))
 
         def count(model, domain, field):
             return dict(model._read_group(domain + [(field, 'in', self.ids)], [field], ['__count']))

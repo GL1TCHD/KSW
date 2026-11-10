@@ -9,3 +9,5 @@ access_ksw_fleet_move_user,ksw.fleet.move.user,model_ksw_fleet_move,group_fleet_
 access_ksw_fleet_move_system,ksw.fleet.move.system,model_ksw_fleet_move,base.group_system,1,1,1,1
 access_ksw_fleet_release_decision_wizard_gm,ksw.fleet.release.decision.wizard.gm,model_ksw_fleet_release_decision_wizard,group_fleet_allocation_gm,1,1,1,1
 access_ksw_fleet_allocate_wizard_gm,ksw.fleet.allocate.wizard.gm,model_ksw_fleet_allocate_wizard,group_fleet_allocation_gm,1,1,1,1
+access_ksw_fleet_receive_wizard_user,ksw.fleet.receive.wizard.user,model_ksw_fleet_receive_wizard,group_fleet_allocation_user,1,1,1,1
+access_ksw_fleet_receive_wizard_line_user,ksw.fleet.receive.wizard.line.user,model_ksw_fleet_receive_wizard_line,group_fleet_allocation_user,1,1,1,1

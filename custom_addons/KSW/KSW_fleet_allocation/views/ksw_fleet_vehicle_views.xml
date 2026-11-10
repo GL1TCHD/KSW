@@ -24,6 +24,7 @@
                     <group>
                         <field name="x_pending_move_id" invisible="not x_pending_move_id"/>
                         <field name="x_release_request_id" invisible="not x_release_request_id"/>
+                        <field name="x_checkup_label" invisible="not x_checkup_label"/>
                     </group>
                 </group>
                 <field name="x_move_ids" readonly="1" invisible="not x_move_ids">
@@ -35,6 +36,7 @@
                         <field name="request_id" optional="show"/>
                         <field name="decided_by_id" optional="show"/>
                         <field name="received_date" optional="show"/>
+                        <field name="received_condition" optional="show"/>
                         <field name="state" widget="badge"/>
                     </list>
                 </field>
@@ -67,6 +69,8 @@
                        decoration-warning="x_allocation_state == 'holding'"
                        decoration-success="x_allocation_state == 'assigned'"/>
                 <field name="x_release_request_id" optional="show"/>
+                <field name="x_checkup_label" optional="show"/>
+                <field name="x_checkup_open" column_invisible="True"/>
             </list>
         </field>
     </record>

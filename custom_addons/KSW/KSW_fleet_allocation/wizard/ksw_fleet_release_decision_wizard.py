@@ -36,7 +36,7 @@ class KswFleetReleaseDecisionWizard(models.TransientModel):
 
     @api.depends('release_line_ids')
     def _compute_sources(self):
-        types = dict(self.env['ksw.fleet.vehicle']._fields['vehicle_type'].selection)
+        types = dict(self.env['ksw.fleet.vehicle']._fields['vehicle_type']._description_selection(self.env))
         for wizard in self:
             wizard.source_department_ids = wizard.release_line_ids.department_id
             wizard.vehicle_types = ', '.join(sorted({
@@ -61,6 +61,8 @@ class KswFleetReleaseDecisionWizard(models.TransientModel):
             raise UserError(_('Already decided: %s. Remove them from the list.',
                               ', '.join(decided.vehicle_id.mapped('name'))))
         target = self.target_department_id
+        if self.decision == 'keep' and not self.note:
+            raise UserError(_('Write why they are kept: the department asked to give them up.'))
         if self.decision == 'transfer':
             if not target:
                 raise UserError(_('Choose the department that receives them.'))
@@ -90,7 +92,7 @@ class KswFleetReleaseDecisionWizard(models.TransientModel):
         if self.decision == 'keep':
             for request in lines.request_id:
                 names = ', '.join(lines.filtered(lambda l: l.request_id == request).vehicle_id.mapped('name'))
-                request._ksw_fleet_post(Markup('<b>%(v)s</b> stay with %(d)s.%(n)s')
+                request._ksw_fleet_post(Markup(_('<b>%(v)s</b> stay with %(d)s.%(n)s'))
                                         % {'v': names, 'd': request.department_id.name, 'n': note_part})
         # The receiving department's requests too: a transfer may settle them.
         (lines.request_id | moves.addition_line_id.request_id)._ksw_fleet_sync_state()

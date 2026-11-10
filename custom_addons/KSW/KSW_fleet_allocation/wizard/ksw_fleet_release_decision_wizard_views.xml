@@ -34,7 +34,8 @@
                         <field name="note"/>
                     </list>
                 </field>
-                <field name="note" placeholder="Note for the departments (optional)..."/>
+                <field name="note" required="decision == 'keep'"
+                       placeholder="Note for the departments (required when keeping them: they asked to give them up)..."/>
                 <separator string="Departments asking for these types"
                            invisible="not demand_line_ids or decision != 'transfer'"/>
                 <field name="demand_line_ids" readonly="1" invisible="not demand_line_ids or decision != 'transfer'">

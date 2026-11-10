@@ -1,0 +1,2125 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* KSW_fleet_allocation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-10 08:05+0000\n"
+"PO-Revision-Date: 2026-11-10 08:05+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ar_001\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=6; plural=(n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5);\n"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/wizard/ksw_fleet_allocate_wizard.py:0
+msgid "%(q)s × %(t)s refused.%(n)s"
+msgstr "رُفض %(q)s × %(t)s.%(n)s"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/wizard/ksw_fleet_allocate_wizard.py:0
+msgid ""
+"%(q)s × %(t)s to be obtained outside (%(m)s). Each one is allocated to %(d)s"
+" when it arrives.%(n)s"
+msgstr ""
+"سيتم توفير %(q)s × %(t)s خارجياً (%(m)s)، وتُخصَّص كل مركبة لـ %(d)s عند "
+"وصولها.%(n)s"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/wizard/ksw_fleet_release_decision_wizard.py:0
+msgid "%(v)s already belong to %(d)s."
+msgstr "%(v)s تابعة أصلاً لـ %(d)s."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_vehicle.py:0
+msgid "%(v)s already belongs to %(d)s."
+msgstr "%(v)s تابعة أصلاً لـ %(d)s."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "%(v)s is already on another release request (%(r)s)."
+msgstr "%(v)s مدرجة أصلاً في طلب استغناء آخر (%(r)s)."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "%(v)s is not a vehicle of %(d)s."
+msgstr "%(v)s ليست من مركبات %(d)s."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_vehicle.py:0
+msgid "%s belongs to a client, not to the company fleet."
+msgstr "%s تابعة لعميل، وليست من أسطول الشركة."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "%s is already being moved."
+msgstr "%s قيد النقل أصلاً."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_vehicle.py:0
+msgid "%s is already being transferred."
+msgstr "%s قيد النقل أصلاً."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "%s is already closed."
+msgstr "%s مغلق أصلاً."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/wizard/ksw_fleet_allocate_wizard.py:0
+msgid "%s is not waiting for a decision."
+msgstr "%s ليس بانتظار قرار."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "%s was already submitted."
+msgstr "تم إرسال %s مسبقاً."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/wizard/ksw_fleet_allocate_wizard.py:0
+msgid ""
+"%s were not released by their department. Write the reason in the note: that"
+" department is told."
+msgstr "لم يستغنِ قسمها عن %s. اكتب السبب في الملاحظة، وسيتم إبلاغ ذلك القسم."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_move.py:0
+msgid ", odometer %s"
+msgstr "، العداد %s"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid ""
+"<b>%(t)s</b> from <b>%(d)s</b> waits for the GM's decision: "
+"%(s)s<br/><i>%(r)s</i>"
+msgstr ""
+"<b>%(t)s</b> من <b>%(d)s</b> بانتظار قرار المدير العام: "
+"%(s)s<br/><i>%(r)s</i>"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_vehicle.py:0
+msgid ""
+"<b>%(v)s</b> is on its way to <b>%(d)s</b>. Confirm on its arrival under "
+"Vehicle Allocation ▸ Transfers to Receive.%(n)s"
+msgstr ""
+"<b>%(v)s</b> في الطريق إلى <b>%(d)s</b>. يُؤكَّد الاستلام عند الوصول من "
+"تخصيص المركبات ▸ النقل ▸ بانتظار الاستلام.%(n)s"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_move.py:0
+msgid ""
+"<b>%(v)s</b> received by <b>%(d)s</b> (%(u)s). Condition: <b>%(c)s</b>%(o)s."
+msgstr ""
+"استلم <b>%(d)s</b> المركبة <b>%(v)s</b> (%(u)s). الحالة: <b>%(c)s</b>%(o)s."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_move.py:0
+msgid ""
+"<b>%(v)s</b> sent to the workshop for a checkup (%(w)s), now in the Holding "
+"pool."
+msgstr "أُرسلت <b>%(v)s</b> إلى الورشة للفحص (%(w)s)، وهي الآن في الاحتياط."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/wizard/ksw_fleet_release_decision_wizard.py:0
+msgid "<b>%(v)s</b> stay with %(d)s.%(n)s"
+msgstr "تبقى <b>%(v)s</b> لدى %(d)s.%(n)s"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_vehicle.py:0
+msgid ""
+"<b>%(v)s</b> was sent to the workshop for a checkup (%(w)s) and is now in "
+"the Holding pool.%(n)s"
+msgstr ""
+"أُرسلت <b>%(v)s</b> إلى الورشة للفحص (%(w)s) وهي الآن في الاحتياط.%(n)s"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_vehicle.py:0
+msgid "<b>%(v)s</b> will be transferred to <b>%(d)s</b>.%(n)s"
+msgstr "سيتم نقل <b>%(v)s</b> إلى <b>%(d)s</b>.%(n)s"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_move.py:0
+msgid ""
+"<b>%(v)s</b> → <b>%(d)s</b>, to confirm on arrival under Vehicle Allocation "
+"▸ Transfers to Receive."
+msgstr ""
+"<b>%(v)s</b> ← <b>%(d)s</b>، ويُؤكَّد الاستلام عند الوصول من تخصيص المركبات "
+"▸ النقل ▸ بانتظار الاستلام."
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_department_kanban_fleet_overview
+msgid "<i class=\"fa fa-arrow-up me-1\"/>Release Vehicles"
+msgstr "<i class=\"fa fa-arrow-up me-1\"/>الاستغناء عن مركبات"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_department_kanban_fleet_overview
+msgid "<i class=\"fa fa-plus me-1\"/>Request Vehicles"
+msgstr "<i class=\"fa fa-plus me-1\"/>طلب مركبات"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "A release request lists vehicles to release only."
+msgstr "طلب الاستغناء يتضمن المركبات المستغنى عنها فقط."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "A submitted request cannot be changed."
+msgstr "لا يمكن تعديل طلب تم إرساله."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid ""
+"A submitted request cannot be changed. The GM decides it as it is; cancel it"
+" and raise a new one if it is wrong."
+msgstr ""
+"لا يمكن تعديل طلب تم إرساله. يبت فيه المدير العام كما هو؛ إن كان خاطئاً "
+"فألغِه وقدّم طلباً جديداً."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_vehicle.py:0
+msgid ""
+"A vehicle changes department through a release or addition request decided "
+"by the GM. Only the system administrator sets it directly."
+msgstr ""
+"تنتقل المركبة بين الأقسام عبر طلب استغناء أو طلب مركبات يبت فيه المدير "
+"العام. مدير النظام وحده يحدد القسم مباشرة."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "A vehicle is listed twice."
+msgstr "مركبة مدرجة مرتين."
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_allocate_wizard_form
+msgid ""
+"A vehicle its department did not release needs a reason in the note, and\n"
+"                        that department is told."
+msgstr ""
+"المركبة التي لم يستغنِ عنها قسمها تتطلب ذكر السبب في الملاحظة، وسيتم إبلاغ "
+"ذلك القسم."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__message_needaction
+msgid "Action Needed"
+msgstr "إجراء مطلوب"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__activity_ids
+msgid "Activities"
+msgstr "الأنشطة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "زخرفة استثناء النشاط"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__activity_state
+msgid "Activity State"
+msgstr "حالة النشاط"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "أيقونة نوع النشاط"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "Add the type and number of vehicles you need."
+msgstr "أضف نوع المركبات المطلوبة وعددها."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "Add the vehicles you want to release."
+msgstr "أضف المركبات التي تريد الاستغناء عنها."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_allocate_wizard__addition_line_id
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__addition_line_id
+msgid "Addition Line"
+msgstr "بند طلب المركبات"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_request__request_type__addition
+msgid "Additional Vehicles"
+msgstr "مركبات إضافية"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_request_search
+msgid "Additions"
+msgstr "طلبات المركبات"
+
+#. module: KSW_fleet_allocation
+#: model:ir.actions.act_window,name:KSW_fleet_allocation.action_ksw_fleet_request
+#: model:ir.ui.menu,name:KSW_fleet_allocation.menu_ksw_fleet_allocation_all_requests
+msgid "All Requests"
+msgstr "جميع الطلبات"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "All lines are settled; the request is closed."
+msgstr "تمت تسوية جميع البنود وأُغلق الطلب."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_allocate_wizard__mode__external_arrival
+msgid "Allocate an obtained vehicle that arrived"
+msgstr "تخصيص مركبة تم توفيرها ووصلت"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_vehicle__x_allocation_state
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_vehicle_form_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_vehicle_search_allocation
+msgid "Allocation"
+msgstr "التخصيص"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__allowed_department_ids
+msgid "Allowed Department"
+msgstr "الأقسام المسموح بها"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/wizard/ksw_fleet_release_decision_wizard.py:0
+msgid "Already decided: %s. Remove them from the list."
+msgstr "تم البت فيها مسبقاً: %s. احذفها من القائمة."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_vehicle.py:0
+msgid "Already on a release request: %s."
+msgstr "مدرجة أصلاً في طلب استغناء: %s."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_allocate_wizard__include_assigned
+msgid "Also take from departments that did not release"
+msgstr "الأخذ أيضاً من أقسام لم تستغنِ عن مركباتها"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "An additional vehicles request lists vehicles needed only."
+msgstr "طلب المركبات الإضافية يتضمن المركبات المطلوبة فقط."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__received_note
+msgid "Arrival Note"
+msgstr "ملاحظة الاستلام"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.actions.act_window,help:KSW_fleet_allocation.action_ksw_fleet_request_addition
+msgid "Ask for more vehicles"
+msgstr "اطلب مركبات إضافية"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.actions.act_window,help:KSW_fleet_allocation.action_ksw_fleet_overview
+msgid ""
+"Ask the administrator to name your departments under Vehicle Allocation ▸\n"
+"               Configuration ▸ Department Users."
+msgstr ""
+"اطلب من مدير النظام تحديد أقسامك من تخصيص المركبات ▸ التهيئة ▸ مستخدمو "
+"الأقسام."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_allocate_wizard__quantity
+msgid "Asked For"
+msgstr "المطلوب"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_move__from_state__assigned
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_vehicle__x_allocation_state__assigned
+msgid "Assigned"
+msgstr "مخصصة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__message_attachment_count
+msgid "Attachment Count"
+msgstr "عدد المرفقات"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_allocate_wizard__available_vehicle_ids
+msgid "Available Vehicle"
+msgstr "المركبات المتاحة"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_request_form
+msgid "Back to Draft"
+msgstr "إعادة إلى مسودة"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/wizard/ksw_fleet_allocate_wizard.py:0
+msgid "Between 1 and %s."
+msgstr "بين 1 و %s."
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_move_list
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_request_form
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_move_form
+msgid "Cancel Transfer"
+msgstr "إلغاء النقل"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_request_form
+msgid "Cancel this request?"
+msgstr "هل تريد إلغاء هذا الطلب؟"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_move_form
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_move_list
+msgid "Cancel this transfer? The vehicle stays where it was."
+msgstr "هل تريد إلغاء النقل؟ ستبقى المركبة حيث كانت."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_addition_line__status__cancelled
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_move__state__cancelled
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_release_line__status__cancelled
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_request__state__cancelled
+msgid "Cancelled"
+msgstr "ملغي"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "Cancelled by %s."
+msgstr "ألغاه %s."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_vehicle__x_checkup_label
+msgid "Checkup"
+msgstr "الفحص"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_vehicle__x_checkup_open
+msgid "Checkup Open"
+msgstr "الفحص مفتوح"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_vehicle__x_checkup_request_id
+msgid "Checkup Request"
+msgstr "طلب الفحص"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_vehicle.py:0
+#: code:addons/KSW_fleet_allocation/wizard/ksw_fleet_release_decision_wizard.py:0
+msgid "Checkup before reallocation"
+msgstr "فحص قبل إعادة التخصيص"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/wizard/ksw_fleet_release_decision_wizard.py:0
+msgid "Choose the department that receives them."
+msgstr "اختر القسم المستلم."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/wizard/ksw_fleet_allocate_wizard.py:0
+msgid "Choose the vehicles to give."
+msgstr "اختر المركبات المراد منحها."
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.actions.act_window,help:KSW_fleet_allocation.action_ksw_fleet_department_users
+msgid ""
+"Clear the \"In this App\" filter to find a user, then name his departments: that gives\n"
+"               him the app. Make someone GM in his Access Rights."
+msgstr ""
+"أزل عامل التصفية \"في هذا التطبيق\" للعثور على مستخدم، ثم حدد أقسامه، فيصبح "
+"التطبيق متاحاً له. يُعيَّن المدير العام من صلاحيات الوصول."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_request__state__done
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_request_search
+msgid "Closed"
+msgstr "مغلق"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_receive_wizard_line__condition
+msgid "Condition"
+msgstr "الحالة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__received_condition
+msgid "Condition at Arrival"
+msgstr "الحالة عند الاستلام"
+
+#. module: KSW_fleet_allocation
+#: model:ir.ui.menu,name:KSW_fleet_allocation.menu_ksw_fleet_allocation_config
+msgid "Configuration"
+msgstr "التهيئة"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_move.py:0
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_receive_wizard_form
+msgid "Confirm Arrival"
+msgstr "تأكيد الاستلام"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_allocate_wizard_form
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_release_decision_wizard_form
+msgid "Confirm Decision"
+msgstr "تأكيد القرار"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model,name:KSW_fleet_allocation.model_ksw_fleet_receive_wizard
+#: model:mail.activity.type,name:KSW_fleet_allocation.mail_activity_fleet_receive
+msgid "Confirm Vehicle Arrival"
+msgstr "تأكيد استلام المركبة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model,name:KSW_fleet_allocation.model_ksw_fleet_receive_wizard_line
+msgid "Confirm Vehicle Arrival: Vehicle"
+msgstr "تأكيد استلام المركبة: المركبة"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "Confirm arrival: %s"
+msgstr "تأكيد الاستلام: %s"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_move_list
+msgid "Confirm the selected vehicles have arrived at your department?"
+msgstr "هل تؤكد وصول المركبات المحددة إلى قسمك؟"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_move_form
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_move_list
+msgid "Confirm the vehicle has arrived at your department?"
+msgstr "هل تؤكد وصول المركبة إلى قسمك؟"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_decision_wizard__match_requests
+msgid "Count against its open requests"
+msgstr "احتسابها من طلباته المفتوحة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_addition_line__create_uid
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_allocate_wizard__create_uid
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__create_uid
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_receive_wizard__create_uid
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_receive_wizard_line__create_uid
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_decision_wizard__create_uid
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_line__create_uid
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__create_uid
+msgid "Created by"
+msgstr "أنشئ بواسطة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_addition_line__create_date
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_allocate_wizard__create_date
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__create_date
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_receive_wizard__create_date
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_receive_wizard_line__create_date
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_decision_wizard__create_date
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_line__create_date
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__create_date
+msgid "Created on"
+msgstr "أنشئ في"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_move__received_condition__damaged
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_receive_wizard_line__condition__damaged
+msgid "Damaged"
+msgstr "متضررة"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_addition_line_list
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_release_line_list
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_request_form
+msgid "Decide"
+msgstr "البت"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "Decide %s Vehicles"
+msgstr "البت في %s مركبات"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_allocate_wizard_form
+msgid "Decide Additional Vehicles"
+msgstr "البت في المركبات الإضافية"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model,name:KSW_fleet_allocation.model_ksw_fleet_release_decision_wizard
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_release_decision_wizard_form
+msgid "Decide Released Vehicles"
+msgstr "البت في المركبات المستغنى عنها"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_release_line_list
+msgid "Decide Selected"
+msgstr "البت في المحدد"
+
+#. module: KSW_fleet_allocation
+#: model:mail.activity.type,name:KSW_fleet_allocation.mail_activity_fleet_decide
+msgid "Decide Vehicle Request"
+msgstr "البت في طلب مركبات"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_request_form
+msgid "Decide Vehicles"
+msgstr "البت في المركبات"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model,name:KSW_fleet_allocation.model_ksw_fleet_allocate_wizard
+msgid "Decide an Additional Vehicles Request"
+msgstr "البت في طلب مركبات إضافية"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "Decide: %(d)s, %(s)s"
+msgstr "البت: %(d)s، %(s)s"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "Decide: %(q)s × %(t)s for %(d)s"
+msgstr "البت: %(q)s × %(t)s لـ %(d)s"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "Decide: %s"
+msgstr "البت: %s"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__decided_by_id
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_line__decided_by_id
+msgid "Decided By"
+msgstr "صاحب القرار"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_allocate_wizard__external_quantity
+msgid "Decided External"
+msgstr "تقرر توفيرها خارجياً"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__date
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_line__decided_date
+msgid "Decided On"
+msgstr "تاريخ القرار"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_decision_wizard__decision
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_line__decision
+msgid "Decision"
+msgstr "القرار"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model,name:KSW_fleet_allocation.model_hr_department
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_addition_line__department_id
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_line__department_id
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__department_id
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_vehicle__x_department_id
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_addition_line_search
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_release_line_search
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_request_search
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_vehicle_search_allocation
+msgid "Department"
+msgstr "القسم"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__res_users__x_fleet_role__user
+#: model:res.groups,name:KSW_fleet_allocation.group_fleet_allocation_user
+msgid "Department User"
+msgstr "مستخدم القسم"
+
+#. module: KSW_fleet_allocation
+#: model:ir.actions.act_window,name:KSW_fleet_allocation.action_ksw_fleet_department_users
+#: model:ir.ui.menu,name:KSW_fleet_allocation.menu_ksw_fleet_allocation_users
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_users_list_ksw_fleet_allocation
+msgid "Department Users"
+msgstr "مستخدمو الأقسام"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_decision_wizard__demand_line_ids
+msgid "Departments Asking for these Types"
+msgstr "الأقسام الطالبة لهذه الأنواع"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_release_decision_wizard_form
+msgid "Departments asking for these types"
+msgstr "الأقسام الطالبة لهذه الأنواع"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/wizard/ksw_fleet_receive_wizard.py:0
+msgid "Describe what is wrong with %s."
+msgstr "صف المشكلة في %s."
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_allocate_wizard_form
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_receive_wizard_form
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_release_decision_wizard_form
+msgid "Discard"
+msgstr "تجاهل"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_hr_department__display_name
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_addition_line__display_name
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_allocate_wizard__display_name
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__display_name
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_receive_wizard__display_name
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_receive_wizard_line__display_name
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_decision_wizard__display_name
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_line__display_name
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__display_name
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_vehicle__display_name
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_res_users__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_addition_line__status__done
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_move__state__done
+msgid "Done"
+msgstr "منتهي"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_request__state__draft
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_request_search
+msgid "Draft"
+msgstr "مسودة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_hr_department__x_fleet_draft_count
+msgid "Drafts"
+msgstr "المسودات"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_line__driver_name
+msgid "Driver"
+msgstr "السائق"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,help:KSW_fleet_allocation.field_ksw_fleet_release_decision_wizard__match_requests
+msgid ""
+"Each vehicle settles the receiving department's oldest open request for its "
+"type, until those are met. The rest are transferred without a request."
+msgstr ""
+"تُحتسب كل مركبة من أقدم طلب مفتوح للقسم المستلم لنفس النوع حتى استيفائه، "
+"وتُنقل البقية دون طلب."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_addition_line__external_quantity
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_move__source__external
+msgid "External"
+msgstr "خارجي"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_addition_line__external_received_quantity
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_allocate_wizard__external_received_quantity
+msgid "External Arrived"
+msgstr "الواصلة خارجياً"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_addition_line__external_method
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_allocate_wizard__external_method
+msgid "External Method"
+msgstr "طريقة التوفير الخارجي"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_allocate_wizard_form
+msgid "External Not Yet Arrived"
+msgstr "الخارجية التي لم تصل بعد"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_addition_line__external_note
+msgid "External Note"
+msgstr "ملاحظة التوفير الخارجي"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_allocate_wizard__external_waiting
+msgid "External Waiting"
+msgstr "الخارجية المنتظرة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_hr_department__x_fleet_type_summary
+msgid "Fleet"
+msgstr "الأسطول"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__message_follower_ids
+msgid "Followers"
+msgstr "المتابعين"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "المتابعين (الشركاء)"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,help:KSW_fleet_allocation.field_ksw_fleet_request__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "أيقونة من Font awesome مثال: fa-tasks"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_allocate_wizard__department_id
+msgid "For"
+msgstr "لـ"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_decision_wizard__workshop_description
+msgid "For the Workshop"
+msgstr "للورشة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__from_department_id
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_receive_wizard_line__from_department_id
+msgid "From"
+msgstr "من"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__from_state
+msgid "From State"
+msgstr "الحالة السابقة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.ui.menu,name:KSW_fleet_allocation.menu_ksw_fleet_allocation_gm
+msgid "GM Decisions"
+msgstr "قرارات المدير العام"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_line__decision_note
+msgid "GM Note"
+msgstr "ملاحظة المدير العام"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__res_users__x_fleet_role__gm
+#: model:res.groups,name:KSW_fleet_allocation.group_fleet_allocation_gm
+msgid "General Manager"
+msgstr "المدير العام"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/wizard/ksw_fleet_allocate_wizard.py:0
+msgid "Give the reason, so the department knows why."
+msgstr "اذكر السبب ليعرف القسم."
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.actions.act_window,help:KSW_fleet_allocation.action_ksw_fleet_request_release
+msgid "Give up vehicles your department no longer needs"
+msgstr "استغنِ عن المركبات التي لم يعد قسمك بحاجة إليها"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_allocate_wizard__mode__internal
+msgid "Give vehicles we already have"
+msgstr "منح مركبات متوفرة لدينا"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_move__received_condition__good
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_receive_wizard_line__condition__good
+msgid "Good"
+msgstr "جيدة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__has_message
+msgid "Has Message"
+msgstr "يحتوي على رسالة"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_move.py:0
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_vehicle_search_allocation
+msgid "Holding"
+msgstr "الاحتياط"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_move__from_state__holding
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_vehicle__x_allocation_state__holding
+msgid "Holding (Workshop)"
+msgstr "احتياط (الورشة)"
+
+#. module: KSW_fleet_allocation
+#: model:ir.actions.act_window,name:KSW_fleet_allocation.action_ksw_fleet_allocation_holding
+#: model:ir.ui.menu,name:KSW_fleet_allocation.menu_ksw_fleet_allocation_holding
+msgid "Holding Pool"
+msgstr "مركبات الاحتياط"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_hr_department__x_fleet_holder
+msgid "Holds Vehicles"
+msgstr "لديه مركبات"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_allocate_wizard__decide_quantity
+msgid "How Many"
+msgstr "العدد"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_hr_department__id
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_addition_line__id
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_allocate_wizard__id
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__id
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_receive_wizard__id
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_receive_wizard_line__id
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_decision_wizard__id
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_line__id
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__id
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_vehicle__id
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_res_users__id
+msgid "ID"
+msgstr "المُعرف"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__activity_exception_icon
+msgid "Icon"
+msgstr "الأيقونة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,help:KSW_fleet_allocation.field_ksw_fleet_request__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "الأيقونة للإشارة إلى النشاط المستثنى."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,help:KSW_fleet_allocation.field_ksw_fleet_request__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "إذا كان محددًا، فهناك رسائل جديدة عليك رؤيتها."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,help:KSW_fleet_allocation.field_ksw_fleet_request__message_has_error
+#: model:ir.model.fields,help:KSW_fleet_allocation.field_ksw_fleet_request__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "إذا كان محددًا، فقد حدث خطأ في تسليم بعض الرسائل."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_release_line__status__holding
+msgid "In Holding"
+msgstr "في الاحتياط"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_addition_line__status__in_transfer
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_move__from_state__in_transfer
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_move__state__in_transfer
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_release_line__status__in_transfer
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_vehicle__x_allocation_state__in_transfer
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_move_search
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_vehicle_search_allocation
+msgid "In Transfer"
+msgstr "قيد النقل"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_users_search_ksw_fleet_allocation
+msgid "In this App"
+msgstr "في هذا التطبيق"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__x_is_incoming
+msgid "Incoming to Me"
+msgstr "واردة إليّ"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_addition_line__internal_quantity
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_move__source__internal
+msgid "Internal"
+msgstr "داخلي"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_addition_line__is_closed
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_line__is_closed
+msgid "Is Closed"
+msgstr "مغلق"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__message_is_follower
+msgid "Is Follower"
+msgstr "متابع"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_addition_line__vehicle_type__isuzu
+msgid "Isuzu"
+msgstr "إيسوزو"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,help:KSW_fleet_allocation.field_ksw_fleet_vehicle__x_is_released
+msgid "Its department has asked to give it up and the GM has not decided yet."
+msgstr "طلب قسمها الاستغناء عنها ولم يبت المدير العام بعد."
+
+#. module: KSW_fleet_allocation
+#: model:ir.module.category,name:KSW_fleet_allocation.module_category_ksw_fleet_allocation
+msgid "KSW Vehicle Allocation"
+msgstr "تخصيص المركبات"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_release_decision_wizard__decision__keep
+msgid "Keep them where they are"
+msgstr "إبقاؤها في قسمها"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_release_line__status__kept
+msgid "Kept"
+msgstr "أُبقيت"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_release_line__decision__keep
+msgid "Kept by Department"
+msgstr "أُبقيت لدى القسم"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_addition_line__write_uid
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_allocate_wizard__write_uid
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__write_uid
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_receive_wizard__write_uid
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_receive_wizard_line__write_uid
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_decision_wizard__write_uid
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_line__write_uid
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_addition_line__write_date
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_allocate_wizard__write_date
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__write_date
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_receive_wizard__write_date
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_receive_wizard_line__write_date
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_decision_wizard__write_date
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_line__write_date
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__message_has_error
+msgid "Message Delivery error"
+msgstr "خطأ في تسليم الرسائل"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__message_ids
+msgid "Messages"
+msgstr "الرسائل"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_move__received_condition__minor
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_receive_wizard_line__condition__minor
+msgid "Minor Issues"
+msgstr "ملاحظات بسيطة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_allocate_wizard__mode
+msgid "Mode"
+msgstr "القرار"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_move_search
+msgid "Month"
+msgstr "الشهر"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "More vehicles were decided than the %s asked for."
+msgstr "عدد المركبات المقررة أكثر من %s المطلوبة."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_receive_wizard_line__move_id
+msgid "Move"
+msgstr "الحركة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.actions.act_window,name:KSW_fleet_allocation.action_ksw_fleet_move_analysis
+#: model:ir.ui.menu,name:KSW_fleet_allocation.menu_ksw_fleet_allocation_move_analysis
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_move_graph
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_move_pivot
+msgid "Movement Analysis"
+msgstr "تحليل الحركات"
+
+#. module: KSW_fleet_allocation
+#: model:ir.actions.act_window,name:KSW_fleet_allocation.action_ksw_fleet_move
+#: model:ir.ui.menu,name:KSW_fleet_allocation.menu_ksw_fleet_allocation_moves
+msgid "Movement History"
+msgstr "سجل الحركات"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_addition_line__move_ids
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_line__move_ids
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__move_ids
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_vehicle__x_move_ids
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_request_form
+msgid "Movements"
+msgstr "الحركات"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "الموعد النهائي لنشاطاتي"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_vehicle__x_in_my_scope
+msgid "My Departments"
+msgstr "أقسامي"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__name
+msgid "Name"
+msgstr "الاسم"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr "الفعالية التالية في تقويم الأنشطة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "الموعد النهائي للنشاط التالي"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__activity_summary
+msgid "Next Activity Summary"
+msgstr "ملخص النشاط التالي"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__activity_type_id
+msgid "Next Activity Type"
+msgstr "نوع النشاط التالي"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_move_form
+msgid "No note"
+msgstr "لا توجد ملاحظة"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.actions.act_window,help:KSW_fleet_allocation.action_ksw_fleet_overview
+msgid "No vehicle department is yours yet"
+msgstr "لم يُحدَّد لك أي قسم مركبات بعد"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.actions.act_window,help:KSW_fleet_allocation.action_ksw_fleet_move_to_receive
+msgid "No vehicle on its way"
+msgstr "لا توجد مركبات في الطريق"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/wizard/ksw_fleet_receive_wizard.py:0
+msgid "No vehicle to receive."
+msgstr "لا توجد مركبات للاستلام."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "None of these vehicles is waiting for a decision."
+msgstr "لا توجد بين هذه المركبات مركبة بانتظار قرار."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/wizard/ksw_fleet_allocate_wizard.py:0
+msgid "Not available: %s."
+msgstr "غير متاحة: %s."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_allocate_wizard__note
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__note
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_receive_wizard_line__note
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_decision_wizard__note
+msgid "Note"
+msgstr "الملاحظات"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_allocate_wizard_form
+msgid ""
+"Note (required when refusing, or when taking a vehicle its department did "
+"not release)..."
+msgstr "ملاحظة (إلزامية عند الرفض، أو عند أخذ مركبة لم يستغنِ عنها قسمها)..."
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_release_decision_wizard_form
+msgid ""
+"Note for the departments (required when keeping them: they asked to give "
+"them up)..."
+msgstr "ملاحظة للأقسام (إلزامية عند الإبقاء: فقد طلبوا الاستغناء عنها)..."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__message_needaction_counter
+msgid "Number of Actions"
+msgstr "عدد الإجراءات"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__message_has_error_counter
+msgid "Number of errors"
+msgstr "عدد الأخطاء"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,help:KSW_fleet_allocation.field_ksw_fleet_request__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "عدد الرسائل التي تتطلب اتخاذ إجراء"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,help:KSW_fleet_allocation.field_ksw_fleet_request__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "عدد الرسائل الحادث بها خطأ في التسليم"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_allocate_wizard__mode__external
+msgid "Obtain outside (purchase / rent)"
+msgstr "توفير خارجي (شراء / استئجار)"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_receive_wizard_line__odometer
+msgid "Odometer"
+msgstr "العداد"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__received_odometer
+msgid "Odometer at Arrival"
+msgstr "العداد عند الاستلام"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_allocate_wizard_form
+msgid ""
+"Offered: the holding pool (checkup completed), vehicles with no department,\n"
+"                        and vehicles other departments released and the GM has not decided yet."
+msgstr ""
+"المعروض: مركبات الاحتياط (بعد اكتمال الفحص)، والمركبات بلا قسم، والمركبات "
+"التي استغنت عنها أقسام أخرى ولم يبت فيها المدير العام بعد."
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_allocate_wizard_form
+msgid ""
+"Offered: vehicles registered with no department yet. The administrator adds a\n"
+"                        purchased or rented vehicle under Vehicles first."
+msgstr ""
+"المعروض: المركبات المسجلة بلا قسم. يضيف مدير النظام المركبة المشتراة أو "
+"المستأجرة في المركبات أولاً."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_hr_department__x_fleet_incoming_count
+msgid "On the Way In"
+msgstr "واردة في الطريق"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_hr_department__x_fleet_outgoing_count
+msgid "On the Way Out"
+msgstr "صادرة في الطريق"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/wizard/ksw_fleet_allocate_wizard.py:0
+msgid "Only %s more can be given on this line."
+msgstr "يمكن منح %s فقط إضافية في هذا البند."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "Only a cancelled request goes back to draft."
+msgstr "لا يعاد إلى مسودة إلا الطلب الملغي."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "Only a draft or cancelled request can be deleted."
+msgstr "لا يمكن حذف إلا الطلب المسودة أو الملغي."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_move.py:0
+msgid "Only a transfer still on its way can be cancelled."
+msgstr "لا يمكن إلغاء إلا النقل الذي لا يزال في الطريق."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_move.py:0
+msgid "Only the GM cancels a transfer."
+msgstr "المدير العام وحده يلغي النقل."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+#: code:addons/KSW_fleet_allocation/wizard/ksw_fleet_release_decision_wizard.py:0
+msgid "Only the GM decides a release."
+msgstr "المدير العام وحده يبت في الاستغناء."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+#: code:addons/KSW_fleet_allocation/wizard/ksw_fleet_allocate_wizard.py:0
+msgid "Only the GM decides an addition."
+msgstr "المدير العام وحده يبت في طلب المركبات."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_move.py:0
+msgid "Only the receiving department confirms that %s arrived."
+msgstr "القسم المستلم وحده يؤكد وصول %s."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_vehicle.py:0
+msgid "Only the system administrator sets a vehicle's department directly."
+msgstr "مدير النظام وحده يحدد قسم المركبة مباشرة."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_vehicle.py:0
+msgid "Only vehicles assigned to a department can be released: %s."
+msgstr "لا يمكن الاستغناء إلا عن المركبات المخصصة لقسم: %s."
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_addition_line_search
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_request_search
+msgid "Open"
+msgstr "مفتوحة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.actions.act_window,name:KSW_fleet_allocation.action_ksw_fleet_addition_line_open
+#: model:ir.ui.menu,name:KSW_fleet_allocation.menu_ksw_fleet_allocation_needs
+msgid "Open Needs"
+msgstr "الاحتياجات المفتوحة"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.actions.act_window,help:KSW_fleet_allocation.action_ksw_fleet_request_release
+msgid ""
+"Or tick them under Vehicles and press Release Selected. The GM decides where"
+" each one goes."
+msgstr ""
+"أو حددها في المركبات واضغط \"الاستغناء عن المحدد\". يقرر المدير العام وجهة "
+"كل مركبة."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_addition_line__external_method__other
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_addition_line__vehicle_type__other
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_allocate_wizard__external_method__other
+msgid "Other"
+msgstr "أخرى"
+
+#. module: KSW_fleet_allocation
+#: model:ir.actions.act_window,name:KSW_fleet_allocation.action_ksw_fleet_overview
+#: model:ir.ui.menu,name:KSW_fleet_allocation.menu_ksw_fleet_allocation_overview
+msgid "Overview"
+msgstr "نظرة عامة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_vehicle__x_is_own_fleet
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_vehicle_search_allocation
+msgid "Own Fleet"
+msgstr "أسطول الشركة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_line__plate_number
+msgid "Plate Number"
+msgstr "رقم اللوحة"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_move.py:0
+msgid "Pool"
+msgstr "الاحتياط"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_addition_line__external_method__purchase
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_allocate_wizard__external_method__purchase
+msgid "Purchase"
+msgstr "شراء"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "Quantities cannot be negative."
+msgstr "لا يمكن أن تكون الكميات سالبة."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_addition_line__quantity
+msgid "Quantity"
+msgstr "الكمية"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__rating_ids
+msgid "Ratings"
+msgstr "التقييمات"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__reason
+msgid "Reason"
+msgstr "السبب"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_move_list
+msgid "Receive Selected"
+msgstr "استلام المحدد"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_move_form
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_move_list
+msgid "Received"
+msgstr "تم الاستلام"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__received_by_id
+msgid "Received By"
+msgstr "المستلم"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__received_date
+msgid "Received On"
+msgstr "تاريخ الاستلام"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_receive_wizard_form
+msgid ""
+"Record the odometer and the state each vehicle arrived in. Anything other than\n"
+"                    Good needs a note, and the GM is told."
+msgstr ""
+"سجّل العداد والحالة التي وصلت بها كل مركبة. أي حالة غير \"جيدة\" تتطلب "
+"ملاحظة، ويتم إبلاغ المدير العام."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_allocate_wizard__mode__refuse
+msgid "Refuse"
+msgstr "رفض"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_addition_line__refuse_reason
+msgid "Refuse Reason"
+msgstr "سبب الرفض"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_addition_line__refused_quantity
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_addition_line__status__refused
+msgid "Refused"
+msgstr "مرفوض"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__release_line_id
+msgid "Release Line"
+msgstr "بند الاستغناء"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_vehicle_list_allocation
+msgid "Release Selected"
+msgstr "الاستغناء عن المحدد"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/hr_department.py:0
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_vehicle.py:0
+#: model:ir.actions.act_window,name:KSW_fleet_allocation.action_ksw_fleet_request_release
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_request__request_type__release
+#: model:ir.ui.menu,name:KSW_fleet_allocation.menu_ksw_fleet_allocation_release
+msgid "Release Vehicles"
+msgstr "الاستغناء عن مركبات"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.actions.act_window,help:KSW_fleet_allocation.action_ksw_fleet_request
+msgid "Release vehicles you no longer need, or ask for more"
+msgstr "استغنِ عن المركبات التي لا تحتاجها، أو اطلب المزيد"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_vehicle__x_is_released
+msgid "Released"
+msgstr "مستغنى عنها"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_vehicle__x_release_request_id
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_release_decision_wizard_form
+msgid "Released By"
+msgstr "القسم المستغني"
+
+#. module: KSW_fleet_allocation
+#: model:ir.actions.act_window,name:KSW_fleet_allocation.action_ksw_fleet_release_line_open
+#: model:ir.ui.menu,name:KSW_fleet_allocation.menu_ksw_fleet_allocation_released
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_release_line_list
+msgid "Released Vehicles"
+msgstr "المركبات المستغنى عنها"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_vehicle_search_allocation
+msgid "Released, Waiting for GM"
+msgstr "مستغنى عنها، بانتظار المدير العام"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_vehicle__x_release_line_ids
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_request_search
+msgid "Releases"
+msgstr "طلبات الاستغناء"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_addition_line__external_method__rent
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_allocate_wizard__external_method__rent
+msgid "Rent"
+msgstr "استئجار"
+
+#. module: KSW_fleet_allocation
+#: model:ir.ui.menu,name:KSW_fleet_allocation.menu_ksw_fleet_allocation_reporting
+msgid "Reporting"
+msgstr "التقارير"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_addition_line__request_id
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__request_id
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_line__request_id
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__request_type
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_request_search
+msgid "Request"
+msgstr "الطلب"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_addition_line__request_state
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_line__request_state
+msgid "Request Status"
+msgstr "حالة الطلب"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/hr_department.py:0
+#: model:ir.actions.act_window,name:KSW_fleet_allocation.action_ksw_fleet_request_addition
+#: model:ir.ui.menu,name:KSW_fleet_allocation.menu_ksw_fleet_allocation_addition
+msgid "Request Vehicles"
+msgstr "طلب مركبات"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__user_id
+msgid "Requested By"
+msgstr "مقدم الطلب"
+
+#. module: KSW_fleet_allocation
+#: model:ir.ui.menu,name:KSW_fleet_allocation.menu_ksw_fleet_allocation_requests
+msgid "Requests"
+msgstr "الطلبات"
+
+#. module: KSW_fleet_allocation
+#: model:ir.ui.menu,name:KSW_fleet_allocation.menu_ksw_fleet_allocation_to_decide
+msgid "Requests to Decide"
+msgstr "طلبات بانتظار البت"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__activity_user_id
+msgid "Responsible User"
+msgstr "المستخدم المسؤول"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "خطأ في تسليم الرسائل النصية القصيرة"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.actions.act_window,help:KSW_fleet_allocation.action_ksw_fleet_request_addition
+msgid ""
+"Say the type and how many. The GM gives you vehicles the company has, obtains them\n"
+"               outside, or explains why not."
+msgstr ""
+"حدد النوع والعدد. يمنحك المدير العام مركبات من أسطول الشركة، أو يوفرها "
+"خارجياً، أو يوضح سبب الرفض."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_release_decision_wizard__decision__holding
+msgid "Send to workshop and hold"
+msgstr "إرسال للورشة ثم الاحتياط"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_move__kind__holding
+msgid "Sent to Workshop (Holding)"
+msgstr "أُرسلت للورشة (احتياط)"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_move__kind__manual
+msgid "Set by Administrator"
+msgstr "حددها مدير النظام"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,help:KSW_fleet_allocation.field_ksw_fleet_allocate_wizard__include_assigned
+msgid ""
+"Show vehicles still in use elsewhere, to take one the GM decides is better "
+"used here."
+msgstr ""
+"عرض المركبات المستخدمة في أقسام أخرى، لأخذ ما يرى المدير العام أنه أنفع هنا."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__source
+msgid "Source"
+msgstr "المصدر"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_decision_wizard__source_department_ids
+msgid "Source Department"
+msgstr "القسم المصدر"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_move__kind__initial
+msgid "Starting Assignment"
+msgstr "التخصيص الابتدائي"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__state
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__state
+msgid "State"
+msgstr "الحالة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_addition_line__status
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_line__status
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_request_search
+msgid "Status"
+msgstr "الحالة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,help:KSW_fleet_allocation.field_ksw_fleet_request__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"الأنشطة المعتمدة على الحالة\n"
+"المتأخرة: تاريخ الاستحقاق مر\n"
+"اليوم: تاريخ النشاط هو اليوم\n"
+"المخطط: الأنشطة المستقبلية."
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_release_decision_wizard_form
+msgid "Still Needed"
+msgstr "المتبقي"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_vehicle.py:0
+msgid ""
+"Still at the workshop: %s. A held vehicle is given out once its checkup is "
+"completed."
+msgstr "لا تزال في الورشة: %s. تُمنح مركبة الاحتياط بعد اكتمال فحصها."
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_request_form
+msgid "Submit to GM"
+msgstr "إرسال إلى المدير العام"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__submitted_date
+msgid "Submitted Date"
+msgstr "تاريخ الإرسال"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__line_summary
+msgid "Summary"
+msgstr "الملخص"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_move.py:0
+msgid "Taken from <b>%(d)s</b> by the GM's decision: <b>%(v)s</b>."
+msgstr "أُخذت من <b>%(d)s</b> بقرار المدير العام: <b>%(v)s</b>."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_addition_line__vehicle_type__tank
+msgid "Tedder (تيدر)"
+msgstr "تيدر"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "The GM decides a release with the Decide button."
+msgstr "يبت المدير العام في الاستغناء عبر زر \"البت\"."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "The GM decides an addition with the Decide button."
+msgstr "يبت المدير العام في طلب المركبات عبر زر \"البت\"."
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.actions.act_window,help:KSW_fleet_allocation.action_ksw_fleet_request
+msgid ""
+"The GM decides each request: a released vehicle goes to another department or to the\n"
+"               workshop's holding pool; a need is met from vehicles we have or obtained outside."
+msgstr ""
+"يبت المدير العام في كل طلب: تنتقل المركبة المستغنى عنها إلى قسم آخر أو إلى "
+"احتياط الورشة، ويُلبّى الاحتياج من مركباتنا أو بتوفير خارجي."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid ""
+"The GM has already decided part of %s. Ask the GM to close what is left "
+"instead of cancelling it."
+msgstr ""
+"بتّ المدير العام في جزء من %s. اطلب منه إغلاق المتبقي بدلاً من الإلغاء."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_vehicle.py:0
+msgid ""
+"The allocation status follows the vehicle's movements; it cannot be set by "
+"hand."
+msgstr "حالة التخصيص تتبع حركات المركبة ولا يمكن تعديلها يدوياً."
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_users_form_ksw_fleet_allocation
+msgid "The departments whose vehicles he releases, requests and receives..."
+msgstr "الأقسام التي يستغني عن مركباتها ويطلبها ويستلمها..."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,help:KSW_fleet_allocation.field_res_users__x_fleet_department_ids
+msgid ""
+"The departments whose vehicles this user may release and ask more for, and "
+"whose incoming transfers he confirms. Sub-departments included."
+msgstr ""
+"الأقسام التي يحق لهذا المستخدم الاستغناء عن مركباتها وطلب المزيد لها وتأكيد "
+"استلام ما يُنقل إليها، بما فيها الأقسام الفرعية."
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.actions.act_window,help:KSW_fleet_allocation.action_ksw_fleet_allocation_holding
+msgid "The pool is empty"
+msgstr "لا توجد مركبات في الاحتياط"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.constraint,message:KSW_fleet_allocation.constraint_ksw_fleet_addition_line_quantity_positive
+msgid "The quantity must be at least 1."
+msgstr "يجب ألا تقل الكمية عن 1."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_vehicle.py:0
+msgid ""
+"These vehicles are being transferred: %s. Confirm or cancel the transfer "
+"first."
+msgstr "هذه المركبات قيد النقل: %s. أكّد الاستلام أو ألغِ النقل أولاً."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,help:KSW_fleet_allocation.field_hr_department__x_fleet_holder
+msgid "This department is given vehicles and may release or request them."
+msgstr "يُخصَّص لهذا القسم مركبات ويمكنه الاستغناء عنها أو طلبها."
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.actions.act_window,help:KSW_fleet_allocation.action_ksw_fleet_allocation_departments
+msgid "Tick Holds Vehicles on every department that is given vehicles."
+msgstr "فعّل \"لديه مركبات\" لكل قسم يُخصَّص له مركبات."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/wizard/ksw_fleet_release_decision_wizard.py:0
+msgid "Tick at least one vehicle."
+msgstr "حدد مركبة واحدة على الأقل."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_vehicle.py:0
+msgid "Tick vehicles of one department at a time (these belong to %s)."
+msgstr "حدد مركبات قسم واحد في كل مرة (هذه تابعة لـ %s)."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__to_department_id
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_move_search
+msgid "To"
+msgstr "إلى"
+
+#. module: KSW_fleet_allocation
+#: model:ir.actions.act_window,name:KSW_fleet_allocation.action_ksw_fleet_request_to_decide
+msgid "To Decide"
+msgstr "بانتظار البت"
+
+#. module: KSW_fleet_allocation
+#: model:ir.ui.menu,name:KSW_fleet_allocation.menu_ksw_fleet_allocation_receive
+msgid "To Receive"
+msgstr "بانتظار الاستلام"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_move_search
+msgid "To Workshop"
+msgstr "إلى الورشة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_release_line__decision__holding
+msgid "To Workshop / Holding"
+msgstr "إلى الورشة / الاحتياط"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_addition_line_list
+msgid "Total"
+msgstr "الإجمالي"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_addition_line__vehicle_type__trailer
+msgid "Trailer (تريلا)"
+msgstr "تريلا"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_move__kind__transfer
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_release_line__decision__transfer
+msgid "Transfer"
+msgstr "نقل"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_decision_wizard__target_department_id
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_line__target_department_id
+msgid "Transfer To"
+msgstr "النقل إلى"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_vehicle__x_pending_move_id
+msgid "Transfer in Progress"
+msgstr "نقل جارٍ"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_move.py:0
+msgid "Transfer of <b>%(v)s</b> to %(d)s cancelled by the GM."
+msgstr "ألغى المدير العام نقل <b>%(v)s</b> إلى %(d)s."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_release_decision_wizard__decision__transfer
+msgid "Transfer to another department"
+msgstr "النقل إلى قسم آخر"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_release_line__status__transferred
+msgid "Transferred"
+msgstr "تم النقل"
+
+#. module: KSW_fleet_allocation
+#: model:ir.ui.menu,name:KSW_fleet_allocation.menu_ksw_fleet_allocation_transfers
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_move_search
+msgid "Transfers"
+msgstr "النقل"
+
+#. module: KSW_fleet_allocation
+#: model:ir.actions.act_window,name:KSW_fleet_allocation.action_ksw_fleet_move_to_receive
+msgid "Transfers to Receive"
+msgstr "عمليات نقل بانتظار الاستلام"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__kind
+msgid "Type"
+msgstr "النوع"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,help:KSW_fleet_allocation.field_ksw_fleet_request__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "نوع النشاط المستثنى في السجل."
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_release_decision_wizard_form
+msgid "Types"
+msgstr "الأنواع"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_move__from_state__unassigned
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_vehicle__x_allocation_state__unassigned
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_vehicle_search_allocation
+msgid "Unassigned"
+msgstr "غير مخصصة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_addition_line__open_quantity
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_allocate_wizard__open_quantity
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__open_line_count
+msgid "Undecided"
+msgstr "بانتظار البت"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+msgid "Use the buttons to move a request on."
+msgstr "استخدم الأزرار لتحريك الطلب."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model,name:KSW_fleet_allocation.model_res_users
+msgid "User"
+msgstr "المستخدم"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model,name:KSW_fleet_allocation.model_ksw_fleet_vehicle
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__vehicle_id
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_receive_wizard_line__vehicle_id
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_line__vehicle_id
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_move_search
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_request_search
+msgid "Vehicle"
+msgstr "المركبة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.ui.menu,name:KSW_fleet_allocation.menu_ksw_fleet_allocation_root
+#: model:res.groups.privilege,name:KSW_fleet_allocation.privilege_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_users_form_ksw_fleet_allocation
+msgid "Vehicle Allocation"
+msgstr "تخصيص المركبات"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model,name:KSW_fleet_allocation.model_ksw_fleet_request
+msgid "Vehicle Allocation Request"
+msgstr "طلب تخصيص مركبات"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_res_users__x_fleet_role
+msgid "Vehicle Allocation Role"
+msgstr "دور تخصيص المركبات"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_hr_department__x_fleet_vehicle_count
+msgid "Vehicle Count"
+msgstr "عدد المركبات"
+
+#. module: KSW_fleet_allocation
+#: model:ir.actions.act_window,name:KSW_fleet_allocation.action_ksw_fleet_allocation_departments
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_res_users__x_fleet_department_ids
+#: model:ir.ui.menu,name:KSW_fleet_allocation.menu_ksw_fleet_allocation_departments
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_department_list_fleet_allocation
+msgid "Vehicle Departments"
+msgstr "أقسام المركبات"
+
+#. module: KSW_fleet_allocation
+#: model:ir.actions.act_window,name:KSW_fleet_allocation.action_ksw_fleet_vehicle_distribution
+#: model:ir.ui.menu,name:KSW_fleet_allocation.menu_ksw_fleet_allocation_distribution
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_vehicle_graph_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_vehicle_pivot_allocation
+msgid "Vehicle Distribution"
+msgstr "توزيع المركبات"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model,name:KSW_fleet_allocation.model_ksw_fleet_move
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_move_form
+msgid "Vehicle Movement"
+msgstr "حركة المركبة"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_move_list
+msgid "Vehicle Movements"
+msgstr "حركات المركبات"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_request_form
+msgid "Vehicle Request"
+msgstr "طلب مركبات"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_request_list
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_request_search
+msgid "Vehicle Requests"
+msgstr "طلبات المركبات"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_addition_line__vehicle_type
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_allocate_wizard__vehicle_type
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__vehicle_type
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_line__vehicle_type
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_addition_line_search
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_release_line_search
+msgid "Vehicle Type"
+msgstr "نوع المركبة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_decision_wizard__vehicle_types
+msgid "Vehicle Types"
+msgstr "أنواع المركبات"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model,name:KSW_fleet_allocation.model_ksw_fleet_release_line
+msgid "Vehicle to Release"
+msgstr "مركبة للاستغناء"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_hr_department__x_fleet_vehicle_ids
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_allocate_wizard__vehicle_ids
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_receive_wizard__line_ids
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_decision_wizard__release_line_ids
+#: model:ir.ui.menu,name:KSW_fleet_allocation.menu_ksw_fleet_allocation_vehicles
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_department_form_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_department_list_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_release_decision_wizard_form
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_vehicle_list_allocation
+msgid "Vehicles"
+msgstr "المركبات"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model,name:KSW_fleet_allocation.model_ksw_fleet_addition_line
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__addition_line_ids
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_addition_line_list
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_request_form
+msgid "Vehicles Needed"
+msgstr "المركبات المطلوبة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.actions.act_window,name:KSW_fleet_allocation.action_ksw_fleet_allocation_vehicles
+msgid "Vehicles by Department"
+msgstr "المركبات حسب القسم"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.actions.act_window,help:KSW_fleet_allocation.action_ksw_fleet_allocation_holding
+msgid ""
+"Vehicles the GM sent to the workshop, and vehicles with no department yet, wait here\n"
+"               until the GM gives them to a department."
+msgstr ""
+"هنا تنتظر المركبات التي أرسلها المدير العام إلى الورشة والمركبات التي بلا "
+"قسم، حتى يمنحها المدير العام لقسم."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__release_line_ids
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_request_form
+msgid "Vehicles to Release"
+msgstr "المركبات المستغنى عنها"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_addition_line__status__waiting_external
+msgid "Waiting for External"
+msgstr "بانتظار التوفير الخارجي"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_hr_department__x_fleet_waiting_count
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_addition_line__status__pending
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_release_line__decision__pending
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_release_line__status__pending
+#: model:ir.model.fields.selection,name:KSW_fleet_allocation.selection__ksw_fleet_request__state__submitted
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_release_line_search
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_request_search
+msgid "Waiting for GM"
+msgstr "بانتظار المدير العام"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__website_message_ids
+msgid "Website Messages"
+msgstr "رسائل الموقع الإلكتروني"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,help:KSW_fleet_allocation.field_ksw_fleet_request__website_message_ids
+msgid "Website communication history"
+msgstr "سجل تواصل الموقع الإلكتروني"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_addition_line__note
+msgid "What For"
+msgstr "الغرض"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.actions.act_window,help:KSW_fleet_allocation.action_ksw_fleet_move_to_receive
+msgid ""
+"When the GM transfers a vehicle to your department, confirm here once it "
+"arrives."
+msgstr "عندما ينقل المدير العام مركبة إلى قسمك، أكّد استلامها هنا عند وصولها."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_release_line__note
+msgid "Why"
+msgstr "السبب"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_request_form
+msgid "Why these vehicles are not needed / what the extra vehicles are for..."
+msgstr "سبب الاستغناء عن هذه المركبات / الغرض من المركبات الإضافية..."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_receive_wizard_line__wizard_id
+msgid "Wizard"
+msgstr "المعالج"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__workshop_request_id
+msgid "Workshop Request"
+msgstr "طلب الورشة"
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__workshop_state
+msgid "Workshop Status"
+msgstr "حالة الورشة"
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/wizard/ksw_fleet_release_decision_wizard.py:0
+msgid "Write why they are kept: the department asked to give them up."
+msgstr "اكتب سبب الإبقاء، فقد طلب القسم الاستغناء عنها."
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__x_can_cancel
+msgid "X Can Cancel"
+msgstr ""
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_move__x_can_receive
+msgid "X Can Receive"
+msgstr ""
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_hr_department__x_fleet_in_my_scope
+msgid "X Fleet In My Scope"
+msgstr ""
+
+#. module: KSW_fleet_allocation
+#: model:ir.model.fields,field_description:KSW_fleet_allocation.field_ksw_fleet_request__x_is_gm
+msgid "X Is Gm"
+msgstr ""
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_request.py:0
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_vehicle.py:0
+msgid "You do not answer for the vehicles of %s."
+msgstr "لست مسؤولاً عن مركبات %s."
+
+#. module: KSW_fleet_allocation
+#. odoo-python
+#: code:addons/KSW_fleet_allocation/models/ksw_fleet_vehicle.py:0
+msgid ""
+"Your user has no employee record, so the workshop request cannot name who "
+"raised it. Ask the administrator to link one."
+msgstr ""
+"لا يرتبط مستخدمك بسجل موظف، فلا يمكن تحديد مقدم طلب الورشة. اطلب من مدير "
+"النظام ربطه."
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_department_kanban_fleet_overview
+msgid "drafts"
+msgstr "مسودات"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_department_kanban_fleet_overview
+msgid "on the way out"
+msgstr "صادرة في الطريق"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_department_kanban_fleet_overview
+msgid "to receive"
+msgstr "بانتظار الاستلام"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_ksw_fleet_request_kanban
+msgid "undecided"
+msgstr "بانتظار البت"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_department_kanban_fleet_overview
+msgid "vehicles"
+msgstr "مركبة"
+
+#. module: KSW_fleet_allocation
+#: model_terms:ir.ui.view,arch_db:KSW_fleet_allocation.view_department_kanban_fleet_overview
+msgid "waiting for GM"
+msgstr "بانتظار المدير العام"
