@@ -86,7 +86,8 @@
                 <field name="x_posting_exception_ids" groups="om_hr_payroll.group_hr_payroll_user">
                     <list editable="bottom">
                         <field name="category_id" options="{'no_create': True}" placeholder="Whole salary"/>
-                        <field name="account_id" options="{'no_create': True}"/>
+                        <field name="default_account_id" readonly="1"/>
+                        <field name="account_id" string="Goes to" options="{'no_create': True}"/>
                         <field name="note"/>
                     </list>
                 </field>

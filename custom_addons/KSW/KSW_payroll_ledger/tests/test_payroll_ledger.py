@@ -210,6 +210,17 @@ class TestPayrollLedger(BasJournalPayrollCommon):
         self.assertEqual(self._lines(self._confirm()), {
             (self.saudi_wage, 8500.0), (self.camp_wage, 2750.0), (self.payable, -11250.0)})
 
+    def test_04i2_an_exception_says_what_it_overrides(self):
+        man = self.env['hr.employee'].sudo().create({
+            'name': 'Ledger Nazmi Two', 'x_posting_group_id': self.m_group.id,
+            'x_posting_exception_ids': [(0, 0, {'category_id': self.cat_housing.id,
+                                                'account_id': self.camp_wage.id})]})
+        row = man.x_posting_exception_ids
+        self.assertEqual(row.group_id, self.m_group)
+        self.assertEqual(row.default_account_id, self.saudi_wage)
+        self.assertIn(self.saudi_wage.code, row.summary)
+        self.assertIn(self.camp_wage.code, row.summary)
+
     def test_04j_the_map_is_the_configuration(self):
         """A new account for the camp's housing: one map row, no code."""
         camp_housing = self.env['account.account'].sudo().create(

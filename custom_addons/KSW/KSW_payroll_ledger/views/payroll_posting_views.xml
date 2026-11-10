@@ -160,10 +160,27 @@
         <field name="arch" type="xml">
             <list editable="bottom">
                 <field name="employee_id" options="{'no_create': True}"/>
+                <field name="group_id" readonly="1"/>
                 <field name="category_id" options="{'no_create': True}" placeholder="Whole salary"/>
-                <field name="account_id" options="{'no_create': True}"/>
+                <field name="default_account_id" readonly="1"/>
+                <field name="account_id" string="Goes to" options="{'no_create': True}"/>
+                <field name="summary" readonly="1" optional="hide"/>
                 <field name="note"/>
             </list>
+        </field>
+    </record>
+
+    <record id="view_ksw_payroll_employee_posting_search" model="ir.ui.view">
+        <field name="name">ksw.payroll.employee.posting.search</field>
+        <field name="model">ksw.payroll.employee.posting</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="employee_id"/>
+                <field name="account_id"/>
+                <group>
+                    <filter name="by_employee" string="Employee" context="{'group_by': 'employee_id'}"/>
+                </group>
+            </search>
         </field>
     </record>
 
@@ -171,6 +188,14 @@
         <field name="name">Employee Exceptions</field>
         <field name="res_model">ksw.payroll.employee.posting</field>
         <field name="view_mode">list</field>
+        <field name="context">{'search_default_by_employee': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No employee exceptions</p>
+            <p>An exception sends part of one employee's salary to another account than his
+               posting group gives: a category (e.g. Other Allowances) to an account, or, with
+               no category, his whole salary. Each row shows his group, where that part would go
+               without the exception ("Instead of") and where it goes ("Goes to").</p>
+        </field>
     </record>
 
     <menuitem id="menu_ksw_payroll_posting" name="Payroll Posting"

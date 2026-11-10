@@ -138,6 +138,35 @@ class KswPayrollEmployeePosting(models.Model):
         help='Empty: his wage and every category without a row of its own.')
     account_id = fields.Many2one('account.account', required=True)
     note = fields.Char(string='Reason')
+    # What the exception changes, said in full: without it the list is a
+    # category and an account and nobody can tell what was overridden.
+    group_id = fields.Many2one(
+        'ksw.payroll.posting.group', string='His Posting Group', compute='_compute_effect',
+        compute_sudo=True, help='The group his department (or his own setting) puts him in.')
+    default_account_id = fields.Many2one(
+        'account.account', string='Instead of', compute='_compute_effect', compute_sudo=True,
+        help='Where this part of his salary would go without the exception.')
+    summary = fields.Char(string='What it does', compute='_compute_effect', compute_sudo=True)
+
+    @api.depends('employee_id', 'category_id', 'account_id')
+    def _compute_effect(self):
+        Posting = self.env['ksw.payroll.posting']
+        for row in self:
+            employee = row.employee_id
+            company = employee.company_id or self.env.company
+            staff = Posting._staff_entity(employee, company) if employee else Posting.browse()
+            group = Posting._posting_group(employee, staff, staff) if employee and staff \
+                else self.env['ksw.payroll.posting.group']
+            rows = group.map_ids
+            default = (rows.filtered(lambda r: r.category_id == row.category_id)[:1] if row.category_id
+                       else rows.browse()) or rows.filtered(lambda r: not r.category_id)[:1]
+            row.group_id = group
+            row.default_account_id = default.account_id
+            what = row.category_id.name or self.env._('Whole salary')
+            row.summary = self.env._(
+                '%(what)s → %(to)s instead of %(default)s (%(group)s)', what=what,
+                to=row.account_id.code or '?', default=default.account_id.code or '?',
+                group=group.name or '?')
 
     _employee_category_unique = models.Constraint(
         'unique(employee_id, category_id)', 'One exception per employee and category.')

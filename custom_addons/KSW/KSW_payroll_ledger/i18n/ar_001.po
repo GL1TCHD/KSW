@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-10 12:09+0000\n"
-"PO-Revision-Date: 2026-11-10 12:09+0000\n"
+"POT-Creation-Date: 2026-11-10 12:29+0000\n"
+"PO-Revision-Date: 2026-11-10 12:29+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ar_001\n"
@@ -58,6 +58,19 @@ msgstr ""
 #: model:ir.model.fields.selection,name:KSW_payroll_ledger.selection__hr_salary_rule__x_ledger_deduction__basic
 msgid "Against the basic wage only"
 msgstr "من الراتب الأساسي فقط"
+
+#. module: KSW_payroll_ledger
+#: model_terms:ir.actions.act_window,help:KSW_payroll_ledger.action_ksw_payroll_employee_posting
+msgid ""
+"An exception sends part of one employee's salary to another account than his\n"
+"               posting group gives: a category (e.g. Other Allowances) to an account, or, with\n"
+"               no category, his whole salary. Each row shows his group, where that part would go\n"
+"               without the exception (\"Instead of\") and where it goes (\"Goes to\")."
+msgstr ""
+"الاستثناء يرسل جزءاً من راتب موظف إلى حساب غير الذي تحدده مجموعة ترحيله: فئة"
+" (مثل بدلات أخرى) إلى حساب، أو بدون فئة: راتبه كاملاً. كل سطر يبين مجموعته، "
+"والحساب الذي كان سيُقيَّد عليه هذا الجزء بدون الاستثناء («بدلاً من») والحساب"
+" الذي يُقيَّد عليه («يُقيَّد على»)."
 
 #. module: KSW_payroll_ledger
 #: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_posting_group_form
@@ -223,6 +236,7 @@ msgstr "مستحق للجهة الصارفة"
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_account_move_line__x_employee_id
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_employee_posting__employee_id
 #: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_account_move_line_filter_ksw_employee
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_employee_posting_search
 msgid "Employee"
 msgstr "الموظف"
 
@@ -285,9 +299,20 @@ msgid "For this entity's staff whose department names no posting group."
 msgstr "لموظفي هذه الجهة الذين لا يحدد قسمهم مجموعة ترحيل."
 
 #. module: KSW_payroll_ledger
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_employee_form_ledger
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_employee_posting_list
+msgid "Goes to"
+msgstr "يُقيَّد على"
+
+#. module: KSW_payroll_ledger
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_map__group_id
 msgid "Group"
 msgstr "المجموعة"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_employee_posting__group_id
+msgid "His Posting Group"
+msgstr "مجموعة ترحيله"
 
 #. module: KSW_payroll_ledger
 #: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_employee_form_ledger
@@ -328,6 +353,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_res_partner_bank__id
 msgid "ID"
 msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_employee_posting__default_account_id
+msgid "Instead of"
+msgstr "بدلاً من"
 
 #. module: KSW_payroll_ledger
 #: model:ir.model,name:KSW_payroll_ledger.model_account_move_line
@@ -399,6 +429,11 @@ msgstr "مشكلة في الترحيل إلى دفتر الأستاذ"
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_group__name
 msgid "Name"
 msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model_terms:ir.actions.act_window,help:KSW_payroll_ledger.action_ksw_payroll_employee_posting
+msgid "No employee exceptions"
+msgstr "لا توجد استثناءات للموظفين"
 
 #. module: KSW_payroll_ledger
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_entity__note
@@ -647,6 +682,11 @@ msgid ""
 msgstr "القيد الذي سُجِّل فيه كشف الراتب هذا (يومية الرواتب). ليس تصدير BAS."
 
 #. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_ksw_payroll_employee_posting__group_id
+msgid "The group his department (or his own setting) puts him in."
+msgstr "المجموعة التي يضعه فيها قسمه (أو إعداده الخاص)."
+
+#. module: KSW_payroll_ledger
 #: model:ir.model.fields,help:KSW_payroll_ledger.field_ksw_pay_run__x_ledger_move_id
 msgid "The month in Odoo's ledger (journal Commissions). Not the BAS export."
 msgstr "الشهر في دفتر أستاذ أودو (يومية العمولات). ليس تصدير BAS."
@@ -661,6 +701,11 @@ msgstr "مجموعتهم"
 #: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_posting_map_list
 msgid "Wage and everything else"
 msgstr "الراتب الأساسي وكل ما عداه"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_employee_posting__summary
+msgid "What it does"
+msgstr "ماذا يفعل"
 
 #. module: KSW_payroll_ledger
 #: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_payslip_line__x_posting_category_id
@@ -682,6 +727,11 @@ msgstr ""
 "الحساب الذي يُقيَّد عليه مبلغ الراتب إذا لم تقابله مجموعة أو سطر في الخريطة،"
 " فتُرحَّل الدفعة ويُذكر المبلغ عليها. فارغ: يُستبعد الموظف حتى تكتمل "
 "الإعدادات."
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_ksw_payroll_employee_posting__default_account_id
+msgid "Where this part of his salary would go without the exception."
+msgstr "الحساب الذي كان سيُقيَّد عليه هذا الجزء من راتبه بدون الاستثناء."
 
 #. module: KSW_payroll_ledger
 #: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_department__x_posting_group_id
