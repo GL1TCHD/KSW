@@ -18,8 +18,11 @@
          "Apps" on Home. A one-time edit in the database survives upgrades of
          a non-noupdate menu only until something rewrites it, so state it here
          (gotcha #3). -->
+    <!-- Settings likewise, on request (Nov 2026): core also opens it to
+         Access Rights (group_erp_manager); here only System Administrators
+         see either app. -->
     <function model="ir.ui.menu" name="write">
-        <value eval="[ref('base.menu_management')]"/>
+        <value eval="[ref('base.menu_management'), ref('base.menu_administration')]"/>
         <value eval="{'group_ids': [(6, 0, [ref('base.group_system')])]}"/>
     </function>
 </odoo>

@@ -585,3 +585,33 @@ msgstr "عادي"
 #: model:ir.model.fields,help:KSW_backend_theme.field_res_users__ksw_text_size
 msgid "Automatic: large for Arabic, standard for English."
 msgstr "تلقائي: كبير للعربية، وعادي للإنجليزية."
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/tour/quick_tour.js:0
+msgid "Type the name of any app or screen and press Enter to open it. From any other page, use the search button at the top or Ctrl+K."
+msgstr "اكتب اسم أي تطبيق أو شاشة واضغط Enter لفتحها. ومن أي صفحة أخرى استخدم زر البحث في الأعلى أو Ctrl+K."
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/tour/quick_tour.js:0
+msgid "Approvals and activities that need you appear here as cards with a count. Press a card to open exactly those records. When nothing is waiting, it tells you so."
+msgstr "تظهر هنا الموافقات والأنشطة التي تحتاج إليك على شكل بطاقات مع عددها. اضغط البطاقة لفتح تلك السجلات بالضبط. وإن لم يكن شيء بانتظارك فستخبرك بذلك."
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/tour/quick_tour.js:0
+msgid "Hide the apps you don't use"
+msgstr "أخفِ التطبيقات التي لا تستخدمها"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/tour/quick_tour.js:0
+msgid "Press Customise, then the eye on an app to hide it, or drag the apps into your own order, and press Save. Hidden apps stay one click away under Show hidden apps."
+msgstr "اضغط «تخصيص» ثم أيقونة العين على التطبيق لإخفائه، أو اسحب التطبيقات لترتيبها كما تريد، ثم اضغط «حفظ». تبقى التطبيقات المخفية على بُعد نقرة واحدة تحت «عرض التطبيقات المخفية»."
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/tour/quick_tour.js:0
+msgid "In the same menu, open My Preferences and choose a text size: Automatic, Standard or Large. You can replay this tour from that menu too: Quick tour."
+msgstr "من القائمة نفسها افتح «تفضيلاتي» واختر حجم الخط: تلقائي أو عادي أو كبير. ويمكنك إعادة هذه الجولة من القائمة نفسها: «الجولة السريعة»."

@@ -51,7 +51,7 @@
 
                 <t t-else="">
                     <!-- 1. Waiting for me -->
-                    <section class="ksw_home_section" aria-labelledby="ksw_home_waiting">
+                    <section class="ksw_home_section ksw_home_waiting_section" aria-labelledby="ksw_home_waiting">
                         <div class="ksw_home_section_head">
                             <h2 id="ksw_home_waiting">Waiting for you</h2>
                             <button t-if="state.data.can_set_default" type="button" class="btn btn-link btn-sm"
@@ -88,7 +88,7 @@
                         <div class="ksw_home_section_head">
                             <h2 id="ksw_home_apps">Apps</h2>
                             <t t-if="!state.editing">
-                                <button type="button" class="btn btn-link btn-sm" t-on-click="startEdit">
+                                <button type="button" class="btn btn-link btn-sm ksw_home_customise" t-on-click="startEdit">
                                     <i class="fa fa-sliders" aria-hidden="true"/> Customise
                                 </button>
                             </t>

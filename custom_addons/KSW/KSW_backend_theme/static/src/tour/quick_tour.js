@@ -24,9 +24,19 @@ const STEPS = [
                 : _t("Press this button at any time to return to Home: what is waiting for you, all your apps, and what you opened recently. Shortcut: Alt+H."),
     },
     {
-        target: () => ".ksw_search_button",
+        target: () => ".ksw_home_search",
         title: () => _t("Search"),
-        body: () => _t("Find any screen by its name instead of going through the menus. Shortcut: Ctrl+K."),
+        body: () => _t("Type the name of any app or screen and press Enter to open it. From any other page, use the search button at the top or Ctrl+K."),
+    },
+    {
+        target: () => ".ksw_home_waiting_section",
+        title: () => _t("Waiting for you"),
+        body: () => _t("Approvals and activities that need you appear here as cards with a count. Press a card to open exactly those records. When nothing is waiting, it tells you so."),
+    },
+    {
+        target: () => ".ksw_home_customise",
+        title: () => _t("Hide the apps you don't use"),
+        body: () => _t("Press Customise, then the eye on an app to hide it, or drag the apps into your own order, and press Save. Hidden apps stay one click away under Show hidden apps."),
     },
     {
         target: () => ".o_user_menu",
@@ -36,13 +46,15 @@ const STEPS = [
     {
         target: () => ".o_user_menu",
         title: () => _t("Text size"),
-        body: () => _t("In the same menu, open My Preferences and choose a text size: Automatic, Standard or Large."),
+        body: () => _t("In the same menu, open My Preferences and choose a text size: Automatic, Standard or Large. You can replay this tour from that menu too: Quick tour."),
     },
 ];
 
+const HOME_ACTION = "KSW_backend_theme.action_ksw_home";
+
 export const kswQuickTourService = {
-    dependencies: ["orm"],
-    start(env, { orm }) {
+    dependencies: ["orm", "action"],
+    start(env, { orm, action }) {
         const state = reactive({ active: false, index: 0 });
         const finish = async () => {
             state.active = false;
@@ -51,7 +63,11 @@ export const kswQuickTourService = {
                 await orm.call("res.users", "ksw_tour_mark_done", []);
             }
         };
-        const start = () => {
+        // Most steps point at Home, so the tour always runs there.
+        const start = async () => {
+            if (!document.querySelector(".ksw_home")) {
+                await action.doAction(HOME_ACTION, { clearBreadcrumbs: true });
+            }
             state.index = 0;
             state.active = true;
         };
@@ -129,10 +145,18 @@ export class KswQuickTour extends Component {
             });
             return;
         }
+        if (this.scrolledFor !== this.state.index) {
+            this.scrolledFor = this.state.index;
+            el.scrollIntoView({ block: "nearest" });
+        }
         const r = el.getBoundingClientRect();
         const spot = `top:${r.top - PAD}px; left:${r.left - PAD}px; width:${r.width + PAD * 2}px; height:${r.height + PAD * 2}px;`;
+        // Below the target if it fits, else above, else pinned to the bottom
+        // (a tall target such as the Waiting for you section).
+        const cardH = 230;
         const below = r.bottom + PAD + 14;
-        const top = below + 190 < vh ? below : Math.max(12, r.top - PAD - 14 - 190);
+        const above = r.top - PAD - 14 - cardH;
+        const top = below + cardH < vh ? below : above >= 12 ? above : vh - cardH - 12;
         const left = Math.min(Math.max(12, r.left + r.width / 2 - width / 2), vw - width - 12);
         Object.assign(this.pos, { spot, card: `width:${width}px; top:${top}px; left:${left}px;` });
     }
