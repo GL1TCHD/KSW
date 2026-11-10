@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="KSW_backend_theme.Home">
+        <!-- While there is a query, search results replace the sections. -->
+        <div class="ksw_home o_action">
+            <div class="ksw_home_inner" t-if="state.data">
+
+                <header class="ksw_home_head">
+                    <div class="ksw_home_hello">
+                        <h1 t-esc="greeting"/>
+                        <p><span t-esc="today"/> · <span t-esc="summary"/></p>
+                    </div>
+                    <label class="ksw_home_search">
+                        <i class="fa fa-search" aria-hidden="true"/>
+                        <input t-ref="search" type="search" t-model="state.query"
+                               t-on-keydown="onSearchKeydown"
+                               placeholder="Search apps and screens"
+                               aria-label="Search apps and screens"/>
+                        <kbd>Ctrl K</kbd>
+                    </label>
+                </header>
+
+                <section t-if="results" class="ksw_home_results" aria-live="polite">
+                    <p t-if="results.empty" class="ksw_home_muted">No app or screen matches.</p>
+                    <div t-if="results.apps.length" class="ksw_home_result_group">
+                        <h2>Apps</h2>
+                        <ul>
+                            <li t-foreach="results.apps" t-as="app" t-key="app.id">
+                                <a t-att-href="app.href" t-on-click.prevent="() => this.openApp(app)">
+                                    <img t-if="app.webIconData" t-att-src="app.webIconData" alt=""/>
+                                    <span t-esc="app.label"/>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div t-if="results.screens.length" class="ksw_home_result_group">
+                        <h2>Screens</h2>
+                        <ul>
+                            <li t-foreach="results.screens" t-as="screen" t-key="screen.menu.id">
+                                <a t-att-href="'/odoo/' + (screen.menu.actionPath or 'action-' + screen.menu.actionID)"
+                                   t-on-click.prevent="() => this.openScreen(screen)">
+                                    <img t-if="screen.app.webIconData" t-att-src="screen.app.webIconData" alt=""/>
+                                    <span class="ksw_home_result_name" t-esc="screen.name"/>
+                                    <span class="ksw_home_result_path" t-esc="screen.path"/>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <t t-else="">
+                    <!-- 1. Waiting for me -->
+                    <section class="ksw_home_section" aria-labelledby="ksw_home_waiting">
+                        <div class="ksw_home_section_head">
+                            <h2 id="ksw_home_waiting">Waiting for you</h2>
+                            <button t-if="state.data.can_set_default" type="button" class="btn btn-link btn-sm"
+                                    t-on-click="configureCounters">Configure</button>
+                        </div>
+                        <div t-if="waitingTotal" class="ksw_home_cards">
+                            <button t-foreach="state.data.counters" t-as="counter" t-key="counter.id"
+                                    type="button" class="ksw_home_card" t-on-click="() => this.openCounter(counter)">
+                                <i t-attf-class="fa {{ counter.icon }}" aria-hidden="true"/>
+                                <span class="ksw_home_card_count" t-esc="counter.count"/>
+                                <span class="ksw_home_card_label" t-esc="counter.name"/>
+                            </button>
+                            <button t-if="state.data.activities.overdue" type="button"
+                                    class="ksw_home_card ksw_home_card_alert" t-on-click="() => this.openActivities('overdue')">
+                                <i class="fa fa-clock-o" aria-hidden="true"/>
+                                <span class="ksw_home_card_count" t-esc="state.data.activities.overdue"/>
+                                <span class="ksw_home_card_label">Overdue activities</span>
+                            </button>
+                            <button t-if="state.data.activities.today" type="button"
+                                    class="ksw_home_card" t-on-click="() => this.openActivities('today')">
+                                <i class="fa fa-calendar-check-o" aria-hidden="true"/>
+                                <span class="ksw_home_card_count" t-esc="state.data.activities.today"/>
+                                <span class="ksw_home_card_label">Activities due today</span>
+                            </button>
+                        </div>
+                        <p t-else="" class="ksw_home_clear">
+                            <i class="fa fa-check-circle" aria-hidden="true"/>
+                            <span>All clear. No approvals or activities are waiting for you.</span>
+                        </p>
+                    </section>
+
+                    <!-- 2. Apps -->
+                    <section class="ksw_home_section" aria-labelledby="ksw_home_apps">
+                        <div class="ksw_home_section_head">
+                            <h2 id="ksw_home_apps">Apps</h2>
+                            <t t-if="!state.editing">
+                                <button type="button" class="btn btn-link btn-sm" t-on-click="startEdit">
+                                    <i class="fa fa-sliders" aria-hidden="true"/> Customise
+                                </button>
+                            </t>
+                            <div t-else="" class="ksw_home_edit_bar">
+                                <span class="ksw_home_muted">Drag to reorder · click the eye to hide or show</span>
+                                <button type="button" class="btn btn-primary btn-sm" t-on-click="saveEdit">Save</button>
+                                <button type="button" class="btn btn-secondary btn-sm" t-on-click="cancelEdit">Cancel</button>
+                                <button t-if="state.data.is_personal" type="button" class="btn btn-link btn-sm"
+                                        t-on-click="resetLayout">Use company default</button>
+                                <button t-if="state.data.can_set_default" type="button" class="btn btn-link btn-sm"
+                                        t-on-click="saveAsDefault">Set as default for everyone</button>
+                            </div>
+                        </div>
+                        <div t-ref="apps" t-attf-class="ksw_home_apps {{ state.editing ? 'is_editing' : '' }}">
+                            <div t-foreach="visibleApps" t-as="app" t-key="app.id"
+                                 t-attf-class="ksw_home_app {{ isHidden(app) ? 'is_hidden' : '' }}"
+                                 t-att-data-xmlid="app.xmlid">
+                                <a t-att-href="app.href" t-on-click.prevent="() => this.openApp(app)"
+                                   t-att-tabindex="state.editing ? -1 : 0">
+                                    <img t-if="app.webIconData" t-att-src="app.webIconData" alt=""/>
+                                    <span t-esc="app.label"/>
+                                </a>
+                                <button t-if="state.editing" type="button" class="ksw_home_app_eye"
+                                        t-att-aria-pressed="isHidden(app) ? 'true' : 'false'"
+                                        t-att-aria-label="app.label"
+                                        t-on-click="() => this.toggleHidden(app)">
+                                    <i t-att-class="isHidden(app) ? 'fa fa-eye-slash' : 'fa fa-eye'" aria-hidden="true"/>
+                                </button>
+                            </div>
+                        </div>
+                        <div t-if="!state.editing and hiddenApps.length" class="ksw_home_hidden">
+                            <button type="button" class="btn btn-link btn-sm"
+                                    t-on-click="toggleShowHidden">
+                                <t t-esc="hiddenToggleLabel"/>
+                            </button>
+                            <div t-if="state.showHidden" class="ksw_home_apps ksw_home_apps_hidden">
+                                <div t-foreach="hiddenApps" t-as="app" t-key="app.id" class="ksw_home_app">
+                                    <a t-att-href="app.href" t-on-click.prevent="() => this.openApp(app)">
+                                        <img t-if="app.webIconData" t-att-src="app.webIconData" alt=""/>
+                                        <span t-esc="app.label"/>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 3. Recent -->
+                    <section t-if="recentItems.length" class="ksw_home_section" aria-labelledby="ksw_home_recent">
+                        <div class="ksw_home_section_head">
+                            <h2 id="ksw_home_recent">Recently opened</h2>
+                        </div>
+                        <ul class="ksw_home_recent">
+                            <li t-foreach="recentItems" t-as="entry" t-key="entry.key">
+                                <a href="#" t-on-click.prevent="() => this.openRecent(entry)">
+                                    <img t-if="entry.icon" t-att-src="entry.icon" alt=""/>
+                                    <span class="ksw_home_recent_title" t-esc="entry.title"/>
+                                    <span class="ksw_home_muted" t-esc="entry.when"/>
+                                </a>
+                            </li>
+                        </ul>
+                    </section>
+                </t>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="KSW_backend_theme.SearchButton">
+        <div class="o_nav_entry">
+            <button type="button" class="ksw_search_button" t-on-click="open" title="Search screens (Ctrl+K)">
+                <i class="fa fa-search" aria-hidden="true"/>
+                <span>Search</span>
+                <kbd>Ctrl K</kbd>
+            </button>
+        </div>
+    </t>
+
+    <!-- Home is the one app switcher: MuK's sidebar is not rendered at all
+         (hiding it with CSS still built it, and its logo, on every page). -->
+    <t t-name="KSW_backend_theme.WebClient" t-inherit="web.WebClient" t-inherit-mode="extension">
+        <xpath expr="//AppsBar" position="replace"/>
+    </t>
+
+    <!-- Phones: the burger menu replaces the apps button, so Home needs its own way in. -->
+    <t t-name="KSW_backend_theme.NavBar.AppsMenu.Sidebar" t-inherit="web.NavBar.AppsMenu.Sidebar" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o_sidebar_topbar')]//a" position="before">
+            <a href="/odoo/home" class="btn btn-secondary me-2 ksw_home_burger"
+               t-on-click.prevent="() => { this._closeAppMenuSidebar(); this.kswOpenHome(); }">
+                <i class="fa fa-home"/><span class="px-2">Home</span>
+            </a>
+        </xpath>
+    </t>
+
+    <!-- The apps button opens Home instead of MuK's overlay. -->
+    <t t-name="KSW_backend_theme.NavBar.AppsMenu" t-inherit="web.NavBar.AppsMenu" t-inherit-mode="extension">
+        <xpath expr="//AppsMenu" position="replace">
+            <a href="/odoo/home" class="ksw_home_button" data-hotkey="h" title="Home"
+               t-on-click.prevent="() => this.kswOpenHome()">
+                <i class="oi oi-apps" aria-hidden="true"/>
+            </a>
+        </xpath>
+    </t>
+
+</templates>

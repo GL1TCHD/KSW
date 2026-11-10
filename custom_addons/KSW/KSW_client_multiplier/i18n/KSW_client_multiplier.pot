@@ -386,6 +386,7 @@ msgstr ""
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier__rate_ids
 #: model_terms:ir.ui.view,arch_db:KSW_client_multiplier.view_client_multiplier_form
+#: model_terms:ir.ui.view,arch_db:KSW_client_multiplier.view_partner_form_multiplier
 msgid "History"
 msgstr ""
 
@@ -913,4 +914,24 @@ msgstr ""
 #: model:ir.model.fields,help:KSW_client_multiplier.field_ksw_client_multiplier__current_multiplier
 #: model:ir.model.fields,help:KSW_client_multiplier.field_ksw_client_multiplier_request__current_multiplier
 msgid "«الرد المضاعف» in force today."
+msgstr ""
+
+#. module: KSW_client_multiplier
+#: model:ir.model.fields,field_description:KSW_client_multiplier.field_res_partner__x_multiplier
+#: model:ir.model.fields,field_description:KSW_client_multiplier.field_res_users__x_multiplier
+msgid "Multiplier (الرد المضاعف)"
+msgstr ""
+
+#. module: KSW_client_multiplier
+#: model:ir.model.fields,help:KSW_client_multiplier.field_res_partner__x_multiplier
+#: model:ir.model.fields,help:KSW_client_multiplier.field_res_users__x_multiplier
+msgid ""
+"The customer's multiplier in force today. It changes only through a "
+"Multiplier Request approved by the GM."
+msgstr ""
+
+#. module: KSW_client_multiplier
+#: model:ir.model.fields,field_description:KSW_client_multiplier.field_res_partner__x_multiplier_client_id
+#: model:ir.model.fields,field_description:KSW_client_multiplier.field_res_users__x_multiplier_client_id
+msgid "X Multiplier Client"
 msgstr ""

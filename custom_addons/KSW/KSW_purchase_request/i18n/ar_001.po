@@ -1,0 +1,76 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* KSW_purchase_request
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-10 00:00+0000\n"
+"PO-Revision-Date: 2026-11-10 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ar_001\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: KSW_purchase_request
+#: model:ir.ui.menu,name:purchase_request.parent_menu_purchase_request
+#: model:ir.ui.menu,name:purchase_request.menu_purchase_request
+#: model:ir.ui.menu,name:purchase_request.menu_purchase_request_act
+#: model:ir.ui.menu,name:purchase_request.menu_purchase_request_pro_mgt
+msgid "Purchase Requests"
+msgstr "طلبات الشراء"
+
+#. module: KSW_purchase_request
+#: model:ir.ui.menu,name:purchase_request.menu_purchase_request_line
+#: model:ir.ui.menu,name:purchase_request.menu_purchase_request_line_act
+msgid "Purchase Request Lines"
+msgstr "بنود طلبات الشراء"
+
+#. module: KSW_purchase_request
+#. odoo-python
+#: code:addons/KSW_purchase_request/models/purchase_order.py:0
+msgid ""
+"%(order)s cannot be confirmed: a purchase request is required for %(items)s."
+" Create the RFQ from an approved purchase request (Purchase Requests ▸ "
+"select the lines ▸ Create RFQ)."
+msgstr ""
+"لا يمكن تأكيد %(order)s: يلزم طلب شراء للأصناف %(items)s. أنشئ طلب عرض السعر"
+" من طلب شراء معتمد (طلبات الشراء ▸ اختر البنود ▸ إنشاء طلب عرض سعر)."
+
+#. module: KSW_purchase_request
+#: model:ir.model.fields,help:KSW_purchase_request.field_res_company__x_purchase_request_required
+#: model:ir.model.fields,help:KSW_purchase_request.field_res_config_settings__x_purchase_request_required
+msgid ""
+"A purchase order can only be confirmed when every product line comes from an"
+" approved purchase request (PR → RFQ → PO)."
+msgstr ""
+"لا يمكن تأكيد أمر الشراء إلا إذا كان كل بند منتج صادراً عن طلب شراء معتمد "
+"(طلب شراء ← طلب عرض سعر ← أمر شراء)."
+
+#. module: KSW_purchase_request
+#: model_terms:ir.ui.view,arch_db:KSW_purchase_request.res_config_settings_view_form_purchase_request
+msgid ""
+"Orders start from an approved Purchase Request: PR, RFQ, PO, receipt, bill"
+msgstr ""
+"تبدأ أوامر الشراء من طلب شراء معتمد: طلب شراء، طلب عرض سعر، أمر شراء، "
+"استلام، فاتورة"
+
+#. module: KSW_purchase_request
+#: model:ir.model.fields,field_description:KSW_purchase_request.field_res_company__x_purchase_request_required
+#: model:ir.model.fields,field_description:KSW_purchase_request.field_res_config_settings__x_purchase_request_required
+msgid "Require Purchase Request"
+msgstr "يلزم طلب شراء"
+
+#. module: KSW_purchase_request
+#: model:ir.model,name:purchase_request.model_purchase_request
+msgid "Purchase Request"
+msgstr "طلب شراء"
+
+#. module: KSW_purchase_request
+#: model:ir.model,name:purchase_request.model_purchase_request_line
+msgid "Purchase Request Line"
+msgstr "بند طلب شراء"

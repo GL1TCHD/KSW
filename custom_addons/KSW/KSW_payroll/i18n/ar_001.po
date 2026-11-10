@@ -194,7 +194,7 @@ msgstr ""
 #. module: KSW_payroll
 #: model_terms:ir.ui.view,arch_db:KSW_payroll.view_hr_salary_rule_form_bas
 msgid "3201010006"
-msgstr ""
+msgstr "3201010006"
 
 #. module: KSW_payroll
 #: model_terms:ir.ui.view,arch_db:KSW_payroll.hr_payslip_run_form_inherit_ksw
@@ -619,6 +619,7 @@ msgstr ""
 #. module: KSW_payroll
 #. odoo-python
 #: code:addons/KSW_payroll/wizard/ksw_revision_request_reason_wizard.py:0
+#: code:addons/KSW_payroll/wizard/payslip_bank_release_wizard.py:0
 msgid "A reason is required."
 msgstr "السبب مطلوب."
 
@@ -1022,6 +1023,7 @@ msgstr "الحسابات البنكية"
 
 #. module: KSW_payroll
 #: model:ir.model.fields,field_description:KSW_payroll.field_ksw_payslip_revision_request__bank_file_id
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_bank_file_leave_line__bank_file_id
 msgid "Bank File"
 msgstr "ملف البنك"
 
@@ -1441,6 +1443,8 @@ msgstr "تجديد الرقم السري"
 #: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_bank_file__create_uid
 #: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_request_reason_wizard__create_uid
 #: model:ir.model.fields,field_description:KSW_payroll.field_ksw_wps_file_wizard__create_uid
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_payslip_bank_release_wizard__create_uid
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_bank_file_leave_line__create_uid
 msgid "Created by"
 msgstr "أنشئ بواسطة"
 
@@ -1456,6 +1460,8 @@ msgstr "أنشئ بواسطة"
 #: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_bank_file__create_date
 #: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_request_reason_wizard__create_date
 #: model:ir.model.fields,field_description:KSW_payroll.field_ksw_wps_file_wizard__create_date
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_payslip_bank_release_wizard__create_date
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_bank_file_leave_line__create_date
 msgid "Created on"
 msgstr "أنشئ في"
 
@@ -1533,6 +1539,8 @@ msgstr "التاريخ من"
 
 #. module: KSW_payroll
 #: model_terms:ir.ui.view,arch_db:KSW_payroll.report_payslip_override
+#: model:ir.model.fields,field_description:hr_biometric_attendance.field_hr_attendance__x_day_of_week
+#: model_terms:ir.ui.view,arch_db:hr_biometric_attendance.view_hr_attendance_tree_inherit
 msgid "Day"
 msgstr "اليوم"
 
@@ -1677,6 +1685,7 @@ msgstr "تاريخ الصرف"
 #: code:addons/KSW_payroll/static/src/js/payslip_run_delete.xml:0
 #: model_terms:ir.ui.view,arch_db:KSW_payroll.ksw_payslip_run_done_wizard_form
 #: model_terms:ir.ui.view,arch_db:KSW_payroll.view_ksw_revision_request_reason_wizard_form
+#: model_terms:ir.ui.view,arch_db:KSW_payroll.ksw_payslip_bank_release_wizard_form
 msgid "Discard"
 msgstr "إهمال"
 
@@ -1720,11 +1729,15 @@ msgstr "متجاهل"
 #: model:ir.model.fields,field_description:KSW_payroll.field_ksw_wps_file_wizard__display_name
 #: model:ir.model.fields,field_description:KSW_payroll.field_res_config_settings__display_name
 #: model:ir.model.fields,field_description:KSW_payroll.field_res_partner_bank__display_name
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_payslip_bank_release_wizard__display_name
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_bank_file_leave_line__display_name
 msgid "Display Name"
 msgstr "اسم العرض"
 
 #. module: KSW_payroll
 #: model:ir.model.fields.selection,name:KSW_payroll.selection__ksw_payslip_run_bank_total__confirm_state__done
+#: model:ir.model.fields.selection,name:om_hr_payroll.selection__hr_payslip_run__state__done
+#: model:ir.model.fields.selection,name:om_hr_payroll.selection__hr_payslip__state__done
 msgid "Done"
 msgstr "منتهي "
 
@@ -1740,6 +1753,8 @@ msgstr ""
 #. module: KSW_payroll
 #: model:ir.model.fields.selection,name:KSW_payroll.selection__ksw_payslip_revision_request__state__draft
 #: model:ir.model.fields.selection,name:KSW_payroll.selection__ksw_revision_bank_file__state__draft
+#: model:ir.model.fields.selection,name:om_hr_payroll.selection__hr_payslip_run__state__draft
+#: model:ir.model.fields.selection,name:om_hr_payroll.selection__hr_payslip__state__draft
 msgid "Draft"
 msgstr "مسودة"
 
@@ -1766,6 +1781,7 @@ msgstr "خطأ في البريد الإلكتروني"
 #: model:ir.model.fields,field_description:KSW_payroll.field_ksw_payslip_run_skip_line__employee_id
 #: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_request_reason_wizard__employee_id
 #: model_terms:ir.ui.view,arch_db:KSW_payroll.view_ksw_payslip_revision_request_search
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_bank_file_leave_line__employee_id
 msgid "Employee"
 msgstr "الموظف"
 
@@ -2109,6 +2125,8 @@ msgstr "كيف سوت المحاسبة الفرق."
 #: model:ir.model.fields,field_description:KSW_payroll.field_ksw_wps_file_wizard__id
 #: model:ir.model.fields,field_description:KSW_payroll.field_res_config_settings__id
 #: model:ir.model.fields,field_description:KSW_payroll.field_res_partner_bank__id
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_payslip_bank_release_wizard__id
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_bank_file_leave_line__id
 msgid "ID"
 msgstr "المعرف"
 
@@ -2259,6 +2277,8 @@ msgstr "عملية الكوثر"
 #: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_bank_file__write_uid
 #: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_request_reason_wizard__write_uid
 #: model:ir.model.fields,field_description:KSW_payroll.field_ksw_wps_file_wizard__write_uid
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_payslip_bank_release_wizard__write_uid
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_bank_file_leave_line__write_uid
 msgid "Last Updated by"
 msgstr "آخر تحديث بواسطة"
 
@@ -2274,6 +2294,8 @@ msgstr "آخر تحديث بواسطة"
 #: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_bank_file__write_date
 #: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_request_reason_wizard__write_date
 #: model:ir.model.fields,field_description:KSW_payroll.field_ksw_wps_file_wizard__write_date
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_payslip_bank_release_wizard__write_date
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_bank_file_leave_line__write_date
 msgid "Last Updated on"
 msgstr "آخر تحديث في"
 
@@ -3064,6 +3086,7 @@ msgstr "كشف الراتب"
 
 #. module: KSW_payroll
 #: model:ir.model.fields,field_description:KSW_payroll.field_ksw_payslip_revision_request__paying_bank_label
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_bank_file_leave_line__paying_bank_label
 msgid "Paying Bank"
 msgstr "البنك الدافع"
 
@@ -3161,6 +3184,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_payroll.field_ksw_payslip_revision_request__payslip_id
 #: model_terms:ir.ui.view,arch_db:KSW_payroll.report_payslip_override
 #: model_terms:ir.ui.view,arch_db:KSW_payroll.view_ksw_payslip_revision_request_form
+#: model_terms:ir.ui.view,arch_db:om_hr_payroll.payroll_hr_employee_view_form
+#: model_terms:ir.ui.view,arch_db:om_hr_payroll.view_hr_payslip_form
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_bank_file_leave_line__payslip_id
 msgid "Payslip"
 msgstr "كشف الراتب"
 
@@ -3301,6 +3327,7 @@ msgstr "كشف الراتب: {{ object.number }}"
 #: model:ir.model.fields,field_description:KSW_payroll.field_ksw_payslip_run_done_wizard_line__slip_count
 #: model_terms:ir.ui.view,arch_db:KSW_payroll.hr_payslip_view_graph
 #: model_terms:ir.ui.view,arch_db:KSW_payroll.hr_payslip_view_pivot
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_payslip_bank_release_wizard__slip_ids
 msgid "Payslips"
 msgstr "كشوف الراتب"
 
@@ -3394,6 +3421,7 @@ msgstr "النسبة المخصومة من (الأساسي + بدل السكن) 
 #. module: KSW_payroll
 #: model_terms:ir.ui.view,arch_db:KSW_payroll.view_ksw_payslip_revision_request_list
 #: model_terms:ir.ui.view,arch_db:KSW_payroll.view_ksw_revision_bank_file_form
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_bank_file_leave_line__date_from
 msgid "Period"
 msgstr "الفترة"
 
@@ -3491,6 +3519,7 @@ msgstr "إعادة إرسال بريد كشف الراتب"
 #: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_request_reason_wizard__reason
 #: model_terms:ir.ui.view,arch_db:KSW_payroll.hr_payslip_run_form_inherit_ksw
 #: model_terms:ir.ui.view,arch_db:KSW_payroll.view_ksw_revision_request_reason_wizard_form
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_payslip_bank_release_wizard__reason
 msgid "Reason"
 msgstr "السبب"
 
@@ -3857,6 +3886,8 @@ msgstr "ملف بنك تعديلات الرواتب"
 
 #. module: KSW_payroll
 #: model:ir.ui.menu,name:KSW_payroll.menu_ksw_revision_requests_root
+#: model_terms:ir.ui.view,arch_db:KSW_payroll.view_ksw_revision_bank_file_form
+#: model_terms:ir.ui.view,arch_db:KSW_payroll.view_ksw_revision_bank_file_list
 msgid "Salary Revisions"
 msgstr "تعديلات الرواتب"
 
@@ -5326,13 +5357,13 @@ msgstr "كشف (كشوف) راتب أرسلت إلى البنك."
 #. odoo-python
 #: code:addons/KSW_payroll/models/hr_payslip.py:0
 msgid "payslip_id"
-msgstr ""
+msgstr "payslip_id"
 
 #. module: KSW_payroll
 #. odoo-python
 #: code:addons/KSW_payroll/models/hr_payslip_run.py:0
 msgid "payslip_run_id"
-msgstr ""
+msgstr "payslip_run_id"
 
 #. module: KSW_payroll
 #. odoo-python
@@ -5377,7 +5408,7 @@ msgstr "هذا الموظف"
 #. module: KSW_payroll
 #: model_terms:ir.ui.view,arch_db:KSW_payroll.view_hr_salary_rule_form_bas
 msgid "مصروفات اضافي العاملين"
-msgstr ""
+msgstr "مصروفات اضافي العاملين"
 
 #. module: KSW_payroll
 #: model_terms:ir.ui.view,arch_db:KSW_payroll.hr_payslip_run_form_inherit_ksw
@@ -5504,3 +5535,392 @@ msgstr "قاعدة الراتب الأصل"
 #: model_terms:ir.ui.view,arch_db:KSW_payroll.report_annual_vacation
 msgid "Custom Balance Consumption"
 msgstr "استهلاك رصيد مخصص"
+
+#. module: KSW_payroll
+#: model:ir.model.fields.selection,name:om_hr_payroll.selection__hr_payslip_run__state__close
+msgid "Close"
+msgstr "مغلق"
+
+#. module: KSW_payroll
+#: model:ir.model.fields.selection,name:om_hr_payroll.selection__hr_payslip__state__verify
+msgid "Waiting"
+msgstr "قيد الانتظار"
+
+#. module: KSW_payroll
+#: model:ir.model.fields.selection,name:om_hr_payroll.selection__hr_payslip__state__cancel
+msgid "Rejected"
+msgstr "مرفوض"
+
+#. module: KSW_payroll
+#: model:ir.model.fields,field_description:om_hr_payroll.field_hr_payslip__version_id
+msgid "Employment Version/Contract"
+msgstr "العقد"
+
+#. module: KSW_payroll
+#: model_terms:ir.ui.view,arch_db:hr_biometric_attendance.view_hr_attendance_tree_inherit
+msgid "Check In"
+msgstr "تسجيل الحضور"
+
+#. module: KSW_payroll
+#: model_terms:ir.ui.view,arch_db:hr_biometric_attendance.view_hr_attendance_tree_inherit
+msgid "Check Out"
+msgstr "تسجيل الخروج"
+
+#. module: KSW_payroll
+#. odoo-python
+#: code:addons/KSW_payroll/wizard/payslip_bank_release_wizard.py:0
+msgid "%(n)s payslip(s) released from the bank freeze"
+msgstr "تم فك تجميد التحويل البنكي عن %(n)s كشف راتب"
+
+#. module: KSW_payroll
+#. odoo-python
+#: code:addons/KSW_payroll/models/ksw_revision_bank_file.py:0
+msgid "%(slip)s: nothing to transfer (net %(amt)s)"
+msgstr "%(slip)s: لا يوجد ما يُحوَّل (الصافي %(amt)s)"
+
+#. module: KSW_payroll
+#. odoo-python
+#: code:addons/KSW_payroll/models/ksw_revision_bank_file.py:0
+msgid ""
+"%(slip)s: paid, transfer of %(amt)s SAR waiting for the next off-cycle bank "
+"file"
+msgstr ""
+"%(slip)s: مدفوع، والتحويل بمبلغ %(amt)s ريال بانتظار ملف البنك التالي خارج "
+"الدورة"
+
+#. module: KSW_payroll
+#. odoo-python
+#: code:addons/KSW_payroll/models/ksw_revision_bank_file.py:0
+msgid "%(slip)s: sent in bank file %(file)s (value date %(date)s)"
+msgstr "%(slip)s: أُرسل في ملف البنك %(file)s (تاريخ القيمة %(date)s)"
+
+#. module: KSW_payroll
+#. odoo-python
+#: code:addons/KSW_payroll/models/ksw_revision_bank_file.py:0
+msgid "%(slip)s: transferred by hand"
+msgstr "%(slip)s: حُوِّل يدوياً"
+
+#. module: KSW_payroll
+#: model_terms:ir.ui.view,arch_db:KSW_payroll.hr_leave_view_form_inherit_payroll_vacation
+msgid "<strong>Bank transfer:</strong>"
+msgstr "<strong>التحويل البنكي:</strong>"
+
+#. module: KSW_payroll
+#. odoo-python
+#: code:addons/KSW_payroll/models/ksw_revision_bank_file.py:0
+msgid ""
+"A settlement line is copied from its payslip. Remove it and let the file add"
+" it again instead."
+msgstr ""
+"بند التسوية منسوخ من كشف الراتب الخاص به. احذفه ودع الملف يضيفه من جديد."
+
+#. module: KSW_payroll
+#. odoo-python
+#: code:addons/KSW_payroll/models/ksw_revision_bank_file.py:0
+msgid ""
+"Add at least one salary revision or vacation / EOS settlement waiting for a "
+"bank file."
+msgstr ""
+"أضف تعديل راتب واحداً على الأقل أو تسوية إجازة / نهاية خدمة بانتظار ملف بنك."
+
+#. module: KSW_payroll
+#. odoo-python
+#: code:addons/KSW_payroll/wizard/payslip_bank_release_wizard.py:0
+msgid ""
+"Confirm that the bank did not pay these payslips. If it did, keep them "
+"frozen: deleting or recomputing a paid payslip makes Odoo disagree with the "
+"bank."
+msgstr ""
+"أكّد أن البنك لم يصرف هذه الكشوف. إن كان قد صرفها فأبقها مجمّدة: حذف كشف "
+"راتب مدفوع أو إعادة احتسابه يجعل Odoo يخالف البنك."
+
+#. module: KSW_payroll
+#: model:ir.model.fields.selection,name:KSW_payroll.selection__ksw_revision_bank_file_leave_line__kind__eos
+msgid "End of Service"
+msgstr "نهاية الخدمة"
+
+#. module: KSW_payroll
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_bank_file_leave_line__confirmed_date
+msgid "GM Final Approval"
+msgstr "الاعتماد النهائي من المدير العام"
+
+#. module: KSW_payroll
+#: model_terms:ir.ui.view,arch_db:KSW_payroll.view_ksw_revision_bank_file_form
+msgid ""
+"Generate one Excel and one TXT bank file for everything listed, and record "
+"every transfer as sent?"
+msgstr ""
+"إنشاء ملف بنك واحد بصيغة Excel وآخر بصيغة TXT لكل ما هو مدرج، وتسجيل كل "
+"التحويلات على أنها أُرسلت؟"
+
+#. module: KSW_payroll
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_bank_file__leave_count
+msgid "Leave Count"
+msgstr "عدد الإجازات"
+
+#. module: KSW_payroll
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_bank_file_leave_line__amount
+msgid "Net"
+msgstr "الصافي"
+
+#. module: KSW_payroll
+#: model_terms:ir.actions.act_window,help:KSW_payroll.action_ksw_revision_bank_files
+msgid "No off-cycle bank files yet"
+msgstr "لا توجد ملفات بنك خارج الدورة بعد"
+
+#. module: KSW_payroll
+#. odoo-python
+#: code:addons/KSW_payroll/wizard/payslip_bank_release_wizard.py:0
+msgid "None of these payslips is frozen."
+msgstr "لا يوجد بين هذه الكشوف كشف مجمّد."
+
+#. module: KSW_payroll
+#: model:ir.model,name:KSW_payroll.model_ksw_revision_bank_file_leave_line
+msgid "Off-Cycle Bank File: Leave Settlement"
+msgstr "ملف بنك خارج الدورة: تسوية إجازة"
+
+#. module: KSW_payroll
+#. odoo-python
+#: code:addons/KSW_payroll/models/ksw_revision_bank_file.py:0
+msgid "Off-Cycle Payments %(ref)s"
+msgstr "دفعات خارج الدورة %(ref)s"
+
+#. module: KSW_payroll
+#: model_terms:ir.ui.view,arch_db:KSW_payroll.ksw_payslip_bank_release_wizard_form
+msgid ""
+"Only release payslips the bank did <strong>not</strong> pay.\n"
+"                    Once released they can be recomputed or deleted, and the bank\n"
+"                    file already exported for them no longer matches Odoo."
+msgstr ""
+"لا تفك تجميد إلا الكشوف التي <strong>لم</strong> يصرفها البنك.\n"
+"                    بعد فك التجميد يمكن إعادة احتسابها أو حذفها، ولا يعود ملف البنك\n"
+"                    المصدَّر لها مطابقاً لـ Odoo."
+
+#. module: KSW_payroll
+#. odoo-python
+#: code:addons/KSW_payroll/models/ksw_revision_bank_file.py:0
+msgid "Only the accounting team may prepare an off-cycle bank file."
+msgstr "يُعِدّ ملف البنك خارج الدورة فريق المحاسبة فقط."
+
+#. module: KSW_payroll
+#: model:ir.model.fields,field_description:KSW_payroll.field_hr_payslip__x_offcycle_bank_file_id
+msgid "Paid by Bank File"
+msgstr "دُفع عبر ملف البنك"
+
+#. module: KSW_payroll
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_bank_file_leave_line__payslip_key
+msgid "Payslip Key"
+msgstr "مفتاح كشف الراتب"
+
+#. module: KSW_payroll
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_bank_file_leave_line__slip_ref
+msgid "Payslip Ref."
+msgstr "مرجع كشف الراتب"
+
+#. module: KSW_payroll
+#. odoo-python
+#: code:addons/KSW_payroll/wizard/payslip_bank_release_wizard.py:0
+msgid ""
+"Payslip released from the bank freeze; recompute it to apply the change."
+msgstr "فُك تجميد التحويل البنكي عن كشف الراتب؛ أعد احتسابه لتطبيق التغيير."
+
+#. module: KSW_payroll
+#: model_terms:ir.ui.view,arch_db:KSW_payroll.ksw_payslip_bank_release_wizard_form
+msgid "Release"
+msgstr "فك التجميد"
+
+#. module: KSW_payroll
+#: model:ir.model,name:KSW_payroll.model_ksw_payslip_bank_release_wizard
+msgid "Release Payslips from the Bank Freeze"
+msgstr "فك تجميد التحويل البنكي عن كشوف الراتب"
+
+#. module: KSW_payroll
+#: model:ir.actions.act_window,name:KSW_payroll.action_ksw_payslip_bank_release
+#: model_terms:ir.ui.view,arch_db:KSW_payroll.hr_payslip_run_form_bank_release
+#: model_terms:ir.ui.view,arch_db:KSW_payroll.ksw_payslip_bank_release_wizard_form
+#: model_terms:ir.ui.view,arch_db:KSW_payroll.view_hr_payslip_form_bank_release
+msgid "Release from Bank Freeze"
+msgstr "فك تجميد التحويل البنكي"
+
+#. module: KSW_payroll
+#. odoo-python
+#: code:addons/KSW_payroll/wizard/payslip_bank_release_wizard.py:0
+msgid "Released from the bank freeze"
+msgstr "فُك تجميد التحويل البنكي"
+
+#. module: KSW_payroll
+#: model_terms:ir.actions.act_window,help:KSW_payroll.action_ksw_revision_bank_files
+msgid ""
+"Salary revisions paid by bank transfer, and vacation / EOS\n"
+"                settlements confirmed at GM final approval, wait here for a\n"
+"                transfer. Create a bank file to send any number of them in\n"
+"                one upload."
+msgstr ""
+"تعديلات الرواتب المدفوعة بتحويل بنكي، وتسويات الإجازة ونهاية الخدمة\n"
+"                المعتمدة في الاعتماد النهائي للمدير العام، تنتظر هنا\n"
+"                التحويل. أنشئ ملف بنك لإرسال أي عدد منها في\n"
+"                رفع واحد."
+
+#. module: KSW_payroll
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_bank_file_leave_line__kind
+msgid "Settlement"
+msgstr "التسوية"
+
+#. module: KSW_payroll
+#: model:ir.model.fields,field_description:KSW_payroll.field_hr_leave__x_settlement_transfer_status
+msgid "Settlement Transfer"
+msgstr "تحويل التسوية"
+
+#. module: KSW_payroll
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_payslip_bank_release_wizard__confirm_not_paid
+msgid "The bank did not pay these payslips"
+msgstr "لم يصرف البنك هذه الكشوف"
+
+#. module: KSW_payroll
+#: model:ir.model.fields,help:KSW_payroll.field_hr_payslip__x_offcycle_bank_file_id
+msgid "The off-cycle bank file whose transfer paid this payslip."
+msgstr "ملف البنك خارج الدورة الذي دفع تحويلُه كشف الراتب هذا."
+
+#. module: KSW_payroll
+#: model_terms:ir.ui.view,arch_db:KSW_payroll.view_ksw_revision_bank_file_form
+msgid ""
+"These are the salary revisions and the vacation / EOS\n"
+"                        settlements waiting for a bank transfer. Remove any\n"
+"                        that should wait; they stay pending for the next\n"
+"                        file. <strong>Generate Bank File</strong> produces one\n"
+"                        Excel and one TXT for everything listed (a zip, one\n"
+"                        file per paying bank, when more than one bank is\n"
+"                        involved). Vacation and EOS payslips are already paid\n"
+"                        from GM final approval; the file only records the\n"
+"                        transfer."
+msgstr ""
+"هذه تعديلات الرواتب وتسويات الإجازة ونهاية\n"
+"                        الخدمة التي تنتظر تحويلاً بنكياً. احذف ما\n"
+"                        ينبغي أن ينتظر؛ ويبقى معلقاً للملف\n"
+"                        التالي. <strong>إنشاء ملف البنك</strong> ينتج ملف\n"
+"                        Excel وملف TXT لكل ما هو مدرج (ملف مضغوط، ملف\n"
+"                        لكل بنك دافع، عند وجود أكثر من\n"
+"                        بنك). كشوف رواتب الإجازة ونهاية الخدمة مدفوعة بالفعل\n"
+"                        منذ الاعتماد النهائي للمدير العام؛ والملف يسجّل\n"
+"                        التحويل فقط."
+
+#. module: KSW_payroll
+#. odoo-python
+#: code:addons/KSW_payroll/models/ksw_revision_bank_file.py:0
+msgid ""
+"These payslips have already been transferred to the employee, so they cannot be cancelled or reset:\n"
+"%(rows)s\n"
+"\n"
+"If the bank returned the transfer, a Payroll Manager must cancel the payslip by hand first."
+msgstr ""
+"هذه الكشوف حُوّلت بالفعل للموظف، فلا يمكن إلغاؤها أو إعادتها:\n"
+"%(rows)s\n"
+"\n"
+"إن أعاد البنك التحويل، فعلى مدير الرواتب إلغاء كشف الراتب يدوياً أولاً."
+
+#. module: KSW_payroll
+#. odoo-python
+#: code:addons/KSW_payroll/models/ksw_revision_bank_file.py:0
+msgid ""
+"These settlements are no longer waiting for a bank transfer (already in another file, recorded as paid by hand, cancelled, or with nothing to pay). Remove them and generate again:\n"
+"%(rows)s"
+msgstr ""
+"هذه التسويات لم تعد تنتظر تحويلاً بنكياً (موجودة في ملف آخر، أو سُجّلت كمدفوعة يدوياً، أو ملغاة، أو لا يوجد ما يُدفع). احذفها وأنشئ الملف مجدداً:\n"
+"%(rows)s"
+
+#. module: KSW_payroll
+#. odoo-python
+#: code:addons/KSW_payroll/wizard/payslip_bank_release_wizard.py:0
+msgid ""
+"They can now be recomputed or deleted. Any bank file already exported for "
+"them is out of date."
+msgstr ""
+"يمكن الآن إعادة احتسابها أو حذفها. أي ملف بنك صُدّر لها سابقاً لم يعد "
+"صالحاً."
+
+#. module: KSW_payroll
+#: model:ir.model.fields,help:KSW_payroll.field_hr_payslip__x_paid_outside_bank_file
+msgid ""
+"This settlement was transferred before off-cycle bank files covered vacation"
+" and EOS payslips, so it is not offered to a bank file again."
+msgstr ""
+"حُوّلت هذه التسوية قبل أن تشمل ملفات البنك خارج الدورة كشوف الإجازة ونهاية "
+"الخدمة، فلا تُعرض على ملف بنك مرة أخرى."
+
+#. module: KSW_payroll
+#: model:ir.model.fields,field_description:KSW_payroll.field_hr_payslip__x_paid_outside_bank_file
+msgid "Transfer Made by Hand"
+msgstr "تحويل يدوي"
+
+#. module: KSW_payroll
+#: model:ir.model.fields.selection,name:KSW_payroll.selection__ksw_revision_bank_file_leave_line__kind__unpaid
+msgid "Unpaid Leave"
+msgstr "الإجازة بدون أجر"
+
+#. module: KSW_payroll
+#: model:ir.model.fields.selection,name:KSW_payroll.selection__ksw_revision_bank_file_leave_line__kind__vacation
+msgid "Vacation"
+msgstr "الإجازة"
+
+#. module: KSW_payroll
+#: model_terms:ir.ui.view,arch_db:KSW_payroll.view_ksw_revision_bank_file_form
+#: model_terms:ir.ui.view,arch_db:KSW_payroll.view_ksw_revision_bank_file_list
+msgid "Vacation & EOS"
+msgstr "الإجازة ونهاية الخدمة"
+
+#. module: KSW_payroll
+#: model:ir.model.fields,field_description:KSW_payroll.field_ksw_revision_bank_file__leave_line_ids
+#: model_terms:ir.ui.view,arch_db:KSW_payroll.view_ksw_revision_bank_file_form
+msgid "Vacation & EOS Settlements"
+msgstr "تسويات الإجازة ونهاية الخدمة"
+
+#. module: KSW_payroll
+#: model:ir.model.fields,help:KSW_payroll.field_ksw_revision_bank_file__leave_line_ids
+msgid ""
+"Vacation / EOS payslips confirmed at GM final approval whose transfer has "
+"not been sent yet. Remove any that should wait."
+msgstr ""
+"كشوف رواتب الإجازة ونهاية الخدمة المعتمدة في الاعتماد النهائي للمدير العام "
+"ولم يُرسل تحويلها بعد. احذف ما ينبغي أن ينتظر."
+
+#. module: KSW_payroll
+#: model_terms:ir.ui.view,arch_db:KSW_payroll.ksw_payslip_bank_release_wizard_form
+msgid "e.g. Bank rejected these rows; employee left before payday."
+msgstr "مثال: رفض البنك هذه الصفوف؛ غادر الموظف قبل يوم الصرف."
+
+#. module: KSW_payroll
+#. odoo-python
+#: code:addons/KSW_payroll/wizard/payslip_bank_release_wizard.py:0
+msgid "release payslips from the bank freeze"
+msgstr "فك تجميد التحويل البنكي عن كشوف الراتب"
+
+#. module: KSW_payroll
+#. odoo-python
+#: code:addons/KSW_payroll/models/ksw_revision_bank_file.py:0
+msgid "transferred by hand"
+msgstr "حُوّل يدوياً"
+
+#. module: KSW_payroll
+#: model:ir.model,name:hr_biometric_attendance.model_daily_attendance
+msgid "Daily Attendance Report"
+msgstr "تقرير الحضور اليومي"
+
+#. module: KSW_payroll
+#: model:ir.model,name:hr_attendance.model_hr_attendance_overtime_ruleset
+msgid "Overtime Ruleset"
+msgstr "مجموعة قواعد العمل الإضافي"
+
+#. module: KSW_payroll
+#: model:ir.model,name:hr_attendance.model_hr_attendance_overtime_rule
+msgid "Overtime Rule"
+msgstr "قاعدة العمل الإضافي"
+
+#. module: KSW_payroll
+#: model:ir.model,name:hr_holidays_attendance.model_hr_leave_attendance_report
+msgid "Attendance and Leave Analysis Report"
+msgstr "تقرير تحليل الحضور والإجازات"
+
+#. module: KSW_payroll
+#: model:ir.model,name:om_hr_payroll.model_hr_contract_advantage_template
+msgid "Employee's Advantage on Contract"
+msgstr "مزايا الموظف في العقد"

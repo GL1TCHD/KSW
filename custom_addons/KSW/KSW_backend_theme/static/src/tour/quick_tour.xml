@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-name="KSW_backend_theme.QuickTour">
+        <div t-if="state.active" class="ksw_tour" t-att-data-step="state.index + 1">
+            <div t-if="pos.spot" class="ksw_tour_spot" t-att-style="pos.spot"/>
+            <div t-else="" class="ksw_tour_dim"/>
+            <div class="ksw_tour_card" t-att-style="pos.card"
+                 role="dialog" aria-modal="true" aria-labelledby="ksw_tour_title">
+                <div class="ksw_tour_head">
+                    <span class="ksw_tour_counter" t-esc="counter"/>
+                    <button type="button" class="btn btn-link btn-sm ksw_tour_skip" t-on-click="skip">Skip tour</button>
+                </div>
+                <h3 id="ksw_tour_title" t-esc="step.title()"/>
+                <p t-esc="step.body(small)"/>
+                <div class="ksw_tour_dots" aria-hidden="true">
+                    <t t-foreach="tour.steps" t-as="s" t-key="s_index">
+                        <span t-att-class="{'active': s_index === state.index}"/>
+                    </t>
+                </div>
+                <div class="ksw_tour_actions">
+                    <button t-if="state.index > 0" type="button" class="btn btn-secondary btn-sm" t-on-click="back">Back</button>
+                    <button type="button" class="btn btn-primary btn-sm" t-ref="next" t-on-click="next">
+                        <t t-if="isLast">Done</t>
+                        <t t-else="">Next</t>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

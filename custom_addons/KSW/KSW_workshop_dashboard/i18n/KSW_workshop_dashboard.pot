@@ -363,3 +363,27 @@ msgstr ""
 #: code:addons/KSW_workshop_dashboard/static/src/workshop_dashboard.xml:0
 msgid "same repair again within"
 msgstr ""
+
+#. module: KSW_workshop_dashboard
+#. odoo-python
+#: code:addons/KSW_workshop_dashboard/models/workshop_dashboard.py:0
+msgid "30p"
+msgstr ""
+
+#. module: KSW_workshop_dashboard
+#. odoo-python
+#: code:addons/KSW_workshop_dashboard/models/workshop_dashboard.py:0
+msgid "3_7"
+msgstr ""
+
+#. module: KSW_workshop_dashboard
+#. odoo-python
+#: code:addons/KSW_workshop_dashboard/models/workshop_dashboard.py:0
+msgid "8_30"
+msgstr ""
+
+#. module: KSW_workshop_dashboard
+#. odoo-javascript
+#: code:addons/KSW_workshop_dashboard/static/src/workshop_dashboard.js:0
+msgid "All workshops"
+msgstr ""

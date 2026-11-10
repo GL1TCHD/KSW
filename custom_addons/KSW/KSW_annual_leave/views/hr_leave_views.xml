@@ -169,8 +169,10 @@
                  position="replace" on it still work. -->
             <xpath expr="//widget[@name='hr_leave_stats']" position="replace">
 
-                <!-- Non-annual leave types: keep the standard Odoo balance summary -->
-                <div name="ksw_core_leave_stats" invisible="x_is_annual_leave_type">
+                <!-- Non-annual leave types (sick, late / early excuses, ...): Odoo's
+                     department summary is hidden on request (Nov 2026). The div
+                     stays so KSW_eos_leave's xpath on it still resolves. -->
+                <div name="ksw_core_leave_stats" invisible="1">
                     <widget name="hr_leave_stats"/>
                 </div>
 

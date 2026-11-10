@@ -1,7 +1,7 @@
 {
     'name': 'KSW - Odoo 19 HR Payroll',
     'category': 'Human Resources/Payroll',
-    'version': '19.0.1.31.0',
+    'version': '19.0.1.32.0',
     'sequence': 1,
     'author': 'Mohammed Albadr',
     'summary': 'HR Payroll Management for Odoo 19 Community Edition',
@@ -42,6 +42,7 @@ Extends om_hr_payroll with:
         'data/ksw_payslip_revision_sequence.xml',
         'data/mail_template_payslip.xml',
         'data/payslip_email_cron.xml',
+        'data/menu_labels.xml',
 
         # Wizard
         'wizard/bank_file_export_wizard_views.xml',

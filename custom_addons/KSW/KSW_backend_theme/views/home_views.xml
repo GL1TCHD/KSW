@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_ksw_home" model="ir.actions.client">
+        <field name="name">Home</field>
+        <field name="tag">ksw_home</field>
+        <field name="path">home</field>
+    </record>
+
+    <record id="view_ksw_home_inbox_source_list" model="ir.ui.view">
+        <field name="name">ksw.home.inbox.source.list</field>
+        <field name="model">ksw.home.inbox.source</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="model_name"/>
+                <field name="domain"/>
+                <field name="icon"/>
+                <field name="group_ids" widget="many2many_tags" optional="show"/>
+                <field name="active" widget="boolean_toggle"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_ksw_home_inbox_source" model="ir.actions.act_window">
+        <field name="name">Home: Waiting For Me</field>
+        <field name="res_model">ksw.home.inbox.source</field>
+        <field name="view_mode">list</field>
+        <field name="context">{'active_test': False}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Add a counter to Home</p>
+            <p>A model and a domain of records waiting for the current user (uid). Each user only counts what their access rights let them read, and a counter at zero is hidden.</p>
+        </field>
+    </record>
+
+    <menuitem id="menu_ksw_home_inbox_source" name="Home: Waiting For Me"
+              parent="base.menu_users" action="action_ksw_home_inbox_source"
+              groups="base.group_system" sequence="90"/>
+
+    <!-- Home is the one app switcher, so MuK's sidebar is hidden and its option
+         would do nothing. -->
+    <record id="view_users_form_simple_modif" model="ir.ui.view">
+        <field name="name">res.users.preferences.ksw.home</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="muk_web_appsbar.view_res_users_form"/>
+        <field name="arch" type="xml">
+            <field name="sidebar_type" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="sidebar_type" position="after">
+                <field name="ksw_text_size" readonly="0" widget="radio"/>
+            </field>
+        </field>
+    </record>
+</odoo>

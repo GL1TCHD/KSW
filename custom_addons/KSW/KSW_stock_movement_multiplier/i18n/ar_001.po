@@ -26,13 +26,13 @@ msgstr "الرد المضاعف"
 #: model:ir.model.fields,field_description:KSW_stock_movement_multiplier.field_ksw_stock_movement_line__display_name
 #: model:ir.model.fields,field_description:KSW_stock_movement_multiplier.field_ksw_stock_movement_wizard__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "اسم العرض"
 
 #. module: KSW_stock_movement_multiplier
 #: model:ir.model.fields,field_description:KSW_stock_movement_multiplier.field_ksw_stock_movement_line__id
 #: model:ir.model.fields,field_description:KSW_stock_movement_multiplier.field_ksw_stock_movement_wizard__id
 msgid "ID"
-msgstr ""
+msgstr "المعرف"
 
 #. module: KSW_stock_movement_multiplier
 #: model:ir.model,name:KSW_stock_movement_multiplier.model_ksw_stock_movement_wizard

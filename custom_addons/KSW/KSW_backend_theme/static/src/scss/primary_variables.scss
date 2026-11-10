@@ -1,0 +1,62 @@
+// KSW brand. The company's report colours (res.company primary/secondary);
+// teal darkened from #0d8aaf (3.98:1 on white) so link and button text passes 4.5:1.
+$ksw-navy: #124081;
+$ksw-teal: #0b7899;
+$ksw-ink: #1f2937;
+$ksw-text: #374151;
+$ksw-line: #e5e7eb;
+$ksw-surface: #f8fafc;
+$ksw-page: #f6f7f9;
+$ksw-muted: #6b7280;
+// Surfaces and states. primary_variables.dark.scss redefines every $ksw-* token
+// for the dark bundle, so no component file may use a literal colour.
+$ksw-card: #ffffff;
+$ksw-border-strong: #d1d5db;
+$ksw-border-hover: #9ca3af;
+$ksw-apps-bg: #eef2f6;
+$ksw-accent-soft: #e6f2f6;
+$ksw-accent-ink: #0b5f79;
+$ksw-alert: #b42318;
+$ksw-alert-soft: #fdecea;
+$ksw-ok: #157347;
+$ksw-star: #b45309;
+$ksw-dark: false;
+$ksw-control-bg: #f3f4f6;
+
+// MuK's colours.scss assigns these without !default, so they are reassigned here.
+$mk_color_brand: $ksw-navy;
+$mk_color_primary: $ksw-teal;
+
+$o-community-color: $ksw-navy;
+$o-enterprise-color: $ksw-navy;
+$o-enterprise-action-color: $ksw-teal;
+$o-brand-odoo: $ksw-navy;
+$o-brand-primary: $ksw-teal;
+
+$o-theme-text-colors: (
+    "primary": $ksw-teal,
+    "success": $o-success,
+    "info": $o-info,
+    "warning": $o-warning,
+    "danger": $o-danger,
+);
+
+// Light top bar (web/static/src/webclient/navbar/navbar.variables.scss uses
+// !default and loads after this file). Literals: $o-white is not defined yet.
+// Selected item in side lists (search panel): core lightens $o-info, which stays
+// near-white even in dark mode.
+$o-list-group-active-bg: $ksw-accent-soft;
+$o-list-group-active-color: $ksw-ink;
+
+$o-navbar-background: $ksw-card;
+$o-navbar-border-bottom: 1px solid $ksw-line;
+$o-navbar-entry-color: $ksw-text;
+$o-navbar-entry-color--hover: $ksw-navy;
+$o-navbar-entry-bg--hover: rgba($ksw-navy, .06);
+$o-navbar-entry-color--active: $ksw-navy;
+$o-navbar-entry-bg--active: rgba($ksw-navy, .08);
+$o-navbar-brand-color: $ksw-navy;
+
+// Arabic glyphs come from Tajawal (@font-face in theme.scss, Arabic ranges only);
+// Latin text keeps the system font.
+$o-system-fonts: ("KSW Arabic", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, "Noto Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");

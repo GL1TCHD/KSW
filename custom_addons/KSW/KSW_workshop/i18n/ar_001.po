@@ -117,6 +117,7 @@ msgstr "إجراء مطلوب"
 #: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_part__active
 #: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_request_type__active
 #: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_technician__active
+#: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop__active
 msgid "Active"
 msgstr "نشط"
 
@@ -275,6 +276,7 @@ msgstr "تطبيق على الطلبات الحالية"
 #: model_terms:ir.ui.view,arch_db:KSW_workshop.view_ksw_workshop_request_type_form
 #: model_terms:ir.ui.view,arch_db:KSW_workshop.view_ksw_workshop_technician_form
 #: model_terms:ir.ui.view,arch_db:KSW_workshop.view_ksw_workshop_technician_search
+#: model_terms:ir.ui.view,arch_db:KSW_workshop.view_ksw_workshop_form
 msgid "Archived"
 msgstr "مؤرشف"
 
@@ -577,6 +579,7 @@ msgstr "وصلة الربط / الصحن"
 #: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_request_type__create_uid
 #: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_return_wizard__create_uid
 #: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_technician__create_uid
+#: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop__create_uid
 msgid "Created by"
 msgstr "أنشئ بواسطة"
 
@@ -592,6 +595,7 @@ msgstr "أنشئ بواسطة"
 #: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_request_type__create_date
 #: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_return_wizard__create_date
 #: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_technician__create_date
+#: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop__create_date
 msgid "Created on"
 msgstr "أنشئ في"
 
@@ -652,6 +656,7 @@ msgstr "عرّف نوعاً من الأعمال والكلمات التي تدل
 #. module: KSW_workshop
 #: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_request__department_id
 #: model_terms:ir.ui.view,arch_db:KSW_workshop.view_ksw_workshop_request_search
+#: model:ir.model,name:KSW_workshop.model_hr_department
 msgid "Department"
 msgstr "القسم"
 
@@ -690,6 +695,8 @@ msgstr "الوصف"
 #: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_technician__display_name
 #: model:ir.model.fields,field_description:KSW_workshop.field_res_partner__display_name
 #: model:ir.model.fields,field_description:KSW_workshop.field_res_users__display_name
+#: model:ir.model.fields,field_description:KSW_workshop.field_hr_department__display_name
+#: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop__display_name
 msgid "Display Name"
 msgstr "اسم العرض"
 
@@ -896,6 +903,8 @@ msgstr "طريقة العرض"
 #: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_technician__id
 #: model:ir.model.fields,field_description:KSW_workshop.field_res_partner__id
 #: model:ir.model.fields,field_description:KSW_workshop.field_res_users__id
+#: model:ir.model.fields,field_description:KSW_workshop.field_hr_department__id
+#: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop__id
 msgid "ID"
 msgstr "المُعرف"
 
@@ -1114,6 +1123,7 @@ msgstr "آخر قراءة عداد"
 #: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_request_type__write_uid
 #: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_return_wizard__write_uid
 #: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_technician__write_uid
+#: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop__write_uid
 msgid "Last Updated by"
 msgstr "آخر تحديث بواسطة"
 
@@ -1129,6 +1139,7 @@ msgstr "آخر تحديث بواسطة"
 #: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_request_type__write_date
 #: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_return_wizard__write_date
 #: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_technician__write_date
+#: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop__write_date
 msgid "Last Updated on"
 msgstr "آخر تحديث في"
 
@@ -1284,6 +1295,7 @@ msgstr "طلباتي"
 #: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_request__name
 #: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_request_type__name
 #: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_technician__name
+#: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop__name
 msgid "Name"
 msgstr "الاسم"
 
@@ -1948,6 +1960,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_request_type__request_ids
 #: model_terms:ir.ui.view,arch_db:KSW_workshop.report_workshop
 #: model_terms:ir.ui.view,arch_db:KSW_workshop.view_ksw_workshop_request_type_list
+#: model_terms:ir.ui.view,arch_db:KSW_workshop.view_ksw_workshop_form
 msgid "Requests"
 msgstr "الطلبات"
 
@@ -2013,6 +2026,7 @@ msgstr "المركبة نفسها (هذا العام)"
 #. module: KSW_workshop
 #: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_labor_line__sequence
 #: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_request_type__sequence
+#: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop__sequence
 msgid "Sequence"
 msgstr "تسلسل"
 
@@ -2231,6 +2245,8 @@ msgstr "اسم الفني (كما سُجّل)"
 #. module: KSW_workshop
 #: model:ir.actions.act_window,name:KSW_workshop.action_ksw_workshop_technician
 #: model:ir.ui.menu,name:KSW_workshop.menu_ksw_workshop_technicians
+#: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop__technician_ids
+#: model_terms:ir.ui.view,arch_db:KSW_workshop.view_ksw_workshop_form
 msgid "Technicians"
 msgstr "الفنيون"
 
@@ -2679,6 +2695,13 @@ msgstr "الأعمال المنفذة / قطع الغيار"
 #: model:ir.ui.menu,name:KSW_workshop.menu_ksw_workshop_root
 #: model_terms:ir.ui.view,arch_db:KSW_workshop.view_employee_form_workshop_technician
 #: model_terms:ir.ui.view,arch_db:KSW_workshop.view_users_form_ksw_workshop_assistant
+#: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_request__workshop_id
+#: code:addons/KSW_workshop/wizard/ksw_workshop_report_wizard.py:0
+#: model:ir.model,name:KSW_workshop.model_ksw_workshop
+#: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_report_wizard__workshop_id
+#: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop_technician__workshop_id
+#: model_terms:ir.ui.view,arch_db:KSW_workshop.view_ksw_workshop_request_search
+#: model_terms:ir.ui.view,arch_db:KSW_workshop.view_ksw_workshop_technician_search
 msgid "Workshop"
 msgstr "الورشة"
 
@@ -3005,3 +3028,200 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_workshop.field_res_users__x_workshop_is_assistant
 msgid "X Workshop Is Assistant"
 msgstr "مساعد مقدم طلبات ورشة"
+
+#. module: KSW_workshop
+#: model:ir.ui.menu,name:KSW_workshop.menu_ksw_workshop_workshops
+#: model:ir.actions.act_window,name:KSW_workshop.action_ksw_workshop
+#: model:ir.model.fields,field_description:KSW_workshop.field_res_users__x_workshop_ids
+#: model_terms:ir.ui.view,arch_db:KSW_workshop.view_ksw_workshop_list
+msgid "Workshops"
+msgstr "الورش"
+
+#. module: KSW_workshop
+#. odoo-python
+#: code:addons/KSW_workshop/models/ksw_workshop_labor_line.py:0
+msgid "%(technician)s works at %(theirs)s, not %(ours)s."
+msgstr "%(technician)s يعمل في %(theirs)s، وليس في %(ours)s."
+
+#. module: KSW_workshop
+#: model:ir.model.constraint,message:KSW_workshop.constraint_ksw_workshop_name_uniq
+msgid "A workshop with this name already exists."
+msgstr "توجد ورشة بهذا الاسم بالفعل."
+
+#. module: KSW_workshop
+#: model:ksw.workshop,name:KSW_workshop.workshop_alhayat
+msgid "Al-Hayat"
+msgstr "الحياة"
+
+#. module: KSW_workshop
+#: model_terms:ir.ui.view,arch_db:KSW_workshop.view_ksw_workshop_report_wizard_form
+msgid "All workshops"
+msgstr "كل الورش"
+
+#. module: KSW_workshop
+#: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop__code
+msgid "Code"
+msgstr "رمز"
+
+#. module: KSW_workshop
+#: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop__department_ids
+#: model_terms:ir.ui.view,arch_db:KSW_workshop.view_ksw_workshop_form
+msgid "Departments Served"
+msgstr "الأقسام المخدومة"
+
+#. module: KSW_workshop
+#: model_terms:ir.ui.view,arch_db:KSW_workshop.view_users_form_ksw_workshop_assistant
+msgid "Empty: the main workshop (Reviewer: every workshop)"
+msgstr "فارغ: الورشة الرئيسية (المراجع: كل الورش)"
+
+#. module: KSW_workshop
+#: model:ir.model.fields,field_description:KSW_workshop.field_hr_department__x_workshop_id
+msgid "Home Workshop"
+msgstr "الورشة الأساسية"
+
+#. module: KSW_workshop
+#: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop__is_main
+msgid "Main Workshop"
+msgstr "الورشة الرئيسية"
+
+#. module: KSW_workshop
+#: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop__user_ids
+#: model_terms:ir.ui.view,arch_db:KSW_workshop.view_ksw_workshop_form
+msgid "Managers & Staff"
+msgstr "المدراء والموظفون"
+
+#. module: KSW_workshop
+#: model:ksw.workshop,name:KSW_workshop.workshop_nabiya
+msgid "Nabiya"
+msgstr "النابية"
+
+#. module: KSW_workshop
+#. odoo-python
+#: code:addons/KSW_workshop/models/ksw_workshop.py:0
+msgid "Only one workshop can be the main workshop."
+msgstr "لا تكون إلا ورشة واحدة هي الورشة الرئيسية."
+
+#. module: KSW_workshop
+#. odoo-python
+#: code:addons/KSW_workshop/models/ksw_workshop_request.py:0
+msgid "Only the workshop manager can send a request to another workshop."
+msgstr "يحوّل الطلب إلى ورشة أخرى مدير الورشة فقط."
+
+#. module: KSW_workshop
+#: model_terms:ir.ui.view,arch_db:KSW_workshop.view_department_form_ksw_workshop
+msgid "Parent's, else the main workshop"
+msgstr "ورشة القسم الأب، وإلا الورشة الرئيسية"
+
+#. module: KSW_workshop
+#: model:ir.model.fields,field_description:KSW_workshop.field_ksw_workshop__request_count
+msgid "Request Count"
+msgstr "عدد الطلبات"
+
+#. module: KSW_workshop
+#: model:ir.model.fields,help:KSW_workshop.field_ksw_workshop__is_main
+msgid ""
+"Requests whose department has no home workshop go here. Exactly one workshop"
+" is the main one."
+msgstr ""
+"تذهب إلى هنا الطلبات التي ليس لقسمها ورشة أساسية. ورشة واحدة فقط هي "
+"الرئيسية."
+
+#. module: KSW_workshop
+#: model_terms:ir.ui.view,arch_db:KSW_workshop.view_ksw_workshop_form
+msgid ""
+"Set on each department as its Home Workshop. A request goes to the home\n"
+"                                workshop of the requester's department (or its nearest parent's); with\n"
+"                                none, to the main workshop."
+msgstr ""
+"يُحدَّد لكل قسم كورشته الأساسية. يذهب الطلب إلى الورشة\n"
+"                                الأساسية لقسم مقدّم الطلب (أو لأقرب قسم أب له)؛ وإن لم\n"
+"                                توجد، فإلى الورشة الرئيسية."
+
+#. module: KSW_workshop
+#: model:ir.model.fields,help:KSW_workshop.field_ksw_workshop__code
+msgid "Short code, e.g. NAB, TBK, HYT."
+msgstr "رمز مختصر، مثل NAB، TBK، HYT."
+
+#. module: KSW_workshop
+#: model:ksw.workshop,name:KSW_workshop.workshop_tabuk
+msgid "Tabuk"
+msgstr "تبوك"
+
+#. module: KSW_workshop
+#: model:ir.model.fields,help:KSW_workshop.field_ksw_workshop_request__workshop_id
+msgid ""
+"The workshop doing the job: the home workshop of the requester's department."
+" A workshop manager can send it to another workshop."
+msgstr ""
+"الورشة المنفّذة للعمل: الورشة الأساسية لقسم مقدّم الطلب. يستطيع مدير الورشة "
+"تحويله إلى ورشة أخرى."
+
+#. module: KSW_workshop
+#: model:ir.model.fields,help:KSW_workshop.field_hr_department__x_workshop_id
+msgid ""
+"The workshop that repairs this department's vehicles. Sub-departments "
+"without one follow their parent; with none at all, the main workshop."
+msgstr ""
+"الورشة التي تصلح مركبات هذا القسم. الأقسام الفرعية التي ليس لها ورشة تتبع "
+"القسم الأب؛ وإن لم توجد أصلاً فالورشة الرئيسية."
+
+#. module: KSW_workshop
+#: model:ir.model.fields,help:KSW_workshop.field_ksw_workshop_technician__workshop_id
+msgid ""
+"Where this technician works: he is offered on that workshop's repairs only, "
+"and sees that workshop's in-progress jobs."
+msgstr ""
+"مكان عمل هذا الفني: يُعرض على إصلاحات تلك الورشة فقط، ويرى أعمالها قيد "
+"التنفيذ."
+
+#. module: KSW_workshop
+#: model:ir.model.fields,help:KSW_workshop.field_res_users__x_workshop_ids
+msgid ""
+"Workshop Manager / Technician: the workshops whose requests he sees, triages"
+" and is notified of; empty means the main workshop. Reviewer: leave empty to"
+" review every workshop, or name the ones he reviews."
+msgstr ""
+"مدير الورشة / الفني: الورش التي يرى طلباتها ويفرزها ويُبلَّغ بها؛ الفارغ "
+"يعني الورشة الرئيسية. المراجع: اتركه فارغاً لمراجعة كل الورش، أو حدّد الورش "
+"التي يراجعها."
+
+#. module: KSW_workshop
+#: model_terms:ir.ui.view,arch_db:KSW_workshop.view_ksw_workshop_form
+msgid ""
+"Workshop Managers named here triage this workshop's requests and are\n"
+"                                notified of new ones. Technicians are placed through Configuration ▸\n"
+"                                Technicians."
+msgstr ""
+"مدراء الورش المذكورون هنا يفرزون طلبات هذه الورشة\n"
+"                                ويُبلَّغون بالجديد منها. ويُحدَّد الفنيون من التهيئة ▸\n"
+"                                الفنيون."
+
+#. module: KSW_workshop
+#: model:ir.model.fields,field_description:KSW_workshop.field_res_users__x_workshop_notify_in_odoo
+msgid "Workshop Notifications in Odoo Only"
+msgstr "إشعارات الورشة في Odoo فقط"
+
+#. module: KSW_workshop
+#: model:ir.model.fields,help:KSW_workshop.field_ksw_workshop__user_ids
+msgid ""
+"Workshop managers and technicians who work here. A manager triages, and is "
+"notified of, only his own workshops' requests. Staff named on no workshop "
+"belong to the main one."
+msgstr ""
+"مدراء الورش والفنيون العاملون هنا. يفرز المدير طلبات ورشه فقط ويُبلَّغ بها. "
+"ومن لم يُذكر في أي ورشة يتبع الورشة الرئيسية."
+
+#. module: KSW_workshop
+#: model:ir.model.fields,help:KSW_workshop.field_res_users__x_workshop_notify_in_odoo
+msgid ""
+"Workshop request notifications arrive in the Odoo inbox only, not by email. "
+"Notifications from other apps are not affected and keep following the "
+"Notification setting above."
+msgstr ""
+"تصل إشعارات طلبات الورشة إلى صندوق Odoo فقط، لا بالبريد الإلكتروني. لا تتأثر"
+" إشعارات التطبيقات الأخرى وتبقى تتبع إعداد الإشعارات أعلاه."
+
+#. module: KSW_workshop
+#: model_terms:ir.ui.view,arch_db:KSW_workshop.view_ksw_workshop_form
+msgid "e.g. Tabuk"
+msgstr "مثال: تبوك"

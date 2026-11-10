@@ -206,6 +206,9 @@ msgstr "البيان"
 #: model:ir.model.fields,field_description:KSW_inventory.field_stock_picking__display_name
 #: model:ir.model.fields,field_description:KSW_inventory.field_stock_picking_type__display_name
 #: model:ir.model.fields,field_description:KSW_inventory.field_stock_warehouse__display_name
+#: model:ir.model.fields,field_description:KSW_inventory.field_account_move__display_name
+#: model:ir.model.fields,field_description:KSW_inventory.field_res_company__display_name
+#: model:ir.model.fields,field_description:KSW_inventory.field_res_config_settings__display_name
 msgid "Display Name"
 msgstr "اسم العرض"
 
@@ -248,6 +251,9 @@ msgstr "من أودو"
 #: model:ir.model.fields,field_description:KSW_inventory.field_stock_picking__id
 #: model:ir.model.fields,field_description:KSW_inventory.field_stock_picking_type__id
 #: model:ir.model.fields,field_description:KSW_inventory.field_stock_warehouse__id
+#: model:ir.model.fields,field_description:KSW_inventory.field_account_move__id
+#: model:ir.model.fields,field_description:KSW_inventory.field_res_company__id
+#: model:ir.model.fields,field_description:KSW_inventory.field_res_config_settings__id
 msgid "ID"
 msgstr "المعرف"
 
@@ -459,6 +465,7 @@ msgstr "تشغيل الإعداد"
 #. odoo-python
 #: code:addons/KSW/KSW_inventory/wizard/bas_inventory_setup.py:0
 #: code:addons/KSW_inventory/wizard/bas_inventory_setup.py:0
+#: code:addons/KSW_inventory/wizard/bas_history_replay.py:0
 msgid "Run the setup first: no BAS warehouses yet."
 msgstr "شغّل الإعداد أولاً: لا توجد مستودعات من BAS بعد."
 
@@ -650,12 +657,16 @@ msgstr "المورد"
 #: model:ir.model.fields,field_description:KSW_inventory.field_ksw_bas_purchase_review__move_id
 #: model:ir.model.fields,field_description:KSW_inventory.field_ksw_product_purchase_history__move_id
 #: model:ir.model.fields.selection,name:KSW_inventory.selection__ksw_product_purchase_history__kind__bill
+#: model:ir.model.fields,field_description:KSW_inventory.field_stock_picking__x_vendor_bill_id
+#: model_terms:ir.ui.view,arch_db:KSW_inventory.view_picking_form_ksw_issue
 msgid "Vendor Bill"
 msgstr "فاتورة المورد"
 
 #. module: KSW_inventory
 #: model_terms:ir.ui.view,arch_db:KSW_inventory.view_product_product_vendor_bills_button
 #: model_terms:ir.ui.view,arch_db:KSW_inventory.view_product_template_vendor_bills_button
+#: code:addons/KSW_inventory/models/stock.py:0
+#: model:ir.model.fields,field_description:KSW_inventory.field_stock_picking__x_vendor_bill_ids
 msgid "Vendor Bills"
 msgstr "فواتير الموردين"
 
@@ -685,3 +696,255 @@ msgstr ""
 #: model:ir.model.fields,help:KSW_inventory.field_ksw_bas_purchase_review__suggestion
 msgid "Why the item was suggested."
 msgstr "سبب اقتراح الصنف."
+
+#. module: KSW_inventory
+#. odoo-python
+#: code:addons/KSW_inventory/wizard/bas_history_replay.py:0
+msgid ""
+"%(item)s at %(wh)s: BAS shows %(now)s in stock but %(inq)s bought and "
+"%(outq)s issued this year, so %(gap)s left without a document"
+msgstr ""
+"%(item)s في %(wh)s: يظهر BAS رصيداً قدره %(now)s، لكن المشترى هذا العام "
+"%(inq)s والمصروف %(outq)s، فخرج %(gap)s دون مستند"
+
+#. module: KSW_inventory
+#: model_terms:ir.ui.view,arch_db:KSW_inventory.ksw_bas_inventory_setup_form
+msgid "15,50,65"
+msgstr "15,50,65"
+
+#. module: KSW_inventory
+#: model_terms:ir.ui.view,arch_db:KSW_inventory.ksw_bas_inventory_setup_form
+msgid ""
+"<b>Link purchases from BAS</b> fills each item's purchase history from BAS's own purchase\n"
+"                        lines (din10): exact item and quantity per bill."
+msgstr ""
+"<b>ربط المشتريات من BAS</b> يملأ سجل مشتريات كل صنف من بنود\n"
+"                        مشتريات BAS نفسها (din10): الصنف والكمية بدقة لكل فاتورة."
+
+#. module: KSW_inventory
+#: model_terms:ir.ui.view,arch_db:KSW_inventory.ksw_bas_inventory_setup_form
+msgid ""
+"<b>Rebuild movement history</b> replays the year's BAS purchases and stock issues as dated\n"
+"                        receipts and issues, from a 1 January opening balance. Today's stock does not change and\n"
+"                        nothing is posted. Items whose BAS figures do not add up are listed, not replayed."
+msgstr ""
+"<b>إعادة بناء سجل الحركة</b> يعيد تشغيل مشتريات BAS ومصروفات المخزون لهذا العام كاستلامات\n"
+"                        وصرف مؤرخة، ابتداءً من رصيد افتتاحي في 1 يناير. لا يتغير رصيد اليوم ولا\n"
+"                        يُرحَّل شيء. الأصناف التي لا تتطابق أرقامها في BAS تُعرض في قائمة ولا يُعاد تشغيلها."
+
+#. module: KSW_inventory
+#: model:ir.model.fields,field_description:KSW_inventory.field_ksw_bas_purchase_review__allowed_product_ids
+msgid "Allowed Product"
+msgstr "المنتج المسموح"
+
+#. module: KSW_inventory
+#: model:ir.model.fields,help:KSW_inventory.field_ksw_bas_inventory_setup__warehouse_codes
+msgid ""
+"BAS warehouse codes, comma separated (e.g. 15,50,65). Empty: every BAS "
+"warehouse and showroom."
+msgstr ""
+"رموز مستودعات BAS مفصولة بفواصل (مثل 15,50,65). فارغ: كل مستودعات ومعارض "
+"BAS."
+
+#. module: KSW_inventory
+#: model_terms:ir.ui.view,arch_db:KSW_inventory.ksw_bas_inventory_setup_form
+msgid "Convert purchase entries to bills"
+msgstr "تحويل قيود المشتريات إلى فواتير موردين"
+
+#. module: KSW_inventory
+#: model:ir.model.fields,help:KSW_inventory.field_ksw_bas_inventory_setup__stock_items_only
+msgid ""
+"Create only stock items (tyres, membranes, desalination spares) from BAS; "
+"water and service products are left alone."
+msgstr ""
+"أنشئ من BAS أصناف المخزون فقط (الإطارات، الأغشية، قطع غيار التحلية)؛ ولا "
+"تُمس منتجات المياه والخدمات."
+
+#. module: KSW_inventory
+#. odoo-python
+#: code:addons/KSW_inventory/wizard/bas_history_replay.py:0
+msgid "From BAS item lines (din10)"
+msgstr "من بنود أصناف BAS (din10)"
+
+#. module: KSW_inventory
+#. odoo-python
+#: code:addons/KSW_inventory/wizard/bas_history_replay.py:0
+msgid "Left as entries, a payment is matched to them: %s"
+msgstr "بقيت كقيود، ويُطابق معها سند دفع: %s"
+
+#. module: KSW_inventory
+#: model_terms:ir.ui.view,arch_db:KSW_inventory.ksw_bas_inventory_setup_form
+msgid "Link purchases from BAS"
+msgstr "ربط المشتريات من BAS"
+
+#. module: KSW_inventory
+#. odoo-python
+#: code:addons/KSW_inventory/wizard/bas_history_replay.py:0
+msgid ""
+"Movement history %(year)s rebuilt for %(n)s items: %(stats)s. Stock today "
+"unchanged; nothing posted."
+msgstr ""
+"أُعيد بناء سجل حركة %(year)s لـ %(n)s صنف: %(stats)s. لم يتغير رصيد اليوم "
+"ولم يُرحَّل شيء."
+
+#. module: KSW_inventory
+#. odoo-python
+#: code:addons/KSW_inventory/wizard/bas_history_replay.py:0
+msgid "No purchase entries to convert."
+msgstr "لا توجد قيود مشتريات لتحويلها."
+
+#. module: KSW_inventory
+#. odoo-python
+#: code:addons/KSW_inventory/wizard/bas_history_replay.py:0
+msgid "Not converted: "
+msgstr "لم يُحوَّل: "
+
+#. module: KSW_inventory
+#. odoo-python
+#: code:addons/KSW_inventory/wizard/bas_history_replay.py:0
+msgid "Not replayed (BAS's figures do not add up): "
+msgstr "لم يُعَد تشغيله (أرقام BAS لا تتطابق): "
+
+#. module: KSW_inventory
+#. odoo-python
+#: code:addons/KSW_inventory/wizard/bas_history_replay.py:0
+msgid "Not replayed: "
+msgstr "لم يُعَد تشغيله: "
+
+#. module: KSW_inventory
+#. odoo-python
+#: code:addons/KSW_inventory/wizard/bas_history_replay.py:0
+msgid "Nothing to rebuild."
+msgstr "لا يوجد ما يُعاد بناؤه."
+
+#. module: KSW_inventory
+#: model_terms:ir.ui.view,arch_db:KSW_inventory.res_config_settings_view_form_ksw_stock_books
+msgid ""
+"Odoo runs receipts and issues; no stock journal entry is posted, BAS keeps "
+"the books"
+msgstr "ينفّذ Odoo الاستلام والصرف؛ ولا يُرحَّل قيد مخزون، فالدفاتر في BAS"
+
+#. module: KSW_inventory
+#: model:ir.model.fields,help:KSW_inventory.field_res_company__x_stock_books_in_bas
+#: model:ir.model.fields,help:KSW_inventory.field_res_config_settings__x_stock_books_in_bas
+msgid ""
+"Odoo runs the stock operations (quantities, receipts, issues, 3-way match) "
+"and posts no stock journal entry; the accountant books them in BAS from the "
+"Odoo document. Every issue line still carries its cost centre."
+msgstr ""
+"ينفّذ Odoo عمليات المخزون (الكميات، الاستلام، الصرف، المطابقة الثلاثية) ولا "
+"يُرحّل قيد مخزون؛ يقيدها المحاسب في BAS من مستند Odoo. ويبقى مركز التكلفة "
+"على كل بند صرف."
+
+#. module: KSW_inventory
+#: model:ir.model.fields,field_description:KSW_inventory.field_ksw_bas_inventory_setup__warehouse_codes
+msgid "Only These Warehouses"
+msgstr "هذه المستودعات فقط"
+
+#. module: KSW_inventory
+#: model:ir.model.fields,field_description:KSW_inventory.field_ksw_bas_purchase_review__part_count
+msgid "Part Count"
+msgstr "عدد القطع"
+
+#. module: KSW_inventory
+#: model:ir.model.fields,field_description:KSW_inventory.field_ksw_bas_purchase_review__pattern
+msgid "Pattern"
+msgstr "النمط"
+
+#. module: KSW_inventory
+#: model:ir.model.fields,field_description:KSW_inventory.field_ksw_bas_purchase_part__product_tmpl_id
+msgid "Product Template"
+msgstr "قالب المنتج"
+
+#. module: KSW_inventory
+#: model:ir.model.fields,field_description:KSW_inventory.field_ksw_product_purchase_history__product_tmpl_id
+msgid "Product Tmpl"
+msgstr "قالب المنتج"
+
+#. module: KSW_inventory
+#. odoo-python
+#: code:addons/KSW_inventory/wizard/bas_history_replay.py:0
+msgid "Purchase entries converted to vendor bills: %s"
+msgstr "قيود المشتريات المحوّلة إلى فواتير موردين: %s"
+
+#. module: KSW_inventory
+#: model_terms:ir.ui.view,arch_db:KSW_inventory.ksw_bas_inventory_setup_form
+msgid "Rebuild movement history"
+msgstr "إعادة بناء سجل الحركة"
+
+#. module: KSW_inventory
+#: model_terms:ir.ui.view,arch_db:KSW_inventory.ksw_bas_inventory_setup_form
+msgid ""
+"Replace this year's BAS purchases still booked as journal entries by vendor "
+"bills (same accounts and amounts)?"
+msgstr ""
+"استبدال مشتريات BAS لهذا العام التي ما زالت مقيدة كقيود يومية بفواتير موردين"
+" (بالحسابات والمبالغ نفسها)؟"
+
+#. module: KSW_inventory
+#: model_terms:ir.ui.view,arch_db:KSW_inventory.ksw_bas_inventory_setup_form
+msgid ""
+"Replay this year's BAS purchases and issues as stock moves? Today's stock "
+"does not change."
+msgstr ""
+"إعادة تشغيل مشتريات BAS ومصروفاته لهذا العام كحركات مخزون؟ لا يتغير رصيد "
+"اليوم."
+
+#. module: KSW_inventory
+#: model:ir.model.fields,field_description:KSW_inventory.field_res_company__x_stock_books_in_bas
+#: model:ir.model.fields,field_description:KSW_inventory.field_res_config_settings__x_stock_books_in_bas
+msgid "Stock Accounting in BAS"
+msgstr "محاسبة المخزون في BAS"
+
+#. module: KSW_inventory
+#: model:ir.model.fields,field_description:KSW_inventory.field_ksw_bas_inventory_setup__stock_items_only
+msgid "Stock Items Only"
+msgstr "أصناف المخزون فقط"
+
+#. module: KSW_inventory
+#: model:ir.model.fields,help:KSW_inventory.field_ksw_bas_inventory_setup__year
+msgid "The BAS fiscal year to replay (din10 / bin10 hold the current year)."
+msgstr ""
+"السنة المالية في BAS المراد إعادة تشغيلها (din10 / bin10 تحويان السنة "
+"الحالية)."
+
+#. module: KSW_inventory
+#. odoo-python
+#: code:addons/KSW_inventory/wizard/bas_history_replay.py:0
+msgid ""
+"The rebuild would have posted %s journal entries, so nothing was saved."
+msgstr "كانت إعادة البناء ستُرحّل %s قيد يومية، فلم يُحفظ شيء."
+
+#. module: KSW_inventory
+#. odoo-python
+#: code:addons/KSW_inventory/wizard/bas_history_replay.py:0
+msgid ""
+"The rebuilt history would change today's stock, so nothing was saved: %s"
+msgstr "السجل المعاد بناؤه سيغيّر رصيد اليوم، فلم يُحفظ شيء: %s"
+
+#. module: KSW_inventory
+#. odoo-python
+#: code:addons/KSW_inventory/models/stock.py:0
+#: model:ir.model.fields,field_description:KSW_inventory.field_account_bank_statement_line__x_picking_ids
+#: model:ir.model.fields,field_description:KSW_inventory.field_account_move__x_picking_ids
+#: model_terms:ir.ui.view,arch_db:KSW_inventory.view_move_form_ksw_pickings
+msgid "Transfers"
+msgstr "النقل"
+
+#. module: KSW_inventory
+#: model:ir.model.fields,field_description:KSW_inventory.field_account_bank_statement_line__x_picking_count
+#: model:ir.model.fields,field_description:KSW_inventory.field_account_move__x_picking_count
+msgid "X Picking Count"
+msgstr "عدد عمليات المخزون"
+
+#. module: KSW_inventory
+#: model:ir.model.fields,field_description:KSW_inventory.field_product_product__x_vendor_bill_count
+#: model:ir.model.fields,field_description:KSW_inventory.field_product_template__x_vendor_bill_count
+#: model:ir.model.fields,field_description:KSW_inventory.field_stock_picking__x_vendor_bill_count
+msgid "X Vendor Bill Count"
+msgstr "عدد فواتير الموردين"
+
+#. module: KSW_inventory
+#: model:ir.model.fields,field_description:KSW_inventory.field_ksw_bas_inventory_setup__year
+msgid "Year"
+msgstr "السنة"

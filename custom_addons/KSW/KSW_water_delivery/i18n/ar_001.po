@@ -233,52 +233,52 @@ msgstr "<strong>بانتظار المشرف.</strong>"
 #. module: KSW_water_delivery
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.report_water_delivery_note
 msgid "<strong>الإجمالي بعد الضريبة / After Tax</strong>"
-msgstr ""
+msgstr "<strong>الإجمالي بعد الضريبة / After Tax</strong>"
 
 #. module: KSW_water_delivery
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.report_water_delivery_note
 msgid "<strong>الإجمالي قبل الضريبة / Before Tax</strong>"
-msgstr ""
+msgstr "<strong>الإجمالي قبل الضريبة / Before Tax</strong>"
 
 #. module: KSW_water_delivery
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.report_water_delivery_note
 msgid "<strong>الردات / Loads</strong>"
-msgstr ""
+msgstr "<strong>الردات / Loads</strong>"
 
 #. module: KSW_water_delivery
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.report_water_delivery_note
 msgid "<strong>السائق / Driver</strong>"
-msgstr ""
+msgstr "<strong>السائق / Driver</strong>"
 
 #. module: KSW_water_delivery
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.report_water_delivery_note
 msgid "<strong>السعر / Unit Price</strong>"
-msgstr ""
+msgstr "<strong>السعر / Unit Price</strong>"
 
 #. module: KSW_water_delivery
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.report_water_delivery_note
 msgid "<strong>الصنف / Description</strong>"
-msgstr ""
+msgstr "<strong>الصنف / Description</strong>"
 
 #. module: KSW_water_delivery
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.report_water_delivery_note
 msgid "<strong>الفرع / Branch</strong>"
-msgstr ""
+msgstr "<strong>الفرع / Branch</strong>"
 
 #. module: KSW_water_delivery
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.report_water_delivery_note
 msgid "<strong>الوايت / Tanker</strong>"
-msgstr ""
+msgstr "<strong>الوايت / Tanker</strong>"
 
 #. module: KSW_water_delivery
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.report_water_delivery_note
 msgid "<strong>ضريبة القيمة المضافة / VAT</strong>"
-msgstr ""
+msgstr "<strong>ضريبة القيمة المضافة / VAT</strong>"
 
 #. module: KSW_water_delivery
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.report_water_delivery_note
 msgid "<strong>قبل الضريبة / Before Tax</strong>"
-msgstr ""
+msgstr "<strong>قبل الضريبة / Before Tax</strong>"
 
 #. module: KSW_water_delivery
 #: model_terms:ir.actions.act_window,help:KSW_water_delivery.action_water_client_branches
@@ -765,6 +765,7 @@ msgstr "سلم من"
 #. module: KSW_water_delivery
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_dispatch__delivered_on
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_stock_picking__x_delivery_date
+#: model_terms:ir.ui.view,arch_db:KSW_water_delivery.report_invoice_document_water_notes
 msgid "Delivered On"
 msgstr "تاريخ التسليم"
 
@@ -813,6 +814,10 @@ msgstr "نوع سند التسليم"
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_delivery_note_list
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_delivery_note_search
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_invoice_wizard_form
+#: code:addons/KSW_water_delivery/models/account_move_water.py:0
+#: model:ir.model.fields,field_description:KSW_water_delivery.field_account_bank_statement_line__x_water_note_ids
+#: model:ir.model.fields,field_description:KSW_water_delivery.field_account_move__x_water_note_ids
+#: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_move_form_water
 msgid "Delivery Notes"
 msgstr "سندات التسليم"
 
@@ -1949,6 +1954,7 @@ msgstr "السعر المطبوع"
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_revenue_account__product_id
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_rate_list
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_rate_search
+#: model_terms:ir.ui.view,arch_db:KSW_water_delivery.report_invoice_document_water_notes
 msgid "Product"
 msgstr "المنتج"
 
@@ -1977,6 +1983,7 @@ msgstr "وحدة المنتج"
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_dispatch__entered_qty
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_invoice_wizard_line__quantity
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_invoice_wizard_form
+#: model_terms:ir.ui.view,arch_db:KSW_water_delivery.report_invoice_document_water_notes
 msgid "Quantity"
 msgstr "الكمية"
 
@@ -2395,6 +2402,7 @@ msgstr "مياه حلوة — حمولة"
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_dispatch__vehicle_id
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_stock_picking__x_vehicle_id
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_tanker_group_search
+#: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_revenue_account__vehicle_id
 msgid "Tanker"
 msgstr "الصهريج"
 
@@ -3057,7 +3065,7 @@ msgstr "إليك"
 #. module: KSW_water_delivery
 #: model:product.template,description_sale:KSW_water_delivery.product_water_load_product_template
 msgid "مياه عذبة — ردة"
-msgstr ""
+msgstr "مياه عذبة — ردة"
 
 #. module: KSW_water_delivery
 #: model:ir.ui.menu,name:KSW_water_delivery.menu_water_delivery_operations
@@ -3067,38 +3075,39 @@ msgstr "العمليات"
 #. module: KSW_water_delivery
 #. odoo-python
 #: code:addons/KSW_water_delivery/models/ksw_water_dispatch.py:0
+#: code:addons/KSW_water_delivery/models/water_cash.py:0
 msgid "%(client)s is not one of %(branch)s's priced clients."
-msgstr ""
+msgstr "%(client)s ليس من العملاء المسعّرين لدى %(branch)s."
 
 #. module: KSW_water_delivery
 #. odoo-python
 #: code:addons/KSW_water_delivery/models/ksw_water_dispatch.py:0
 msgid "%(dispatch)s is %(state)s, not waiting for delivery."
-msgstr ""
+msgstr "%(dispatch)s حالته %(state)s، وليس بانتظار التسليم."
 
 #. module: KSW_water_delivery
 #. odoo-python
 #: code:addons/KSW_water_delivery/models/ksw_water_dispatch.py:0
 msgid "%(dispatch)s was already confirmed (%(capture)s)."
-msgstr ""
+msgstr "سبق تأكيد %(dispatch)s (%(capture)s)."
 
 #. module: KSW_water_delivery
 #. odoo-python
 #: code:addons/KSW_water_delivery/models/ksw_water_dispatch.py:0
 msgid "%(dispatch)s was given to %(driver)s before this confirmation arrived."
-msgstr ""
+msgstr "أُسند %(dispatch)s إلى %(driver)s قبل وصول هذا التأكيد."
 
 #. module: KSW_water_delivery
 #. odoo-python
 #: code:addons/KSW_water_delivery/models/ksw_water_dispatch.py:0
 msgid "%(driver)s is not driving a tanker of %(branch)s."
-msgstr ""
+msgstr "%(driver)s لا يقود وايت تابعاً لـ %(branch)s."
 
 #. module: KSW_water_delivery
 #. odoo-python
 #: code:addons/KSW_water_delivery/models/stock_picking.py:0
 msgid "%s delivers against dispatches, and this delivery was not dispatched."
-msgstr ""
+msgstr "%s يسلّم بموجب أوامر التوزيع، وهذا التسليم لم يصدر له أمر توزيع."
 
 #. module: KSW_water_delivery
 #. odoo-python
@@ -3108,6 +3117,9 @@ msgid ""
 "\"Dispatcher dispatches, driver confirms\" first (Water Delivery ▸ "
 "Configuration ▸ Branches)."
 msgstr ""
+"الفرع %s مضبوط على أن يُصدر السائقون تسليماتهم بأنفسهم. غيّر إعداد الفرع إلى"
+" \"الموزّع يصدر الأمر والسائق يؤكد\" أولاً (توصيل المياه ▸ التهيئة ▸ "
+"الفروع)."
 
 #. module: KSW_water_delivery
 #. odoo-python
@@ -3117,6 +3129,8 @@ msgid ""
 "first (only possible before the driver has confirmed it), or cancel it and "
 "make a new one."
 msgstr ""
+"لا يمكن تعديل أمر التوزيع إلا وهو مسودة. أعده إلى مسودة أولاً (ممكن فقط قبل "
+"أن يؤكده السائق)، أو ألغه وأنشئ أمراً جديداً."
 
 #. module: KSW_water_delivery
 #: model_terms:ir.actions.act_window,help:KSW_water_delivery.action_water_rates
@@ -3133,70 +3147,70 @@ msgstr ""
 #. module: KSW_water_delivery
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_dispatch__allowed_driver_user_ids
 msgid "Allowed Driver User"
-msgstr ""
+msgstr "مستخدم السائق المسموح"
 
 #. module: KSW_water_delivery
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_dispatch__allowed_picking_type_ids
 msgid "Allowed Picking Type"
-msgstr ""
+msgstr "نوع العملية المسموح"
 
 #. module: KSW_water_delivery
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_dispatch_form
 msgid "Anything the driver should know"
-msgstr ""
+msgstr "أي ملاحظة ينبغي أن يعرفها السائق"
 
 #. module: KSW_water_delivery
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_dispatch_form
 msgid "Back to Draft"
-msgstr ""
+msgstr "إعادة إلى مسودة"
 
 #. module: KSW_water_delivery
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_dispatch__branch_in_dispatch_mode
 msgid "Branch In Dispatch Mode"
-msgstr ""
+msgstr "فرع بنظام أوامر التوزيع"
 
 #. module: KSW_water_delivery
 #: model:ir.actions.act_window,name:KSW_water_delivery.action_water_branches
 #: model:ir.ui.menu,name:KSW_water_delivery.menu_water_delivery_branches
 msgid "Branches"
-msgstr ""
+msgstr "الفروع"
 
 #. module: KSW_water_delivery
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_dispatch_form
 msgid "Cancel Dispatch"
-msgstr ""
+msgstr "إلغاء أمر التوزيع"
 
 #. module: KSW_water_delivery
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_dispatch_form
 msgid "Cancel this dispatch? The driver will no longer see it."
-msgstr ""
+msgstr "إلغاء أمر التوزيع هذا؟ لن يراه السائق بعد ذلك."
 
 #. module: KSW_water_delivery
 #: model:ir.model.fields.selection,name:KSW_water_delivery.selection__ksw_water_dispatch__state__cancelled
 msgid "Cancelled"
-msgstr ""
+msgstr "ملغي"
 
 #. module: KSW_water_delivery
 #. odoo-python
 #: code:addons/KSW_water_delivery/models/ksw_water_dispatch.py:0
 msgid "Choose the driver."
-msgstr ""
+msgstr "اختر السائق."
 
 #. module: KSW_water_delivery
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_dispatch__client_located
 msgid "Client Located"
-msgstr ""
+msgstr "موقع العميل محدد"
 
 #. module: KSW_water_delivery
 #. odoo-python
 #: code:addons/KSW_water_delivery/models/ksw_water_dispatch.py:0
 msgid "Delivered by the driver:"
-msgstr ""
+msgstr "سلّمه السائق:"
 
 #. module: KSW_water_delivery
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_dispatch__quantity_m3
 msgid "Delivers (m³)"
-msgstr ""
+msgstr "يوصّل (م³)"
 
 #. module: KSW_water_delivery
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_capture__dispatch_id
@@ -3204,27 +3218,27 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_stock_picking__x_dispatch_id
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_dispatch_form
 msgid "Dispatch"
-msgstr ""
+msgstr "أمر توزيع"
 
 #. module: KSW_water_delivery
 #: model_terms:ir.actions.act_window,help:KSW_water_delivery.action_water_dispatches
 msgid "Dispatch a delivery"
-msgstr ""
+msgstr "إصدار أمر توزيع"
 
 #. module: KSW_water_delivery
 #: model:ir.model.fields.selection,name:KSW_water_delivery.selection__ksw_water_dispatch__state__dispatched
 msgid "Dispatched"
-msgstr ""
+msgstr "صدر أمر التوزيع"
 
 #. module: KSW_water_delivery
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_dispatch__dispatcher_id
 msgid "Dispatched By"
-msgstr ""
+msgstr "أصدره"
 
 #. module: KSW_water_delivery
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_dispatch__dispatched_on
 msgid "Dispatched On"
-msgstr ""
+msgstr "تاريخ إصدار الأمر"
 
 #. module: KSW_water_delivery
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_stock_picking__x_dispatcher_id
@@ -3235,38 +3249,38 @@ msgstr "المرسِل"
 #. module: KSW_water_delivery
 #: model:ir.model.fields.selection,name:KSW_water_delivery.selection__stock_picking_type__x_issue_mode__dispatch
 msgid "Dispatcher dispatches, driver confirms"
-msgstr ""
+msgstr "الموزّع يصدر الأمر والسائق يؤكد"
 
 #. module: KSW_water_delivery
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_stock_picking_type__x_dispatcher_user_ids
 msgid "Dispatchers"
-msgstr ""
+msgstr "الموزّعون"
 
 #. module: KSW_water_delivery
 #: model:ir.actions.act_window,name:KSW_water_delivery.action_water_dispatches
 #: model:ir.ui.menu,name:KSW_water_delivery.menu_water_delivery_dispatches
 msgid "Dispatches"
-msgstr ""
+msgstr "أوامر التوزيع"
 
 #. module: KSW_water_delivery
 #: model:ir.model.fields.selection,name:KSW_water_delivery.selection__ksw_water_dispatch__state__draft
 msgid "Draft"
-msgstr ""
+msgstr "مسودة"
 
 #. module: KSW_water_delivery
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_dispatch__driver_id
 msgid "Driver (Employee)"
-msgstr ""
+msgstr "السائق (الموظف)"
 
 #. module: KSW_water_delivery
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_dispatch__capture_id
 msgid "Driver Confirmation"
-msgstr ""
+msgstr "تأكيد السائق"
 
 #. module: KSW_water_delivery
 #: model:ir.model.fields.selection,name:KSW_water_delivery.selection__stock_picking_type__x_issue_mode__driver
 msgid "Driver issues the delivery"
-msgstr ""
+msgstr "السائق يُصدر التسليم"
 
 #. module: KSW_water_delivery
 #: model:ir.model.fields,help:KSW_water_delivery.field_stock_picking_type__x_issue_mode
@@ -3275,47 +3289,49 @@ msgid ""
 "Dispatcher: the branch's dispatcher picks all of that and the driver; the "
 "driver only presses Deliver at the client."
 msgstr ""
+"السائق: يختار السائق العميل والمنتج والكمية من تطبيقه. الموزّع: يختار موزّع "
+"الفرع كل ذلك والسائق؛ ويكتفي السائق بالضغط على تسليم عند العميل."
 
 #. module: KSW_water_delivery
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_dispatch__note
 msgid "Instructions"
-msgstr ""
+msgstr "التعليمات"
 
 #. module: KSW_water_delivery
 #. odoo-python
 #: code:addons/KSW_water_delivery/models/ksw_water_dispatch.py:0
 #: code:addons/KSW_water_delivery/models/water_cash.py:0
 msgid "New"
-msgstr ""
+msgstr "جديد"
 
 #. module: KSW_water_delivery
 #. odoo-python
 #: code:addons/KSW_water_delivery/models/ksw_water_dispatch.py:0
 msgid "Only a dispatch the driver has not yet confirmed can go back to draft."
-msgstr ""
+msgstr "لا يعود إلى مسودة إلا أمر التوزيع الذي لم يؤكده السائق بعد."
 
 #. module: KSW_water_delivery
 #. odoo-python
 #: code:addons/KSW_water_delivery/models/ksw_water_dispatch.py:0
 msgid "Only a dispatcher can do this."
-msgstr ""
+msgstr "هذا الإجراء للموزّع فقط."
 
 #. module: KSW_water_delivery
 #. odoo-python
 #: code:addons/KSW_water_delivery/models/ksw_water_dispatch.py:0
 msgid "Only a draft can be dispatched."
-msgstr ""
+msgstr "لا يصدر أمر توزيع إلا من مسودة."
 
 #. module: KSW_water_delivery
 #. odoo-python
 #: code:addons/KSW_water_delivery/models/ksw_water_dispatch.py:0
 msgid "Only a draft or cancelled dispatch can be deleted."
-msgstr ""
+msgstr "لا يُحذف إلا أمر توزيع في حالة مسودة أو ملغى."
 
 #. module: KSW_water_delivery
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_dispatch_search
 msgid "Open"
-msgstr ""
+msgstr "فتح"
 
 #. module: KSW_water_delivery
 #: model_terms:ir.actions.act_window,help:KSW_water_delivery.action_water_dispatches
@@ -3323,6 +3339,8 @@ msgid ""
 "Pick the client, what to deliver and the driver. The driver\n"
 "               sees it in his app and confirms it at the client's site."
 msgstr ""
+"اختر العميل وما يُسلَّم والسائق. يراه السائق\n"
+"               في تطبيقه ويؤكده في موقع العميل."
 
 #. module: KSW_water_delivery
 #: model:ir.model,name:KSW_water_delivery.model_product_pricelist
@@ -3343,7 +3361,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/KSW_water_delivery/models/ksw_water_dispatch.py:0
 msgid "Tanker %(tanker)s belongs to another branch."
-msgstr ""
+msgstr "الوايت %(tanker)s يتبع فرعاً آخر."
 
 #. module: KSW_water_delivery
 #. odoo-python
@@ -3352,6 +3370,8 @@ msgid ""
 "Tanker %s has no trip volume, so the quantity cannot be given in trips. "
 "Enter it in m³, or set the trip volume."
 msgstr ""
+"الوايت %s ليس له حجم نقلة، فلا يمكن إدخال الكمية بالنقلات. أدخلها بالمتر "
+"المكعب، أو حدّد حجم النقلة."
 
 #. module: KSW_water_delivery
 #: model:ir.model.fields,help:KSW_water_delivery.field_product_pricelist__x_client_id
@@ -3366,7 +3386,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/KSW_water_delivery/models/ksw_water_capture.py:0
 msgid "The dispatch this delivery confirms no longer exists."
-msgstr ""
+msgstr "أمر التوزيع الذي يؤكده هذا التسليم لم يعد موجوداً."
 
 #. module: KSW_water_delivery
 #. odoo-python
@@ -3374,14 +3394,14 @@ msgstr ""
 msgid ""
 "The driver's delivery was rejected by the supervisor; the dispatch is open "
 "again."
-msgstr ""
+msgstr "رفض المشرف تسليم السائق؛ أعيد فتح أمر التوزيع."
 
 #. module: KSW_water_delivery
 #. odoo-python
 #: code:addons/KSW_water_delivery/models/ksw_water_dispatch.py:0
 #: code:addons/KSW_water_delivery/models/water_cash.py:0
 msgid "The quantity must be greater than zero."
-msgstr ""
+msgstr "يجب أن تكون الكمية أكبر من صفر."
 
 #. module: KSW_water_delivery
 #. odoo-python
@@ -3398,8 +3418,9 @@ msgstr ""
 #. module: KSW_water_delivery
 #. odoo-python
 #: code:addons/KSW_water_delivery/models/ksw_water_dispatch.py:0
+#: code:addons/KSW_water_delivery/models/water_cash.py:0
 msgid "There is no agreed rate for %(product)s with %(client)s."
-msgstr ""
+msgstr "لا يوجد سعر متفق عليه لـ %(product)s مع %(client)s."
 
 #. module: KSW_water_delivery
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_dispatch_form
@@ -3408,6 +3429,9 @@ msgid ""
 "                        deliveries. Switch it to <b>Dispatcher dispatches,\n"
 "                        driver confirms</b> before dispatching."
 msgstr ""
+"هذا الفرع مضبوط على أن يبدأ السائقون تسليماتهم\n"
+"                        بأنفسهم. غيّره إلى <b>الموزّع يصدر الأمر\n"
+"                        والسائق يؤكد</b> قبل إصدار أوامر التوزيع."
 
 #. module: KSW_water_delivery
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_dispatch_form
@@ -3416,6 +3440,9 @@ msgid ""
 "                        will be asked to send it from the site, and can deliver\n"
 "                        once a supervisor approves it."
 msgstr ""
+"هذا العميل ليس له موقع معتمد بعد. سيُطلب من السائق\n"
+"                        إرساله من الموقع، ويستطيع التسليم\n"
+"                        بعد أن يعتمده المشرف."
 
 #. module: KSW_water_delivery
 #. odoo-python
@@ -3425,21 +3452,23 @@ msgid ""
 "happened is reviewed by the supervisor on the delivery itself, not cancelled"
 " here."
 msgstr ""
+"أكّد السائق أمر التوزيع هذا بالفعل. التسليم الذي تم يراجعه المشرف على "
+"التسليم نفسه، ولا يُلغى من هنا."
 
 #. module: KSW_water_delivery
 #: model:ir.model.fields,help:KSW_water_delivery.field_stock_picking_type__x_dispatcher_user_ids
 msgid "Users who dispatch deliveries for this branch."
-msgstr ""
+msgstr "المستخدمون الذين يصدرون أوامر التوزيع لهذا الفرع."
 
 #. module: KSW_water_delivery
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_dispatch__note_held
 msgid "Waiting for Supervisor"
-msgstr ""
+msgstr "بانتظار المشرف"
 
 #. module: KSW_water_delivery
 #: model:ir.model,name:KSW_water_delivery.model_ksw_water_dispatch
 msgid "Water Delivery Dispatch"
-msgstr ""
+msgstr "أمر توزيع توصيل المياه"
 
 #. module: KSW_water_delivery
 #: model:ir.model,name:KSW_water_delivery.model_ksw_water_pricing
@@ -3449,29 +3478,29 @@ msgstr "تسعير توصيل المياه"
 #. module: KSW_water_delivery
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_stock_picking_type__x_issue_mode
 msgid "Who Starts a Delivery"
-msgstr ""
+msgstr "من يبدأ التسليم"
 
 #. module: KSW_water_delivery
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_dispatch_search
 msgid "With the Driver"
-msgstr ""
+msgstr "مع السائق"
 
 #. module: KSW_water_delivery
 #. odoo-python
 #: code:addons/KSW_water_delivery/models/ksw_water_dispatch.py:0
 msgid "You are not a dispatcher for %s."
-msgstr ""
+msgstr "لست موزّعاً للفرع %s."
 
 #. module: KSW_water_delivery
 #. odoo-python
 #: code:addons/KSW_water_delivery/models/ksw_water_dispatch.py:0
 msgid "another driver"
-msgstr ""
+msgstr "سائق آخر"
 
 #. module: KSW_water_delivery
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_branch_list
 msgid "Delivers From"
-msgstr ""
+msgstr "يوصّل من"
 
 #. module: KSW_water_delivery
 #: model:res.groups,name:KSW_water_delivery.group_water_gm
@@ -3509,6 +3538,8 @@ msgid ""
 "Works a branch desk: dispatches deliveries for the branches he is listed on "
 "(Configuration ▸ Branches), and the driver confirms them."
 msgstr ""
+"يعمل على مكتب فرع: يصدر أوامر التوزيع للفروع المدرج عليها (التهيئة ▸ "
+"الفروع)، ويؤكدها السائق."
 
 #. module: KSW_water_delivery
 #. odoo-python
@@ -3677,7 +3708,7 @@ msgstr "المبلغ المطلوب"
 #. module: KSW_water_delivery
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_dispatch_list
 msgid "Total"
-msgstr ""
+msgstr "الإجمالي"
 
 #. module: KSW_water_delivery
 #: model:ir.model.fields,help:KSW_water_delivery.field_stock_picking_type__x_cash_journal_id
@@ -3722,7 +3753,7 @@ msgstr "سبب تعذّر تسعير هذا البيع النقدي أو است�
 #. module: KSW_water_delivery
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_dispatch__x_cash_problem
 msgid "X Cash Problem"
-msgstr ""
+msgstr "مشكلة نقدية"
 
 #. module: KSW_water_delivery
 #. odoo-python
@@ -3804,13 +3835,13 @@ msgstr ""
 #. module: KSW_water_delivery
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_dispatch__x_is_pickup
 msgid "X Is Pickup"
-msgstr ""
+msgstr "استلام ذاتي"
 
 #. module: KSW_water_delivery
 #. odoo-python
 #: code:addons/KSW_water_delivery/models/water_cash.py:0
 msgid "its cash account"
-msgstr ""
+msgstr "حسابه النقدي"
 
 #. module: KSW_water_delivery
 #. odoo-python
@@ -4041,3 +4072,69 @@ msgstr ""
 "سطر هنا يُرحَّل إلى الحساب الافتراضي للفرع (المحدد على الفرع)، وإلا فإلى "
 "حساب إيرادات الصنف نفسه. استخدم <b>الاستيراد من BAS9</b> لنسخ طريقة ترحيل "
 "BAS."
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/account_move_water.py:0
+msgid ""
+"%(inv)s: grouping the delivery notes moved the total from %(old)s to "
+"%(new)s."
+msgstr "%(inv)s: تجميع سندات التسليم غيّر الإجمالي من %(old)s إلى %(new)s."
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/account_move_water.py:0
+msgid "%(product)s: %(count)s delivery notes"
+msgstr "%(product)s: %(count)s سند تسليم"
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/account_move_water.py:0
+msgid "%(product)s: %(count)s delivery notes, %(start)s to %(end)s"
+msgstr "%(product)s: %(count)s سند تسليم، من %(start)s إلى %(end)s"
+
+#. module: KSW_water_delivery
+#: model_terms:ir.ui.view,arch_db:KSW_water_delivery.report_invoice_document_water_notes
+msgid "<strong>Delivery Notes</strong>"
+msgstr "<strong>سندات التسليم</strong>"
+
+#. module: KSW_water_delivery
+#: model_terms:ir.ui.view,arch_db:KSW_water_delivery.report_invoice_document_water_notes
+msgid "Amount"
+msgstr "المبلغ"
+
+#. module: KSW_water_delivery
+#: model:ir.model.fields,field_description:KSW_water_delivery.field_account_move_line__x_water_grouped
+msgid "Delivery Notes Line"
+msgstr "بند سند التسليم"
+
+#. module: KSW_water_delivery
+#: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_revenue_account_list
+msgid "Every tanker"
+msgstr "كل الوايتات"
+
+#. module: KSW_water_delivery
+#: model_terms:ir.ui.view,arch_db:KSW_water_delivery.report_invoice_document_water_notes
+msgid "Note"
+msgstr "الملاحظات"
+
+#. module: KSW_water_delivery
+#: model:ir.model.fields,help:KSW_water_delivery.field_ksw_water_revenue_account__vehicle_id
+msgid ""
+"Only notes delivered by this tanker in this branch. Empty: every tanker of "
+"the branch."
+msgstr ""
+"سندات التسليم التي سلّمها هذا الوايت في هذا الفرع فقط. فارغ: كل وايتات "
+"الفرع."
+
+#. module: KSW_water_delivery
+#: model:ir.model.fields,field_description:KSW_water_delivery.field_account_bank_statement_line__x_water_note_count
+#: model:ir.model.fields,field_description:KSW_water_delivery.field_account_move__x_water_note_count
+msgid "X Water Note Count"
+msgstr "عدد سندات المياه"
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/account_move_water.py:0
+msgid "id"
+msgstr "المعرف"

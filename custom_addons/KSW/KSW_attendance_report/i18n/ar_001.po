@@ -55,7 +55,7 @@ msgstr "<span style=\"color:#90a4ae;\">⬜ نهاية أسبوع</span>"
 #. module: KSW_attendance_report
 #: model_terms:ir.ui.view,arch_db:KSW_attendance_report.report_monthly_attendance
 msgid "<span style=\"color:#bdbdbd;\">—</span>"
-msgstr ""
+msgstr "<span style=\"color:#bdbdbd;\">—</span>"
 
 #. module: KSW_attendance_report
 #: model_terms:ir.ui.view,arch_db:KSW_attendance_report.report_monthly_attendance

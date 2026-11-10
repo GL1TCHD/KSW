@@ -71,6 +71,7 @@ msgstr ""
 #. module: KSW_water_delivery
 #. odoo-python
 #: code:addons/KSW_water_delivery/models/ksw_water_dispatch.py:0
+#: code:addons/KSW_water_delivery/models/water_cash.py:0
 msgid "%(client)s is not one of %(branch)s's priced clients."
 msgstr ""
 
@@ -1068,6 +1069,7 @@ msgstr ""
 #. module: KSW_water_delivery
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_dispatch__delivered_on
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_stock_picking__x_delivery_date
+#: model_terms:ir.ui.view,arch_db:KSW_water_delivery.report_invoice_document_water_notes
 msgid "Delivered On"
 msgstr ""
 
@@ -1138,6 +1140,10 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_delivery_note_list
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_delivery_note_search
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_invoice_wizard_form
+#: code:addons/KSW_water_delivery/models/account_move_water.py:0
+#: model:ir.model.fields,field_description:KSW_water_delivery.field_account_bank_statement_line__x_water_note_ids
+#: model:ir.model.fields,field_description:KSW_water_delivery.field_account_move__x_water_note_ids
+#: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_move_form_water
 msgid "Delivery Notes"
 msgstr ""
 
@@ -2427,6 +2433,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_revenue_account__product_id
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_rate_list
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_rate_search
+#: model_terms:ir.ui.view,arch_db:KSW_water_delivery.report_invoice_document_water_notes
 msgid "Product"
 msgstr ""
 
@@ -2455,6 +2462,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_dispatch__entered_qty
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_invoice_wizard_line__quantity
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_invoice_wizard_form
+#: model_terms:ir.ui.view,arch_db:KSW_water_delivery.report_invoice_document_water_notes
 msgid "Quantity"
 msgstr ""
 
@@ -2889,6 +2897,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_dispatch__vehicle_id
 #: model:ir.model.fields,field_description:KSW_water_delivery.field_stock_picking__x_vehicle_id
 #: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_tanker_group_search
+#: model:ir.model.fields,field_description:KSW_water_delivery.field_ksw_water_revenue_account__vehicle_id
 msgid "Tanker"
 msgstr ""
 
@@ -3176,6 +3185,7 @@ msgstr ""
 #. module: KSW_water_delivery
 #. odoo-python
 #: code:addons/KSW_water_delivery/models/ksw_water_dispatch.py:0
+#: code:addons/KSW_water_delivery/models/water_cash.py:0
 msgid "There is no agreed rate for %(product)s with %(client)s."
 msgstr ""
 
@@ -3827,4 +3837,68 @@ msgid ""
 "               A product with no line here posts to the branch default (set on\n"
 "               the branch), else to the product's own income account.\n"
 "               Use <b>Import from BAS9</b> to copy how BAS posts it."
+msgstr ""
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/account_move_water.py:0
+msgid ""
+"%(inv)s: grouping the delivery notes moved the total from %(old)s to "
+"%(new)s."
+msgstr ""
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/account_move_water.py:0
+msgid "%(product)s: %(count)s delivery notes"
+msgstr ""
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/account_move_water.py:0
+msgid "%(product)s: %(count)s delivery notes, %(start)s to %(end)s"
+msgstr ""
+
+#. module: KSW_water_delivery
+#: model_terms:ir.ui.view,arch_db:KSW_water_delivery.report_invoice_document_water_notes
+msgid "<strong>Delivery Notes</strong>"
+msgstr ""
+
+#. module: KSW_water_delivery
+#: model_terms:ir.ui.view,arch_db:KSW_water_delivery.report_invoice_document_water_notes
+msgid "Amount"
+msgstr ""
+
+#. module: KSW_water_delivery
+#: model:ir.model.fields,field_description:KSW_water_delivery.field_account_move_line__x_water_grouped
+msgid "Delivery Notes Line"
+msgstr ""
+
+#. module: KSW_water_delivery
+#: model_terms:ir.ui.view,arch_db:KSW_water_delivery.view_water_revenue_account_list
+msgid "Every tanker"
+msgstr ""
+
+#. module: KSW_water_delivery
+#: model_terms:ir.ui.view,arch_db:KSW_water_delivery.report_invoice_document_water_notes
+msgid "Note"
+msgstr ""
+
+#. module: KSW_water_delivery
+#: model:ir.model.fields,help:KSW_water_delivery.field_ksw_water_revenue_account__vehicle_id
+msgid ""
+"Only notes delivered by this tanker in this branch. Empty: every tanker of "
+"the branch."
+msgstr ""
+
+#. module: KSW_water_delivery
+#: model:ir.model.fields,field_description:KSW_water_delivery.field_account_bank_statement_line__x_water_note_count
+#: model:ir.model.fields,field_description:KSW_water_delivery.field_account_move__x_water_note_count
+msgid "X Water Note Count"
+msgstr ""
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/account_move_water.py:0
+msgid "id"
 msgstr ""

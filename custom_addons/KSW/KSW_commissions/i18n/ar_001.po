@@ -894,18 +894,19 @@ msgstr "'صالح حتى' يسبق 'صالح من' في %(name)s."
 #. module: KSW_commissions
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_component_form
 msgid "2107010001"
-msgstr ""
+msgstr "2107010001"
 
 #. module: KSW_commissions
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_commission_bank_export_wizard_form
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_settlement_form
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.ksw_pay_run_paid_wizard_form
 msgid "26007264"
-msgstr ""
+msgstr "26007264"
 
 #. module: KSW_commissions
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_component_form
 msgid "3203020007"
-msgstr ""
+msgstr "3203020007"
 
 #. module: KSW_commissions
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_batch_form
@@ -1893,6 +1894,7 @@ msgstr "المبلغ بانتظار الاعتماد"
 #. module: KSW_commissions
 #. odoo-python
 #: code:addons/KSW_commissions/models/ksw_deduction_line.py:0
+#: code:addons/KSW_commissions/models/hr_payslip.py:0
 msgid "Amount:"
 msgstr "المبلغ:"
 
@@ -2327,6 +2329,7 @@ msgstr "الراتب الأساسي"
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_gm_review_line__batch_name
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_recurring_vacation_wizard__batch_id
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.report_annual_vacation_commission_detail
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_submit_wizard__batch_id
 msgid "Batch"
 msgstr "الدفعة"
 
@@ -2613,6 +2616,7 @@ msgstr "قاعدة التحصيل"
 #: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_sales_commission_rule__kind__collection
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_sales_commission_rule_search
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_sales_commission_sheet_list
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_sales_commission_bas_line__kind__collection
 msgid "Collection"
 msgstr "التحصيل"
 
@@ -2685,6 +2689,8 @@ msgstr "قاعدة التحصيل"
 #. module: KSW_commissions
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_salesperson_target_line__collection_target
 #: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_sales_commission_tier__base__collection_target
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_sales_commission_bas_line__kind__target
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.res_config_settings_view_form_ksw_commissions
 msgid "Collection Target"
 msgstr "مستهدف التحصيل"
 
@@ -2693,6 +2699,9 @@ msgstr "مستهدف التحصيل"
 #: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_salesperson_profile__role__collect
 #: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_salesperson_profile_client_split__role__collect
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_salesperson_profile_search
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_sales_commission_bas_line__commission_type__collect
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_sales_commission_line__x_commission_type__collect
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_salesperson_profile_type_rule__commission_type__collect
 msgid "Collector"
 msgstr "المحصِّل"
 
@@ -3161,6 +3170,9 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_account__create_uid
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__create_uid
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_wizard__create_uid
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_bas_sales_rep__create_uid
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_bas_line__create_uid
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_salesperson_profile_type_rule__create_uid
 msgid "Created by"
 msgstr "أنشئ بواسطة"
 
@@ -3209,6 +3221,9 @@ msgstr "أنشئ بواسطة"
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_account__create_date
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__create_date
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_wizard__create_date
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_bas_sales_rep__create_date
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_bas_line__create_date
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_salesperson_profile_type_rule__create_date
 msgid "Created on"
 msgstr "أنشئ في"
 
@@ -3326,6 +3341,7 @@ msgstr "ديسمبر"
 #. module: KSW_commissions
 #. odoo-python
 #: code:addons/KSW_commissions/models/ksw_pay_run_journal.py:0
+#: code:addons/KSW_commissions/models/ksw_pay_settlement.py:0
 msgid "Deducted from commissions"
 msgstr "خصم من عمولات"
 
@@ -3575,6 +3591,11 @@ msgstr "إهمال"
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_account__display_name
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__display_name
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_wizard__display_name
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_bas_sales_rep__display_name
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_bas__display_name
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_bas_line__display_name
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_salesperson_profile_type_rule__display_name
+#: model:ir.model.fields,field_description:KSW_commissions.field_res_partner_bank__display_name
 msgid "Display Name"
 msgstr "اسم العرض"
 
@@ -3789,6 +3810,7 @@ msgstr "عيد الفطر"
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_settlement_search
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_employee_review_search
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__employee_id
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_bas_sales_rep__employee_id
 msgid "Employee"
 msgstr "الموظف"
 
@@ -4599,6 +4621,11 @@ msgstr "كيف احتُسِب هذا؟"
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_account__id
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__id
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_wizard__id
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_bas_sales_rep__id
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_bas__id
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_bas_line__id
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_salesperson_profile_type_rule__id
+#: model:ir.model.fields,field_description:KSW_commissions.field_res_partner_bank__id
 msgid "ID"
 msgstr "المعرف"
 
@@ -4988,6 +5015,9 @@ msgstr "أُبقي — لدى المدير العام أو معتمد"
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_component__kind
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_rule__kind
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_sales_commission_rule_search
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_bas_line__kind
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_salesperson_profile_type_rule__rule_kind
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_sales_commission_bas_line_search
 msgid "Kind"
 msgstr "النوع"
 
@@ -5041,6 +5071,9 @@ msgstr "التسمية"
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_account__write_uid
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__write_uid
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_wizard__write_uid
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_bas_sales_rep__write_uid
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_bas_line__write_uid
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_salesperson_profile_type_rule__write_uid
 msgid "Last Updated by"
 msgstr "آخر تحديث بواسطة"
 
@@ -5089,6 +5122,9 @@ msgstr "آخر تحديث بواسطة"
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_account__write_date
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_line__write_date
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run_bas_compare_wizard__write_date
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_bas_sales_rep__write_date
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_bas_line__write_date
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_salesperson_profile_type_rule__write_date
 msgid "Last Updated on"
 msgstr "آخر تحديث في"
 
@@ -5411,6 +5447,7 @@ msgstr "المستهدفات الشهرية"
 #. module: KSW_commissions
 #. odoo-python
 #: code:addons/KSW_commissions/models/ksw_pay_run_journal.py:0
+#: code:addons/KSW_commissions/models/ksw_pay_settlement.py:0
 msgid "Monthly commissions"
 msgstr "عمولات"
 
@@ -6710,6 +6747,7 @@ msgstr "الأولوية"
 #. module: KSW_commissions
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_salesperson_profile_client_split__profile_id
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_salesperson_target_line__profile_id
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_salesperson_profile_type_rule__profile_id
 msgid "Profile"
 msgstr "الملف"
 
@@ -6729,6 +6767,7 @@ msgstr ""
 
 #. module: KSW_commissions
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_sales_commission_sheet_form
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_salesperson_profile_form
 msgid "Pull from BAS"
 msgstr "سحب من BAS"
 
@@ -7249,6 +7288,7 @@ msgstr "الدور"
 
 #. module: KSW_commissions
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_tier__rule_id
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_salesperson_profile_type_rule__rule_id
 msgid "Rule"
 msgstr "القاعدة"
 
@@ -7361,6 +7401,8 @@ msgstr "قاعدة الراتب"
 #: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_sales_commission_rule__kind__sales
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_sales_commission_rule_search
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_sales_commission_sheet_list
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_sales_commission_bas_line__kind__sales
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_sales_commission_bas_line_search
 msgid "Sales"
 msgstr "المبيعات"
 
@@ -7502,6 +7544,9 @@ msgstr "تم اعتماد كشف عمولة المبيعات / التحصيل. �
 #: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_salesperson_profile__role__sales
 #: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_salesperson_profile_client_split__role__sales
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_salesperson_profile_search
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_sales_commission_bas_line__commission_type__sales
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_sales_commission_line__x_commission_type__sales
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_salesperson_profile_type_rule__commission_type__sales
 msgid "Salesman"
 msgstr "مندوب المبيعات"
 
@@ -7509,6 +7554,9 @@ msgstr "مندوب المبيعات"
 #: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_sales_commission_line__role__both
 #: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_salesperson_profile__role__both
 #: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_salesperson_profile_client_split__role__both
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_sales_commission_bas_line__commission_type__both
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_sales_commission_line__x_commission_type__both
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_salesperson_profile_type_rule__commission_type__both
 msgid "Salesman & Collector"
 msgstr "مندوب مبيعات ومحصل"
 
@@ -7721,6 +7769,7 @@ msgstr "تسوية الخصومات من العمولة أولًا"
 
 #. module: KSW_commissions
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_line__sheet_id
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_bas_line__sheet_id
 msgid "Sheet"
 msgstr "الكشف"
 
@@ -7820,6 +7869,7 @@ msgstr "بدء دفعة فرعية جديدة (أيام أخرى أو سبب آ�
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_submission__state
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_sheet__state
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_sales_commission_sheet_search
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_bas_sales_rep__state
 msgid "State"
 msgstr "الحالة"
 
@@ -7835,6 +7885,8 @@ msgstr "الحالة"
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_settlement__state
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_settlement_item__state
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_settlement_search
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_bas_line__status
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_sales_commission_bas_line_search
 msgid "Status"
 msgstr "الحالة"
 
@@ -8341,6 +8393,7 @@ msgstr ""
 #. module: KSW_commissions
 #. odoo-python
 #: code:addons/KSW_commissions/wizard/bank_file_export_wizard.py:0
+#: code:addons/KSW_commissions/models/ksw_pay_settlement.py:0
 msgid ""
 "The journal-entry export is not available on this system yet: it is written "
 "by KSW_payroll, which has not been updated. Ask IT to deploy it."
@@ -8917,6 +8970,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_settlement_list
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_settlement_item_list
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_settlement_form
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_sales_commission_bas_line_list
 msgid "Total"
 msgstr "الإجمالي"
 
@@ -9015,6 +9069,10 @@ msgstr "لا يمكن أن يتشارك خياران من المكوّن نفس�
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_recurring__option_id
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.employee_review_sections
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_entry_search
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_bas_line__commission_type
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_line__x_commission_type
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_salesperson_profile_type_rule__commission_type
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_sales_commission_bas_line_search
 msgid "Type"
 msgstr "النوع"
 
@@ -9859,7 +9917,7 @@ msgstr "مثال: مبيعات — عام"
 #. module: KSW_commissions
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_hr_employee_form_site
 msgid "e.g. عرفان الله قاسم 1483"
-msgstr ""
+msgstr "مثال: عرفان الله قاسم 1483"
 
 #. module: KSW_commissions
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_sub_batch_form
@@ -9876,6 +9934,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/KSW_commissions/models/ksw_pay_run_journal.py:0
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.employee_review_sections
+#: code:addons/KSW_commissions/models/ksw_pay_settlement.py:0
 msgid "entries"
 msgstr "قيود"
 
@@ -9960,6 +10019,7 @@ msgstr "الكمية"
 #. module: KSW_commissions
 #. odoo-python
 #: code:addons/KSW_commissions/models/ksw_pay_run_journal.py:0
+#: code:addons/KSW_commissions/models/ksw_pay_settlement.py:0
 msgid "register"
 msgstr "السجل"
 
@@ -10059,17 +10119,17 @@ msgstr "÷ %(divisor).0f = سعر الساعة المجرّد"
 #. module: KSW_commissions
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_component_form
 msgid "بدل عمل ايام الجمعة"
-msgstr ""
+msgstr "بدل عمل ايام الجمعة"
 
 #. module: KSW_commissions
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_component_form
 msgid "حساب مصروفات - عمولات سائقين التريلات"
-msgstr ""
+msgstr "حساب مصروفات - عمولات سائقين التريلات"
 
 #. module: KSW_commissions
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_component_form
 msgid "مصروفات مستحقة عمولات سائقين التريلات"
-msgstr ""
+msgstr "مصروفات مستحقة عمولات سائقين التريلات"
 
 #. module: KSW_commissions
 #. odoo-python
@@ -10493,7 +10553,7 @@ msgstr "%(name)s: تمت تسوية %(amount).2f من عمولة %(month)s، و�
 #. module: KSW_commissions
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_partner_bank_form_inherit_ksw_commission_bas
 msgid "1202010005"
-msgstr ""
+msgstr "1202010005"
 
 #. module: KSW_commissions
 #. odoo-python
@@ -11232,7 +11292,7 @@ msgstr "%(n)s موظف لا تتوازن أسطره في BAS (المصروف −
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_bas_baseline_wizard_form
 #: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_run_bas_compare_wizard_form
 msgid "26008282"
-msgstr ""
+msgstr "26008282"
 
 #. module: KSW_commissions
 #: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_settlement_item__accrual_code
@@ -12141,3 +12201,779 @@ msgstr "هذا الشهر في Odoo: مدين %(debit).2f · دائن %(credit).
 #: code:addons/KSW_commissions/models/ksw_pay_settlement.py:0
 msgid "PAID on vacation payslip"
 msgstr "مدفوعة في كشف راتب الإجازة"
+
+#. module: KSW_commissions
+#: model:ir.ui.menu,name:KSW_commissions.menu_ksw_bas_sales_rep
+#: model:ir.actions.act_window,name:KSW_commissions.action_ksw_bas_sales_rep
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_bas_sales_rep_list
+msgid "BAS Sales Reps"
+msgstr "مناديب المبيعات في BAS"
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/hr_payslip.py:0
+msgid ""
+"%(run)s had settled it, but the vacation pays that month instead, so "
+"%(slip)s collects it."
+msgstr ""
+"كان %(run)s قد سدّده، لكن راتب الإجازة يدفع ذلك الشهر بدلاً منه، فيُحصّل "
+"%(slip)s المبلغ."
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_sales_commission_sheet.py:0
+msgid "(no name in BAS)"
+msgstr "(بلا اسم في BAS)"
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_sales_commission_sheet.py:0
+msgid "A commission line of this type for %(e)s already exists on this sheet."
+msgstr "يوجد بالفعل بند عمولة من هذا النوع لـ %(e)s في هذا الكشف."
+
+#. module: KSW_commissions
+#: model:ir.model.fields,help:KSW_commissions.field_ksw_sales_commission_line__x_target_collection_adjustment
+msgid ""
+"Added to the collection target BAS gives (negative to reduce it), e.g. a "
+"retention the client holds until the project ends. Kept across pulls."
+msgstr ""
+"يُضاف إلى هدف التحصيل الذي يعطيه BAS (بالسالب لتخفيضه)، مثل محتجزات يحتفظ "
+"بها العميل حتى انتهاء المشروع. يبقى عند كل سحب."
+
+#. module: KSW_commissions
+#: model:ir.model.fields,help:KSW_commissions.field_ksw_sales_commission_line__x_sales_adjustment
+msgid ""
+"Added to the sales BAS gives (negative to reduce it) and kept across pulls —"
+" e.g. part of one BAS invoice that belongs to another rep or is not "
+"commissionable."
+msgstr ""
+"يُضاف إلى المبيعات التي يعطيها BAS (بالسالب لتخفيضها) ويبقى عند كل سحب — مثل"
+" جزء من فاتورة BAS يخص مندوباً آخر أو لا تُحتسب عليه عمولة."
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_line__x_target_adjustment_note
+msgid "Adjustment Reason"
+msgstr "سبب التعديل"
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/wizard/ksw_pay_handover_wizards.py:0
+msgid "Already in a sub-batch, with their %(what)s entries: %(names)s"
+msgstr "موجودون بالفعل في دفعة فرعية، مع قيودهم من %(what)s: %(names)s"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_bas_line__net
+msgid "Amount excl. VAT"
+msgstr "المبلغ بدون الضريبة"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_bas_line__gross
+msgid "Amount incl. VAT"
+msgstr "المبلغ شامل الضريبة"
+
+#. module: KSW_commissions
+#: model:ir.actions.act_window,name:KSW_commissions.action_ksw_sales_commission_bas_line
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_sheet__x_bas_detail_ids
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_sales_commission_bas_line_list
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_sales_commission_bas_line_pivot
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_sales_commission_sheet_form
+msgid "BAS Detail"
+msgstr "تفاصيل BAS"
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_sales_commission_sheet.py:0
+msgid "BAS Detail: %s"
+msgstr "تفاصيل BAS: %s"
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.res_config_settings_view_form_ksw_commissions
+msgid "BAS Document Types"
+msgstr "أنواع مستندات BAS"
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_sales_commission_bas_line_search
+msgid "BAS Rep"
+msgstr "مندوب BAS"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_bas_sales_rep__code
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_bas_line__rep_code
+msgid "BAS Rep Code"
+msgstr "رمز مندوب BAS"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_sheet__x_unmapped_rep_count
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_sales_commission_sheet_form
+msgid "BAS Reps to Link"
+msgstr "مناديب BAS للربط"
+
+#. module: KSW_commissions
+#: model:ir.model,name:KSW_commissions.model_ksw_bas_sales_rep
+msgid "BAS Sales Rep Mapping"
+msgstr "ربط مناديب المبيعات في BAS"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,help:KSW_commissions.field_res_config_settings__ksw_sc_vat_rate
+msgid ""
+"BAS amounts include VAT; commission is worked on amounts without it. 0 = use"
+" BAS amounts as they are."
+msgstr ""
+"مبالغ BAS شاملة الضريبة، والعمولة تُحتسب على المبالغ بدونها. 0 = استخدام "
+"مبالغ BAS كما هي."
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.res_config_settings_view_form_ksw_commissions
+msgid "BAS amounts include VAT; commission is worked without it."
+msgstr "مبالغ BAS شاملة الضريبة، والعمولة تُحتسب بدونها."
+
+#. module: KSW_commissions
+#: model:ir.model.fields,help:KSW_commissions.field_ksw_salesperson_profile__x_sales_excluded_accounts
+msgid ""
+"BAS customer accounts, comma separated, whose sales Pull from BAS leaves out"
+" of this employee's sales line — e.g. the distilled-water customer whose "
+"commission is worked separately (7% of the margin, paid after collection) "
+"and entered as an addition. Collections are not affected."
+msgstr ""
+"حسابات عملاء BAS مفصولة بفواصل، يستثني السحب من BAS مبيعاتها من بند مبيعات "
+"هذا الموظف — مثل عميل الماء المقطر الذي تُحتسب عمولته منفصلة (7% من الهامش، "
+"تُدفع بعد التحصيل) وتُدخل كإضافة. لا يتأثر التحصيل."
+
+#. module: KSW_commissions
+#: model:ir.model.fields,help:KSW_commissions.field_ksw_sales_commission_sheet__x_unmapped_rep_count
+msgid ""
+"BAS rep codes with customers but no employee linked: their sales and "
+"collections are credited to nobody."
+msgstr ""
+"رموز مناديب BAS لها عملاء ولا يرتبط بها موظف: مبيعاتها وتحصيلاتها لا تُنسب "
+"لأحد."
+
+#. module: KSW_commissions
+#: model:ir.model.fields,help:KSW_commissions.field_res_config_settings__ksw_sc_sales_doc_types
+msgid ""
+"BAS voucher types (FTYPE) that count as a sale when they debit a customer, "
+"comma separated. 002 = month-end invoice."
+msgstr ""
+"أنواع سندات BAS (FTYPE) التي تُعد بيعاً عندما تُقيد مديناً على عميل، مفصولة "
+"بفواصل. 002 = فاتورة نهاية الشهر."
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_bas_line__balance
+msgid "Balance at Month Start"
+msgstr "الرصيد في بداية الشهر"
+
+#. module: KSW_commissions
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__res_config_settings__ksw_sc_target_method__due_balance
+msgid "Balance due (as the workbook)"
+msgstr "الرصيد المستحق (كما في ملف العمل)"
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.res_config_settings_view_form_ksw_commissions
+msgid ""
+"Balance due = balance at the end of the previous month minus invoices still "
+"within the payment term."
+msgstr ""
+"الرصيد المستحق = الرصيد في نهاية الشهر السابق مطروحاً منه الفواتير التي ما "
+"زالت ضمن مدة السداد."
+
+#. module: KSW_commissions
+#: model:ir.model.fields,help:KSW_commissions.field_res_config_settings__ksw_sc_target_method
+msgid ""
+"Balance due: balance at the end of the previous month minus the invoices "
+"still within the payment term."
+msgstr ""
+"الرصيد المستحق: الرصيد في نهاية الشهر السابق مطروحاً منه الفواتير التي ما "
+"زالت ضمن مدة السداد."
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_submit_wizard__batch_hint
+msgid "Batch Hint"
+msgstr "تلميح الدفعة"
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/hr_payslip.py:0
+msgid "Collected by the vacation payslip"
+msgstr "حصّله كشف راتب الإجازة"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_res_config_settings__ksw_sc_collection_doc_types
+msgid "Collection Document Types"
+msgstr "أنواع مستندات التحصيل"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_res_config_settings__ksw_sc_target_owner
+msgid "Collection Target Belongs To"
+msgstr "هدف التحصيل يعود إلى"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_res_config_settings__ksw_sc_target_method
+msgid "Collection Target Method"
+msgstr "طريقة احتساب هدف التحصيل"
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_sales_commission_bas_line_search
+msgid "Collection Targets"
+msgstr "أهداف التحصيل"
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_sales_commission_bas_line_search
+msgid "Collections"
+msgstr "التحصيلات"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_res_config_settings__ksw_sc_attribution
+msgid "Credit Sales & Collections To"
+msgstr "تُنسب المبيعات والتحصيلات إلى"
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.res_config_settings_view_form_ksw_commissions
+msgid "Credit To"
+msgstr "يُنسب إلى"
+
+#. module: KSW_commissions
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__res_config_settings__ksw_sc_term_source__limt_days
+msgid "Credit day limit (LIMT_DAYS)"
+msgstr "حد أيام الائتمان (LIMT_DAYS)"
+
+#. module: KSW_commissions
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_sales_commission_bas_line__status__credited
+msgid "Credited"
+msgstr "منسوب"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_bas_line__employee_id
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_sales_commission_bas_line_search
+msgid "Credited To"
+msgstr "منسوب إلى"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_bas_line__customer_name
+msgid "Customer"
+msgstr "العميل"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_bas_line__account
+msgid "Customer Account"
+msgstr "حساب العميل"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_res_config_settings__ksw_sc_ledger_prefixes
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.res_config_settings_view_form_ksw_commissions
+msgid "Customer Ledgers in Scope"
+msgstr "دفاتر العملاء المشمولة"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,help:KSW_commissions.field_res_config_settings__ksw_sc_ledger_prefixes
+msgid ""
+"Customer account prefixes this commission covers, comma separated. * = every"
+" customer account."
+msgstr ""
+"بادئات حسابات العملاء التي تشملها هذه العمولة، مفصولة بفواصل. * = كل حسابات "
+"العملاء."
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.res_config_settings_view_form_ksw_commissions
+msgid "Customer account prefixes, comma separated. * = every customer."
+msgstr "بادئات حسابات العملاء، مفصولة بفواصل. * = كل العملاء."
+
+#. module: KSW_commissions
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__res_config_settings__ksw_sc_target_owner__customer
+msgid "Customer's current collector"
+msgstr "المحصّل الحالي للعميل"
+
+#. module: KSW_commissions
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__res_config_settings__ksw_sc_attribution__customer
+msgid "Customer's current rep"
+msgstr "المندوب الحالي للعميل"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_bas_sales_rep__customer_count
+msgid "Customers"
+msgstr "العملاء"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_bas_sales_rep__collection_customer_count
+msgid "Customers (Collection)"
+msgstr "العملاء (التحصيل)"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_bas_sales_rep__sales_customer_count
+msgid "Customers (Sales)"
+msgstr "العملاء (المبيعات)"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_res_config_settings__ksw_sc_default_term_days
+msgid "Default Payment Term (Days)"
+msgstr "مدة السداد الافتراضية (أيام)"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_bas_line__doc_count
+msgid "Documents"
+msgstr "المستندات"
+
+#. module: KSW_commissions
+#: model:ir.model.constraint,message:KSW_commissions.constraint_ksw_bas_sales_rep_code_unique
+msgid "Each BAS rep code can only be mapped once."
+msgstr "لا يُربط رمز مندوب BAS إلا مرة واحدة."
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_sales_commission_sheet.py:0
+msgid "FIFO aging"
+msgstr "أعمار الديون (الوارد أولاً يُسدَّد أولاً)"
+
+#. module: KSW_commissions
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__res_config_settings__ksw_sc_target_method__fifo
+msgid "FIFO aging (previous method)"
+msgstr "أعمار الديون (الوارد أولاً يُسدَّد أولاً، الطريقة السابقة)"
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.res_config_settings_view_form_ksw_commissions
+msgid ""
+"How Pull from BAS builds a month on the Sales & Collection sheets. The "
+"defaults reproduce the accountant's March 2026 workbook; change one here and"
+" the next pull follows it."
+msgstr ""
+"طريقة بناء السحب من BAS لشهر في كشوف المبيعات والتحصيل. الإعدادات الافتراضية"
+" تطابق ملف عمل المحاسب لشهر مارس 2026؛ غيّر أياً منها هنا وسيتبعه السحب "
+"التالي."
+
+#. module: KSW_commissions
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__res_config_settings__ksw_sc_term_source__invdays
+msgid "Invoice payment term (INVDAYS)"
+msgstr "مدة سداد الفاتورة (INVDAYS)"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,help:KSW_commissions.field_ksw_sales_commission_bas_line__not_due
+msgid "Invoices within the payment term, VAT included."
+msgstr "الفواتير التي ما زالت ضمن مدة السداد، شاملة الضريبة."
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_sub_batch_form
+msgid "Leave Out"
+msgstr "استبعاد"
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_sub_batch_form
+msgid ""
+"Leave this employee's entries of this pay type out of the sub-batch? They "
+"will be paid with the rest of the month."
+msgstr ""
+"استبعاد قيود هذا الموظف من نوع الدفع هذا من الدفعة الفرعية؟ ستُدفع مع بقية "
+"الشهر."
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_sub_batch_form
+msgid "Leave this pay type out of the sub-batch: it waits for the month end"
+msgstr "استبعاد نوع الدفع هذا من الدفعة الفرعية: ينتظر نهاية الشهر"
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_pay_batch.py:0
+msgid "Leaving entries out"
+msgstr "استبعاد قيود"
+
+#. module: KSW_commissions
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_sales_commission_bas_line__status__excluded
+msgid "Left Out (Profile)"
+msgstr "مستبعد (الملف)"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,help:KSW_commissions.field_ksw_pay_entry__x_sub_batch_left_out
+msgid ""
+"Left out of the employee's sub-batch for this component — paid with the rest"
+" of the month."
+msgstr ""
+"مستبعد من الدفعة الفرعية لهذا الموظف لهذا البند — يُدفع مع بقية الشهر."
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_pay_batch.py:0
+msgid "Left out:"
+msgstr "المستبعد:"
+
+#. module: KSW_commissions
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_bas_sales_rep__state__mapped
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_bas_sales_rep_search
+msgid "Mapped"
+msgstr "مربوط"
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_partner_form_ksw_commission
+msgid "Name as in the Excel Sales file (fallback if no account no.)"
+msgstr "الاسم كما في ملف المبيعات Excel (يُستخدم عند غياب رقم الحساب)"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_bas_sales_rep__bas_name
+msgid "Name in BAS"
+msgstr "الاسم في BAS"
+
+#. module: KSW_commissions
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_bas_sales_rep__state__todo
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_bas_sales_rep_search
+msgid "Needs an Employee"
+msgstr "يلزم موظف"
+
+#. module: KSW_commissions
+#: model_terms:ir.actions.act_window,help:KSW_commissions.action_ksw_bas_sales_rep
+msgid "No BAS reps yet"
+msgstr "لا يوجد مناديب BAS بعد"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_bas_sales_rep__is_house
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_bas_sales_rep__state__house
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_sales_commission_bas_line__status__house
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_bas_sales_rep_search
+msgid "No Commission"
+msgstr "بلا عمولة"
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_sales_commission_bas_line_search
+msgid "Not Credited"
+msgstr "غير منسوب"
+
+#. module: KSW_commissions
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_sales_commission_bas_line__status__role
+msgid "Not Their Role"
+msgstr "ليس من دوره"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_bas_line__not_due
+msgid "Not Yet Due"
+msgstr "لم يستحق بعد"
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_submit_wizard_form
+msgid "Only employees with entries in"
+msgstr "فقط الموظفون الذين لهم قيود في"
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_pay_batch.py:0
+msgid "Paid with the rest of the month."
+msgstr "يُدفع مع بقية الشهر."
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_res_config_settings__ksw_sc_term_source
+msgid "Payment Term From"
+msgstr "مدة السداد من"
+
+#. module: KSW_commissions
+#: model_terms:ir.actions.act_window,help:KSW_commissions.action_ksw_bas_sales_rep
+msgid ""
+"Press <b>Pull from BAS</b> on a Sales &amp; Collection sheet:\n"
+"               every rep BAS assigns to a customer is listed here.\n"
+"               Link each one to its employee once."
+msgstr ""
+"اضغط <b>السحب من BAS</b> في كشف المبيعات والتحصيل:\n"
+"               يظهر هنا كل مندوب يسنده BAS إلى عميل.\n"
+"               اربط كلاً منهم بموظفه مرة واحدة."
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_sales_commission_sheet_form
+msgid ""
+"Pull achieved sales & collection for this period directly from BAS, using "
+"the rep BAS assigns to each customer (see BAS Sales Reps)"
+msgstr ""
+"سحب المبيعات والتحصيلات المحققة لهذه الفترة من BAS مباشرة، حسب المندوب الذي "
+"يسنده BAS لكل عميل (انظر مناديب مبيعات BAS)"
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_salesperson_profile_form
+msgid ""
+"Pull from BAS gives this employee one line per\n"
+"                                commission type: <b>Salesman</b> (customers he\n"
+"                                sells to, somebody else collects),\n"
+"                                <b>Collector</b> (he collects, somebody else\n"
+"                                sold) and <b>Salesman &amp; Collector</b>\n"
+"                                (both). Choose the rule that pays each."
+msgstr ""
+"ينشئ السحب من BAS لهذا الموظف بنداً واحداً لكل\n"
+"                                نوع عمولة: <b>بائع</b> (عملاء يبيع لهم\n"
+"                                ويحصّل منهم غيره)، <b>محصّل</b> (يحصّل وقد\n"
+"                                باع غيره) و<b>بائع ومحصّل</b>\n"
+"                                (الاثنان). اختر القاعدة التي تدفع لكل منها."
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_batch_form
+msgid "Put Back"
+msgstr "إعادة"
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_pay_batch.py:0
+msgid "Put back:"
+msgstr "المُعاد:"
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_batch_form
+msgid "Put this pay type back into the employee's sub-batch"
+msgstr "إعادة نوع الدفع هذا إلى الدفعة الفرعية للموظف"
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_pay_batch.py:0
+msgid "Putting entries back"
+msgstr "إعادة القيود"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_bas_line__rep_name
+msgid "Rep Name (BAS)"
+msgstr "اسم المندوب (BAS)"
+
+#. module: KSW_commissions
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__ksw_sales_commission_bas_line__status__unmapped
+msgid "Rep Not Linked"
+msgstr "مندوب غير مربوط"
+
+#. module: KSW_commissions
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__res_config_settings__ksw_sc_attribution__document
+msgid "Rep on each BAS document"
+msgstr "المندوب على كل مستند في BAS"
+
+#. module: KSW_commissions
+#: model:ir.model.fields.selection,name:KSW_commissions.selection__res_config_settings__ksw_sc_target_owner__last_receipt
+msgid "Rep on the last receipt"
+msgstr "المندوب على آخر سند قبض"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_salesperson_profile__x_type_rule_ids
+msgid "Rule per Commission Type"
+msgstr "القاعدة لكل نوع عمولة"
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_salesperson_profile_form
+msgid "Rule per Type"
+msgstr "القاعدة لكل نوع"
+
+#. module: KSW_commissions
+#: model:ir.model,name:KSW_commissions.model_ksw_sales_commission_bas
+msgid "Sales & Collection figures from the BAS ledger"
+msgstr "أرقام المبيعات والتحصيل من دفتر BAS"
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.res_config_settings_view_form_ksw_commissions
+msgid "Sales & Collection from BAS"
+msgstr "المبيعات والتحصيل من BAS"
+
+#. module: KSW_commissions
+#: model:ir.model,name:KSW_commissions.model_ksw_sales_commission_bas_line
+msgid "Sales & Collection: BAS detail per customer"
+msgstr "المبيعات والتحصيل: تفاصيل BAS لكل عميل"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_line__x_sales_adjustment
+msgid "Sales Adjustment"
+msgstr "تعديل المبيعات"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_line__x_sales_adjustment_note
+msgid "Sales Adjustment Reason"
+msgstr "سبب تعديل المبيعات"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_res_config_settings__ksw_sc_sales_doc_types
+msgid "Sales Document Types"
+msgstr "أنواع مستندات المبيعات"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_salesperson_profile__x_sales_excluded_accounts
+msgid "Sales Left Out (BAS Accounts)"
+msgstr "مبيعات مستبعدة (حسابات BAS)"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_res_config_settings__ksw_sc_sales_return_doc_types
+msgid "Sales Return Document Types"
+msgstr "أنواع مستندات مرتجعات المبيعات"
+
+#. module: KSW_commissions
+#: model:ir.model,name:KSW_commissions.model_ksw_salesperson_profile_type_rule
+msgid "Salesperson Profile: rule per commission type"
+msgstr "ملف المندوب: القاعدة لكل نوع عمولة"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,help:KSW_commissions.field_ksw_sales_commission_line__x_commission_type
+msgid ""
+"Set by Pull from BAS: which of the employee's commissions this line is. "
+"Salesman = customers he sells to and somebody else collects; Collector = "
+"customers he collects from and somebody else sold to; Salesman & Collector ="
+" both. One employee can have a line of each type, each with its own "
+"customers and rule."
+msgstr ""
+"يحدده السحب من BAS: أي عمولات الموظف يمثلها هذا البند. بائع = عملاء يبيع لهم"
+" ويحصّل منهم غيره؛ محصّل = عملاء يحصّل منهم وقد باع لهم غيره؛ بائع ومحصّل = "
+"الاثنان. يمكن أن يكون للموظف بند من كل نوع، لكل منها عملاؤه وقاعدته."
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_bas_sales_rep__state_order
+msgid "State Order"
+msgstr "ترتيب الحالة"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_line__x_target_collection_adjustment
+msgid "Target Adjustment"
+msgstr "تعديل الهدف"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_bas_line__term_days
+msgid "Term (Days)"
+msgstr "المدة (أيام)"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,help:KSW_commissions.field_ksw_bas_sales_rep__employee_id
+msgid ""
+"The employee credited with the sales and collections of every customer BAS "
+"assigns to this rep code."
+msgstr ""
+"الموظف الذي تُنسب إليه مبيعات وتحصيلات كل عميل يسنده BAS إلى رمز المندوب "
+"هذا."
+
+#. module: KSW_commissions
+#: model:ir.model.fields,help:KSW_commissions.field_ksw_bas_sales_rep__bas_name
+msgid ""
+"The label BAS uses for this rep code (VOU10.SELLERNAME). Refreshed on every "
+"pull; the employee link does not depend on it."
+msgstr ""
+"التسمية التي يستخدمها BAS لرمز المندوب هذا (VOU10.SELLERNAME). تُحدَّث مع كل"
+" سحب؛ ولا يعتمد عليها ربط الموظف."
+
+#. module: KSW_commissions
+#: model:ir.model.fields,help:KSW_commissions.field_res_config_settings__ksw_sc_attribution
+msgid ""
+"The rep BAS stamped on each invoice/receipt keeps past months right when "
+"customers are reassigned; the customer's current rep follows today's "
+"assignment."
+msgstr ""
+"المندوب الذي ختمه BAS على كل فاتورة / سند قبض يبقي الأشهر السابقة صحيحة عند "
+"إعادة إسناد العملاء؛ أما المندوب الحالي للعميل فيتبع إسناد اليوم."
+
+#. module: KSW_commissions
+#: model:ir.model.fields,help:KSW_commissions.field_ksw_bas_sales_rep__is_house
+msgid ""
+"This code is a company/house account, not a person (e.g. \"Company "
+"collector\"). Its customers earn nobody commission and are not reported as "
+"missing a rep."
+msgstr ""
+"هذا الرمز حساب للشركة وليس لشخص (مثل «محصّل الشركة»). عملاؤه لا يستحق عليهم "
+"أحد عمولة، ولا يُبلَّغ عنهم كعملاء بلا مندوب."
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_pay_batch.py:0
+msgid "This entry is not in a sub-batch."
+msgstr "هذا القيد ليس في دفعة فرعية."
+
+#. module: KSW_commissions
+#: model:ir.model.fields,help:KSW_commissions.field_res_config_settings__ksw_sc_default_term_days
+msgid "Used when BAS has no term for the customer."
+msgstr "يُستخدم عندما لا تكون للعميل مدة سداد في BAS."
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_res_config_settings__ksw_sc_vat_rate
+msgid "VAT Rate to Remove (%)"
+msgstr "نسبة الضريبة المراد استبعادها (%)"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,help:KSW_commissions.field_ksw_sales_commission_bas_line__balance
+msgid "VAT included, as BAS holds it."
+msgstr "شامل الضريبة، كما يحفظه BAS."
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.res_config_settings_view_form_ksw_commissions
+msgid "VAT to Remove"
+msgstr "الضريبة المراد استبعادها"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,help:KSW_commissions.field_res_config_settings__ksw_sc_collection_doc_types
+msgid ""
+"Voucher types that count as a collection when they credit a customer. 018 = "
+"cash receipt, 015 = bank receipt."
+msgstr ""
+"أنواع السندات التي تُعد تحصيلاً عندما تُقيد دائناً لعميل. 018 = سند قبض "
+"نقدي، 015 = سند قبض بنكي."
+
+#. module: KSW_commissions
+#: model:ir.model.fields,help:KSW_commissions.field_res_config_settings__ksw_sc_sales_return_doc_types
+msgid ""
+"Voucher types that reduce sales when they credit a customer. Empty = none."
+msgstr ""
+"أنواع السندات التي تخفّض المبيعات عندما تُقيد دائناً لعميل. فارغ = لا شيء."
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_entry__x_sub_batch_left_out
+msgid "Waits for Month End"
+msgstr "ينتظر نهاية الشهر"
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.res_config_settings_view_form_ksw_commissions
+msgid ""
+"Which BAS voucher types are sales (002 month-end invoice), sales returns, "
+"and collections (018 cash, 015 bank)."
+msgstr ""
+"أي أنواع سندات BAS مبيعات (002 فاتورة نهاية الشهر)، ومرتجعات مبيعات، "
+"وتحصيلات (018 نقدي، 015 بنكي)."
+
+#. module: KSW_commissions
+#: model:ir.model.fields,help:KSW_commissions.field_ksw_salesperson_profile__x_type_rule_ids
+msgid ""
+"Which rule pays each of this employee's commission types (Salesman / "
+"Collector / Salesman & Collector lines that Pull from BAS creates). A type "
+"listed here with no rule of a kind earns nothing of that kind. Types not "
+"listed fall back to the rules above."
+msgstr ""
+"القاعدة التي تدفع لكل نوع من عمولات هذا الموظف (بنود البائع / المحصّل / "
+"البائع والمحصّل التي ينشئها السحب من BAS). النوع المدرج هنا دون قاعدة من صنف"
+" ما لا يستحق شيئاً من ذلك الصنف. والأنواع غير المدرجة تعود إلى القواعد "
+"أعلاه."
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.res_config_settings_view_form_ksw_commissions
+msgid ""
+"Who a sale or collection is credited to, and who owns a customer's "
+"collection target."
+msgstr "لمن تُنسب المبيعات أو التحصيلات، ومن يملك هدف تحصيل العميل."
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_pay_run__x_bas_can_load
+msgid "X Bas Can Load"
+msgstr "يمكن التحميل من BAS"
+
+#. module: KSW_commissions
+#: model:ir.model.fields,field_description:KSW_commissions.field_ksw_sales_commission_sheet__x_bas_detail_count
+msgid "X Bas Detail Count"
+msgstr "عدد تفاصيل BAS"
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_sales_commission_sheet.py:0
+msgid "all"
+msgstr "الكل"
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_pay_submit_wizard_form
+msgid "are listed."
+msgstr "مدرجون."
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_sales_commission_sheet.py:0
+msgid "customer's current rep"
+msgstr "المندوب الحالي للعميل"
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_sales_commission_sheet.py:0
+msgid "due balance"
+msgstr "الرصيد المستحق"
+
+#. module: KSW_commissions
+#: model_terms:ir.ui.view,arch_db:KSW_commissions.view_ksw_salesperson_profile_form
+msgid "e.g. 120301309"
+msgstr "مثال: 120301309"
+
+#. module: KSW_commissions
+#. odoo-python
+#: code:addons/KSW_commissions/models/ksw_sales_commission_sheet.py:0
+msgid "rep on each document"
+msgstr "المندوب على كل مستند"

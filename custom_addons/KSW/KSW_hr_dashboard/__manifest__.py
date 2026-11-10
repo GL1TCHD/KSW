@@ -1,6 +1,6 @@
 {
     'name': 'KSW HR Dashboard',
-    'version': '19.0.1.0.0',
+    'version': '19.0.1.1.0',
     'summary': 'HR/Payroll/Attendance/Deduction overview in the Dashboards app',
     'description': """
 Adds a "KSW HR Overview" spreadsheet dashboard under the Dashboards app's

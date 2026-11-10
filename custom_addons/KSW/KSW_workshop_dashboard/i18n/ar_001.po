@@ -76,12 +76,12 @@ msgstr "تكلفة الأعمال المكتملة"
 #. module: KSW_workshop_dashboard
 #: model:ir.model.fields,field_description:KSW_workshop_dashboard.field_ksw_workshop_dashboard__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "اسم العرض"
 
 #. module: KSW_workshop_dashboard
 #: model:ir.model.fields,field_description:KSW_workshop_dashboard.field_ksw_workshop_dashboard__id
 msgid "ID"
-msgstr ""
+msgstr "المعرف"
 
 #. module: KSW_workshop_dashboard
 #. odoo-javascript
@@ -364,3 +364,27 @@ msgstr "مُعاد إلى مقدم الطلب"
 #: code:addons/KSW_workshop_dashboard/static/src/workshop_dashboard.xml:0
 msgid "same repair again within"
 msgstr "نفس الإصلاح مجدداً خلال"
+
+#. module: KSW_workshop_dashboard
+#. odoo-python
+#: code:addons/KSW_workshop_dashboard/models/workshop_dashboard.py:0
+msgid "30p"
+msgstr "30p"
+
+#. module: KSW_workshop_dashboard
+#. odoo-python
+#: code:addons/KSW_workshop_dashboard/models/workshop_dashboard.py:0
+msgid "3_7"
+msgstr "3_7"
+
+#. module: KSW_workshop_dashboard
+#. odoo-python
+#: code:addons/KSW_workshop_dashboard/models/workshop_dashboard.py:0
+msgid "8_30"
+msgstr "8_30"
+
+#. module: KSW_workshop_dashboard
+#. odoo-javascript
+#: code:addons/KSW_workshop_dashboard/static/src/workshop_dashboard.js:0
+msgid "All workshops"
+msgstr "كل الورش"

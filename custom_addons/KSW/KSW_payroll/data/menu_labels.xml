@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Arabic for HR menus owned by om_hr_payroll / hr_attendance / cybrosys
+         biometric / auto-install bridges, which ship none (or a wrong one).
+         Payroll's two list menus read «كشوف الراتب» and «كشوف الرواتب»
+         (both glossary terms): the individual one says so, and Settings
+         stops repeating its parent Configuration. -->
+    <function model="ir.ui.menu" name="_ksw_set_menu_arabic">
+        <value eval="{
+            'om_hr_payroll.menu_department_tree': 'كشوف الراتب الفردية',
+            'om_hr_payroll.menu_hr_payroll_configuration': 'التهيئة',
+            'om_hr_payroll.menu_hr_payroll_global_settings': 'إعدادات الرواتب',
+            'om_hr_payroll.menu_payroll_employee': 'الموظفون',
+            'om_hr_payroll.menu_hr_employee': 'الموظفون',
+            'om_hr_payroll.hr_menu_contract': 'العقود',
+            'om_hr_payroll.menu_contract_type': 'أنواع التوظيف',
+            'om_hr_payroll.hr_contract_advantage_template_menu_action': 'قوالب مزايا العقود',
+            'hr_attendance.menu_hr_attendance_overtime_rulesets': 'قواعد العمل الإضافي',
+            'hr_biometric_attendance.biometric_device_details_menu': 'أجهزة البصمة',
+            'hr_biometric_attendance.biometric_device_details_sub_menu': 'أجهزة البصمة',
+            'hr_biometric_attendance.daily_attendance_menu': 'تحليل الحضور',
+            'hr_holidays_attendance.hr_leave_attendance_report': 'سجل الإجازات',
+            'hr_skills.menu_learnings_training_attendances': 'حضور التدريب',
+        }"/>
+    </function>
+</odoo>

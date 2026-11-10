@@ -145,6 +145,7 @@ msgstr "نسبة الإهلاك السنوية في BAS (%)"
 #: model:ir.model.fields,field_description:KSW_bas_gl_import.field_account_bank_statement_line__x_bas_branch
 #: model:ir.model.fields,field_description:KSW_bas_gl_import.field_account_move__x_bas_branch
 #: model:ir.model.fields,field_description:KSW_bas_gl_import.field_stock_picking__x_bas_branch
+#: model:ir.model,name:KSW_bas_gl_import.model_ksw_bas_branch
 msgid "BAS Branch"
 msgstr "فرع BAS"
 
@@ -280,6 +281,7 @@ msgstr "أسماء الدليل: العربية (افتراضي)"
 
 #. module: KSW_bas_gl_import
 #: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_fixed_asset__code
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_branch__code
 msgid "Code"
 msgstr "رمز"
 
@@ -298,6 +300,8 @@ msgstr "جهة الاتصال"
 #: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_fixed_asset__create_uid
 #: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_fixed_asset_event__create_uid
 #: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_gl_import__create_uid
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_branch__create_uid
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_document_type__create_uid
 msgid "Created by"
 msgstr "أنشئ بواسطة"
 
@@ -305,6 +309,8 @@ msgstr "أنشئ بواسطة"
 #: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_fixed_asset__create_date
 #: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_fixed_asset_event__create_date
 #: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_gl_import__create_date
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_branch__create_date
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_document_type__create_date
 msgid "Created on"
 msgstr "أنشئ في"
 
@@ -346,6 +352,12 @@ msgstr "يحمل الإهلاك يوميا في قائمة الدخل (طريق�
 #: model:ir.model.fields,field_description:KSW_bas_gl_import.field_product_product__display_name
 #: model:ir.model.fields,field_description:KSW_bas_gl_import.field_res_partner__display_name
 #: model:ir.model.fields,field_description:KSW_bas_gl_import.field_stock_picking__display_name
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_account_asset_remove__display_name
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_account_payment__display_name
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_branch__display_name
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_branch_mixin__display_name
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_document_mixin__display_name
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_document_type__display_name
 msgid "Display Name"
 msgstr "اسم العرض"
 
@@ -399,6 +411,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_bas_gl_import.field_product_product__id
 #: model:ir.model.fields,field_description:KSW_bas_gl_import.field_res_partner__id
 #: model:ir.model.fields,field_description:KSW_bas_gl_import.field_stock_picking__id
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_account_asset_remove__id
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_account_payment__id
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_branch__id
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_branch_mixin__id
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_document_mixin__id
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_document_type__id
 msgid "ID"
 msgstr "المُعرف"
 
@@ -443,6 +461,8 @@ msgstr "النوع"
 #: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_fixed_asset__write_uid
 #: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_fixed_asset_event__write_uid
 #: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_gl_import__write_uid
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_branch__write_uid
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_document_type__write_uid
 msgid "Last Updated by"
 msgstr "آخر تحديث بواسطة"
 
@@ -450,6 +470,8 @@ msgstr "آخر تحديث بواسطة"
 #: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_fixed_asset__write_date
 #: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_fixed_asset_event__write_date
 #: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_gl_import__write_date
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_branch__write_date
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_document_type__write_date
 msgid "Last Updated on"
 msgstr "آخر تحديث في"
 
@@ -470,6 +492,7 @@ msgstr "عدد الحركات"
 
 #. module: KSW_bas_gl_import
 #: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_gl_import__name
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_branch__name
 msgid "Name"
 msgstr "الاسم"
 
@@ -579,3 +602,168 @@ msgid ""
 msgstr ""
 "رقم حساب هذا العميل أو المورد في BAS (COD10.DCODE1، مثل \"120301080\"): "
 "المفتاح الذي تطابق عليه كل مزامنة واستيراد من BAS."
+
+#. module: KSW_bas_gl_import
+#: model:ir.ui.menu,name:KSW_bas_gl_import.menu_ksw_bas_branch
+#: model:ir.actions.act_window,name:KSW_bas_gl_import.action_ksw_bas_branch
+msgid "BAS Branches"
+msgstr "فروع BAS"
+
+#. module: KSW_bas_gl_import
+#: model:ir.ui.menu,name:KSW_bas_gl_import.menu_ksw_bas_document_type
+#: model:ir.actions.act_window,name:KSW_bas_gl_import.action_ksw_bas_document_type
+msgid "BAS Document Types"
+msgstr "أنواع مستندات BAS"
+
+#. module: KSW_bas_gl_import
+#. odoo-python
+#: code:addons/KSW_bas_gl_import/models/bas_links.py:0
+msgid "%(count)s delivery notes, %(start)s to %(end)s"
+msgstr "%(count)s سند تسليم، من %(start)s إلى %(end)s"
+
+#. module: KSW_bas_gl_import
+#. odoo-python
+#: code:addons/KSW_bas_gl_import/models/bas_links.py:0
+msgid "%(inv)s: rebuilding the lines moved the total from %(old)s to %(new)s."
+msgstr "%(inv)s: إعادة بناء البنود غيّرت الإجمالي من %(old)s إلى %(new)s."
+
+#. module: KSW_bas_gl_import
+#. odoo-python
+#: code:addons/KSW_bas_gl_import/models/bas_links.py:0
+msgid "%(product)s: %(qty)s %(uom)s at %(price)s (%(count)s notes)"
+msgstr "%(product)s: %(qty)s %(uom)s بسعر %(price)s (%(count)s سندات)"
+
+#. module: KSW_bas_gl_import
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_branch__active
+msgid "Active"
+msgstr "نشط"
+
+#. module: KSW_bas_gl_import
+#: model:ir.model.fields,help:KSW_bas_gl_import.field_ksw_bas_branch__code
+msgid "BAS CODE2 on vouchers and delivery notes."
+msgstr "رمز CODE2 في BAS على السندات وسندات التسليم."
+
+#. module: KSW_bas_gl_import
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_account_bank_statement_line__x_bas_delivery_ids
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_account_move__x_bas_delivery_ids
+msgid "BAS Delivery Notes"
+msgstr "سندات التسليم في BAS"
+
+#. module: KSW_bas_gl_import
+#: model:ir.model,name:KSW_bas_gl_import.model_ksw_bas_document_mixin
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_account_bank_statement_line__x_bas_document
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_account_move__x_bas_document
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_account_payment__x_bas_document
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_document_mixin__x_bas_document
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_stock_picking__x_bas_document
+msgid "BAS Document"
+msgstr "مستند BAS"
+
+#. module: KSW_bas_gl_import
+#: model:ir.model,name:KSW_bas_gl_import.model_ksw_bas_document_type
+msgid "BAS Document Type"
+msgstr "نوع مستند BAS"
+
+#. module: KSW_bas_gl_import
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_stock_picking__x_bas_invoice_key
+msgid "BAS Invoice"
+msgstr "فاتورة BAS"
+
+#. module: KSW_bas_gl_import
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_document_type__name
+msgid "BAS Name"
+msgstr "الاسم في BAS"
+
+#. module: KSW_bas_gl_import
+#. odoo-python
+#: code:addons/KSW_bas_gl_import/models/bas_links.py:0
+msgid "BAS partner ledgers: tag the partner on its lines"
+msgstr "دفاتر الشركاء في BAS: وسم الشريك على بنودها"
+
+#. module: KSW_bas_gl_import
+#: model:ir.model.fields,help:KSW_bas_gl_import.field_ksw_bas_document_type__name
+msgid "BAS9's own name for the document type (VOU_SETTING.NAME1)."
+msgstr "اسم نوع المستند في BAS9 نفسه (VOU_SETTING.NAME1)."
+
+#. module: KSW_bas_gl_import
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_stock_picking__x_bas_invoice_id
+#: model_terms:ir.ui.view,arch_db:KSW_bas_gl_import.view_picking_internal_search_bas_invoice
+msgid "Billed On"
+msgstr "تاريخ الفوترة"
+
+#. module: KSW_bas_gl_import
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_account_bank_statement_line__x_bas_branch_id
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_account_move__x_bas_branch_id
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_branch_mixin__x_bas_branch_id
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_stock_picking__x_bas_branch_id
+#: model_terms:ir.ui.view,arch_db:KSW_bas_gl_import.view_account_invoice_filter_bas_branch
+#: model_terms:ir.ui.view,arch_db:KSW_bas_gl_import.view_account_move_filter_bas_branch
+#: model_terms:ir.ui.view,arch_db:KSW_bas_gl_import.view_picking_internal_search_bas_branch
+msgid "Branch"
+msgstr "الفرع"
+
+#. module: KSW_bas_gl_import
+#. odoo-python
+#: code:addons/KSW_bas_gl_import/models/bas_links.py:0
+#: model_terms:ir.ui.view,arch_db:KSW_bas_gl_import.view_move_form_bas_deliveries
+msgid "Delivery Notes"
+msgstr "سندات التسليم"
+
+#. module: KSW_bas_gl_import
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_document_type__ftype
+msgid "FTYPE"
+msgstr "FTYPE"
+
+#. module: KSW_bas_gl_import
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_document_type__ftype2
+msgid "FTYPE2"
+msgstr "FTYPE2"
+
+#. module: KSW_bas_gl_import
+#: model:ir.model,name:KSW_bas_gl_import.model_ksw_bas_branch_mixin
+msgid "Has a BAS branch"
+msgstr "له فرع في BAS"
+
+#. module: KSW_bas_gl_import
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_ksw_bas_branch__note
+msgid "How it was identified"
+msgstr "طريقة التعرّف عليه"
+
+#. module: KSW_bas_gl_import
+#: model:ir.model,name:KSW_bas_gl_import.model_account_asset_remove
+msgid "Remove Asset"
+msgstr "إزالة العهدة"
+
+#. module: KSW_bas_gl_import
+#: model:ir.model.fields,help:KSW_bas_gl_import.field_account_bank_statement_line__x_bas_document
+#: model:ir.model.fields,help:KSW_bas_gl_import.field_account_move__x_bas_document
+#: model:ir.model.fields,help:KSW_bas_gl_import.field_account_payment__x_bas_document
+#: model:ir.model.fields,help:KSW_bas_gl_import.field_ksw_bas_document_mixin__x_bas_document
+#: model:ir.model.fields,help:KSW_bas_gl_import.field_stock_picking__x_bas_document
+msgid ""
+"The BAS9 document this record was created from, as BAS names it: type, "
+"branch / number."
+msgstr ""
+"مستند BAS9 الذي أُنشئ منه هذا السجل، بتسمية BAS: النوع، الفرع / الرقم."
+
+#. module: KSW_bas_gl_import
+#: model:ir.model.constraint,message:KSW_bas_gl_import.constraint_ksw_bas_branch_code_uniq
+msgid "This BAS branch code already exists."
+msgstr "رمز فرع BAS هذا موجود بالفعل."
+
+#. module: KSW_bas_gl_import
+#: model:ir.model.constraint,message:KSW_bas_gl_import.constraint_ksw_bas_document_type_ftype_uniq
+msgid "This BAS document type exists already."
+msgstr "نوع مستند BAS هذا موجود بالفعل."
+
+#. module: KSW_bas_gl_import
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_account_bank_statement_line__x_bas_delivery_count
+#: model:ir.model.fields,field_description:KSW_bas_gl_import.field_account_move__x_bas_delivery_count
+msgid "X Bas Delivery Count"
+msgstr "عدد سندات تسليم BAS"
+
+#. module: KSW_bas_gl_import
+#. odoo-python
+#: code:addons/KSW_bas_gl_import/models/bas_links.py:0
+msgid "x_bas_invoice_id"
+msgstr "x_bas_invoice_id"

@@ -23,6 +23,7 @@ msgstr ""
 
 #. module: KSW_ext_sync
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_payment__amount
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__amount
 msgid "Amount"
 msgstr ""
 
@@ -55,6 +56,7 @@ msgstr ""
 #. module: KSW_ext_sync
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_invoice__bas_key
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_payment__bas_key
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__bas_key
 msgid "BAS Key"
 msgstr ""
 
@@ -121,6 +123,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_payment__branch_code
 #: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_invoice_search
 #: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_payment_search
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__branch_code
 msgid "Branch"
 msgstr ""
 
@@ -202,6 +205,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_customer__create_uid
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_invoice__create_uid
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_payment__create_uid
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__create_uid
 msgid "Created by"
 msgstr ""
 
@@ -210,6 +214,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_customer__create_date
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_invoice__create_date
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_payment__create_date
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__create_date
 msgid "Created on"
 msgstr ""
 
@@ -241,6 +246,7 @@ msgstr ""
 #. module: KSW_ext_sync
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_invoice__invoice_date
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_payment__payment_date
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__date
 msgid "Date"
 msgstr ""
 
@@ -251,6 +257,7 @@ msgstr ""
 
 #. module: KSW_ext_sync
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_payment__remark
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__description
 msgid "Description"
 msgstr ""
 
@@ -261,12 +268,15 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_invoice__display_name
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_payment__display_name
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_res_partner__display_name
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: KSW_ext_sync
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_invoice__ftype
 #: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_invoice_search
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__ftype
+#: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_ledger_line_search
 msgid "Doc Type"
 msgstr ""
 
@@ -293,6 +303,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_invoice__id
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_payment__id
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_res_partner__id
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__id
 msgid "ID"
 msgstr ""
 
@@ -311,6 +322,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_customer__last_synced
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_invoice__last_synced
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_payment__last_synced
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__last_synced
 msgid "Last Synced"
 msgstr ""
 
@@ -319,6 +331,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_customer__write_uid
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_invoice__write_uid
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_payment__write_uid
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__write_uid
 msgid "Last Updated by"
 msgstr ""
 
@@ -327,6 +340,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_customer__write_date
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_invoice__write_date
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_payment__write_date
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__write_date
 msgid "Last Updated on"
 msgstr ""
 
@@ -350,6 +364,7 @@ msgstr ""
 #. module: KSW_ext_sync
 #: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_invoice_search
 #: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_payment_search
+#: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_ledger_line_search
 msgid "Month"
 msgstr ""
 
@@ -392,6 +407,7 @@ msgstr ""
 
 #. module: KSW_ext_sync
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_account__opening_balance
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_customer__opening_balance
 msgid "Opening Balance"
 msgstr ""
 
@@ -515,6 +531,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_invoice__total
 #: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_invoice_list
 #: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_payment_list
+#: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_ledger_line_list
 msgid "Total"
 msgstr ""
 
@@ -561,4 +578,105 @@ msgstr ""
 msgid ""
 "The BAS customer account code. Kept under this name for the callers that use"
 " it; stored as the contact's Reference."
+msgstr ""
+
+#. module: KSW_ext_sync
+#: model:ir.ui.menu,name:KSW_ext_sync.menu_bas_ledger
+msgid "Customer Ledger"
+msgstr ""
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,help:KSW_ext_sync.field_ksw_bas_ledger_line__amount
+msgid "As posted in BAS, VAT included."
+msgstr ""
+
+#. module: KSW_ext_sync
+#: model:ir.actions.act_window,name:KSW_ext_sync.action_bas_ledger_line
+#: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_ledger_line_list
+msgid "BAS Customer Ledger"
+msgstr ""
+
+#. module: KSW_ext_sync
+#: model:ir.model,name:KSW_ext_sync.model_ksw_bas_ledger_line
+msgid "BAS Customer Ledger Line"
+msgstr ""
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__credit_account
+msgid "Credit Account"
+msgstr ""
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__debit_account
+msgid "Debit Account"
+msgstr ""
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__number
+msgid "Doc No."
+msgstr ""
+
+#. module: KSW_ext_sync
+#: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_ledger_line_search
+msgid "Month-end Invoices (002)"
+msgstr ""
+
+#. module: KSW_ext_sync
+#: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_ledger_line_search
+msgid "Receipts (018/015)"
+msgstr ""
+
+#. module: KSW_ext_sync
+#: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_ledger_line_search
+msgid "Rep"
+msgstr ""
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__seller_code
+msgid "Rep Code"
+msgstr ""
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__seller_name
+msgid "Rep Name (BAS)"
+msgstr ""
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__ftype2
+msgid "Sub-type"
+msgstr ""
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__term_days
+msgid "Term (Days)"
+msgstr ""
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,help:KSW_ext_sync.field_ksw_bas_customer__opening_balance
+msgid ""
+"The balance the customer carried into this fiscal year, positive when the "
+"customer owes us. COD10.DOLDACC stores it with the opposite sign (negative ="
+" debit); reconciled 2026-10-21 against the March 2026 commission workbook."
+msgstr ""
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__tax_amount
+msgid "VAT (BAS)"
+msgstr ""
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,help:KSW_ext_sync.field_ksw_bas_ledger_line__term_days
+msgid "VOU10.DUTY_DAY on this document."
+msgstr ""
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,help:KSW_ext_sync.field_ksw_bas_ledger_line__ftype
+msgid ""
+"VOU10.FTYPE: 002 month-end sales invoice, 018 cash receipt, 015 bank "
+"receipt, ..."
+msgstr ""
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,help:KSW_ext_sync.field_ksw_bas_ledger_line__seller_code
+msgid "VOU10.SELLER on this document."
 msgstr ""

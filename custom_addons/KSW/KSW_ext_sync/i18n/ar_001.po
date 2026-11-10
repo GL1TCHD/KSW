@@ -24,6 +24,7 @@ msgstr "رمز الحساب"
 
 #. module: KSW_ext_sync
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_payment__amount
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__amount
 msgid "Amount"
 msgstr "المبلغ"
 
@@ -56,6 +57,7 @@ msgstr "حساب BAS العام (القروض والسلف)"
 #. module: KSW_ext_sync
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_invoice__bas_key
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_payment__bas_key
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__bas_key
 msgid "BAS Key"
 msgstr "مفتاح BAS"
 
@@ -126,6 +128,7 @@ msgstr "قروض بنكية"
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_payment__branch_code
 #: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_invoice_search
 #: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_payment_search
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__branch_code
 msgid "Branch"
 msgstr "الفرع"
 
@@ -220,6 +223,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_customer__create_uid
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_invoice__create_uid
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_payment__create_uid
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__create_uid
 msgid "Created by"
 msgstr "أنشئ بواسطة"
 
@@ -228,6 +232,7 @@ msgstr "أنشئ بواسطة"
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_customer__create_date
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_invoice__create_date
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_payment__create_date
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__create_date
 msgid "Created on"
 msgstr "أنشئ في"
 
@@ -259,6 +264,7 @@ msgstr "العملاء"
 #. module: KSW_ext_sync
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_invoice__invoice_date
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_payment__payment_date
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__date
 msgid "Date"
 msgstr "التاريخ"
 
@@ -269,6 +275,7 @@ msgstr "المدين"
 
 #. module: KSW_ext_sync
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_payment__remark
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__description
 msgid "Description"
 msgstr "الوصف"
 
@@ -279,12 +286,15 @@ msgstr "الوصف"
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_invoice__display_name
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_payment__display_name
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_res_partner__display_name
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__display_name
 msgid "Display Name"
 msgstr "اسم العرض"
 
 #. module: KSW_ext_sync
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_invoice__ftype
 #: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_invoice_search
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__ftype
+#: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_ledger_line_search
 msgid "Doc Type"
 msgstr "نوع المستند"
 
@@ -311,6 +321,7 @@ msgstr "من الحساب"
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_invoice__id
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_payment__id
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_res_partner__id
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__id
 msgid "ID"
 msgstr "المعرف"
 
@@ -329,6 +340,7 @@ msgstr "KSW BAS: مزامنة من SQL Server (كل 10 دقائق)"
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_customer__last_synced
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_invoice__last_synced
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_payment__last_synced
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__last_synced
 msgid "Last Synced"
 msgstr "آخر مزامنة"
 
@@ -337,6 +349,7 @@ msgstr "آخر مزامنة"
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_customer__write_uid
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_invoice__write_uid
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_payment__write_uid
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__write_uid
 msgid "Last Updated by"
 msgstr "آخر تحديث بواسطة"
 
@@ -345,6 +358,7 @@ msgstr "آخر تحديث بواسطة"
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_customer__write_date
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_invoice__write_date
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_payment__write_date
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__write_date
 msgid "Last Updated on"
 msgstr "آخر تحديث في"
 
@@ -370,6 +384,7 @@ msgstr ""
 #. module: KSW_ext_sync
 #: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_invoice_search
 #: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_payment_search
+#: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_ledger_line_search
 msgid "Month"
 msgstr "الشهر"
 
@@ -412,6 +427,7 @@ msgstr "الرصيد الافتتاحي"
 
 #. module: KSW_ext_sync
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_account__opening_balance
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_customer__opening_balance
 msgid "Opening Balance"
 msgstr "الرصيد الافتتاحي"
 
@@ -542,6 +558,7 @@ msgstr "إلى الحساب"
 #: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_invoice__total
 #: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_invoice_list
 #: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_payment_list
+#: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_ledger_line_list
 msgid "Total"
 msgstr "الإجمالي"
 
@@ -595,3 +612,109 @@ msgid ""
 msgstr ""
 "رقم حساب العميل في BAS. محفوظ بهذا الاسم للبرامج التي تستخدمه، ويُخزَّن في "
 "حقل المرجع لجهة الاتصال."
+
+#. module: KSW_ext_sync
+#: model:ir.ui.menu,name:KSW_ext_sync.menu_bas_ledger
+msgid "Customer Ledger"
+msgstr "دفتر أستاذ العملاء"
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,help:KSW_ext_sync.field_ksw_bas_ledger_line__amount
+msgid "As posted in BAS, VAT included."
+msgstr "كما رُحِّل في BAS، شامل ضريبة القيمة المضافة."
+
+#. module: KSW_ext_sync
+#: model:ir.actions.act_window,name:KSW_ext_sync.action_bas_ledger_line
+#: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_ledger_line_list
+msgid "BAS Customer Ledger"
+msgstr "كشف حساب العميل في BAS"
+
+#. module: KSW_ext_sync
+#: model:ir.model,name:KSW_ext_sync.model_ksw_bas_ledger_line
+msgid "BAS Customer Ledger Line"
+msgstr "بند كشف حساب العميل في BAS"
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__credit_account
+msgid "Credit Account"
+msgstr "الحساب الدائن"
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__debit_account
+msgid "Debit Account"
+msgstr "الحساب المدين"
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__number
+msgid "Doc No."
+msgstr "رقم المستند"
+
+#. module: KSW_ext_sync
+#: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_ledger_line_search
+msgid "Month-end Invoices (002)"
+msgstr "فواتير نهاية الشهر (002)"
+
+#. module: KSW_ext_sync
+#: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_ledger_line_search
+msgid "Receipts (018/015)"
+msgstr "سندات القبض (018/015)"
+
+#. module: KSW_ext_sync
+#: model_terms:ir.ui.view,arch_db:KSW_ext_sync.view_bas_ledger_line_search
+msgid "Rep"
+msgstr "المندوب"
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__seller_code
+msgid "Rep Code"
+msgstr "رمز المندوب"
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__seller_name
+msgid "Rep Name (BAS)"
+msgstr "اسم المندوب (BAS)"
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__ftype2
+msgid "Sub-type"
+msgstr "النوع الفرعي"
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__term_days
+msgid "Term (Days)"
+msgstr "المدة (أيام)"
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,help:KSW_ext_sync.field_ksw_bas_customer__opening_balance
+msgid ""
+"The balance the customer carried into this fiscal year, positive when the "
+"customer owes us. COD10.DOLDACC stores it with the opposite sign (negative ="
+" debit); reconciled 2026-10-21 against the March 2026 commission workbook."
+msgstr ""
+"الرصيد الذي دخل به العميل هذه السنة المالية، موجباً عندما يكون مديناً لنا. "
+"يخزنه COD10.DOLDACC بإشارة معاكسة (سالب = مدين)؛ طوبق في 2026-10-21 مع ملف "
+"عمولات مارس 2026."
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,field_description:KSW_ext_sync.field_ksw_bas_ledger_line__tax_amount
+msgid "VAT (BAS)"
+msgstr "ضريبة القيمة المضافة (BAS)"
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,help:KSW_ext_sync.field_ksw_bas_ledger_line__term_days
+msgid "VOU10.DUTY_DAY on this document."
+msgstr "VOU10.DUTY_DAY على هذا المستند."
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,help:KSW_ext_sync.field_ksw_bas_ledger_line__ftype
+msgid ""
+"VOU10.FTYPE: 002 month-end sales invoice, 018 cash receipt, 015 bank "
+"receipt, ..."
+msgstr ""
+"VOU10.FTYPE: 002 فاتورة مبيعات نهاية الشهر، 018 سند قبض نقدي، 015 سند قبض "
+"بنكي، ..."
+
+#. module: KSW_ext_sync
+#: model:ir.model.fields,help:KSW_ext_sync.field_ksw_bas_ledger_line__seller_code
+msgid "VOU10.SELLER on this document."
+msgstr "VOU10.SELLER على هذا المستند."

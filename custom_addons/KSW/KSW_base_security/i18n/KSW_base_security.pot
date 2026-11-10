@@ -1099,3 +1099,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:KSW_base_security.view_users_form_ksw_manager_assistant
 msgid "— and can prepare requests for their direct reports."
 msgstr ""
+
+#. module: KSW_base_security
+#: model_terms:ir.ui.view,arch_db:hr_homeworking.view_employee_form
+msgid "Usual Work Location"
+msgstr ""

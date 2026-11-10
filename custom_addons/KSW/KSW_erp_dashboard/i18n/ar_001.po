@@ -513,7 +513,7 @@ msgstr "حسابات بنكية ونقدية"
 #. odoo-python
 #: code:addons/KSW_erp_dashboard/models/erp_dashboard.py:0
 msgid "company_id"
-msgstr ""
+msgstr "company_id"
 
 #. module: KSW_erp_dashboard
 #. odoo-javascript
@@ -586,3 +586,21 @@ msgstr "بالانتظار"
 #: code:addons/KSW_erp_dashboard/static/src/finance/finance_dashboard.xml:0
 msgid "· Year"
 msgstr "· السنة"
+
+#. module: KSW_erp_dashboard
+#. odoo-python
+#: code:addons/KSW_erp_dashboard/models/erp_dashboard.py:0
+msgid "31_60"
+msgstr "31_60"
+
+#. module: KSW_erp_dashboard
+#. odoo-python
+#: code:addons/KSW_erp_dashboard/models/erp_dashboard.py:0
+msgid "61_90"
+msgstr "61_90"
+
+#. module: KSW_erp_dashboard
+#. odoo-python
+#: code:addons/KSW_erp_dashboard/models/erp_dashboard.py:0
+msgid "90p"
+msgstr "90p"

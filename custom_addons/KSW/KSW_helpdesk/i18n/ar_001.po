@@ -1,0 +1,753 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* KSW_helpdesk
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-10 00:00+0000\n"
+"PO-Revision-Date: 2026-11-10 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ar_001\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: KSW_helpdesk
+#: model:ir.ui.menu,name:KSW_helpdesk.menu_helpdesk_overview
+msgid "Overview"
+msgstr "نظرة عامة"
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_consumable.py:0
+msgid ""
+"%(name)s (%(code)s) is at %(qty)d %(uom)s, at or below the minimum stock of "
+"%(min)d. Suggested reorder quantity: %(reorder)d."
+msgstr ""
+"رصيد %(name)s (%(code)s) %(qty)d %(uom)s، وهو عند الحد الأدنى للمخزون "
+"%(min)d أو دونه. كمية إعادة الطلب المقترحة: %(reorder)d."
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/helpdesk_dashboard.py:0
+msgid "1_3"
+msgstr "1_3"
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/helpdesk_dashboard.py:0
+msgid "1–3 days"
+msgstr "1–3 أيام"
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/helpdesk_dashboard.py:0
+msgid "4_7"
+msgstr "4_7"
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/helpdesk_dashboard.py:0
+msgid "4–7 days"
+msgstr "4–7 أيام"
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/helpdesk_dashboard.py:0
+msgid "7p"
+msgstr "7p"
+
+#. module: KSW_helpdesk
+#: model:ir.model.fields,field_description:KSW_helpdesk.field_it_asset_assignment__accessories
+msgid "Accessories"
+msgstr "الملحقات"
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_consumable_purchase_request.py:0
+msgid "Add at least one item before marking this request as purchased."
+msgstr "أضف صنفاً واحداً على الأقل قبل تحديد هذا الطلب كمشترى."
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_asset_assignment.py:0
+msgid "Asset %s is not available. Return or repair it first."
+msgstr "العهدة %s غير متاحة. أعدها أو أصلحها أولاً."
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "Assets with the most tickets, this period"
+msgstr "العُهد الأكثر تذاكر في هذه الفترة"
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_asset.py:0
+#: model_terms:ir.ui.view,arch_db:KSW_helpdesk.it_asset_assignment_view_form_dialog
+msgid "Assign Asset"
+msgstr "إسناد عهدة"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "Average resolution"
+msgstr "متوسط مدة الحل"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.js:0
+msgid "Blocked tickets"
+msgstr "تذاكر معلّقة"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "Closed, this period"
+msgstr "المغلقة في هذه الفترة"
+
+#. module: KSW_helpdesk
+#: model_terms:ir.ui.view,arch_db:KSW_helpdesk.it_asset_assignment_view_form
+msgid "Dates & Status"
+msgstr "التواريخ والحالة"
+
+#. module: KSW_helpdesk
+#: model:ir.model.fields,field_description:KSW_helpdesk.field_it_asset_assignment__date_expected_return
+msgid "Expected Return"
+msgstr "تاريخ الإرجاع المتوقع"
+
+#. module: KSW_helpdesk
+#: model_terms:ir.actions.act_window,help:KSW_helpdesk.action_it_consumable_purchase_request
+msgid ""
+"Generate one from the Consumables list once an item is low\n"
+"                on stock - select specific items first, or leave nothing\n"
+"                selected to pull in everything currently low. You can also\n"
+"                create one here directly, for items outside the consumables\n"
+"                list (e.g. a new laptop): leave Consumable empty and type a\n"
+"                Description."
+msgstr ""
+"أنشئ طلباً من قائمة المستهلكات عندما ينخفض مخزون صنف\n"
+"                - اختر أصنافاً محددة أولاً، أو لا تختر شيئاً\n"
+"                لجلب كل ما هو منخفض حالياً. ويمكنك أيضاً\n"
+"                إنشاء طلب هنا مباشرة لأصناف خارج قائمة\n"
+"                المستهلكات (مثل حاسب محمول جديد): اترك المستهلك فارغاً واكتب\n"
+"                الوصف."
+
+#. module: KSW_helpdesk
+#: model_terms:ir.ui.view,arch_db:KSW_helpdesk.it_asset_assignment_view_form
+msgid "Handover"
+msgstr "التسليم"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+#: model:ir.actions.client,name:KSW_helpdesk.action_helpdesk_dashboard
+#: model:ir.model,name:KSW_helpdesk.model_helpdesk_dashboard
+msgid "Helpdesk Overview"
+msgstr "نظرة عامة على الدعم الفني"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "High & urgent"
+msgstr "عالية وعاجلة"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.js:0
+msgid "High and urgent open tickets"
+msgstr "التذاكر المفتوحة العالية والعاجلة"
+
+#. module: KSW_helpdesk
+#: model_terms:ir.ui.view,arch_db:KSW_helpdesk.report_it_consumable_purchase_request
+msgid "IT Purchase Request"
+msgstr "طلب شراء تقنية معلومات"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "IT Team workload"
+msgstr "عبء عمل فريق تقنية المعلومات"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "IT asset register"
+msgstr "سجل الأصول التقنية"
+
+#. module: KSW_helpdesk
+#: model:ir.model.fields,help:KSW_helpdesk.field_it_asset_assignment__accessories
+msgid "Items handed over with the asset, e.g. 'Charger, bag, mouse'."
+msgstr "الملحقات المسلّمة مع العهدة، مثل: «شاحن، حقيبة، فأرة»."
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.js:0
+msgid "Last month"
+msgstr "الشهر الماضي"
+
+#. module: KSW_helpdesk
+#: model:ir.model.fields,help:KSW_helpdesk.field_it_asset_assignment__date_expected_return
+msgid "Leave empty for a permanent assignment."
+msgstr "اتركه فارغاً للإسناد الدائم."
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "Loading…"
+msgstr "جارٍ التحميل…"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.js:0
+msgid "Low stock consumables"
+msgstr "مستهلكات منخفضة المخزون"
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_consumable.py:0
+msgid "Low stock: %s"
+msgstr "مخزون منخفض: %s"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "No assigned tickets."
+msgstr "لا توجد تذاكر مسندة."
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_consumable.py:0
+msgid "No consumables are currently low on stock."
+msgstr "لا توجد مستهلكات منخفضة المخزون حالياً."
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_asset.py:0
+msgid "No matching consumable registered"
+msgstr "لا يوجد مستهلك مسجّل مطابق"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "No ratings on this period's closed tickets."
+msgstr "لا توجد تقييمات على التذاكر المغلقة في هذه الفترة."
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "No ticket linked to an asset this period."
+msgstr "لا توجد تذكرة مرتبطة بعهدة في هذه الفترة."
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "No tickets this period."
+msgstr "لا توجد تذاكر في هذه الفترة."
+
+#. module: KSW_helpdesk
+#: model_terms:ir.ui.view,arch_db:KSW_helpdesk.it_consumable_purchase_request_view_form
+msgid "Not a stocked item"
+msgstr "ليس صنفاً مخزنياً"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "Nothing open."
+msgstr "لا توجد طلبات مفتوحة."
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/wizard/it_consumable_issue_wizard.py:0
+msgid "Only %(available)d %(item)s in stock - cannot issue %(requested)d."
+msgstr "المتوفر %(available)d فقط من %(item)s - لا يمكن صرف %(requested)d."
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/helpdesk_ticket.py:0
+msgid ""
+"Only IT Helpdesk agents can change the stage, kanban state or assignee of a "
+"ticket."
+msgstr ""
+"يغيّر مرحلة التذكرة أو حالتها أو المسؤول عنها موظفو الدعم الفني لتقنية "
+"المعلومات فقط."
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/helpdesk_ticket.py:0
+msgid "Only IT Helpdesk agents can do this."
+msgstr "هذا الإجراء لموظفي الدعم الفني لتقنية المعلومات فقط."
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_consumable_purchase_request.py:0
+msgid "Only a draft request can be marked as purchased."
+msgstr "لا يُحدَّد كمشترى إلا طلب في حالة مسودة."
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_asset.py:0
+msgid "Only an available asset can be assigned. Return or repair it first."
+msgstr "لا تُسند إلا عهدة متاحة. أعدها أو أصلحها أولاً."
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_asset.py:0
+msgid "Only an available asset can be sent to maintenance."
+msgstr "لا تُرسل للصيانة إلا عهدة متاحة."
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.js:0
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "Open tickets"
+msgstr "التذاكر المفتوحة"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.js:0
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "Open tickets by age"
+msgstr "التذاكر المفتوحة حسب العمر"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "Open tickets by priority"
+msgstr "التذاكر المفتوحة حسب الأولوية"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "Open tickets by stage"
+msgstr "التذاكر المفتوحة حسب المرحلة"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "Open tickets by type"
+msgstr "التذاكر المفتوحة حسب النوع"
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/helpdesk_dashboard.py:0
+msgid "Over 7 days"
+msgstr "أكثر من 7 أيام"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.js:0
+msgid "Overdue tickets"
+msgstr "التذاكر المتأخرة"
+
+#. module: KSW_helpdesk
+#: model:ir.model.fields,help:KSW_helpdesk.field_it_consumable_purchase_request_line__consumable_id
+msgid ""
+"Pick a stocked consumable to restock it, or leave empty for a one-off item "
+"outside the consumables list (e.g. a new laptop)."
+msgstr ""
+"اختر مستهلكاً مخزنياً لإعادة تزويده، أو اتركه فارغاً لصنف لمرة واحدة خارج "
+"قائمة المستهلكات (مثل حاسب محمول جديد)."
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/helpdesk_ticket.py:0
+msgid ""
+"Please fill in the Resolution Notes before closing \"%s\" - explain how it "
+"was solved so it can be used as a reference next time."
+msgstr ""
+"يرجى تعبئة ملاحظات الحل قبل إغلاق \"%s\" - وضّح كيف حُلّت لتكون مرجعاً في "
+"المرة القادمة."
+
+#. module: KSW_helpdesk
+#: model_terms:ir.ui.view,arch_db:KSW_helpdesk.report_it_consumable_purchase_request
+msgid "Purchase Request <span class=\"fs-4\" dir=\"rtl\">/ طلب شراء</span>"
+msgstr "Purchase Request <span class=\"fs-4\" dir=\"rtl\">/ طلب شراء</span>"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.js:0
+msgid "Rated tickets"
+msgstr "التذاكر المقيّمة"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.js:0
+msgid "Received and closed, by day"
+msgstr "المستلمة والمغلقة حسب اليوم"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.js:0
+msgid "Received and closed, by month"
+msgstr "المستلمة والمغلقة حسب الشهر"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.js:0
+msgid "Received and closed, by week"
+msgstr "المستلمة والمغلقة حسب الأسبوع"
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_consumable_purchase_request.py:0
+msgid "Received via Purchase Request %s"
+msgstr "استُلم عبر طلب الشراء %s"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "Received, this period"
+msgstr "المستلمة في هذه الفترة"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "Refresh"
+msgstr "تحديث"
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_asset.py:0
+msgid "Return or repair this asset before retiring it."
+msgstr "أعد هذه العهدة أو أصلحها قبل إخراجها من الخدمة."
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "Satisfaction, this period"
+msgstr "الرضا في هذه الفترة"
+
+#. module: KSW_helpdesk
+#: model_terms:ir.ui.view,arch_db:KSW_helpdesk.it_asset_assignment_view_form_dialog
+msgid "Save"
+msgstr "حفظ"
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/helpdesk_dashboard.py:0
+msgid "The Helpdesk overview is for the IT Team."
+msgstr "النظرة العامة على الدعم الفني لفريق تقنية المعلومات."
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/helpdesk_ticket.py:0
+msgid "The category \"%(category)s\" is not valid for a %(type)s ticket."
+msgstr "الفئة \"%(category)s\" غير صالحة لتذكرة من نوع %(type)s."
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/wizard/it_consumable_issue_wizard.py:0
+#: code:addons/KSW_helpdesk/wizard/it_consumable_receive_wizard.py:0
+msgid "The quantity must be greater than zero."
+msgstr "يجب أن تكون الكمية أكبر من صفر."
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_consumable_move.py:0
+msgid "The quantity of a stock move must be greater than zero."
+msgstr "يجب أن تكون كمية حركة المخزون أكبر من صفر."
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_asset.py:0
+#: code:addons/KSW_helpdesk/wizard/it_asset_return_wizard.py:0
+msgid "This asset is not currently assigned."
+msgstr "هذه العهدة غير مسندة حالياً."
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_asset.py:0
+msgid "This asset is not in maintenance."
+msgstr "هذه العهدة ليست في الصيانة."
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.js:0
+msgid "This month"
+msgstr "هذا الشهر"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.js:0
+msgid "This quarter"
+msgstr "هذا الربع"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.js:0
+msgid "This year"
+msgstr "هذه السنة"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "Tickets by category, this period"
+msgstr "التذاكر حسب الفئة في هذه الفترة"
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/helpdesk_ticket.py:0
+msgid "Tickets can only be assigned to an IT Helpdesk agent or manager."
+msgstr ""
+"لا تُسند التذاكر إلا إلى موظف أو مدير في الدعم الفني لتقنية المعلومات."
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.js:0
+msgid "Unassigned open tickets"
+msgstr "تذاكر مفتوحة غير مسندة"
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/helpdesk_dashboard.py:0
+msgid "Under 1 day"
+msgstr "أقل من يوم"
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_asset.py:0
+msgid "Warranty expiring in %d days"
+msgstr "الضمان ينتهي خلال %d يوماً"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.js:0
+msgid "Warranty expiring soon"
+msgstr "الضمان ينتهي قريباً"
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_asset.py:0
+msgid "Warranty for %(asset)s (%(tag)s) expires on %(date)s."
+msgstr "ضمان %(asset)s (%(tag)s) ينتهي في %(date)s."
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/helpdesk_ticket.py:0
+msgid ""
+"You can only create or edit tickets for yourself or your direct reports."
+msgstr "لا يمكنك إنشاء التذاكر أو تعديلها إلا لنفسك أو لمرؤوسيك المباشرين."
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_asset.py:0
+msgid "asset_id"
+msgstr "asset_id"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "blocked"
+msgstr "معلّقة"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "closed"
+msgstr "مغلق"
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_consumable.py:0
+msgid "consumable_id"
+msgstr "consumable_id"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "consumables low on stock"
+msgstr "مستهلكات منخفضة المخزون"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "days"
+msgstr "يوم"
+
+#. module: KSW_helpdesk
+#: model_terms:ir.ui.view,arch_db:KSW_helpdesk.it_asset_assignment_view_form_dialog
+msgid "e.g. Charger, bag, mouse"
+msgstr "مثال: شاحن، حقيبة، فأرة"
+
+#. module: KSW_helpdesk
+#: model_terms:ir.ui.view,arch_db:KSW_helpdesk.it_asset_category_view_form
+msgid "fa-laptop"
+msgstr "fa-laptop"
+
+#. module: KSW_helpdesk
+#: model_terms:ir.ui.view,arch_db:KSW_helpdesk.helpdesk_ticket_category_view_form
+msgid "fa-question-circle"
+msgstr "fa-question-circle"
+
+#. module: KSW_helpdesk
+#: model_terms:ir.ui.view,arch_db:KSW_helpdesk.it_consumable_category_view_form
+msgid "fa-tint"
+msgstr "fa-tint"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "now"
+msgstr "الآن"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "open"
+msgstr "مفتوح"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "open now"
+msgstr "مفتوحة الآن"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "past deadline ·"
+msgstr "تجاوزت الموعد ·"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "previous"
+msgstr "السابق"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "raised to closed · previous"
+msgstr "من الاستلام إلى الإغلاق · السابق"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "rated"
+msgstr "مقيّمة"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "rated Great ·"
+msgstr "قُيّمت «ممتاز» ·"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "unassigned"
+msgstr "غير مسندة"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "warranty expiring"
+msgstr "الضمان على وشك الانتهاء"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+msgid "· oldest"
+msgstr "· الأقدم"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+#: model:ir.actions.act_window,name:KSW_helpdesk.action_helpdesk_ticket_all
+#: model:ir.ui.menu,name:KSW_helpdesk.menu_helpdesk_all_tickets
+msgid "All Tickets"
+msgstr "جميع التذاكر"
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_asset.py:0
+#: model:ir.model.fields,field_description:KSW_helpdesk.field_it_asset__assignment_ids
+msgid "Assignment History"
+msgstr "سجل العهد"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.js:0
+#: model:helpdesk.ticket.stage,name:KSW_helpdesk.stage_closed
+#: model_terms:ir.ui.view,arch_db:KSW_helpdesk.helpdesk_ticket_view_search
+msgid "Closed"
+msgstr "مغلق"
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_consumable.py:0
+#: model_terms:ir.ui.view,arch_db:KSW_helpdesk.it_consumable_issue_wizard_view_form
+#: model_terms:ir.ui.view,arch_db:KSW_helpdesk.it_consumable_view_form
+msgid "Issue Stock"
+msgstr "صرف مخزون"
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_asset.py:0
+#: model:ir.actions.act_window,name:KSW_helpdesk.it_asset_maintenance_action
+#: model:ir.ui.menu,name:KSW_helpdesk.menu_helpdesk_assets_maintenance
+#: model_terms:ir.ui.view,arch_db:KSW_helpdesk.it_asset_view_form
+msgid "Maintenance"
+msgstr "الصيانة"
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_asset.py:0
+#: model:ir.model.fields,field_description:KSW_helpdesk.field_it_asset__maintenance_ids
+msgid "Maintenance History"
+msgstr "سجل الصيانة"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.xml:0
+#: model_terms:ir.ui.view,arch_db:KSW_helpdesk.helpdesk_ticket_view_form
+#: model_terms:ir.ui.view,arch_db:KSW_helpdesk.helpdesk_ticket_view_kanban
+#: model_terms:ir.ui.view,arch_db:KSW_helpdesk.helpdesk_ticket_view_search
+msgid "Overdue"
+msgstr "متأخر"
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_consumable.py:0
+#: model:ir.actions.report,name:KSW_helpdesk.action_report_it_consumable_purchase_request
+msgid "Purchase Request"
+msgstr "طلب شراء"
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_consumable.py:0
+#: model_terms:ir.ui.view,arch_db:KSW_helpdesk.it_consumable_receive_wizard_view_form
+#: model_terms:ir.ui.view,arch_db:KSW_helpdesk.it_consumable_view_form
+msgid "Receive Stock"
+msgstr "استلام مخزون"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.js:0
+#: model_terms:ir.ui.view,arch_db:KSW_helpdesk.it_consumable_move_view_search
+msgid "Received"
+msgstr "المستلم"
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_asset.py:0
+#: model_terms:ir.ui.view,arch_db:KSW_helpdesk.it_asset_return_wizard_view_form
+msgid "Return Asset"
+msgstr "استرجاع العهدة"
+
+#. module: KSW_helpdesk
+#. odoo-python
+#: code:addons/KSW_helpdesk/models/it_consumable.py:0
+#: model:ir.model.fields,field_description:KSW_helpdesk.field_it_consumable__move_ids
+msgid "Stock Moves"
+msgstr "حركات المخزون"
+
+#. module: KSW_helpdesk
+#. odoo-javascript
+#: code:addons/KSW_helpdesk/static/src/dashboard/helpdesk_dashboard.js:0
+msgid "h"
+msgstr "س"

@@ -478,6 +478,8 @@ msgstr "أنشئ في"
 #. module: KSW_accounting_ux
 #: model:ir.model.fields,field_description:KSW_accounting_ux.field_ksw_cost_centre_statement_line__credit
 #: model_terms:ir.ui.view,arch_db:KSW_accounting_ux.report_cost_centre_statement
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_sale_terms__credit
+#: model_terms:ir.ui.view,arch_db:KSW_accounting_ux.view_account_invoice_filter_ksw_bas_info
 msgid "Credit"
 msgstr "دائن"
 
@@ -538,6 +540,11 @@ msgstr "البيان"
 #: model:ir.model.fields,field_description:KSW_accounting_ux.field_mis_report_instance__display_name
 #: model:ir.model.fields,field_description:KSW_accounting_ux.field_res_partner__display_name
 #: model:ir.model.fields,field_description:KSW_accounting_ux.field_statement_common_wizard__display_name
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_activity_statement_wizard__display_name
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_report_partner_statement_activity_statement__display_name
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_report_partner_statement_detailed_activity_statement__display_name
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_report_partner_statement_outstanding_statement__display_name
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_statement_common__display_name
 msgid "Display Name"
 msgstr "اسم العرض"
 
@@ -656,6 +663,11 @@ msgstr "المجموعة"
 #: model:ir.model.fields,field_description:KSW_accounting_ux.field_mis_report_instance__id
 #: model:ir.model.fields,field_description:KSW_accounting_ux.field_res_partner__id
 #: model:ir.model.fields,field_description:KSW_accounting_ux.field_statement_common_wizard__id
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_activity_statement_wizard__id
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_report_partner_statement_activity_statement__id
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_report_partner_statement_detailed_activity_statement__id
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_report_partner_statement_outstanding_statement__id
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_statement_common__id
 msgid "ID"
 msgstr "المعرف"
 
@@ -922,6 +934,7 @@ msgstr "الافتتاحي"
 
 #. module: KSW_accounting_ux
 #: model:ir.model.fields,field_description:KSW_accounting_ux.field_ksw_cost_centre_statement__opening_balance
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_doc_category__opening
 msgid "Opening Balance"
 msgstr "الرصيد الافتتاحي"
 
@@ -1826,6 +1839,8 @@ msgstr ""
 #. module: KSW_accounting_ux
 #: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_sale_terms__credit
 #: model_terms:ir.ui.view,arch_db:KSW_accounting_ux.view_account_invoice_filter_ksw_bas_info
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_ksw_cost_centre_statement_line__credit
+#: model_terms:ir.ui.view,arch_db:KSW_accounting_ux.report_cost_centre_statement
 msgid "Credit"
 msgstr ""
 
@@ -2000,4 +2015,229 @@ msgstr ""
 #. odoo-python
 #: code:addons/KSW_accounting_ux/models/account_move.py:0
 msgid "Journal Items · %s"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:res.country,vat_label:base.sa
+msgid "VAT Number"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_activity_statement_wizard__account_type
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_detailed_activity_statement_wizard__account_type
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_outstanding_statement_wizard__account_type
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_statement_common_wizard__account_type
+msgid "Account Type"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model,name:KSW_accounting_ux.model_activity_statement_wizard
+msgid "Activity Statement Wizard"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model_terms:ir.ui.view,arch_db:KSW_accounting_ux.view_move_form_ksw_bas_info
+msgid "BAS"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_bank_statement_line__x_bas_number
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_move__x_bas_number
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_move_line__x_bas_number
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_payment__x_bas_number
+msgid "BAS Document No."
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_bank_statement_line__x_bas_doc_type
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_move__x_bas_doc_type
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_move_line__x_bas_doc_type
+msgid "BAS Document Type"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_bank_statement_line__x_bas_entered_by
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_move__x_bas_entered_by
+msgid "BAS Entered By"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_move_line__x_bas_line_ref
+msgid "BAS Line Reference"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_move_line__x_bas_line_remark
+msgid "BAS Line Remark"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_bank_statement_line__x_bas_reference
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_move__x_bas_reference
+msgid "BAS Reference"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_bank_statement_line__x_bas_remarks
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_move__x_bas_remarks
+msgid "BAS Remarks"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_bank_statement_line__x_bas_entered_by
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_move__x_bas_entered_by
+msgid "BAS user number who entered the document."
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_doc_category__bank_receipt
+msgid "Bank Receipt"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_bank_statement_line__x_bas_number
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_move__x_bas_number
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_move_line__x_bas_number
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_payment__x_bas_number
+msgid "Branch / number of the document in BAS."
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_doc_category__cash_sale
+msgid "Cash Sale"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_doc_category__credit_note
+msgid "Customer Credit Note"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_doc_category__customer_invoice
+msgid "Customer Invoice"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_doc_category__customer_payment
+msgid "Customer Payment"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_doc_category__depreciation
+msgid "Depreciation"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_bank_statement_line__x_doc_category
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_move__x_doc_category
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_move_line__x_doc_category
+#: model_terms:ir.ui.view,arch_db:KSW_accounting_ux.view_account_move_filter_ksw_bas_info
+#: model_terms:ir.ui.view,arch_db:KSW_accounting_ux.view_account_move_line_filter_ksw_doc_category
+msgid "Document Type"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_bank_statement_line__x_bas_old_name
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_move__x_bas_old_name
+msgid "Imported As"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_doc_category__journal_voucher
+msgid "Journal Voucher"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model,name:KSW_accounting_ux.model_report_partner_statement_activity_statement
+msgid "Partner Activity Statement"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model,name:KSW_accounting_ux.model_report_partner_statement_detailed_activity_statement
+msgid "Partner Detailed Activity Statement"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model,name:KSW_accounting_ux.model_report_partner_statement_outstanding_statement
+msgid "Partner Outstanding Statement"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model,name:KSW_accounting_ux.model_statement_common
+msgid "Statement Reports Common"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_doc_category__stock
+msgid "Stock Movement"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_bank_statement_line__x_bas_reference
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_move__x_bas_reference
+msgid "The document's reference text in BAS (REF)."
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_bank_statement_line__x_bas_remarks
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_move__x_bas_remarks
+msgid "The document's remarks in BAS (REMARK)."
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_bank_statement_line__x_bas_old_name
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_move__x_bas_old_name
+msgid ""
+"The number this document had before it was renumbered in its standard "
+"journal."
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_move_line__x_bas_line_ref
+msgid "This line's reference text in BAS (REF)."
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_doc_category__vendor_bill
+msgid "Vendor Bill"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_doc_category__vendor_payment
+msgid "Vendor Payment"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_doc_category__vendor_refund
+msgid "Vendor Refund"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model,name:account_fiscal_year.model_account_fiscal_year
+msgid "Fiscal Year"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model,name:account_move_template.model_account_move_template
+msgid "Journal Entry Template"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model,name:account_fiscal_year_closing.model_account_fiscalyear_closing
+msgid "Fiscal year closing"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model,name:account_fiscal_year_closing.model_account_fiscalyear_closing_template
+msgid "Fiscal year closing template"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model,name:mis_builder_budget.model_mis_budget
+msgid "MIS Budget by KPI"
+msgstr ""
+
+#. module: KSW_accounting_ux
+#: model:ir.model,name:mis_builder_budget.model_mis_budget_by_account
+msgid "MIS Budget by Account"
 msgstr ""

@@ -208,6 +208,10 @@
             'mis_builder.mis_report_view_menu': 'قوالب تقارير MIS',
             'mis_builder.mis_report_style_view_menu': 'أنماط تقارير MIS',
             'KSW_bas_gl_import.menu_ksw_bas_gl_import': 'استيراد دفتر الأستاذ من BAS',
+            'account_asset_management.account_asset_report_menu': 'تحليل الأصول',
+            'account_fiscal_year_closing.menu_account_fiscalyear_closing_configuration': 'إقفال السنة المالية',
+            'date_range_account.menu_date_range_root': 'الفترات الزمنية',
+            'mis_builder.mis_report_conf_menu': 'تقارير MIS',
         }"/>
     </function>
 </odoo>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Text size class on <body>, so the first paint is already the right size.
+         The _fields check keeps every page rendering on a server that has this
+         view but not yet the Python (Pitfalls #259: it returned 500 on dev once). -->
+    <template id="webclient_bootstrap" name="KSW text size" inherit_id="web.webclient_bootstrap">
+        <xpath expr="//t[@t-set='body_classname']" position="after">
+            <t t-set="ksw_user" t-value="request.env.user"/>
+            <t t-if="'ksw_text_size' in ksw_user._fields and (ksw_user.ksw_text_size == 'large' or (ksw_user.ksw_text_size == 'auto' and (ksw_user.lang or '').startswith('ar')))"
+               t-set="body_classname" t-value="'%s ksw_text_large' % body_classname"/>
+        </xpath>
+    </template>
+</odoo>

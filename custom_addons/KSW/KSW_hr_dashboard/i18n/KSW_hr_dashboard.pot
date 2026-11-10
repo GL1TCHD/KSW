@@ -24,6 +24,7 @@ msgstr ""
 #. module: KSW_hr_dashboard
 #. odoo-javascript
 #: code:addons/KSW_hr_dashboard/data/files/ksw_hr_dashboard.json:0
+#: code:addons/KSW_hr_dashboard/data/files/ksw_payroll_dashboard.json:0
 msgid "Amount"
 msgstr ""
 
@@ -42,6 +43,7 @@ msgstr ""
 #. module: KSW_hr_dashboard
 #. odoo-javascript
 #: code:addons/KSW_hr_dashboard/data/files/ksw_hr_dashboard.json:0
+#: code:addons/KSW_hr_dashboard/data/files/ksw_payroll_dashboard.json:0
 msgid "Department"
 msgstr ""
 
@@ -71,6 +73,7 @@ msgstr ""
 #. module: KSW_hr_dashboard
 #. odoo-javascript
 #: code:addons/KSW_hr_dashboard/data/files/ksw_hr_dashboard.json:0
+#: code:addons/KSW_hr_dashboard/data/files/ksw_payroll_dashboard.json:0
 msgid "Payroll by Department"
 msgstr ""
 
@@ -84,4 +87,9 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/KSW_hr_dashboard/data/files/ksw_hr_dashboard.json:0
 msgid "Requests"
+msgstr ""
+
+#. module: KSW_hr_dashboard
+#: model:spreadsheet.dashboard,name:KSW_hr_dashboard.spreadsheet_dashboard_ksw_payroll
+msgid "KSW Payroll Overview"
 msgstr ""

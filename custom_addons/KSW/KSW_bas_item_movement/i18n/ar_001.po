@@ -435,3 +435,44 @@ msgid ""
 "«رد الفاتورة»: the multiplier recorded on the invoice when it was issued "
 "(vou10.PHRDIS)."
 msgstr "«رد الفاتورة»: المعامل المسجل على الفاتورة وقت إصدارها."
+
+#. module: KSW_bas_item_movement
+#: model:ir.model.fields,field_description:KSW_bas_item_movement.field_ksw_bas_item_movement_line__create_uid
+#: model:ir.model.fields,field_description:KSW_bas_item_movement.field_ksw_bas_item_movement_wizard__create_uid
+msgid "Created by"
+msgstr "أنشئ بواسطة"
+
+#. module: KSW_bas_item_movement
+#: model:ir.model.fields,field_description:KSW_bas_item_movement.field_ksw_bas_item_movement_line__create_date
+#: model:ir.model.fields,field_description:KSW_bas_item_movement.field_ksw_bas_item_movement_wizard__create_date
+msgid "Created on"
+msgstr "أنشئ في"
+
+#. module: KSW_bas_item_movement
+#: model:ir.model.fields,field_description:KSW_bas_item_movement.field_ksw_bas_item_movement_line__display_name
+#: model:ir.model.fields,field_description:KSW_bas_item_movement.field_ksw_bas_item_movement_wizard__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: KSW_bas_item_movement
+#: model:ir.model.fields,field_description:KSW_bas_item_movement.field_ksw_bas_item_movement_line__id
+#: model:ir.model.fields,field_description:KSW_bas_item_movement.field_ksw_bas_item_movement_wizard__id
+msgid "ID"
+msgstr "المعرف"
+
+#. module: KSW_bas_item_movement
+#: model:ir.model.fields,field_description:KSW_bas_item_movement.field_ksw_bas_item_movement_line__write_uid
+#: model:ir.model.fields,field_description:KSW_bas_item_movement.field_ksw_bas_item_movement_wizard__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: KSW_bas_item_movement
+#: model:ir.model.fields,field_description:KSW_bas_item_movement.field_ksw_bas_item_movement_line__write_date
+#: model:ir.model.fields,field_description:KSW_bas_item_movement.field_ksw_bas_item_movement_wizard__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: KSW_bas_item_movement
+#: model:ir.model.fields,field_description:KSW_bas_item_movement.field_ksw_bas_item_movement_line__wizard_id
+msgid "Wizard"
+msgstr "المعالج"

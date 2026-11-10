@@ -1,0 +1,85 @@
+// Quick tour overlay. Above dropdowns and the navbar; below modal dialogs is not
+// needed because the tour only runs on the main screen.
+.ksw_tour {
+    position: fixed;
+    inset: 0;
+    z-index: 1090;
+    pointer-events: none;
+}
+
+// The spotlight cuts a hole in the dim layer with one huge shadow.
+.ksw_tour_spot {
+    position: fixed;
+    border-radius: 10px;
+    box-shadow: 0 0 0 9999px rgba(9, 12, 16, .55);
+    outline: 2px solid $ksw-teal;
+    outline-offset: 2px;
+    transition: all .2s ease;
+}
+
+.ksw_tour_dim {
+    position: fixed;
+    inset: 0;
+    background: rgba(9, 12, 16, .55);
+}
+
+.ksw_tour_card {
+    position: fixed;
+    pointer-events: auto;
+    padding: 16px 18px 14px;
+    border: 1px solid $ksw-line;
+    border-radius: 14px;
+    background: $ksw-card;
+    color: $ksw-ink;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, .25);
+    transition: top .2s ease, left .2s ease;
+    h3 {
+        margin: 2px 0 6px;
+        font-size: 1.1rem;
+        font-weight: 700;
+    }
+    p {
+        margin: 0 0 12px;
+        color: $ksw-text;
+        line-height: 1.55;
+    }
+}
+
+.ksw_tour_head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: $ksw-muted;
+    font-size: .82rem;
+    .ksw_tour_skip {
+        padding: 0;
+        color: $ksw-muted;
+        text-decoration: none;
+    }
+}
+
+.ksw_tour_dots {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 12px;
+    span {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: $ksw-line;
+        &.active {
+            width: 18px;
+            border-radius: 4px;
+            background: $ksw-teal;
+        }
+    }
+}
+
+.ksw_tour_actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    .btn {
+        min-width: 72px;
+    }
+}

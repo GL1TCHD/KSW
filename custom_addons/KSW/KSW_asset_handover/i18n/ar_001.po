@@ -1,0 +1,296 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* KSW_asset_handover
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-10 00:00+0000\n"
+"PO-Revision-Date: 2026-11-10 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ar_001\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: KSW_asset_handover
+#: model:ir.ui.menu,name:KSW_asset_handover.menu_it_assets_root
+msgid "IT Assets"
+msgstr "الأصول التقنية"
+
+#. module: KSW_asset_handover
+#: model:ir.ui.menu,name:KSW_asset_handover.menu_it_assets_config
+msgid "Configuration"
+msgstr "التهيئة"
+
+#. module: KSW_asset_handover
+#: model:ir.ui.menu,name:KSW_asset_handover.menu_it_assets_consumables
+msgid "Consumables"
+msgstr "المستهلكات"
+
+#. module: KSW_asset_handover
+#: model:ir.actions.report,print_report_name:KSW_asset_handover.action_report_it_asset_handover
+msgid ""
+"'Asset Handover - %s - %s' % (object.asset_id.asset_tag, "
+"object.employee_id.name)"
+msgstr ""
+"'تسليم عهدة - %s - %s' % (object.asset_id.asset_tag, "
+"object.employee_id.name)"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.report_it_asset_handover
+msgid "<strong>Accessories</strong>"
+msgstr "<strong>الملحقات</strong>"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.report_it_asset_handover
+msgid "<strong>Asset Tag</strong>"
+msgstr "<strong>رقم العهدة</strong>"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.report_it_asset_handover
+msgid "<strong>Brand / Model</strong>"
+msgstr "<strong>العلامة التجارية / الطراز</strong>"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.report_it_asset_handover
+msgid "<strong>Category</strong>"
+msgstr "<strong>الفئة</strong>"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.report_it_asset_handover
+msgid "<strong>Condition</strong>"
+msgstr "<strong>الحالة</strong>"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.report_it_asset_handover
+msgid "<strong>Date Assigned</strong>"
+msgstr "<strong>تاريخ التسليم</strong>"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.report_it_asset_handover
+msgid "<strong>Department</strong>"
+msgstr "<strong>القسم</strong>"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.report_it_asset_handover
+msgid "<strong>Description</strong>"
+msgstr "<strong>الوصف</strong>"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.report_it_asset_handover
+msgid "<strong>Expected Return</strong>"
+msgstr "<strong>تاريخ الإرجاع المتوقع</strong>"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.report_it_asset_handover
+msgid "<strong>Handed Over By (IT Team) / المسلّم</strong>"
+msgstr "<strong>Handed Over By (IT Team) / المسلّم</strong>"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.report_it_asset_handover
+msgid "<strong>Handed Over By</strong>"
+msgstr "<strong>المسلّم</strong>"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.report_it_asset_handover
+msgid "<strong>Job Title</strong>"
+msgstr "<strong>المسمى الوظيفي</strong>"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.report_it_asset_handover
+msgid "<strong>Name</strong>"
+msgstr "<strong>الاسم</strong>"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.report_it_asset_handover
+msgid "<strong>Notes</strong>"
+msgstr "<strong>ملاحظات</strong>"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.report_it_asset_handover
+msgid "<strong>Received By (Employee) / المستلم</strong>"
+msgstr "<strong>Received By (Employee) / المستلم</strong>"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.report_it_asset_handover
+msgid "<strong>Serial / IMEI</strong>"
+msgstr "<strong>الرقم التسلسلي / IMEI</strong>"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.report_it_asset_handover
+msgid "<strong>Work Email</strong>"
+msgstr "<strong>البريد الإلكتروني للعمل</strong>"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.report_it_asset_handover
+msgid "Asset <span dir=\"rtl\">/ العهدة</span>"
+msgstr "Asset <span dir=\"rtl\">/ العهدة</span>"
+
+#. module: KSW_asset_handover
+#: model:ir.actions.report,name:KSW_asset_handover.action_report_it_asset_handover
+msgid "Asset Handover Form"
+msgstr "نموذج تسليم عهدة"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.report_it_asset_handover
+msgid "Asset Handover Form <span class=\"fs-4\" dir=\"rtl\">/ نموذج تسليم عهدة</span>"
+msgstr ""
+"Asset Handover Form <span class=\"fs-4\" dir=\"rtl\">/ نموذج تسليم "
+"عهدة</span>"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.it_asset_assignment_view_form_handover
+msgid "Capture from Wacom Pad"
+msgstr "الالتقاط من لوح Wacom"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.it_asset_assignment_view_form_handover
+msgid "Clear Signatures"
+msgstr "مسح التواقيع"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.it_asset_assignment_view_form_handover
+msgid "Employee (Received By)"
+msgstr "الموظف (المستلم)"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.report_it_asset_handover
+msgid "Employee <span dir=\"rtl\">/ الموظف</span>"
+msgstr "Employee <span dir=\"rtl\">/ الموظف</span>"
+
+#. module: KSW_asset_handover
+#: model:ir.model.fields,field_description:KSW_asset_handover.field_it_asset_assignment__employee_signature
+msgid "Employee Signature"
+msgstr "توقيع الموظف"
+
+#. module: KSW_asset_handover
+#: model:ir.model.fields,field_description:KSW_asset_handover.field_it_asset_assignment__employee_signed_date
+msgid "Employee Signed On"
+msgstr "تاريخ توقيع الموظف"
+
+#. module: KSW_asset_handover
+#: model:ir.model.fields,field_description:KSW_asset_handover.field_it_asset_assignment__employee_signature_method
+msgid "Employee Signed Via"
+msgstr "طريقة توقيع الموظف"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.report_it_asset_handover
+msgid "Form No."
+msgstr "رقم النموذج"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.report_it_asset_handover
+msgid "Handover Details <span dir=\"rtl\">/ تفاصيل التسليم</span>"
+msgstr "Handover Details <span dir=\"rtl\">/ تفاصيل التسليم</span>"
+
+#. module: KSW_asset_handover
+#. odoo-python
+#: code:addons/KSW_asset_handover/models/it_asset_assignment.py:0
+msgid "Handover Form"
+msgstr "نموذج التسليم"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.report_it_asset_handover
+msgid ""
+"I, the undersigned, acknowledge receipt of the above asset in the\n"
+"                            stated condition. I agree to use it for work purposes only, keep\n"
+"                            it safe, report any damage, loss or theft to the IT Team\n"
+"                            immediately, and return it with all accessories when requested or\n"
+"                            when my employment ends."
+msgstr ""
+"أقر أنا الموقّع أدناه باستلام العهدة المذكورة أعلاه بالحالة\n"
+"                            المبينة، وأتعهد باستخدامها لأغراض العمل فقط والمحافظة\n"
+"                            عليها، وإبلاغ فريق تقنية المعلومات فوراً بأي تلف أو فقدان أو سرقة،\n"
+"                            وإعادتها مع جميع ملحقاتها عند الطلب أو\n"
+"                            عند انتهاء خدمتي."
+
+#. module: KSW_asset_handover
+#: model:ir.model.fields,field_description:KSW_asset_handover.field_it_asset_assignment__it_signature
+msgid "IT Signature"
+msgstr "توقيع تقنية المعلومات"
+
+#. module: KSW_asset_handover
+#: model:ir.model.fields,field_description:KSW_asset_handover.field_it_asset_assignment__it_signed_date
+msgid "IT Signed On"
+msgstr "تاريخ توقيع تقنية المعلومات"
+
+#. module: KSW_asset_handover
+#: model:ir.model.fields,field_description:KSW_asset_handover.field_it_asset_assignment__it_signature_method
+msgid "IT Signed Via"
+msgstr "طريقة توقيع تقنية المعلومات"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.it_asset_assignment_view_form_handover
+msgid "IT Team (Handed Over By)"
+msgstr "فريق تقنية المعلومات (المسلّم)"
+
+#. module: KSW_asset_handover
+#: model:ir.model.fields,field_description:KSW_asset_handover.field_it_asset_assignment__is_fully_signed
+msgid "Is Fully Signed"
+msgstr "مكتمل التوقيع"
+
+#. module: KSW_asset_handover
+#: model:ir.model.fields.selection,name:KSW_asset_handover.selection__it_asset_assignment__employee_signature_method__manual
+#: model:ir.model.fields.selection,name:KSW_asset_handover.selection__it_asset_assignment__it_signature_method__manual
+msgid "Mouse / Touch"
+msgstr "الفأرة / اللمس"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.report_it_asset_handover
+msgid "Permanent"
+msgstr "دائم"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.it_asset_assignment_view_form_handover
+msgid "Print Handover Form"
+msgstr "طباعة نموذج التسليم"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.it_asset_assignment_view_form_handover
+msgid "Remove both signatures from this handover form?"
+msgstr "إزالة التوقيعين من نموذج التسليم هذا؟"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.it_asset_assignment_view_form_dialog_handover
+msgid "Save & Sign"
+msgstr "حفظ وتوقيع"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.it_asset_assignment_view_form_handover
+msgid "Signatures"
+msgstr "التواقيع"
+
+#. module: KSW_asset_handover
+#. odoo-python
+#: code:addons/KSW_asset_handover/models/it_asset_assignment.py:0
+msgid "Signatures on a returned assignment cannot be changed."
+msgstr "لا يمكن تغيير التواقيع على عهدة مُعادة."
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.it_asset_assignment_view_form_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.it_asset_assignment_view_list_handover
+msgid "Signed"
+msgstr "تم التوقيع"
+
+#. module: KSW_asset_handover
+#: model:ir.model.fields.selection,name:KSW_asset_handover.selection__it_asset_assignment__employee_signature_method__wacom_pad
+#: model:ir.model.fields.selection,name:KSW_asset_handover.selection__it_asset_assignment__it_signature_method__wacom_pad
+msgid "Wacom Signature Pad"
+msgstr "لوح توقيع Wacom"
+
+#. module: KSW_asset_handover
+#: model_terms:ir.ui.view,arch_db:KSW_asset_handover.report_it_asset_handover
+msgid ""
+"أقر أنا الموقع أدناه باستلام العهدة الموضحة أعلاه بالحالة المذكورة،\n"
+"                            وأتعهد باستخدامها لأغراض العمل فقط والمحافظة عليها، وإبلاغ فريق تقنية\n"
+"                            المعلومات فوراً عن أي تلف أو فقدان أو سرقة، وإعادتها مع جميع ملحقاتها\n"
+"                            عند الطلب أو عند انتهاء خدمتي."
+msgstr ""
+"أقر أنا الموقع أدناه باستلام العهدة الموضحة أعلاه بالحالة المذكورة،\n"
+"                            وأتعهد باستخدامها لأغراض العمل فقط والمحافظة عليها، وإبلاغ فريق تقنية\n"
+"                            المعلومات فوراً عن أي تلف أو فقدان أو سرقة، وإعادتها مع جميع ملحقاتها\n"
+"                            عند الطلب أو عند انتهاء خدمتي."

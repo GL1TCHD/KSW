@@ -35,6 +35,18 @@ class HrLeave(models.Model):
         related='holiday_status_id.is_attendance_issue',
     )
 
+    # Core stores duration_display, so its "9 days" was written once, in the
+    # language of whoever triggered the compute (crons and admin: English),
+    # and Arabic users read English in every list, title and breadcrumb.
+    # Computed per reader instead. The old column stays in the table, unused:
+    # a running server that still stores it keeps working through an upgrade.
+    duration_display = fields.Char(store=False)
+
+    @api.depends_context('lang')
+    @api.depends('number_of_hours', 'number_of_days', 'leave_type_request_unit')
+    def _compute_duration_display(self):
+        return super()._compute_duration_display()
+
     def action_submit(self):
         """Called by the 'Submit' button on new records.
         The record is auto-saved by Odoo before this method runs,

@@ -584,3 +584,21 @@ msgstr ""
 #: code:addons/KSW_erp_dashboard/static/src/finance/finance_dashboard.xml:0
 msgid "· Year"
 msgstr ""
+
+#. module: KSW_erp_dashboard
+#. odoo-python
+#: code:addons/KSW_erp_dashboard/models/erp_dashboard.py:0
+msgid "31_60"
+msgstr ""
+
+#. module: KSW_erp_dashboard
+#. odoo-python
+#: code:addons/KSW_erp_dashboard/models/erp_dashboard.py:0
+msgid "61_90"
+msgstr ""
+
+#. module: KSW_erp_dashboard
+#. odoo-python
+#: code:addons/KSW_erp_dashboard/models/erp_dashboard.py:0
+msgid "90p"
+msgstr ""

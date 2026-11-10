@@ -277,6 +277,7 @@ msgstr ""
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier__rate_ids
 #: model_terms:ir.ui.view,arch_db:KSW_client_multiplier.view_client_multiplier_form
+#: model_terms:ir.ui.view,arch_db:KSW_client_multiplier.view_partner_form_multiplier
 msgid "History"
 msgstr "السجل"
 
@@ -637,43 +638,43 @@ msgstr "«الرد المضاعف» الساري اليوم."
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier__message_needaction
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "إجراء مطلوب"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "الأنشطة"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr ""
+msgstr "زخرفة استثناء النشاط"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__activity_state
 msgid "Activity State"
-msgstr ""
+msgstr "حالة النشاط"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__activity_type_icon
 msgid "Activity Type Icon"
-msgstr ""
+msgstr "أيقونة نوع النشاط"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier__message_attachment_count
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "عدد المرفقات"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__can_approve
 msgid "Can Approve"
-msgstr ""
+msgstr "بإمكانه الموافقة"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__can_cancel
 msgid "Can Cancel"
-msgstr ""
+msgstr "يمكن الإلغاء "
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier__create_uid
@@ -681,7 +682,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_refuse_wizard__create_uid
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "أنشئ بواسطة"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier__create_date
@@ -689,7 +690,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_refuse_wizard__create_date
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__create_date
 msgid "Created on"
-msgstr ""
+msgstr "أنشئ في"
 
 #. module: KSW_client_multiplier
 #: model_terms:ir.ui.view,arch_db:KSW_client_multiplier.view_client_multiplier_form
@@ -718,29 +719,29 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier__message_follower_ids
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "المتابعين"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier__message_partner_ids
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "المتابعين (الشركاء)"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,help:KSW_client_multiplier.field_ksw_client_multiplier_request__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
-msgstr ""
+msgstr "أيقونة من Font awesome مثال: fa-tasks"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__gm_user_id
 msgid "GM User"
-msgstr ""
+msgstr "مستخدم المدير العام"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier__has_message
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "يحتوي على رسالة"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier__id
@@ -754,18 +755,18 @@ msgstr ""
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__activity_exception_icon
 msgid "Icon"
-msgstr ""
+msgstr "الأيقونة"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,help:KSW_client_multiplier.field_ksw_client_multiplier_request__activity_exception_icon
 msgid "Icon to indicate an exception activity."
-msgstr ""
+msgstr "الأيقونة للإشارة إلى النشاط المستثنى."
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,help:KSW_client_multiplier.field_ksw_client_multiplier__message_needaction
 #: model:ir.model.fields,help:KSW_client_multiplier.field_ksw_client_multiplier_request__message_needaction
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "إذا كان محددًا، فهناك رسائل جديدة عليك رؤيتها."
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,help:KSW_client_multiplier.field_ksw_client_multiplier__message_has_error
@@ -773,13 +774,13 @@ msgstr ""
 #: model:ir.model.fields,help:KSW_client_multiplier.field_ksw_client_multiplier_request__message_has_error
 #: model:ir.model.fields,help:KSW_client_multiplier.field_ksw_client_multiplier_request__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "إذا كان محددًا، فقد حدث خطأ في تسليم بعض الرسائل."
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier__message_is_follower
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "متابع"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier__write_uid
@@ -787,7 +788,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_refuse_wizard__write_uid
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "آخر تحديث بواسطة"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier__write_date
@@ -795,44 +796,44 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_refuse_wizard__write_date
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "آخر تحديث في"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier__message_has_error
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__message_has_error
 msgid "Message Delivery error"
-msgstr ""
+msgstr "خطأ في تسليم الرسائل"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier__message_ids
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "الرسائل"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr ""
+msgstr "الموعد النهائي لنشاطاتي"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__activity_calendar_event_id
 msgid "Next Activity Calendar Event"
-msgstr ""
+msgstr "الفعالية التالية في تقويم الأنشطة"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__activity_date_deadline
 msgid "Next Activity Deadline"
-msgstr ""
+msgstr "الموعد النهائي للنشاط التالي"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__activity_summary
 msgid "Next Activity Summary"
-msgstr ""
+msgstr "ملخص النشاط التالي"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__activity_type_id
 msgid "Next Activity Type"
-msgstr ""
+msgstr "نوع النشاط التالي"
 
 #. module: KSW_client_multiplier
 #: model_terms:ir.ui.view,arch_db:KSW_client_multiplier.view_client_multiplier_list
@@ -844,42 +845,42 @@ msgstr "غير موجود في BAS"
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier__message_needaction_counter
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "عدد الإجراءات"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier__message_has_error_counter
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "عدد الأخطاء"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,help:KSW_client_multiplier.field_ksw_client_multiplier__message_needaction_counter
 #: model:ir.model.fields,help:KSW_client_multiplier.field_ksw_client_multiplier_request__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr ""
+msgstr "عدد الرسائل التي تتطلب اتخاذ إجراء"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,help:KSW_client_multiplier.field_ksw_client_multiplier__message_has_error_counter
 #: model:ir.model.fields,help:KSW_client_multiplier.field_ksw_client_multiplier_request__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
+msgstr "عدد الرسائل الحادث بها خطأ في التسليم"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier__rating_ids
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__rating_ids
 msgid "Ratings"
-msgstr ""
+msgstr "التقييمات"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__activity_user_id
 msgid "Responsible User"
-msgstr ""
+msgstr "المستخدم المسؤول"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier__message_has_sms_error
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__message_has_sms_error
 msgid "SMS Delivery error"
-msgstr ""
+msgstr "خطأ في تسليم الرسائل النصية القصيرة"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,help:KSW_client_multiplier.field_ksw_client_multiplier_request__activity_state
@@ -889,23 +890,27 @@ msgid ""
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
+"الأنشطة المعتمدة على الحالة\n"
+"المتأخرة: تاريخ الاستحقاق مر\n"
+"اليوم: تاريخ النشاط هو اليوم\n"
+"المخطط: الأنشطة المستقبلية."
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,help:KSW_client_multiplier.field_ksw_client_multiplier_request__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
+msgstr "نوع النشاط المستثنى في السجل."
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier__website_message_ids
 #: model:ir.model.fields,field_description:KSW_client_multiplier.field_ksw_client_multiplier_request__website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "رسائل الموقع الإلكتروني"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.fields,help:KSW_client_multiplier.field_ksw_client_multiplier__website_message_ids
 #: model:ir.model.fields,help:KSW_client_multiplier.field_ksw_client_multiplier_request__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "سجل تواصل الموقع الإلكتروني"
 
 #. module: KSW_client_multiplier
 #: model:ir.model.constraint,message:KSW_client_multiplier.constraint_ksw_client_multiplier_client_identified
@@ -932,3 +937,24 @@ msgstr ""
 #: code:addons/KSW_client_multiplier/models/multiplier_request.py:0
 msgid "You cannot decide on a request you raised yourself (%(ref)s)."
 msgstr "لا يمكنك البت في طلب رفعته بنفسك (%(ref)s)."
+
+#. module: KSW_client_multiplier
+#: model:ir.model.fields,field_description:KSW_client_multiplier.field_res_partner__x_multiplier
+#: model:ir.model.fields,field_description:KSW_client_multiplier.field_res_users__x_multiplier
+msgid "Multiplier (الرد المضاعف)"
+msgstr "المضاعِف (الرد المضاعف)"
+
+#. module: KSW_client_multiplier
+#: model:ir.model.fields,help:KSW_client_multiplier.field_res_partner__x_multiplier
+#: model:ir.model.fields,help:KSW_client_multiplier.field_res_users__x_multiplier
+msgid ""
+"The customer's multiplier in force today. It changes only through a "
+"Multiplier Request approved by the GM."
+msgstr ""
+"المضاعِف الساري للعميل اليوم. لا يتغير إلا بطلب مضاعِف يعتمده المدير العام."
+
+#. module: KSW_client_multiplier
+#: model:ir.model.fields,field_description:KSW_client_multiplier.field_res_partner__x_multiplier_client_id
+#: model:ir.model.fields,field_description:KSW_client_multiplier.field_res_users__x_multiplier_client_id
+msgid "X Multiplier Client"
+msgstr "عميل بمضاعِف"

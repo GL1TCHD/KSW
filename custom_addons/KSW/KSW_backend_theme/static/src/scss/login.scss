@@ -1,0 +1,21 @@
+// Login page (frontend bundle): the same card language as the backend.
+// Light only: the page loads before anyone has picked a colour mode.
+.oe_login_form,
+.oe_signup_form,
+.oe_reset_password_form {
+    .btn-primary {
+        border-radius: 8px;
+        padding-block: .55rem;
+        font-weight: 600;
+    }
+    .form-control {
+        border-radius: 8px;
+    }
+}
+
+body:has(.oe_login_form) .card.o_database_list,
+body:has(.oe_reset_password_form) .card.o_database_list {
+    border-radius: 16px;
+    box-shadow: 0 1px 2px rgba(17, 24, 39, .06), 0 12px 32px rgba(17, 24, 39, .08);
+    padding-block: 8px;
+}

@@ -437,6 +437,8 @@ msgstr "أنشئ في"
 #. module: KSW_accounting_ux
 #: model:ir.model.fields,field_description:KSW_accounting_ux.field_ksw_cost_centre_statement_line__credit
 #: model_terms:ir.ui.view,arch_db:KSW_accounting_ux.report_cost_centre_statement
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_sale_terms__credit
+#: model_terms:ir.ui.view,arch_db:KSW_accounting_ux.view_account_invoice_filter_ksw_bas_info
 msgid "Credit"
 msgstr "دائن"
 
@@ -491,6 +493,11 @@ msgstr "البيان"
 #: model:ir.model.fields,field_description:KSW_accounting_ux.field_mis_report_instance__display_name
 #: model:ir.model.fields,field_description:KSW_accounting_ux.field_res_partner__display_name
 #: model:ir.model.fields,field_description:KSW_accounting_ux.field_statement_common_wizard__display_name
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_activity_statement_wizard__display_name
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_report_partner_statement_activity_statement__display_name
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_report_partner_statement_detailed_activity_statement__display_name
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_report_partner_statement_outstanding_statement__display_name
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_statement_common__display_name
 msgid "Display Name"
 msgstr "اسم العرض"
 
@@ -609,6 +616,11 @@ msgstr "المجموعة"
 #: model:ir.model.fields,field_description:KSW_accounting_ux.field_mis_report_instance__id
 #: model:ir.model.fields,field_description:KSW_accounting_ux.field_res_partner__id
 #: model:ir.model.fields,field_description:KSW_accounting_ux.field_statement_common_wizard__id
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_activity_statement_wizard__id
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_report_partner_statement_activity_statement__id
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_report_partner_statement_detailed_activity_statement__id
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_report_partner_statement_outstanding_statement__id
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_statement_common__id
 msgid "ID"
 msgstr "المعرف"
 
@@ -805,6 +817,7 @@ msgstr "الافتتاحي"
 
 #. module: KSW_accounting_ux
 #: model:ir.model.fields,field_description:KSW_accounting_ux.field_ksw_cost_centre_statement__opening_balance
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_doc_category__opening
 msgid "Opening Balance"
 msgstr "الرصيد الافتتاحي"
 
@@ -1163,6 +1176,8 @@ msgstr "نقدي"
 #. module: KSW_accounting_ux
 #: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_sale_terms__credit
 #: model_terms:ir.ui.view,arch_db:KSW_accounting_ux.view_account_invoice_filter_ksw_bas_info
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_ksw_cost_centre_statement_line__credit
+#: model_terms:ir.ui.view,arch_db:KSW_accounting_ux.report_cost_centre_statement
 msgid "Credit"
 msgstr "آجل"
 
@@ -1338,3 +1353,888 @@ msgstr "حساب"
 #: code:addons/KSW_accounting_ux/models/account_move.py:0
 msgid "Journal Items · %s"
 msgstr "عناصر اليومية · %s"
+
+#. module: KSW_accounting_ux
+#: model:res.country,vat_label:base.sa
+msgid "VAT Number"
+msgstr "الرقم الضريبي"
+
+#. module: KSW_accounting_ux
+#: model:ir.actions.report,print_report_name:KSW_accounting_ux.action_report_cost_centre_statement
+msgid "'Statement - %s' % object.analytic_account_id.name"
+msgstr "'كشف حساب - %s' % object.analytic_account_id.name"
+
+#. module: KSW_accounting_ux
+#: model_terms:ir.ui.view,arch_db:KSW_accounting_ux.report_cost_centre_statement
+msgid ""
+",\n"
+"                                closing"
+msgstr ""
+"،\n"
+"                                الختامي"
+
+#. module: KSW_accounting_ux
+#: model_terms:ir.ui.view,arch_db:KSW_accounting_ux.report_cost_centre_statement
+msgid ", credit"
+msgstr "، دائن"
+
+#. module: KSW_accounting_ux
+#: model_terms:ir.ui.view,arch_db:KSW_accounting_ux.view_account_payment_form_ksw_bas
+msgid ""
+"; this payment has none of its own\n"
+"                    and cannot be edited."
+msgstr ""
+"؛ هذا السند ليس له رصيد خاص به\n"
+"                    ولا يمكن تعديله."
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_activity_statement_wizard__account_type
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_detailed_activity_statement_wizard__account_type
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_outstanding_statement_wizard__account_type
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_statement_common_wizard__account_type
+msgid "Account Type"
+msgstr "نوع الحساب"
+
+#. module: KSW_accounting_ux
+#: model:ir.model,name:KSW_accounting_ux.model_activity_statement_wizard
+msgid "Activity Statement Wizard"
+msgstr "معالج كشف النشاط"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_ksw_cost_centre_statement__allowed_group_ids
+msgid "Allowed Group"
+msgstr "المجموعة المسموحة"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_ksw_cost_centre_statement__allowed_plan_ids
+msgid "Allowed Plan"
+msgstr "الخطة المسموحة"
+
+#. module: KSW_accounting_ux
+#: model_terms:ir.ui.view,arch_db:KSW_accounting_ux.view_move_form_ksw_bas_info
+msgid "BAS"
+msgstr "BAS"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_bank_statement_line__x_bas_number
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_move__x_bas_number
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_move_line__x_bas_number
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_payment__x_bas_number
+msgid "BAS Document No."
+msgstr "رقم مستند BAS"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_bank_statement_line__x_bas_doc_type
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_move__x_bas_doc_type
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_move_line__x_bas_doc_type
+msgid "BAS Document Type"
+msgstr "نوع مستند BAS"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_bank_statement_line__x_bas_entered_by
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_move__x_bas_entered_by
+msgid "BAS Entered By"
+msgstr "أدخله في BAS"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_move_line__x_bas_line_ref
+msgid "BAS Line Reference"
+msgstr "مرجع البند في BAS"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_move_line__x_bas_line_remark
+msgid "BAS Line Remark"
+msgstr "ملاحظة البند في BAS"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_bank_statement_line__x_bas_reference
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_move__x_bas_reference
+msgid "BAS Reference"
+msgstr "مرجع BAS"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_bank_statement_line__x_bas_remarks
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_move__x_bas_remarks
+msgid "BAS Remarks"
+msgstr "ملاحظات BAS"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_bank_statement_line__x_bas_entered_by
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_move__x_bas_entered_by
+msgid "BAS user number who entered the document."
+msgstr "رقم مستخدم BAS الذي أدخل المستند."
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_doc_category__bank_receipt
+msgid "Bank Receipt"
+msgstr "سند قبض بنكي"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_bank_statement_line__x_bas_number
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_move__x_bas_number
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_move_line__x_bas_number
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_payment__x_bas_number
+msgid "Branch / number of the document in BAS."
+msgstr "الفرع / رقم المستند في BAS."
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_doc_category__cash_sale
+msgid "Cash Sale"
+msgstr "بيع نقدي"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_ksw_cost_centre_statement__currency_id
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_ksw_cost_centre_statement_line__currency_id
+msgid "Currency"
+msgstr "العملة"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_doc_category__credit_note
+msgid "Customer Credit Note"
+msgstr "إشعار دائن للعميل"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_doc_category__customer_invoice
+msgid "Customer Invoice"
+msgstr "فاتورة العميل"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_doc_category__customer_payment
+msgid "Customer Payment"
+msgstr "سداد العميل"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_doc_category__depreciation
+msgid "Depreciation"
+msgstr "إهلاك"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_bank_statement_line__x_doc_category
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_move__x_doc_category
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_move_line__x_doc_category
+#: model_terms:ir.ui.view,arch_db:KSW_accounting_ux.view_account_move_filter_ksw_bas_info
+#: model_terms:ir.ui.view,arch_db:KSW_accounting_ux.view_account_move_line_filter_ksw_doc_category
+msgid "Document Type"
+msgstr "نوع المستند"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_bank_statement_line__x_bas_old_name
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_move__x_bas_old_name
+msgid "Imported As"
+msgstr "استُورد بصفة"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_ksw_cost_centre_statement_line__is_opening
+msgid "Is Opening"
+msgstr "رصيد افتتاحي"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_ksw_cost_centre_statement_line__is_summary
+msgid "Is Summary"
+msgstr "سطر إجمالي"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_doc_category__journal_voucher
+msgid "Journal Voucher"
+msgstr "قيد يومية"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_ksw_cost_centre_statement__line_ids
+msgid "Line"
+msgstr "البند"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.instance.period,name:KSW_accounting_ux.mis_pl_instance_monthly_p11
+msgid "M-1"
+msgstr "ش-1"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.instance.period,name:KSW_accounting_ux.mis_pl_instance_monthly_p02
+msgid "M-10"
+msgstr "ش-10"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.instance.period,name:KSW_accounting_ux.mis_pl_instance_monthly_p01
+msgid "M-11"
+msgstr "ش-11"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.instance.period,name:KSW_accounting_ux.mis_pl_instance_monthly_p10
+msgid "M-2"
+msgstr "ش-2"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.instance.period,name:KSW_accounting_ux.mis_pl_instance_monthly_p09
+msgid "M-3"
+msgstr "ش-3"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.instance.period,name:KSW_accounting_ux.mis_pl_instance_monthly_p08
+msgid "M-4"
+msgstr "ش-4"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.instance.period,name:KSW_accounting_ux.mis_pl_instance_monthly_p07
+msgid "M-5"
+msgstr "ش-5"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.instance.period,name:KSW_accounting_ux.mis_pl_instance_monthly_p06
+msgid "M-6"
+msgstr "ش-6"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.instance.period,name:KSW_accounting_ux.mis_pl_instance_monthly_p05
+msgid "M-7"
+msgstr "ش-7"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.instance.period,name:KSW_accounting_ux.mis_pl_instance_monthly_p04
+msgid "M-8"
+msgstr "ش-8"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.instance.period,name:KSW_accounting_ux.mis_pl_instance_monthly_p03
+msgid "M-9"
+msgstr "ش-9"
+
+#. module: KSW_accounting_ux
+#: model_terms:ir.ui.view,arch_db:KSW_accounting_ux.view_account_payment_form_ksw_bas
+msgid "Paid in BAS. The accounting entry is the BAS voucher"
+msgstr "مدفوع في BAS. القيد المحاسبي هو سند BAS"
+
+#. module: KSW_accounting_ux
+#: model:ir.model,name:KSW_accounting_ux.model_report_partner_statement_activity_statement
+msgid "Partner Activity Statement"
+msgstr "كشف نشاط الشريك"
+
+#. module: KSW_accounting_ux
+#: model:ir.model,name:KSW_accounting_ux.model_report_partner_statement_detailed_activity_statement
+msgid "Partner Detailed Activity Statement"
+msgstr "كشف نشاط الشريك التفصيلي"
+
+#. module: KSW_accounting_ux
+#: model:ir.model,name:KSW_accounting_ux.model_report_partner_statement_outstanding_statement
+msgid "Partner Outstanding Statement"
+msgstr "كشف الأرصدة المستحقة على الشريك"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_ksw_cost_centre_statement_line__sequence
+msgid "Sequence"
+msgstr "تسلسل"
+
+#. module: KSW_accounting_ux
+#: model:ir.model,name:KSW_accounting_ux.model_statement_common
+msgid "Statement Reports Common"
+msgstr "أساسيات تقارير كشوف الحساب"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_doc_category__stock
+msgid "Stock Movement"
+msgstr "حركة المخزون"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_bank_statement_line__x_bas_reference
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_move__x_bas_reference
+msgid "The document's reference text in BAS (REF)."
+msgstr "نص مرجع المستند في BAS (REF)."
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_bank_statement_line__x_bas_remarks
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_move__x_bas_remarks
+msgid "The document's remarks in BAS (REMARK)."
+msgstr "ملاحظات المستند في BAS (REMARK)."
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_bank_statement_line__x_bas_old_name
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_move__x_bas_old_name
+msgid ""
+"The number this document had before it was renumbered in its standard "
+"journal."
+msgstr "الرقم الذي كان لهذا المستند قبل إعادة ترقيمه في دفتر يومياته القياسي."
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,help:KSW_accounting_ux.field_account_move_line__x_bas_line_ref
+msgid "This line's reference text in BAS (REF)."
+msgstr "نص مرجع هذا البند في BAS (REF)."
+
+#. module: KSW_accounting_ux
+#: model_terms:ir.ui.view,arch_db:KSW_accounting_ux.report_cost_centre_statement
+msgid "Total: debit"
+msgstr "الإجمالي: مدين"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_ksw_cost_centre_statement__unit_count
+msgid "Unit Count"
+msgstr "عدد الوحدات"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_doc_category__vendor_bill
+msgid "Vendor Bill"
+msgstr "فاتورة المورد"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_doc_category__vendor_payment
+msgid "Vendor Payment"
+msgstr "مدفوعات المورد"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields.selection,name:KSW_accounting_ux.selection__account_move__x_doc_category__vendor_refund
+msgid "Vendor Refund"
+msgstr "مرتجع مورد"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_payment__x_bas_bill_count
+msgid "X Bas Bill Count"
+msgstr "عدد فواتير BAS"
+
+#. module: KSW_accounting_ux
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_bank_statement_line__x_bas_payment_count
+#: model:ir.model.fields,field_description:KSW_accounting_ux.field_account_move__x_bas_payment_count
+msgid "X Bas Payment Count"
+msgstr "عدد سندات دفع BAS"
+
+#. module: KSW_accounting_ux
+#: model_terms:ir.ui.view,arch_db:KSW_accounting_ux.report_cost_centre_statement
+msgid "to"
+msgstr "إلى"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_fa_1904
+msgid "أثاث وتجهيزات"
+msgstr "أثاث وتجهيزات"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_eq_prior
+msgid "أرباح (خسائر) سنوات سابقة غير مرحّلة"
+msgstr "أرباح (خسائر) سنوات سابقة غير مرحّلة"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_ca_1208
+msgid "أرصدة مدينة أخرى"
+msgstr "أرصدة مدينة أخرى"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_nca_1301
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_inv_1301
+msgid "أصول الاستثمار العقاري"
+msgstr "أصول الاستثمار العقاري"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_cl_2110
+msgid "أمانات السائقين"
+msgstr "أمانات السائقين"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_assets
+msgid "إجمالي الأصول"
+msgstr "إجمالي الأصول"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_fa_cost
+msgid "إجمالي الأصول الثابتة بالتكلفة"
+msgstr "إجمالي الأصول الثابتة بالتكلفة"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_ca
+msgid "إجمالي الأصول المتداولة"
+msgstr "إجمالي الأصول المتداولة"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_nca
+msgid "إجمالي الأصول غير المتداولة"
+msgstr "إجمالي الأصول غير المتداولة"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_cl
+msgid "إجمالي الخصوم المتداولة"
+msgstr "إجمالي الخصوم المتداولة"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_le
+msgid "إجمالي الخصوم وحقوق الملكية"
+msgstr "إجمالي الخصوم وحقوق الملكية"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_cost
+msgid "إجمالي المشتريات وتكلفة التشغيل"
+msgstr "إجمالي المشتريات وتكلفة التشغيل"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_opex
+msgid "إجمالي المصروفات"
+msgstr "إجمالي المصروفات"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_dep
+msgid "إجمالي اهلاك الاصول الثابتة"
+msgstr "إجمالي اهلاك الاصول الثابتة"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_eq
+msgid "إجمالي حقوق الملكية"
+msgstr "إجمالي حقوق الملكية"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_cl_2106
+msgid "إيرادات مقدمة"
+msgstr "إيرادات مقدمة"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_fa_1901
+msgid "الأراضي"
+msgstr "الأراضي"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_eq_2302
+msgid "الأرباح التشغيلية والمبقاة"
+msgstr "الأرباح التشغيلية والمبقاة"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_ca_1202
+msgid "البنوك"
+msgstr "البنوك"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_wc_payables
+msgid "التغير في الدائنين والمستحقات والإيرادات المقدمة والأمانات"
+msgstr "التغير في الدائنين والمستحقات والإيرادات المقدمة والأمانات"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_wc_prepaid
+msgid "التغير في الدفعات والمدفوعات المقدمة وخطابات الضمان"
+msgstr "التغير في الدفعات والمدفوعات المقدمة وخطابات الضمان"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_wc_1203
+msgid "التغير في العملاء"
+msgstr "التغير في العملاء"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_wc_inv
+msgid "التغير في المخزون"
+msgstr "التغير في المخزون"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_wc_prov
+msgid "التغير في المخصصات"
+msgstr "التغير في المخصصات"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_wc_2101
+msgid "التغير في الموردين"
+msgstr "التغير في الموردين"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_wc_vat
+msgid "التغير في صافي ضريبة القيمة المضافة"
+msgstr "التغير في صافي ضريبة القيمة المضافة"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_wc_staff
+msgid "التغير في عهد وسلف العاملين"
+msgstr "التغير في عهد وسلف العاملين"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_wc_other
+msgid "التغير في مديونية السائقين والأرصدة المدينة الأخرى"
+msgstr "التغير في مديونية السائقين والأرصدة المدينة الأخرى"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_operating
+msgid "الربح التشغيلي"
+msgstr "الربح التشغيلي"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_ebitda
+msgid "الربح قبل الاهلاك"
+msgstr "الربح قبل الاهلاك"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_fa_1906
+msgid "السيارات"
+msgstr "السيارات"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.instance.period,name:KSW_accounting_ux.mis_pl_instance_detail_p_month
+#: model:mis.report.instance.period,name:KSW_accounting_ux.mis_pl_instance_p_month
+msgid "الشهر الحالي"
+msgstr "الشهر الحالي"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.instance.period,name:KSW_accounting_ux.mis_pl_instance_p_prev
+msgid "الشهر السابق"
+msgstr "الشهر السابق"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_ca_1203
+msgid "العملاء"
+msgstr "العملاء"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_ca_inv
+msgid "المخزون"
+msgstr "المخزون"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_cost_3101
+msgid "المشتريات العامة"
+msgstr "المشتريات العامة"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_cl_2101
+msgid "الموردين"
+msgstr "الموردين"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_cash_close
+msgid "النقد وما في حكمه آخر الفترة"
+msgstr "النقد وما في حكمه آخر الفترة"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_cash_open
+msgid "النقد وما في حكمه أول الفترة"
+msgstr "النقد وما في حكمه أول الفترة"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_ca_1201
+msgid "النقدية"
+msgstr "النقدية"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_dep_3304
+msgid "اهلاك اثاث وتجهيزات"
+msgstr "اهلاك اثاث وتجهيزات"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_dep_3301
+msgid "اهلاك الاراضي"
+msgstr "اهلاك الاراضي"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_dep_3306
+msgid "اهلاك السيارات"
+msgstr "اهلاك السيارات"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_dep_3305
+msgid "اهلاك عدد وادوات"
+msgstr "اهلاك عدد وادوات"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_dep_3302
+msgid "اهلاك مباني وبرتبلات"
+msgstr "اهلاك مباني وبرتبلات"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_dep_3303
+msgid "اهلاك مكائن التحلية"
+msgstr "اهلاك مكائن التحلية"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_other
+msgid "ايرادات اخرى متنوعة"
+msgstr "ايرادات اخرى متنوعة"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_rev_4104
+msgid "ايرادات نقليات الكوثر"
+msgstr "ايرادات نقليات الكوثر"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_cost_3102
+msgid "تكلفة الانتاج بالمصانع"
+msgstr "تكلفة الانتاج بالمصانع"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_cl_2105
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_fin_2105
+msgid "تمويل من جهات ذات علاقة"
+msgstr "تمويل من جهات ذات علاقة"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_eq_2303
+msgid "توزيعات الأرباح"
+msgstr "توزيعات الأرباح"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_cl_2111
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_fin_2111
+msgid "جاري مجلس الإدارة"
+msgstr "جاري مجلس الإدارة"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_other
+msgid "حركات غير مصنفة (للمراجعة)"
+msgstr "حركات غير مصنفة (للمراجعة)"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_cl_2103
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_fin_2103
+msgid "حسابات جارية دائنة - البنوك"
+msgstr "حسابات جارية دائنة - البنوك"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_ca_1211
+msgid "خطابات ضمان واعتمادات وتأمين مقدم"
+msgstr "خطابات ضمان واعتمادات وتأمين مقدم"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_cl_2104
+msgid "دائنون - شركات متنوعة"
+msgstr "دائنون - شركات متنوعة"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_ca_1210
+msgid "دفعات مقدمة للموردين"
+msgstr "دفعات مقدمة للموردين"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_eq_2301
+msgid "رأس المال"
+msgstr "رأس المال"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_fin_equity
+msgid "رأس المال والأرباح المبقاة والتوزيعات"
+msgstr "رأس المال والأرباح المبقاة والتوزيعات"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_ca_1205
+msgid "سلف العاملين"
+msgstr "سلف العاملين"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_inv_fa
+msgid "شراء واستبعاد الأصول الثابتة"
+msgstr "شراء واستبعاد الأصول الثابتة"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_fa_net
+msgid "صافي الأصول الثابتة"
+msgstr "صافي الأصول الثابتة"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_change
+msgid "صافي التغير في النقد"
+msgstr "صافي التغير في النقد"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_net
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_net
+msgid "صافي الربح (الخسارة)"
+msgstr "صافي الربح (الخسارة)"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_sales
+msgid "صافي المبيعات والإيرادات"
+msgstr "صافي المبيعات والإيرادات"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_inv
+msgid "صافي النقد من الأنشطة الاستثمارية"
+msgstr "صافي النقد من الأنشطة الاستثمارية"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_op
+msgid "صافي النقد من الأنشطة التشغيلية"
+msgstr "صافي النقد من الأنشطة التشغيلية"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_fin
+msgid "صافي النقد من الأنشطة التمويلية"
+msgstr "صافي النقد من الأنشطة التمويلية"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_eq_result
+msgid "صافي ربح (خسارة) العام"
+msgstr "صافي ربح (خسارة) العام"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_cl_2119
+msgid "ضريبة القيمة المضافة - المبيعات"
+msgstr "ضريبة القيمة المضافة - المبيعات"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_ca_1209
+msgid "ضريبة القيمة المضافة المدينة"
+msgstr "ضريبة القيمة المضافة المدينة"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_fa_1905
+msgid "عدد وأدوات"
+msgstr "عدد وأدوات"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_ca_1204
+msgid "عهد طرف العاملين"
+msgstr "عهد طرف العاملين"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_check
+msgid "فرق التوازن (يجب أن يساوي صفراً)"
+msgstr "فرق التوازن (يجب أن يساوي صفراً)"
+
+#. module: KSW_accounting_ux
+#: model:mis.report,description:KSW_accounting_ux.mis_cf_report
+msgid "قائمة التدفقات النقدية"
+msgstr "قائمة التدفقات النقدية"
+
+#. module: KSW_accounting_ux
+#: model:mis.report,description:KSW_accounting_ux.mis_pl_report
+msgid "قائمة الدخل"
+msgstr "قائمة الدخل"
+
+#. module: KSW_accounting_ux
+#: model:mis.report,description:KSW_accounting_ux.mis_bs_report
+msgid "قائمة المركز المالي"
+msgstr "قائمة المركز المالي"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_cl_2102
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_fin_2102
+msgid "قروض قصيرة الأجل"
+msgstr "قروض قصيرة الأجل"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_fa_1902
+msgid "مباني وبرتبلات"
+msgstr "مباني وبرتبلات"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_rev_4103
+msgid "مبيعات وايرادات الاستثمارات"
+msgstr "مبيعات وايرادات الاستثمارات"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_rev_4101
+msgid "مبيعات وايرادات الفروع"
+msgstr "مبيعات وايرادات الفروع"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_rev_4102
+msgid "مبيعات وايرادات فرع الاحساء"
+msgstr "مبيعات وايرادات فرع الاحساء"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_fa_dep
+msgid "مجمع الإهلاك"
+msgstr "مجمع الإهلاك"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_gross
+msgid "مجمل الربح"
+msgstr "مجمل الربح"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_cl_2109
+msgid "مخصص الزكاة والضريبة"
+msgstr "مخصص الزكاة والضريبة"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_cl_2112
+msgid "مخصص ديون العملاء"
+msgstr "مخصص ديون العملاء"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_cl_2108
+msgid "مخصص مكافأة نهاية الخدمة"
+msgstr "مخصص مكافأة نهاية الخدمة"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_ca_1212
+msgid "مدفوعات مقدمة"
+msgstr "مدفوعات مقدمة"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_ca_1207
+msgid "مديونية السائقين والتأمين"
+msgstr "مديونية السائقين والتأمين"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_ca_1219
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_inv_1219
+msgid "مشروعات تحت التنفيذ"
+msgstr "مشروعات تحت التنفيذ"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_exp_3202
+msgid "مصروفات ادارية وعمومية"
+msgstr "مصروفات ادارية وعمومية"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_exp_3204
+msgid "مصروفات الاستثمارات"
+msgstr "مصروفات الاستثمارات"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_exp_3203
+msgid "مصروفات البيع والتسويق والتمويل"
+msgstr "مصروفات البيع والتسويق والتمويل"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_exp_3201
+msgid "مصروفات التشغيل"
+msgstr "مصروفات التشغيل"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_exp_3206
+msgid "مصروفات تشغيلية وادارية فرع النقليات"
+msgstr "مصروفات تشغيلية وادارية فرع النقليات"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_pl_kpi_exp_3205
+msgid "مصروفات فرع الحياة والثلج البلوري"
+msgstr "مصروفات فرع الحياة والثلج البلوري"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_cl_2107
+msgid "مصروفات مستحقة"
+msgstr "مصروفات مستحقة"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_bs_kpi_fa_1903
+msgid "مكائن التحلية"
+msgstr "مكائن التحلية"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.instance.period,name:KSW_accounting_ux.mis_pl_instance_detail_p_ytd
+#: model:mis.report.instance.period,name:KSW_accounting_ux.mis_pl_instance_monthly_ytd
+#: model:mis.report.instance.period,name:KSW_accounting_ux.mis_pl_instance_p_ytd
+msgid "من بداية السنة"
+msgstr "من بداية السنة"
+
+#. module: KSW_accounting_ux
+#: model:mis.report.kpi,description:KSW_accounting_ux.mis_cf_kpi_dep_add
+msgid "يضاف: الإهلاك"
+msgstr "يضاف: الإهلاك"
+
+#. module: KSW_accounting_ux
+#: model:ir.model,name:account_fiscal_year.model_account_fiscal_year
+msgid "Fiscal Year"
+msgstr "السنة المالية"
+
+#. module: KSW_accounting_ux
+#: model:ir.model,name:account_move_template.model_account_move_template
+msgid "Journal Entry Template"
+msgstr "قالب قيد اليومية"
+
+#. module: KSW_accounting_ux
+#: model:ir.model,name:account_fiscal_year_closing.model_account_fiscalyear_closing
+msgid "Fiscal year closing"
+msgstr "إقفال السنة المالية"
+
+#. module: KSW_accounting_ux
+#: model:ir.model,name:account_fiscal_year_closing.model_account_fiscalyear_closing_template
+msgid "Fiscal year closing template"
+msgstr "قالب إقفال السنة المالية"
+
+#. module: KSW_accounting_ux
+#: model:ir.model,name:mis_builder_budget.model_mis_budget
+msgid "MIS Budget by KPI"
+msgstr "موازنة MIS حسب المؤشرات"
+
+#. module: KSW_accounting_ux
+#: model:ir.model,name:mis_builder_budget.model_mis_budget_by_account
+msgid "MIS Budget by Account"
+msgstr "موازنة MIS حسب الحساب"

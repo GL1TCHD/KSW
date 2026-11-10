@@ -1,0 +1,6 @@
+// Light apps sidebar and dark text on the apps screen.
+// MuK's muk_web_theme/static/src/scss/colors.scss assigns these without !default.
+$mk-appbar-background: $ksw-surface;
+$mk-appbar-color: $ksw-text;
+$mk-appbar-active: rgba($ksw-teal, .12);
+$mk-appsmenu-color: $ksw-ink;

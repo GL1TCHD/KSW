@@ -85,13 +85,13 @@ msgstr "إغلاق"
 #: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_line__create_uid
 #: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_wizard__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "أنشئ بواسطة"
 
 #. module: KSW_stock_movement
 #: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_line__create_date
 #: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_wizard__create_date
 msgid "Created on"
-msgstr ""
+msgstr "أنشئ في"
 
 #. module: KSW_stock_movement
 #: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_line__date
@@ -114,7 +114,7 @@ msgstr "مسلَّم ولم يُفوتر"
 #: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_line__display_name
 #: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_wizard__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "اسم العرض"
 
 #. module: KSW_stock_movement
 #: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_line__reference
@@ -176,7 +176,7 @@ msgstr "طريقة العرض"
 #: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_line__id
 #: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_wizard__id
 msgid "ID"
-msgstr ""
+msgstr "المعرف"
 
 #. module: KSW_stock_movement
 #: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_line__qty_in
@@ -254,18 +254,18 @@ msgstr "الأصناف"
 #: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_line__write_uid
 #: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_wizard__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "آخر تحديث بواسطة"
 
 #. module: KSW_stock_movement
 #: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_line__write_date
 #: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_wizard__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "آخر تحديث في"
 
 #. module: KSW_stock_movement
 #: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_wizard__line_ids
 msgid "Line"
-msgstr ""
+msgstr "البند"
 
 #. module: KSW_stock_movement
 #: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_line__location_id
@@ -382,7 +382,7 @@ msgstr "الشركاء"
 #. module: KSW_stock_movement
 #: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_line__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "تسلسل"
 
 #. module: KSW_stock_movement
 #: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_wizard__layout
@@ -518,7 +518,7 @@ msgstr "أي المخازن"
 #. module: KSW_stock_movement
 #: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_line__wizard_id
 msgid "Wizard"
-msgstr ""
+msgstr "المعالج"
 
 #. module: KSW_stock_movement
 #: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_line__currency_id
@@ -573,3 +573,13 @@ msgstr "فتح سند التسليم"
 #: model_terms:ir.ui.view,arch_db:KSW_stock_movement.view_stock_movement_line_list
 msgid "Open the invoice"
 msgstr "فتح الفاتورة"
+
+#. module: KSW_stock_movement
+#: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_line__invoice_date
+msgid "Invoice Date"
+msgstr "تاريخ الفاتورة"
+
+#. module: KSW_stock_movement
+#: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_line__invoice_ref
+msgid "Invoice Reference"
+msgstr "مرجع الفاتورة"

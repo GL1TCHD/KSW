@@ -1,0 +1,334 @@
+// KSW backend theme: components. Colours come from primary_variables.scss.
+
+// Arabic font: Tajawal ships with core web (OFL). unicode-range keeps it to
+// Arabic characters, so Latin text and numbers keep the system font.
+$ksw-arabic-range: U+0600-06FF, U+0750-077F, U+0870-089F, U+08A0-08FF, U+FB50-FDFF, U+FE70-FEFF;
+@each $weight, $file in (400: "Regular", 500: "Medium", 700: "Bold") {
+    @font-face {
+        font-family: "KSW Arabic";
+        font-weight: $weight;
+        font-style: normal;
+        font-display: swap;
+        src: url("/web/static/fonts/google/Tajawal/Tajawal-#{$file}.ttf") format("truetype");
+        unicode-range: $ksw-arabic-range;
+    }
+}
+
+// Text size (Preferences > Text Size). Large is the size the Arabic screens used
+// from the start; Automatic gives it to Arabic users and Standard to English ones.
+body.o_web_client.ksw_text_large {
+    --bs-body-font-size: #{o-to-rem(15px)};
+    font-size: o-to-rem(15px);
+}
+
+// Top bar: a hairline instead of MuK's borderless dark slab.
+.o_main_navbar {
+    box-shadow: 0 1px 0 $ksw-line;
+    .o_menu_brand {
+        font-weight: 600;
+    }
+    .o_navbar_apps_menu .dropdown-toggle {
+        color: $ksw-navy;
+    }
+}
+
+// Apps screen: plain surface, white rounded tiles. MuK sets the background
+// image inline from JS (appsmenu.js onOpened), hence !important.
+.mk_app_menu.dropdown-menu {
+    background-image: none !important;
+    background-color: $ksw-apps-bg !important;
+    .o_app {
+        > a {
+            .mk_app_icon {
+                max-width: 64px;
+                padding: 9px;
+                border-radius: 16px;
+                box-shadow: 0 1px 2px rgba($ksw-ink, .08), 0 2px 6px rgba($ksw-ink, .06);
+            }
+            .mk_app_name {
+                margin-top: 8px;
+                font-weight: 500;
+                text-align: center;
+            }
+        }
+        &:hover .mk_app_icon {
+            box-shadow: 0 2px 4px rgba($ksw-ink, .1), 0 8px 18px rgba($ksw-ink, .1);
+        }
+    }
+}
+
+// Apps sidebar: light, with an accent bar on the open app.
+.mk_apps_sidebar_panel {
+    border-inline-end: 1px solid $ksw-line;
+    .mk_apps_sidebar .mk_apps_sidebar_menu > li {
+        > a {
+            font-weight: 400;
+            border-radius: 8px;
+            margin: 2px 6px;
+        }
+        &.active > a {
+            color: $ksw-teal;
+            font-weight: 500;
+            box-shadow: inset 3px 0 0 $ksw-teal;
+        }
+    }
+}
+
+// Rounded controls.
+.btn {
+    border-radius: 6px;
+}
+.modal-content {
+    border-radius: 12px;
+}
+
+// Form sheet as a card.
+.o_form_view .o_form_sheet_bg > .o_form_sheet {
+    border: 1px solid $ksw-line;
+    border-radius: 10px;
+    box-shadow: 0 1px 2px rgba($ksw-ink, .04);
+}
+
+// List header and row hover.
+.o_list_renderer .o_list_table {
+    thead th {
+        background-color: $ksw-surface;
+        color: $ksw-text;
+        font-weight: 600;
+        vertical-align: bottom;
+        // Arabic titles run longer than their column: two lines, then clamp,
+        // instead of one line cut to "...سلّمة". The tooltip keeps the full title.
+        span.text-truncate.flex-grow-1 {
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            -webkit-line-clamp: 2;
+            white-space: normal;
+            line-height: 1.25;
+        }
+    }
+    tbody > tr.o_data_row:hover > td {
+        background-color: rgba($ksw-teal, .04);
+    }
+}
+
+// Kanban cards.
+.o_kanban_renderer .o_kanban_record:not(.o_kanban_ghost) {
+    border-radius: 8px;
+    border-color: $ksw-line;
+    transition: box-shadow .12s ease-in;
+    &:hover {
+        box-shadow: 0 2px 8px rgba($ksw-ink, .08);
+    }
+}
+
+// Chatter: MuK paints the idle "Send message" red (btn-danger) and "Internal"
+// green (btn-success); a red button reads as an error. Neutral until chosen,
+// teal (btn-primary) once active, which MuK already does.
+.o-mail-Chatter-sendMessage.btn-danger,
+.o-mail-Chatter-sendInternal.btn-success {
+    color: $ksw-text;
+    background-color: $ksw-card;
+    border: 1px solid $ksw-border-strong;
+    &:hover,
+    &:focus {
+        color: $ksw-navy;
+        background-color: $ksw-surface;
+        border-color: $ksw-border-hover;
+    }
+}
+
+// ============================================================================
+// Shell: one app switcher (Home), visible search, nothing duplicated.
+// ============================================================================
+
+// MuK's apps sidebar is not rendered at all (home.xml): Home is the one app switcher.
+
+// On Home, and on a screen that belongs to no app, the previous app's name and
+// sections would be misleading.
+body.ksw_on_home .o_main_navbar,
+body.ksw_no_app .o_main_navbar {
+    .o_menu_brand,
+    .o_menu_sections {
+        visibility: hidden;
+    }
+}
+
+.ksw_home_button {
+    display: inline-flex;
+    align-items: center;
+    padding: 0 14px;
+    height: var(--o-navbar-height);
+    color: $ksw-navy;
+    font-size: 1.15rem;
+    &:hover {
+        background: rgba($ksw-navy, .06);
+        color: $ksw-navy;
+    }
+}
+
+.ksw_search_button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-inline: 6px;
+    padding: 4px 10px;
+    border: 1px solid $ksw-line;
+    border-radius: 8px;
+    background: $ksw-surface;
+    color: $ksw-muted;
+    font-size: .85rem;
+    line-height: 1.4;
+    &:hover {
+        border-color: rgba($ksw-teal, .5);
+        color: $ksw-ink;
+    }
+    @include media-breakpoint-down(lg) {
+        span,
+        kbd {
+            display: none;
+        }
+    }
+    // Phones: a plain icon like the other top-bar entries, not a boxed square.
+    @include media-breakpoint-down(md) {
+        margin-inline: 0;
+        padding: 0 10px;
+        height: var(--o-navbar-height);
+        border: 0;
+        background: transparent;
+        color: $ksw-text;
+    }
+}
+
+// ============================================================================
+// Phones: touch targets of at least 40px (Fiori uses 44) on the controls people
+// tap all day; the "buttons too small to tap" complaint about Odoo on mobile.
+// ============================================================================
+@include media-breakpoint-down(md) {
+    .o_control_panel .btn,
+    .o_form_statusbar .btn,
+    .o_statusbar_status > .o_arrow_button,
+    .modal-footer .btn {
+        min-height: 40px;
+    }
+    .o_kanban_renderer .o_kanban_record .btn {
+        min-height: 40px;
+    }
+}
+
+// ============================================================================
+// Record screens
+// ============================================================================
+
+// One primary action per screen (Fiori): further highlighted buttons in the
+// same bar are drawn as secondary, so the eye lands on one.
+.o_form_statusbar .o_statusbar_buttons .btn-primary ~ .btn-primary {
+    color: $ksw-text;
+    background-color: $ksw-card;
+    border-color: $ksw-border-strong;
+    &:hover {
+        color: $ksw-navy;
+        background-color: $ksw-surface;
+    }
+}
+
+// Actions and status stay visible while a long form scrolls (Fiori sticky header).
+.o_form_view .o_form_sheet_bg > .o_form_statusbar {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+    background-color: $ksw-page;
+}
+
+// Status as pills instead of chevrons. Core draws each step's chevron outline
+// on a ::before layer and colours the current step through these variables
+// (set on .o_field_statusbar > .o_statusbar_status, so the same selector here).
+.o_field_statusbar > .o_statusbar_status {
+    --o-statusbar-background-active: #{rgba($ksw-teal, .12)};
+    --o-statusbar-background-hover: #{$ksw-surface};
+    gap: 4px;
+    > .o_arrow_button:not(.d-none) {
+        clip-path: none !important;
+        margin: 0 !important;
+        padding: 4px 12px !important;
+        border-radius: 999px !important;
+        border: 1px solid transparent;
+        color: $ksw-muted;
+        &::before {
+            display: none !important;
+        }
+        &.o_arrow_button_current {
+            border-color: rgba($ksw-teal, .35);
+            color: $ksw-accent-ink;
+            font-weight: 600;
+        }
+        // Steps not reached read as labels, not as buttons.
+        &:not(.o_arrow_button_current) {
+            background-color: transparent;
+        }
+        &:not(.o_arrow_button_current):hover:not(:disabled) {
+            background-color: $ksw-surface;
+            color: $ksw-ink;
+        }
+    }
+}
+
+// Breadcrumb: the record's name is the title of the page.
+.o_control_panel .o_breadcrumb .active {
+    font-weight: 600;
+}
+
+// Figures line up in columns.
+.o_list_number,
+.o_field_monetary,
+.o_field_float,
+.o_field_integer,
+.o_list_table td.o_list_number {
+    font-variant-numeric: tabular-nums;
+}
+
+// ============================================================================
+// Dark mode: dark borders on dark backgrounds made buttons, switchers, status
+// steps and field lines disappear. Everything you click gets a visible edge.
+// ============================================================================
+@if $ksw-dark {
+    .btn-secondary,
+    .btn-light,
+    .o_switch_view,
+    .o_pager .btn,
+    .o_cp_switch_buttons .btn,
+    .o_control_panel .btn-group > .btn:not(.btn-primary) {
+        background-color: $ksw-control-bg;
+        border: 1px solid $ksw-border-strong !important;
+        color: $ksw-text;
+        &:hover,
+        &:focus-visible {
+            border-color: $ksw-border-hover !important;
+            color: $ksw-ink;
+        }
+        &.active {
+            border-color: $ksw-teal !important;
+            color: $ksw-teal;
+        }
+    }
+    .o_field_statusbar > .o_statusbar_status > .o_arrow_button:not(.d-none):not(.o_arrow_button_current) {
+        border-color: $ksw-line;
+    }
+    .o_input,
+    .o_field_widget input,
+    .o_field_widget select,
+    .o_field_widget textarea {
+        border-color: $ksw-border-strong;
+    }
+    .o_searchview,
+    .o_kanban_renderer .o_kanban_record,
+    .o_form_view .o_form_sheet_bg > .o_form_sheet,
+    .dropdown-menu {
+        border-color: $ksw-line;
+    }
+    // Icon-only buttons in the chatter bar, pager and systray read as text.
+    .o-mail-Chatter-topbar .btn .fa,
+    .o_main_navbar .o_nav_entry .fa,
+    .o_main_navbar .o-dropdown .fa {
+        color: $ksw-text;
+    }
+}

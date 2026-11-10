@@ -92,6 +92,7 @@ msgstr "مركز تكلفة المركبة في BAS"
 #. module: KSW_workshop_tanker
 #: model:ir.model.fields,field_description:KSW_workshop_tanker.field_ksw_fleet_vehicle__display_name
 #: model:ir.model.fields,field_description:KSW_workshop_tanker.field_ksw_workshop_request__display_name
+#: model:ir.model.fields,field_description:KSW_workshop_tanker.field_hr_employee__display_name
 msgid "Display Name"
 msgstr "اسم العرض"
 
@@ -115,6 +116,7 @@ msgstr "تم تحديث السائقين من BAS"
 #. module: KSW_workshop_tanker
 #: model:ir.model.fields,field_description:KSW_workshop_tanker.field_ksw_fleet_vehicle__id
 #: model:ir.model.fields,field_description:KSW_workshop_tanker.field_ksw_workshop_request__id
+#: model:ir.model.fields,field_description:KSW_workshop_tanker.field_hr_employee__id
 msgid "ID"
 msgstr "المعرف"
 
@@ -228,3 +230,47 @@ msgstr "طلب خدمة الورشة"
 #: model_terms:ir.ui.view,arch_db:KSW_workshop_tanker.view_ksw_workshop_request_form_tanker
 msgid "is not the driver attached to this vehicle. The attached driver is"
 msgstr "ليس السائق المرتبط بهذه المركبة. السائق المرتبط هو"
+
+#. module: KSW_workshop_tanker
+#: model:ir.model.fields,field_description:KSW_workshop_tanker.field_hr_employee__x_workshop_vehicle_added_ids
+msgid "Added by Hand"
+msgstr "مضاف يدوياً"
+
+#. module: KSW_workshop_tanker
+#: model:ir.model.fields,field_description:KSW_workshop_tanker.field_hr_employee__x_workshop_vehicle_removed_ids
+msgid "Removed by Hand"
+msgstr "محذوف يدوياً"
+
+#. module: KSW_workshop_tanker
+#: model:ir.model.fields,field_description:KSW_workshop_tanker.field_ksw_fleet_vehicle__x_workshop_supervisor_id
+msgid "Supervisor"
+msgstr "المشرف"
+
+#. module: KSW_workshop_tanker
+#: model:ir.model.fields,help:KSW_workshop_tanker.field_hr_employee__x_workshop_vehicle_ids
+msgid ""
+"The trucks this supervisor can pick on a workshop request. Remove or add "
+"trucks here; the change is kept even when BAS later puts a different driver "
+"on the truck."
+msgstr ""
+"الشاحنات التي يستطيع هذا المشرف اختيارها في طلب الورشة. أضف أو احذف الشاحنات"
+" هنا؛ ويبقى التغيير حتى لو وضع BAS لاحقاً سائقاً آخر على الشاحنة."
+
+#. module: KSW_workshop_tanker
+#: model:ir.model.fields,help:KSW_workshop_tanker.field_hr_employee__x_workshop_vehicle_removed_ids
+msgid ""
+"Trucks taken off this supervisor although his tanker groups or his drivers "
+"would give them to him. Add one back in Workshop Vehicles to undo."
+msgstr ""
+"شاحنات أُزيلت من هذا المشرف رغم أن مجموعات وايتاته أو سائقيه تمنحه إياها. "
+"أعد إضافتها في مركبات الورشة للتراجع."
+
+#. module: KSW_workshop_tanker
+#: model_terms:ir.ui.view,arch_db:KSW_workshop_tanker.view_employee_form_workshop_vehicles
+msgid "Trucks this supervisor can pick on a workshop request"
+msgstr "الشاحنات التي يستطيع هذا المشرف اختيارها في طلب الورشة"
+
+#. module: KSW_workshop_tanker
+#: model:ir.model.fields,field_description:KSW_workshop_tanker.field_hr_employee__x_workshop_vehicle_ids
+msgid "Workshop Vehicles"
+msgstr "مركبات الورشة"

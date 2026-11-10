@@ -1,0 +1,535 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* KSW_wacom_signature
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-10 00:00+0000\n"
+"PO-Revision-Date: 2026-11-10 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ar_001\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: KSW_wacom_signature
+#: model:ir.ui.menu,name:KSW_wacom_signature.menu_ksw_wacom_signature_root
+msgid "Signatures"
+msgstr "التواقيع"
+
+#. module: KSW_wacom_signature
+#: model:ir.ui.menu,name:KSW_wacom_signature.menu_ksw_wacom_signature_documents
+#: model:ir.actions.act_window,name:KSW_wacom_signature.action_ksw_signature_document
+#: model_terms:ir.ui.view,arch_db:KSW_wacom_signature.view_ksw_signature_document_list
+msgid "Signature Documents"
+msgstr "مستندات التوقيع"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,help:KSW_wacom_signature.field_ksw_signature_document__page_number
+msgid "1-based page number of the source PDF to stamp the signature on."
+msgstr "رقم صفحة ملف PDF الأصلي (بدءاً من 1) التي يُختم عليها التوقيع."
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__message_needaction
+msgid "Action Needed"
+msgstr "إجراء مطلوب"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__activity_ids
+msgid "Activities"
+msgstr "الأنشطة"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "زخرفة استثناء النشاط"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__activity_state
+msgid "Activity State"
+msgstr "حالة النشاط"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "أيقونة نوع النشاط"
+
+#. module: KSW_wacom_signature
+#: model_terms:ir.ui.view,arch_db:KSW_wacom_signature.view_ksw_signature_document_form
+msgid "Apply Signature to PDF"
+msgstr "تطبيق التوقيع على ملف PDF"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__message_attachment_count
+msgid "Attachment Count"
+msgstr "عدد المرفقات"
+
+#. module: KSW_wacom_signature
+#: model:res.groups,comment:KSW_wacom_signature.group_wacom_signature_manager
+msgid ""
+"Can see and manage every signature document, and reset a signed document "
+"back to draft."
+msgstr "يرى كل مستندات التوقيع ويديرها، ويعيد المستند الموقّع إلى مسودة."
+
+#. module: KSW_wacom_signature
+#: model:res.groups,comment:KSW_wacom_signature.group_wacom_signature_user
+msgid "Can upload PDFs, capture a signature and sign their own documents."
+msgstr "يرفع ملفات PDF ويلتقط التوقيع ويوقّع مستنداته."
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields.selection,name:KSW_wacom_signature.selection__ksw_signature_document__state__cancelled
+msgid "Cancelled"
+msgstr "ملغي"
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/models/ksw_signature_document.py:0
+msgid "Capture a signature first (Wacom pad or draw with mouse/touch)."
+msgstr "التقط توقيعاً أولاً (لوح Wacom أو الرسم بالفأرة / باللمس)."
+
+#. module: KSW_wacom_signature
+#. odoo-javascript
+#: code:addons/KSW_wacom_signature/static/src/js/ksw_wacom_capture_widget.js:0
+#: model_terms:ir.ui.view,arch_db:KSW_wacom_signature.view_ksw_signature_document_form
+msgid "Capture from Wacom Pad"
+msgstr "الالتقاط من لوح Wacom"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__signature_image
+msgid "Captured Signature"
+msgstr "التوقيع الملتقط"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__capture_method
+msgid "Captured Via"
+msgstr "طريقة الالتقاط"
+
+#. module: KSW_wacom_signature
+#. odoo-javascript
+#: code:addons/KSW_wacom_signature/static/src/xml/ksw_wacom_capture_widget.xml:0
+msgid "Checking Wacom pad..."
+msgstr "جارٍ فحص لوح Wacom..."
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__company_id
+msgid "Company"
+msgstr "الشركة"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__create_uid
+msgid "Created by"
+msgstr "أنشئ بواسطة"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__create_date
+msgid "Created on"
+msgstr "أنشئ في"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: KSW_wacom_signature
+#. odoo-javascript
+#: code:addons/KSW_wacom_signature/static/src/js/ksw_wacom_capture_widget.js:0
+msgid "Document Approval"
+msgstr "اعتماد المستند"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields.selection,name:KSW_wacom_signature.selection__ksw_signature_document__state__draft
+#: model_terms:ir.ui.view,arch_db:KSW_wacom_signature.view_ksw_signature_document_search
+msgid "Draft"
+msgstr "مسودة"
+
+#. module: KSW_wacom_signature
+#. odoo-javascript
+#: code:addons/KSW_wacom_signature/static/src/xml/ksw_wacom_capture_widget.xml:0
+msgid "Draw Signature (Wacom pad not detected)"
+msgstr "رسم التوقيع (لم يُكتشف لوح Wacom)"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__employee_id
+#: model_terms:ir.ui.view,arch_db:KSW_wacom_signature.view_ksw_signature_document_search
+msgid "Employee"
+msgstr "الموظف"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__message_follower_ids
+msgid "Followers"
+msgstr "المتابعين"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "المتابعين (الشركاء)"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,help:KSW_wacom_signature.field_ksw_signature_document__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "أيقونة من Font awesome مثال: fa-tasks"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__has_message
+msgid "Has Message"
+msgstr "يحتوي على رسالة"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__sig_height
+msgid "Height (pt)"
+msgstr "الارتفاع (نقطة)"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__id
+msgid "ID"
+msgstr "المعرف"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__activity_exception_icon
+msgid "Icon"
+msgstr "الأيقونة"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,help:KSW_wacom_signature.field_ksw_signature_document__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "الأيقونة للإشارة إلى النشاط المستثنى."
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,help:KSW_wacom_signature.field_ksw_signature_document__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "إذا كان محددًا، فهناك رسائل جديدة عليك رؤيتها."
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,help:KSW_wacom_signature.field_ksw_signature_document__message_has_error
+#: model:ir.model.fields,help:KSW_wacom_signature.field_ksw_signature_document__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "إذا كان محددًا، فقد حدث خطأ في تسليم بعض الرسائل."
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__message_is_follower
+msgid "Is Follower"
+msgstr "متابع"
+
+#. module: KSW_wacom_signature
+#: model:ir.module.category,name:KSW_wacom_signature.module_category_ksw_wacom_signature
+msgid "KSW Wacom Signature"
+msgstr "توقيع Wacom من KSW"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: KSW_wacom_signature
+#: model:res.groups,name:KSW_wacom_signature.group_wacom_signature_manager
+msgid "Manager"
+msgstr "المدير"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__message_has_error
+msgid "Message Delivery error"
+msgstr "خطأ في تسليم الرسائل"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__message_ids
+msgid "Messages"
+msgstr "الرسائل"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields.selection,name:KSW_wacom_signature.selection__ksw_signature_document__capture_method__manual
+msgid "Mouse / Touch"
+msgstr "الفأرة / اللمس"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "الموعد النهائي لنشاطاتي"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__name
+msgid "Name"
+msgstr "الاسم"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
+msgstr "الفعالية التالية في تقويم الأنشطة"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "الموعد النهائي للنشاط التالي"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__activity_summary
+msgid "Next Activity Summary"
+msgstr "ملخص النشاط التالي"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__activity_type_id
+msgid "Next Activity Type"
+msgstr "نوع النشاط التالي"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__message_needaction_counter
+msgid "Number of Actions"
+msgstr "عدد الإجراءات"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__message_has_error_counter
+msgid "Number of errors"
+msgstr "عدد الأخطاء"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,help:KSW_wacom_signature.field_ksw_signature_document__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "عدد الرسائل التي تتطلب اتخاذ إجراء"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,help:KSW_wacom_signature.field_ksw_signature_document__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "عدد الرسائل الحادث بها خطأ في التسليم"
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/models/ksw_signature_document.py:0
+msgid ""
+"Only a Wacom Signature Manager can reset a signed document back to draft."
+msgstr "يعيد المستند الموقّع إلى مسودة مدير توقيعات Wacom فقط."
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/models/ksw_signature_document.py:0
+msgid "Only draft documents can be signed."
+msgstr "لا تُوقَّع إلا المستندات في حالة مسودة."
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__page_number
+msgid "Page"
+msgstr "الصفحة"
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/models/ksw_signature_document.py:0
+msgid "Page number must be at least 1."
+msgstr "يجب أن يكون رقم الصفحة 1 على الأقل."
+
+#. module: KSW_wacom_signature
+#: model_terms:ir.ui.view,arch_db:KSW_wacom_signature.view_ksw_signature_document_form
+msgid "Placement on PDF"
+msgstr "الموضع على ملف PDF"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__rating_ids
+msgid "Ratings"
+msgstr "التقييمات"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__signature_reason
+msgid "Reason"
+msgstr "السبب"
+
+#. module: KSW_wacom_signature
+#: model_terms:ir.ui.view,arch_db:KSW_wacom_signature.view_ksw_signature_document_form
+msgid "Reset to Draft"
+msgstr "إعادة التعيين كمسودة"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__activity_user_id
+msgid "Responsible User"
+msgstr "المستخدم المسؤول"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "خطأ في تسليم الرسائل النصية القصيرة"
+
+#. module: KSW_wacom_signature
+#: model_terms:ir.ui.view,arch_db:KSW_wacom_signature.view_ksw_signature_document_search
+msgid "Search Signature Documents"
+msgstr "البحث في مستندات التوقيع"
+
+#. module: KSW_wacom_signature
+#. odoo-javascript
+#: code:addons/KSW_wacom_signature/static/src/xml/ksw_wacom_capture_widget.xml:0
+#: model_terms:ir.ui.view,arch_db:KSW_wacom_signature.view_ksw_signature_document_form
+msgid "Signature"
+msgstr "التوقيع"
+
+#. module: KSW_wacom_signature
+#: model_terms:ir.ui.view,arch_db:KSW_wacom_signature.view_ksw_signature_document_form
+msgid "Signature Document"
+msgstr "مستند توقيع"
+
+#. module: KSW_wacom_signature
+#: model:res.groups.privilege,name:KSW_wacom_signature.privilege_wacom_signature
+msgid "Signature Management"
+msgstr "إدارة التواقيع"
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/models/ksw_signature_document.py:0
+msgid "Signature width/height must be positive."
+msgstr "يجب أن يكون عرض التوقيع وارتفاعه موجبين."
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields.selection,name:KSW_wacom_signature.selection__ksw_signature_document__state__signed
+#: model_terms:ir.ui.view,arch_db:KSW_wacom_signature.view_ksw_signature_document_search
+msgid "Signed"
+msgstr "تم التوقيع"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__signed_uid
+msgid "Signed By"
+msgstr "تم التوقيع من قبل"
+
+#. module: KSW_wacom_signature
+#: model_terms:ir.ui.view,arch_db:KSW_wacom_signature.view_ksw_signature_document_form
+msgid "Signed Document"
+msgstr "المستند الموقّع"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__signed_pdf_filename
+msgid "Signed Filename"
+msgstr "اسم الملف الموقّع"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__signed_date
+msgid "Signed On"
+msgstr "تم التوقيع في"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__signed_pdf
+msgid "Signed PDF"
+msgstr "ملف PDF الموقّع"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__signer_name
+msgid "Signer Name"
+msgstr "اسم الموقّع"
+
+#. module: KSW_wacom_signature
+#: model_terms:ir.ui.view,arch_db:KSW_wacom_signature.view_ksw_signature_document_form
+msgid "Source Document"
+msgstr "المستند المصدر"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__source_pdf_filename
+msgid "Source Filename"
+msgstr "اسم الملف الأصلي"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__source_pdf
+msgid "Source PDF"
+msgstr "ملف PDF الأصلي"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__state
+msgid "State"
+msgstr "الحالة"
+
+#. module: KSW_wacom_signature
+#: model_terms:ir.ui.view,arch_db:KSW_wacom_signature.view_ksw_signature_document_search
+msgid "Status"
+msgstr "الحالة"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,help:KSW_wacom_signature.field_ksw_signature_document__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"الأنشطة المعتمدة على الحالة\n"
+"المتأخرة: تاريخ الاستحقاق مر\n"
+"اليوم: تاريخ النشاط هو اليوم\n"
+"المخطط: الأنشطة المستقبلية."
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/models/ksw_signature_document.py:0
+msgid "The source PDF has no pages."
+msgstr "ملف PDF الأصلي ليس فيه صفحات."
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,help:KSW_wacom_signature.field_ksw_signature_document__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "نوع النشاط المستثنى في السجل."
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/models/ksw_signature_document.py:0
+msgid "Unknown"
+msgstr "غير معروف"
+
+#. module: KSW_wacom_signature
+#: model_terms:ir.actions.act_window,help:KSW_wacom_signature.action_ksw_signature_document
+msgid "Upload a PDF and sign it with your Wacom pad"
+msgstr "ارفع ملف PDF ووقّعه بلوح Wacom"
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/models/ksw_signature_document.py:0
+msgid "Upload a source PDF first."
+msgstr "ارفع ملف PDF الأصلي أولاً."
+
+#. module: KSW_wacom_signature
+#: model:res.groups,name:KSW_wacom_signature.group_wacom_signature_user
+msgid "User"
+msgstr "المستخدم"
+
+#. module: KSW_wacom_signature
+#: model:ir.model,name:KSW_wacom_signature.model_ksw_signature_document
+msgid "Wacom Signature Document"
+msgstr "مستند توقيع Wacom"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields.selection,name:KSW_wacom_signature.selection__ksw_signature_document__capture_method__wacom_pad
+msgid "Wacom Signature Pad"
+msgstr "لوح توقيع Wacom"
+
+#. module: KSW_wacom_signature
+#. odoo-javascript
+#: code:addons/KSW_wacom_signature/static/src/js/ksw_wacom_capture_widget.js:0
+msgid "Wacom pad capture failed."
+msgstr "فشل الالتقاط من لوح Wacom."
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__website_message_ids
+msgid "Website Messages"
+msgstr "رسائل الموقع الإلكتروني"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,help:KSW_wacom_signature.field_ksw_signature_document__website_message_ids
+msgid "Website communication history"
+msgstr "سجل تواصل الموقع الإلكتروني"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__sig_width
+msgid "Width (pt)"
+msgstr "العرض (نقطة)"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__pos_x
+msgid "X (pt from left)"
+msgstr "X (نقطة من اليسار)"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__pos_y
+msgid "Y (pt from bottom)"
+msgstr "Y (نقطة من الأسفل)"
+
+#. module: KSW_wacom_signature
+#: model_terms:ir.ui.view,arch_db:KSW_wacom_signature.view_ksw_signature_document_form
+msgid "e.g. Offer Letter - John Doe"
+msgstr "مثال: خطاب عرض - محمد أحمد"

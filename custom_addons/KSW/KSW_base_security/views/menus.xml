@@ -12,4 +12,14 @@
         <value eval="[ref('utm.marketing_utm')]"/>
         <value eval="{'parent_id': ref('base.menu_custom'), 'sequence': 40}"/>
     </function>
+
+    <!-- The Apps installer is declared groups="base.group_system" in base, but
+         odoo_dev had lost that (no groups at all), so every employee saw
+         "Apps" on Home. A one-time edit in the database survives upgrades of
+         a non-noupdate menu only until something rewrites it, so state it here
+         (gotcha #3). -->
+    <function model="ir.ui.menu" name="write">
+        <value eval="[ref('base.menu_management')]"/>
+        <value eval="{'group_ids': [(6, 0, [ref('base.group_system')])]}"/>
+    </function>
 </odoo>

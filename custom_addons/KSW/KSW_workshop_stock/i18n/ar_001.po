@@ -208,2839 +208,2839 @@ msgstr "قطعة غيار مصروفة للورشة"
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0005
 msgid "إسطب"
-msgstr ""
+msgstr "إسطب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0424
 msgid "إسطب خلف"
-msgstr ""
+msgstr "إسطب خلف"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0425
 msgid "إسطب فلاش"
-msgstr ""
+msgstr "إسطب فلاش"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0243
 msgid "إسطب لوحة"
-msgstr ""
+msgstr "إسطب لوحة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0142
 msgid "إسطب ليزر"
-msgstr ""
+msgstr "إسطب ليزر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0143
 msgid "إشارة"
-msgstr ""
+msgstr "إشارة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0049
 msgid "إصبع بطارية"
-msgstr ""
+msgstr "إصبع بطارية"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0293
 msgid "ادابتر"
-msgstr ""
+msgstr "ادابتر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0141
 msgid "استيكر"
-msgstr ""
+msgstr "استيكر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0242
 msgid "استيكر سيفتي"
-msgstr ""
+msgstr "استيكر سيفتي"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0426
 msgid "افرول"
-msgstr ""
+msgstr "افرول"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0244
 msgid "اقتران"
-msgstr ""
+msgstr "اقتران"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0427
 msgid "انبوب"
-msgstr ""
+msgstr "انبوب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0428
 msgid "انبوب فولاذي"
-msgstr ""
+msgstr "انبوب فولاذي"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0294
 msgid "ايم سيل"
-msgstr ""
+msgstr "ايم سيل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0047
 msgid "باكم"
-msgstr ""
+msgstr "باكم"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0018
 msgid "باكم فرامل"
-msgstr ""
+msgstr "باكم فرامل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0215
 msgid "باكم هواء"
-msgstr ""
+msgstr "باكم هواء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0006
 msgid "بالون"
-msgstr ""
+msgstr "بالون"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0338
 msgid "بالون قاعدة"
-msgstr ""
+msgstr "بالون قاعدة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0429
 msgid "بالون قاعدة بلاستيك"
-msgstr ""
+msgstr "بالون قاعدة بلاستيك"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0339
 msgid "بالون قاعدة حديد"
-msgstr ""
+msgstr "بالون قاعدة حديد"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0265
 msgid "بالون هواء بقاعدة"
-msgstr ""
+msgstr "بالون هواء بقاعدة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0120
 msgid "بخاخ"
-msgstr ""
+msgstr "بخاخ"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0430
 msgid "بخاخ بوية"
-msgstr ""
+msgstr "بخاخ بوية"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0295
 msgid "بخاخ ماء"
-msgstr ""
+msgstr "بخاخ ماء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0041
 msgid "برشام"
-msgstr ""
+msgstr "برشام"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0170
 msgid "برشام قماش فرامل"
-msgstr ""
+msgstr "برشام قماش فرامل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0050
 msgid "برغي"
-msgstr ""
+msgstr "برغي"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0245
 msgid "برميل شحم"
-msgstr ""
+msgstr "برميل شحم"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0136
 msgid "بستم"
-msgstr ""
+msgstr "بستم"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0340
 msgid "بستم ماكينة"
-msgstr ""
+msgstr "بستم ماكينة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0014
 msgid "بطارية"
-msgstr ""
+msgstr "بطارية"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0053
 msgid "بطارية 170 أمبير"
-msgstr ""
+msgstr "بطارية 170 أمبير"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0144
 msgid "بطارية 180 أمبير"
-msgstr ""
+msgstr "بطارية 180 أمبير"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0066
 msgid "بطارية 200 أمبير"
-msgstr ""
+msgstr "بطارية 200 أمبير"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0171
 msgid "بطارية 230 أمبير"
-msgstr ""
+msgstr "بطارية 230 أمبير"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0341
 msgid "بطارية ريموت"
-msgstr ""
+msgstr "بطارية ريموت"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0121
 msgid "بطانة فرامل"
-msgstr ""
+msgstr "بطانة فرامل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0342
 msgid "بكرة"
-msgstr ""
+msgstr "بكرة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0343
 msgid "بلاستيك"
-msgstr ""
+msgstr "بلاستيك"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0431
 msgid "بلاستيك بلف شاص"
-msgstr ""
+msgstr "بلاستيك بلف شاص"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0156
 msgid "بلاستيك بنز"
-msgstr ""
+msgstr "بلاستيك بنز"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0432
 msgid "بلاطة"
-msgstr ""
+msgstr "بلاطة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0344
 msgid "بلاطة ماطور"
-msgstr ""
+msgstr "بلاطة ماطور"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0030
 msgid "بلف"
-msgstr ""
+msgstr "بلف"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0433
 msgid "بلف بالون"
-msgstr ""
+msgstr "بلف بالون"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0434
 msgid "بلف توسيع"
-msgstr ""
+msgstr "بلف توسيع"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0435
 msgid "بلف ثلاجة"
-msgstr ""
+msgstr "بلف ثلاجة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0436
 msgid "بلف حرارة"
-msgstr ""
+msgstr "بلف حرارة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0246
 msgid "بلف حلاب"
-msgstr ""
+msgstr "بلف حلاب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0437
 msgid "بلف خزان"
-msgstr ""
+msgstr "بلف خزان"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0189
 msgid "بلف صاروخ"
-msgstr ""
+msgstr "بلف صاروخ"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0098
 msgid "بلف عطاس"
-msgstr ""
+msgstr "بلف عطاس"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0205
 msgid "بلف فرامل"
-msgstr ""
+msgstr "بلف فرامل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0438
 msgid "بلف كفر"
-msgstr ""
+msgstr "بلف كفر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0439
 msgid "بلف كهرباء"
-msgstr ""
+msgstr "بلف كهرباء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0440
 msgid "بلف مكيف"
-msgstr ""
+msgstr "بلف مكيف"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0296
 msgid "بلف هواء"
-msgstr ""
+msgstr "بلف هواء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0345
 msgid "بلية عمود ميزان"
-msgstr ""
+msgstr "بلية عمود ميزان"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0145
 msgid "بنز"
-msgstr ""
+msgstr "بنز"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0096
 msgid "بنز كليبر"
-msgstr ""
+msgstr "بنز كليبر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0099
 msgid "بوجي"
-msgstr ""
+msgstr "بوجي"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0346
 msgid "بودرة رديتر"
-msgstr ""
+msgstr "بودرة رديتر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0042
 msgid "بوري"
-msgstr ""
+msgstr "بوري"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0078
 msgid "بوري ريوس"
-msgstr ""
+msgstr "بوري ريوس"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0216
 msgid "بوستر"
-msgstr ""
+msgstr "بوستر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0122
 msgid "بوستر فرامل"
-msgstr ""
+msgstr "بوستر فرامل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0137
 msgid "بوستر كلاتش"
-msgstr ""
+msgstr "بوستر كلاتش"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0441
 msgid "بوش"
-msgstr ""
+msgstr "بوش"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0090
 msgid "بوشنج"
-msgstr ""
+msgstr "بوشنج"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0012
 msgid "بوية"
-msgstr ""
+msgstr "بوية"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0091
 msgid "بيرنج"
-msgstr ""
+msgstr "بيرنج"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0297
 msgid "تاكوقراف"
-msgstr ""
+msgstr "تاكوقراف"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0298
 msgid "تحويلة"
-msgstr ""
+msgstr "تحويلة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0299
 msgid "ترس سلف"
-msgstr ""
+msgstr "ترس سلف"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0347
 msgid "ترموستات"
-msgstr ""
+msgstr "ترموستات"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0348
 msgid "تكاية كفر"
-msgstr ""
+msgstr "تكاية كفر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0266
 msgid "تلبيسة دركسيون"
-msgstr ""
+msgstr "تلبيسة دركسيون"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0349
 msgid "تماتيك فرامل"
-msgstr ""
+msgstr "تماتيك فرامل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0300
 msgid "تنر"
-msgstr ""
+msgstr "تنر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0067
 msgid "توصيلة"
-msgstr ""
+msgstr "توصيلة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0301
 msgid "توصيلة حديد"
-msgstr ""
+msgstr "توصيلة حديد"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0350
 msgid "توصيلة خرتوش رديتر"
-msgstr ""
+msgstr "توصيلة خرتوش رديتر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0442
 msgid "توصيلة معدن"
-msgstr ""
+msgstr "توصيلة معدن"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0172
 msgid "توصيلة هواء"
-msgstr ""
+msgstr "توصيلة هواء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0108
 msgid "تيب"
-msgstr ""
+msgstr "تيب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0247
 msgid "تيب سنة"
-msgstr ""
+msgstr "تيب سنة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0443
 msgid "تيفلون دودة"
-msgstr ""
+msgstr "تيفلون دودة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0351
 msgid "تيفلون دودة دركسيون"
-msgstr ""
+msgstr "تيفلون دودة دركسيون"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0164
 msgid "تيلة"
-msgstr ""
+msgstr "تيلة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0173
 msgid "تيوب"
-msgstr ""
+msgstr "تيوب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0037
 msgid "جاسكت"
-msgstr ""
+msgstr "جاسكت"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0444
 msgid "جاسكت ماكينة"
-msgstr ""
+msgstr "جاسكت ماكينة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0267
 msgid "جاسكت مبخرة زيت"
-msgstr ""
+msgstr "جاسكت مبخرة زيت"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0020
 msgid "جلبة"
-msgstr ""
+msgstr "جلبة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0445
 msgid "جلبة انثي نحاس"
-msgstr ""
+msgstr "جلبة انثي نحاس"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0138
 msgid "جلبة بنز"
-msgstr ""
+msgstr "جلبة بنز"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0217
 msgid "جلبة توازن"
-msgstr ""
+msgstr "جلبة توازن"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0446
 msgid "جلبة توازن غمارة"
-msgstr ""
+msgstr "جلبة توازن غمارة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0447
 msgid "جلبة حديد"
-msgstr ""
+msgstr "جلبة حديد"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0302
 msgid "جلبة ذكر"
-msgstr ""
+msgstr "جلبة ذكر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0448
 msgid "جلبة رباط"
-msgstr ""
+msgstr "جلبة رباط"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0449
 msgid "جلبة ركبة توازن نحاس"
-msgstr ""
+msgstr "جلبة ركبة توازن نحاس"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0450
 msgid "جلبة سوست"
-msgstr ""
+msgstr "جلبة سوست"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0248
 msgid "جلبة شاصية"
-msgstr ""
+msgstr "جلبة شاصية"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0451
 msgid "جلبة عمود توازن"
-msgstr ""
+msgstr "جلبة عمود توازن"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0190
 msgid "جلبة عمود ميزان"
-msgstr ""
+msgstr "جلبة عمود ميزان"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0088
 msgid "جلبة غمارة"
-msgstr ""
+msgstr "جلبة غمارة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0452
 msgid "جلبة كابينة"
-msgstr ""
+msgstr "جلبة كابينة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0079
 msgid "جلبة كليبر"
-msgstr ""
+msgstr "جلبة كليبر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0453
 msgid "جلبة ميزانية"
-msgstr ""
+msgstr "جلبة ميزانية"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0206
 msgid "جلبة نحاس"
-msgstr ""
+msgstr "جلبة نحاس"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0126
 msgid "جلدة"
-msgstr ""
+msgstr "جلدة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0352
 msgid "جلدة سوست"
-msgstr ""
+msgstr "جلدة سوست"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0303
 msgid "جلدة غمارة"
-msgstr ""
+msgstr "جلدة غمارة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0353
 msgid "جلدة مطب"
-msgstr ""
+msgstr "جلدة مطب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0354
 msgid "جلدة مطب سوست"
-msgstr ""
+msgstr "جلدة مطب سوست"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0355
 msgid "جملكة"
-msgstr ""
+msgstr "جملكة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0304
 msgid "جنزير"
-msgstr ""
+msgstr "جنزير"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0356
 msgid "جنزير كليبر"
-msgstr ""
+msgstr "جنزير كليبر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0027
 msgid "جنط"
-msgstr ""
+msgstr "جنط"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0139
 msgid "جنط تيوبلس"
-msgstr ""
+msgstr "جنط تيوبلس"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0454
 msgid "جويزة مقص"
-msgstr ""
+msgstr "جويزة مقص"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0455
 msgid "جير"
-msgstr ""
+msgstr "جير"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0456
 msgid "حداف"
-msgstr ""
+msgstr "حداف"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0457
 msgid "حديد قماش"
-msgstr ""
+msgstr "حديد قماش"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0146
 msgid "حذاء فرامل"
-msgstr ""
+msgstr "حذاء فرامل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0458
 msgid "حركة كليبر"
-msgstr ""
+msgstr "حركة كليبر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0100
 msgid "حزام"
-msgstr ""
+msgstr "حزام"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0045
 msgid "حساس"
-msgstr ""
+msgstr "حساس"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0357
 msgid "حساس ABS"
-msgstr ""
+msgstr "حساس ABS"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0358
 msgid "حساس بالون"
-msgstr ""
+msgstr "حساس بالون"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0359
 msgid "حساس جير"
-msgstr ""
+msgstr "حساس جير"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0249
 msgid "حساس حزام"
-msgstr ""
+msgstr "حساس حزام"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0218
 msgid "حساس زيت"
-msgstr ""
+msgstr "حساس زيت"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0459
 msgid "حساس ضغط زيت"
-msgstr ""
+msgstr "حساس ضغط زيت"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0268
 msgid "حساس فرامل"
-msgstr ""
+msgstr "حساس فرامل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0360
 msgid "حساس كفر"
-msgstr ""
+msgstr "حساس كفر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0460
 msgid "حساس منفاخ"
-msgstr ""
+msgstr "حساس منفاخ"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0361
 msgid "حشوة"
-msgstr ""
+msgstr "حشوة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0147
 msgid "حقيبة إسعافات"
-msgstr ""
+msgstr "حقيبة إسعافات"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0269
 msgid "حلمة"
-msgstr ""
+msgstr "حلمة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0270
 msgid "خابور"
-msgstr ""
+msgstr "خابور"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0362
 msgid "خرطوش دينمو"
-msgstr ""
+msgstr "خرطوش دينمو"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0363
 msgid "خرطوشة مجفف هواء"
-msgstr ""
+msgstr "خرطوشة مجفف هواء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0207
 msgid "خزان"
-msgstr ""
+msgstr "خزان"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0461
 msgid "خزان ديزل"
-msgstr ""
+msgstr "خزان ديزل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0462
 msgid "خزان هواء"
-msgstr ""
+msgstr "خزان هواء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0463
 msgid "خط ديزل"
-msgstr ""
+msgstr "خط ديزل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0364
 msgid "دبة رديتر"
-msgstr ""
+msgstr "دبة رديتر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0464
 msgid "دبوس"
-msgstr ""
+msgstr "دبوس"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0034
 msgid "دسك فرامل"
-msgstr ""
+msgstr "دسك فرامل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0250
 msgid "دسك كفر"
-msgstr ""
+msgstr "دسك كفر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0133
 msgid "دسك كلاتش"
-msgstr ""
+msgstr "دسك كلاتش"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0465
 msgid "دعامة"
-msgstr ""
+msgstr "دعامة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0305
 msgid "دعسة"
-msgstr ""
+msgstr "دعسة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0365
 msgid "دقمة بلف عطاس"
-msgstr ""
+msgstr "دقمة بلف عطاس"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0466
 msgid "دودة دركسيون"
-msgstr ""
+msgstr "دودة دركسيون"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0366
 msgid "ديكور"
-msgstr ""
+msgstr "ديكور"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0367
 msgid "ديكور صدام"
-msgstr ""
+msgstr "ديكور صدام"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0061
 msgid "دينمو"
-msgstr ""
+msgstr "دينمو"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0113
 msgid "ذراع"
-msgstr ""
+msgstr "ذراع"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0467
 msgid "ذراع توصيل"
-msgstr ""
+msgstr "ذراع توصيل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0051
 msgid "ذراع دركسيون"
-msgstr ""
+msgstr "ذراع دركسيون"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0368
 msgid "ذراع ماطور"
-msgstr ""
+msgstr "ذراع ماطور"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0468
 msgid "ذراع ميزانية"
-msgstr ""
+msgstr "ذراع ميزانية"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0306
 msgid "راحة"
-msgstr ""
+msgstr "راحة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0469
 msgid "راحة هلال"
-msgstr ""
+msgstr "راحة هلال"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0114
 msgid "رباط"
-msgstr ""
+msgstr "رباط"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0208
 msgid "ربر"
-msgstr ""
+msgstr "ربر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0038
 msgid "ربلة"
-msgstr ""
+msgstr "ربلة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0174
 msgid "ربلة بنز"
-msgstr ""
+msgstr "ربلة بنز"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0271
 msgid "ربلة ذراع كفر"
-msgstr ""
+msgstr "ربلة ذراع كفر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0191
 msgid "ربلة زيت"
-msgstr ""
+msgstr "ربلة زيت"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0219
 msgid "ربلة سوست"
-msgstr ""
+msgstr "ربلة سوست"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0307
 msgid "ربلة عمود"
-msgstr ""
+msgstr "ربلة عمود"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0470
 msgid "ربلة قاعدة"
-msgstr ""
+msgstr "ربلة قاعدة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0157
 msgid "ربلة قميص"
-msgstr ""
+msgstr "ربلة قميص"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0471
 msgid "ربلة ماسورة"
-msgstr ""
+msgstr "ربلة ماسورة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0472
 msgid "ربلة ماسورة بخاخ"
-msgstr ""
+msgstr "ربلة ماسورة بخاخ"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0308
 msgid "ربلة ماطور"
-msgstr ""
+msgstr "ربلة ماطور"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0369
 msgid "ربلة ماطور هواء"
-msgstr ""
+msgstr "ربلة ماطور هواء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0473
 msgid "ربلة مبرد زيت"
-msgstr ""
+msgstr "ربلة مبرد زيت"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0309
 msgid "ربير كيت"
-msgstr ""
+msgstr "ربير كيت"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0039
 msgid "رديتر"
-msgstr ""
+msgstr "رديتر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0272
 msgid "رديتر مكيف"
-msgstr ""
+msgstr "رديتر مكيف"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0048
 msgid "رفرف"
-msgstr ""
+msgstr "رفرف"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0474
 msgid "رفرف امام"
-msgstr ""
+msgstr "رفرف امام"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0475
 msgid "رفرف طيني"
-msgstr ""
+msgstr "رفرف طيني"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0370
 msgid "ركبة"
-msgstr ""
+msgstr "ركبة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0273
 msgid "ركبة توازن"
-msgstr ""
+msgstr "ركبة توازن"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0021
 msgid "رمان"
-msgstr ""
+msgstr "رمان"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0476
 msgid "رمان كفر"
-msgstr ""
+msgstr "رمان كفر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0251
 msgid "رمان كليبر"
-msgstr ""
+msgstr "رمان كليبر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0371
 msgid "رمان هوب"
-msgstr ""
+msgstr "رمان هوب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0274
 msgid "رنديلة"
-msgstr ""
+msgstr "رنديلة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0372
 msgid "رولر"
-msgstr ""
+msgstr "رولر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0175
 msgid "ريت ماطور"
-msgstr ""
+msgstr "ريت ماطور"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0101
 msgid "ريش"
-msgstr ""
+msgstr "ريش"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0069
 msgid "زجاج"
-msgstr ""
+msgstr "زجاج"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0477
 msgid "زجاج امام"
-msgstr ""
+msgstr "زجاج امام"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0102
 msgid "زجاج شمعة"
-msgstr ""
+msgstr "زجاج شمعة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0092
 msgid "زيت جير"
-msgstr ""
+msgstr "زيت جير"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0035
 msgid "زيت دركسيون"
-msgstr ""
+msgstr "زيت دركسيون"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0478
 msgid "زيت شحم"
-msgstr ""
+msgstr "زيت شحم"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0148
 msgid "زيت فرامل"
-msgstr ""
+msgstr "زيت فرامل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0011
 msgid "زيت ماكينة"
-msgstr ""
+msgstr "زيت ماكينة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0479
 msgid "سبائك ماكينة"
-msgstr ""
+msgstr "سبائك ماكينة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0097
 msgid "سباكة"
-msgstr ""
+msgstr "سباكة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0220
 msgid "سبرنج"
-msgstr ""
+msgstr "سبرنج"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0373
 msgid "سبرنج فرامل"
-msgstr ""
+msgstr "سبرنج فرامل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0374
 msgid "ستارتر"
-msgstr ""
+msgstr "ستارتر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0103
 msgid "سدة"
-msgstr ""
+msgstr "سدة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0480
 msgid "سدة هاف ام بي"
-msgstr ""
+msgstr "سدة هاف ام بي"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0149
 msgid "سلف"
-msgstr ""
+msgstr "سلف"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0481
 msgid "سلف ماكينة"
-msgstr ""
+msgstr "سلف ماكينة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0036
 msgid "سلك"
-msgstr ""
+msgstr "سلك"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0482
 msgid "سلك باب"
-msgstr ""
+msgstr "سلك باب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0483
 msgid "سلك حلزوني"
-msgstr ""
+msgstr "سلك حلزوني"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0080
 msgid "سلك كهرباء"
-msgstr ""
+msgstr "سلك كهرباء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0150
 msgid "سلندر"
-msgstr ""
+msgstr "سلندر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0044
 msgid "سلندر فرامل"
-msgstr ""
+msgstr "سلندر فرامل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0375
 msgid "سلندر كلاتش"
-msgstr ""
+msgstr "سلندر كلاتش"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0484
 msgid "سنة كليبر"
-msgstr ""
+msgstr "سنة كليبر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0025
 msgid "سوست"
-msgstr ""
+msgstr "سوست"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0252
 msgid "سوست باكم"
-msgstr ""
+msgstr "سوست باكم"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0376
 msgid "سويتش"
-msgstr ""
+msgstr "سويتش"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0485
 msgid "سيخ بالون"
-msgstr ""
+msgstr "سيخ بالون"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0486
 msgid "سيخ منافيخ"
-msgstr ""
+msgstr "سيخ منافيخ"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0253
 msgid "سيخ ميزانية"
-msgstr ""
+msgstr "سيخ ميزانية"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0209
 msgid "سير"
-msgstr ""
+msgstr "سير"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0377
 msgid "سير دينمو"
-msgstr ""
+msgstr "سير دينمو"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0064
 msgid "سير ماكينة"
-msgstr ""
+msgstr "سير ماكينة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0310
 msgid "سير محرك"
-msgstr ""
+msgstr "سير محرك"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0158
 msgid "سير مروحة"
-msgstr ""
+msgstr "سير مروحة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0487
 msgid "سير مكيف"
-msgstr ""
+msgstr "سير مكيف"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0104
 msgid "سيفتي"
-msgstr ""
+msgstr "سيفتي"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0378
 msgid "سيفون"
-msgstr ""
+msgstr "سيفون"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0488
 msgid "سيل"
-msgstr ""
+msgstr "سيل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0016
 msgid "سيليكون"
-msgstr ""
+msgstr "سيليكون"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0221
 msgid "شبك"
-msgstr ""
+msgstr "شبك"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0489
 msgid "شبك امام"
-msgstr ""
+msgstr "شبك امام"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0490
 msgid "شبك دعسة درج"
-msgstr ""
+msgstr "شبك دعسة درج"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0007
 msgid "شحم"
-msgstr ""
+msgstr "شحم"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0491
 msgid "شد وصل"
-msgstr ""
+msgstr "شد وصل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0222
 msgid "شداد"
-msgstr ""
+msgstr "شداد"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0379
 msgid "شداد دينمو"
-msgstr ""
+msgstr "شداد دينمو"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0072
 msgid "شداد سير"
-msgstr ""
+msgstr "شداد سير"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0223
 msgid "شريط"
-msgstr ""
+msgstr "شريط"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0054
 msgid "شريط عاكس"
-msgstr ""
+msgstr "شريط عاكس"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0224
 msgid "شطرطون"
-msgstr ""
+msgstr "شطرطون"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0192
 msgid "شفرات المساحات"
-msgstr ""
+msgstr "شفرات المساحات"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0127
 msgid "شمبر فرامل"
-msgstr ""
+msgstr "شمبر فرامل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0492
 msgid "شمبر ماطور"
-msgstr ""
+msgstr "شمبر ماطور"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0128
 msgid "شمعة"
-msgstr ""
+msgstr "شمعة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0275
 msgid "شمعة فلتر"
-msgstr ""
+msgstr "شمعة فلتر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0140
 msgid "شمعة نور"
-msgstr ""
+msgstr "شمعة نور"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0311
 msgid "شوكة"
-msgstr ""
+msgstr "شوكة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0276
 msgid "صاج"
-msgstr ""
+msgstr "صاج"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0129
 msgid "صاجة"
-msgstr ""
+msgstr "صاجة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0312
 msgid "صاجة حساس"
-msgstr ""
+msgstr "صاجة حساس"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0493
 msgid "صاجة حساس فرامل"
-msgstr ""
+msgstr "صاجة حساس فرامل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0494
 msgid "صاجة حساس كفر"
-msgstr ""
+msgstr "صاجة حساس كفر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0017
 msgid "صامولة"
-msgstr ""
+msgstr "صامولة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0277
 msgid "صامولة كفر"
-msgstr ""
+msgstr "صامولة كفر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0380
 msgid "صامولة مسمار"
-msgstr ""
+msgstr "صامولة مسمار"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0115
 msgid "صحن كلاتش"
-msgstr ""
+msgstr "صحن كلاتش"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0109
 msgid "صدام"
-msgstr ""
+msgstr "صدام"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0495
 msgid "صرة زيت"
-msgstr ""
+msgstr "صرة زيت"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0176
 msgid "صفائح حديد"
-msgstr ""
+msgstr "صفائح حديد"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0381
 msgid "صنفرة"
-msgstr ""
+msgstr "صنفرة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0382
 msgid "صوف قاعدة"
-msgstr ""
+msgstr "صوف قاعدة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0024
 msgid "صوفة"
-msgstr ""
+msgstr "صوفة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0313
 msgid "صوفة اصلاح"
-msgstr ""
+msgstr "صوفة اصلاح"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0496
 msgid "صوفة جير"
-msgstr ""
+msgstr "صوفة جير"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0497
 msgid "صوفة دركسيون"
-msgstr ""
+msgstr "صوفة دركسيون"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0130
 msgid "صوفة زيت"
-msgstr ""
+msgstr "صوفة زيت"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0159
 msgid "صوفة صندوق"
-msgstr ""
+msgstr "صوفة صندوق"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0498
 msgid "صوفة فكسة"
-msgstr ""
+msgstr "صوفة فكسة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0110
 msgid "صوفة كفر"
-msgstr ""
+msgstr "صوفة كفر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0499
 msgid "صوفة ماكينة"
-msgstr ""
+msgstr "صوفة ماكينة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0383
 msgid "صوفة هوب"
-msgstr ""
+msgstr "صوفة هوب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0151
 msgid "طبة"
-msgstr ""
+msgstr "طبة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0210
 msgid "طبة بنز"
-msgstr ""
+msgstr "طبة بنز"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0500
 msgid "طبة سدة"
-msgstr ""
+msgstr "طبة سدة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0211
 msgid "طبة كليبر"
-msgstr ""
+msgstr "طبة كليبر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0131
 msgid "طرمبة"
-msgstr ""
+msgstr "طرمبة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0177
 msgid "طرمبة دركسيون"
-msgstr ""
+msgstr "طرمبة دركسيون"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0254
 msgid "طرمبة ديزل"
-msgstr ""
+msgstr "طرمبة ديزل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0178
 msgid "طرمبة زيت"
-msgstr ""
+msgstr "طرمبة زيت"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0013
 msgid "طرمبة ماء"
-msgstr ""
+msgstr "طرمبة ماء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0384
 msgid "طرمبة ممسحة"
-msgstr ""
+msgstr "طرمبة ممسحة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0055
 msgid "طفاية حريق"
-msgstr ""
+msgstr "طفاية حريق"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0002
 msgid "طقم فلاتر"
-msgstr ""
+msgstr "طقم فلاتر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0314
 msgid "ظفيرة"
-msgstr ""
+msgstr "ظفيرة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0315
 msgid "عازل كهربائي"
-msgstr ""
+msgstr "عازل كهربائي"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0165
 msgid "عاكس"
-msgstr ""
+msgstr "عاكس"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0501
 msgid "عاكس فحص"
-msgstr ""
+msgstr "عاكس فحص"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0179
 msgid "عطاس"
-msgstr ""
+msgstr "عطاس"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0502
 msgid "عكوس"
-msgstr ""
+msgstr "عكوس"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0193
 msgid "علبة كلاتش"
-msgstr ""
+msgstr "علبة كلاتش"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0278
 msgid "عمود"
-msgstr ""
+msgstr "عمود"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0225
 msgid "عمود دركسيون"
-msgstr ""
+msgstr "عمود دركسيون"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0132
 msgid "غراء"
-msgstr ""
+msgstr "غراء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0076
 msgid "غطاء"
-msgstr ""
+msgstr "غطاء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0160
 msgid "غطاء إسطب"
-msgstr ""
+msgstr "غطاء إسطب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0212
 msgid "غطاء بطارية"
-msgstr ""
+msgstr "غطاء بطارية"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0105
 msgid "غطاء بلاستيك"
-msgstr ""
+msgstr "غطاء بلاستيك"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0081
 msgid "غطاء بنز"
-msgstr ""
+msgstr "غطاء بنز"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0503
 msgid "غطاء تشغيل ماطور"
-msgstr ""
+msgstr "غطاء تشغيل ماطور"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0123
 msgid "غطاء تنك ديزل"
-msgstr ""
+msgstr "غطاء تنك ديزل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0194
 msgid "غطاء توازن"
-msgstr ""
+msgstr "غطاء توازن"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0316
 msgid "غطاء جير"
-msgstr ""
+msgstr "غطاء جير"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0385
 msgid "غطاء حركة"
-msgstr ""
+msgstr "غطاء حركة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0504
 msgid "غطاء رديتر"
-msgstr ""
+msgstr "غطاء رديتر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0166
 msgid "غطاء رفرف"
-msgstr ""
+msgstr "غطاء رفرف"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0058
 msgid "غطاء شحم"
-msgstr ""
+msgstr "غطاء شحم"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0386
 msgid "غطاء فيوز"
-msgstr ""
+msgstr "غطاء فيوز"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0505
 msgid "غطاء لمبة"
-msgstr ""
+msgstr "غطاء لمبة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0506
 msgid "غطاء ميزانية"
-msgstr ""
+msgstr "غطاء ميزانية"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0134
 msgid "غطاء هوب"
-msgstr ""
+msgstr "غطاء هوب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0317
 msgid "فاصل زيت"
-msgstr ""
+msgstr "فاصل زيت"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0387
 msgid "فالف"
-msgstr ""
+msgstr "فالف"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0032
 msgid "فحمة"
-msgstr ""
+msgstr "فحمة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0507
 msgid "فحمة دينمو"
-msgstr ""
+msgstr "فحمة دينمو"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0152
 msgid "فحمة كلاتش"
-msgstr ""
+msgstr "فحمة كلاتش"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0180
 msgid "فخد دفرنش"
-msgstr ""
+msgstr "فخد دفرنش"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0388
 msgid "فخد قاعدة"
-msgstr ""
+msgstr "فخد قاعدة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0508
 msgid "فرامل هواء"
-msgstr ""
+msgstr "فرامل هواء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0509
 msgid "فرشة"
-msgstr ""
+msgstr "فرشة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0093
 msgid "فريون"
-msgstr ""
+msgstr "فريون"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0510
 msgid "فلتر بخار"
-msgstr ""
+msgstr "فلتر بخار"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0389
 msgid "فلتر بلف عطاس"
-msgstr ""
+msgstr "فلتر بلف عطاس"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0181
 msgid "فلتر دركسيون"
-msgstr ""
+msgstr "فلتر دركسيون"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0003
 msgid "فلتر ديزل"
-msgstr ""
+msgstr "فلتر ديزل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0001
 msgid "فلتر زيت"
-msgstr ""
+msgstr "فلتر زيت"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0028
 msgid "فلتر عطاس"
-msgstr ""
+msgstr "فلتر عطاس"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0390
 msgid "فلتر ماء"
-msgstr ""
+msgstr "فلتر ماء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0116
 msgid "فلتر مبخرة"
-msgstr ""
+msgstr "فلتر مبخرة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0094
 msgid "فلتر مكيف"
-msgstr ""
+msgstr "فلتر مكيف"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0010
 msgid "فلتر هواء"
-msgstr ""
+msgstr "فلتر هواء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0511
 msgid "فلتر هواء دائري"
-msgstr ""
+msgstr "فلتر هواء دائري"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0033
 msgid "فلنجة"
-msgstr ""
+msgstr "فلنجة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0512
 msgid "فلنجة قاعدة"
-msgstr ""
+msgstr "فلنجة قاعدة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0513
 msgid "فلنجة كفر"
-msgstr ""
+msgstr "فلنجة كفر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0226
 msgid "فلنجة هوب"
-msgstr ""
+msgstr "فلنجة هوب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0111
 msgid "فيش"
-msgstr ""
+msgstr "فيش"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0514
 msgid "فيش شمعة"
-msgstr ""
+msgstr "فيش شمعة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0195
 msgid "فيش كهرباء"
-msgstr ""
+msgstr "فيش كهرباء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0515
 msgid "فيشة"
-msgstr ""
+msgstr "فيشة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0161
 msgid "قاعدة"
-msgstr ""
+msgstr "قاعدة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0516
 msgid "قاعدة بطارية"
-msgstr ""
+msgstr "قاعدة بطارية"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0391
 msgid "قاعدة صدام"
-msgstr ""
+msgstr "قاعدة صدام"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0517
 msgid "قاعدة فيش"
-msgstr ""
+msgstr "قاعدة فيش"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0318
 msgid "قاعدة مسمار"
-msgstr ""
+msgstr "قاعدة مسمار"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0518
 msgid "قبقاب"
-msgstr ""
+msgstr "قبقاب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0392
 msgid "قبقاب قماش"
-msgstr ""
+msgstr "قبقاب قماش"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0393
 msgid "قربة رديتر"
-msgstr ""
+msgstr "قربة رديتر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0519
 msgid "قربة ماء"
-msgstr ""
+msgstr "قربة ماء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0520
 msgid "قطاعات حديد"
-msgstr ""
+msgstr "قطاعات حديد"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0084
 msgid "قفزان"
-msgstr ""
+msgstr "قفزان"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0394
 msgid "قفزان لي"
-msgstr ""
+msgstr "قفزان لي"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0106
 msgid "قفل"
-msgstr ""
+msgstr "قفل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0319
 msgid "قفل باب"
-msgstr ""
+msgstr "قفل باب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0196
 msgid "قفل بالون"
-msgstr ""
+msgstr "قفل بالون"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0521
 msgid "قفل بطارية"
-msgstr ""
+msgstr "قفل بطارية"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0395
 msgid "قفل جير"
-msgstr ""
+msgstr "قفل جير"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0022
 msgid "قفيز"
-msgstr ""
+msgstr "قفيز"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0522
 msgid "قفيز قاعدة"
-msgstr ""
+msgstr "قفيز قاعدة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0227
 msgid "قفيز لي هواء"
-msgstr ""
+msgstr "قفيز لي هواء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0396
 msgid "قفيز هوز"
-msgstr ""
+msgstr "قفيز هوز"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0004
 msgid "قماش فرامل"
-msgstr ""
+msgstr "قماش فرامل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0279
 msgid "قميص"
-msgstr ""
+msgstr "قميص"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0397
 msgid "قميص ماطور هواء"
-msgstr ""
+msgstr "قميص ماطور هواء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0320
 msgid "كابانج"
-msgstr ""
+msgstr "كابانج"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0085
 msgid "كابل"
-msgstr ""
+msgstr "كابل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0162
 msgid "كابل كهرباء"
-msgstr ""
+msgstr "كابل كهرباء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0523
 msgid "كابل لحام"
-msgstr ""
+msgstr "كابل لحام"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0321
 msgid "كابل هواء"
-msgstr ""
+msgstr "كابل هواء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0213
 msgid "كارونة"
-msgstr ""
+msgstr "كارونة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0398
 msgid "كاميرات"
-msgstr ""
+msgstr "كاميرات"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0197
 msgid "كرسي"
-msgstr ""
+msgstr "كرسي"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0255
 msgid "كرسي جير"
-msgstr ""
+msgstr "كرسي جير"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0524
 msgid "كرسي دينمو"
-msgstr ""
+msgstr "كرسي دينمو"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0525
 msgid "كرسي قماش"
-msgstr ""
+msgstr "كرسي قماش"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0112
 msgid "كرسي ماكينة"
-msgstr ""
+msgstr "كرسي ماكينة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0089
 msgid "كشاف"
-msgstr ""
+msgstr "كشاف"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0399
 msgid "كشاف ضباب"
-msgstr ""
+msgstr "كشاف ضباب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0163
 msgid "كشاف مربع"
-msgstr ""
+msgstr "كشاف مربع"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0046
 msgid "كف هواء"
-msgstr ""
+msgstr "كف هواء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0568
 msgid "كفرات"
-msgstr ""
+msgstr "كفرات"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0095
 msgid "كلاتش"
-msgstr ""
+msgstr "كلاتش"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0400
 msgid "كلاتش مروحة"
-msgstr ""
+msgstr "كلاتش مروحة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0526
 msgid "كلامب"
-msgstr ""
+msgstr "كلامب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0322
 msgid "كلبس هوز"
-msgstr ""
+msgstr "كلبس هوز"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0256
 msgid "كلبسات"
-msgstr ""
+msgstr "كلبسات"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0401
 msgid "كليب هوز"
-msgstr ""
+msgstr "كليب هوز"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0124
 msgid "كليبر"
-msgstr ""
+msgstr "كليبر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0073
 msgid "كمبريسور"
-msgstr ""
+msgstr "كمبريسور"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0527
 msgid "كمبيوتر"
-msgstr ""
+msgstr "كمبيوتر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0528
 msgid "كمبيوتر جير"
-msgstr ""
+msgstr "كمبيوتر جير"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0402
 msgid "كمر شاص"
-msgstr ""
+msgstr "كمر شاص"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0077
 msgid "كوبلنج"
-msgstr ""
+msgstr "كوبلنج"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0062
 msgid "كوع"
-msgstr ""
+msgstr "كوع"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0228
 msgid "كوع حديد"
-msgstr ""
+msgstr "كوع حديد"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0529
 msgid "كوع دركسيون"
-msgstr ""
+msgstr "كوع دركسيون"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0323
 msgid "كوع زاوية"
-msgstr ""
+msgstr "كوع زاوية"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0324
 msgid "كوع هواء"
-msgstr ""
+msgstr "كوع هواء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0530
 msgid "كويل"
-msgstr ""
+msgstr "كويل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0531
 msgid "لحتم"
-msgstr ""
+msgstr "لحتم"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0153
 msgid "لحية"
-msgstr ""
+msgstr "لحية"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0009
 msgid "لمبة"
-msgstr ""
+msgstr "لمبة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0229
 msgid "لمبة إسطب"
-msgstr ""
+msgstr "لمبة إسطب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0280
 msgid "لمبة إشارة"
-msgstr ""
+msgstr "لمبة إشارة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0532
 msgid "لمبة اشفاق"
-msgstr ""
+msgstr "لمبة اشفاق"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0533
 msgid "لمبة باب"
-msgstr ""
+msgstr "لمبة باب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0230
 msgid "لمبة بلح"
-msgstr ""
+msgstr "لمبة بلح"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0403
 msgid "لمبة جانبية"
-msgstr ""
+msgstr "لمبة جانبية"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0281
 msgid "لمبة ريوس"
-msgstr ""
+msgstr "لمبة ريوس"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0404
 msgid "لمبة غرز"
-msgstr ""
+msgstr "لمبة غرز"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0257
 msgid "لمبة فرامل"
-msgstr ""
+msgstr "لمبة فرامل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0534
 msgid "لمبة كبيرة"
-msgstr ""
+msgstr "لمبة كبيرة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0231
 msgid "لمبة لوحة"
-msgstr ""
+msgstr "لمبة لوحة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0282
 msgid "لوح صاج"
-msgstr ""
+msgstr "لوح صاج"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0535
 msgid "لوحة باب"
-msgstr ""
+msgstr "لوحة باب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0405
 msgid "لوحة تحكم"
-msgstr ""
+msgstr "لوحة تحكم"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0214
 msgid "لي باكم"
-msgstr ""
+msgstr "لي باكم"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0232
 msgid "لي طفاية"
-msgstr ""
+msgstr "لي طفاية"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0536
 msgid "لي قفيز"
-msgstr ""
+msgstr "لي قفيز"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0182
 msgid "لي كهرباء"
-msgstr ""
+msgstr "لي كهرباء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0040
 msgid "لي هواء"
-msgstr ""
+msgstr "لي هواء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0074
 msgid "ماء رديتر"
-msgstr ""
+msgstr "ماء رديتر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0198
 msgid "ماسورة"
-msgstr ""
+msgstr "ماسورة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0537
 msgid "ماسورة حديد"
-msgstr ""
+msgstr "ماسورة حديد"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0538
 msgid "ماسورة كمبريسور"
-msgstr ""
+msgstr "ماسورة كمبريسور"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0258
 msgid "ماسورة ماء"
-msgstr ""
+msgstr "ماسورة ماء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0082
 msgid "ماطور"
-msgstr ""
+msgstr "ماطور"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0167
 msgid "ماطور زجاج"
-msgstr ""
+msgstr "ماطور زجاج"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0539
 msgid "ماطور نافذة"
-msgstr ""
+msgstr "ماطور نافذة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0199
 msgid "ماطور هواء"
-msgstr ""
+msgstr "ماطور هواء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0283
 msgid "ماطور هوندا"
-msgstr ""
+msgstr "ماطور هوندا"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0168
 msgid "ماكينة زجاج"
-msgstr ""
+msgstr "ماكينة زجاج"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0406
 msgid "مانع تسرب"
-msgstr ""
+msgstr "مانع تسرب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0117
 msgid "مبخرة"
-msgstr ""
+msgstr "مبخرة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0065
 msgid "مبخرة زيت"
-msgstr ""
+msgstr "مبخرة زيت"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0259
 msgid "مبرد"
-msgstr ""
+msgstr "مبرد"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0407
 msgid "مبرد زيت"
-msgstr ""
+msgstr "مبرد زيت"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0200
 msgid "مثلث عاكس"
-msgstr ""
+msgstr "مثلث عاكس"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0135
 msgid "مجفف هواء"
-msgstr ""
+msgstr "مجفف هواء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0540
 msgid "مجوز كابل كهرباء"
-msgstr ""
+msgstr "مجوز كابل كهرباء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0059
 msgid "محبس"
-msgstr ""
+msgstr "محبس"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0408
 msgid "محبس حديد"
-msgstr ""
+msgstr "محبس حديد"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0086
 msgid "محبس ماء"
-msgstr ""
+msgstr "محبس ماء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0260
 msgid "محبس هواء"
-msgstr ""
+msgstr "محبس هواء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0169
 msgid "محول"
-msgstr ""
+msgstr "محول"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0075
 msgid "مراية"
-msgstr ""
+msgstr "مراية"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0026
 msgid "مربط"
-msgstr ""
+msgstr "مربط"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0284
 msgid "مربط بلاستيك"
-msgstr ""
+msgstr "مربط بلاستيك"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0541
 msgid "مربط رفرف"
-msgstr ""
+msgstr "مربط رفرف"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0325
 msgid "مربط هوز"
-msgstr ""
+msgstr "مربط هوز"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0183
 msgid "مربع فارغ"
-msgstr ""
+msgstr "مربع فارغ"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0125
 msgid "مركز"
-msgstr ""
+msgstr "مركز"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0233
 msgid "مركز صوفة"
-msgstr ""
+msgstr "مركز صوفة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0184
 msgid "مروحة"
-msgstr ""
+msgstr "مروحة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0542
 msgid "مروحة تبريد"
-msgstr ""
+msgstr "مروحة تبريد"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0543
 msgid "مروحة رديتر"
-msgstr ""
+msgstr "مروحة رديتر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0326
 msgid "مروحة كلاتش"
-msgstr ""
+msgstr "مروحة كلاتش"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0234
 msgid "مروحة مكيف"
-msgstr ""
+msgstr "مروحة مكيف"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0070
 msgid "مزيل صدأ"
-msgstr ""
+msgstr "مزيل صدأ"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0019
 msgid "مساحات"
-msgstr ""
+msgstr "مساحات"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0023
 msgid "مساعد"
-msgstr ""
+msgstr "مساعد"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0285
 msgid "مساعد سوست"
-msgstr ""
+msgstr "مساعد سوست"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0327
 msgid "مساعد شاص"
-msgstr ""
+msgstr "مساعد شاص"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0107
 msgid "مساعد غمارة"
-msgstr ""
+msgstr "مساعد غمارة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0409
 msgid "مساعد كبينة"
-msgstr ""
+msgstr "مساعد كبينة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0410
 msgid "مساكة ثلاجة"
-msgstr ""
+msgstr "مساكة ثلاجة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0008
 msgid "مسمار"
-msgstr ""
+msgstr "مسمار"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0411
 msgid "مسمار اسود"
-msgstr ""
+msgstr "مسمار اسود"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0412
 msgid "مسمار بالون"
-msgstr ""
+msgstr "مسمار بالون"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0261
 msgid "مسمار توازن"
-msgstr ""
+msgstr "مسمار توازن"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0413
 msgid "مسمار ديزل"
-msgstr ""
+msgstr "مسمار ديزل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0235
 msgid "مسمار سنتر"
-msgstr ""
+msgstr "مسمار سنتر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0118
 msgid "مسمار كفر"
-msgstr ""
+msgstr "مسمار كفر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0544
 msgid "مسمار مخرطة"
-msgstr ""
+msgstr "مسمار مخرطة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0414
 msgid "مسمار مساعد"
-msgstr ""
+msgstr "مسمار مساعد"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0545
 msgid "مسمار نصف"
-msgstr ""
+msgstr "مسمار نصف"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0154
 msgid "مشبك"
-msgstr ""
+msgstr "مشبك"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0236
 msgid "مشبك هوز"
-msgstr ""
+msgstr "مشبك هوز"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0415
 msgid "مشرط"
-msgstr ""
+msgstr "مشرط"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0185
 msgid "مصفاة"
-msgstr ""
+msgstr "مصفاة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0052
 msgid "معجون"
-msgstr ""
+msgstr "معجون"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0546
 msgid "معجون بدل وجه"
-msgstr ""
+msgstr "معجون بدل وجه"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0286
 msgid "معجون لحام"
-msgstr ""
+msgstr "معجون لحام"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0201
 msgid "مفصلة باب"
-msgstr ""
+msgstr "مفصلة باب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0547
 msgid "مقبض باب"
-msgstr ""
+msgstr "مقبض باب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0328
 msgid "مقص"
-msgstr ""
+msgstr "مقص"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0329
 msgid "مقصات"
-msgstr ""
+msgstr "مقصات"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0416
 msgid "مقياس زيت"
-msgstr ""
+msgstr "مقياس زيت"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0330
 msgid "مكبس"
-msgstr ""
+msgstr "مكبس"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0548
 msgid "مكيف كاربوريتر"
-msgstr ""
+msgstr "مكيف كاربوريتر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0417
 msgid "منجارة"
-msgstr ""
+msgstr "منجارة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0418
 msgid "منظم فرامل"
-msgstr ""
+msgstr "منظم فرامل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0029
 msgid "منفاخ"
-msgstr ""
+msgstr "منفاخ"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0549
 msgid "منفاخ غمارة"
-msgstr ""
+msgstr "منفاخ غمارة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0419
 msgid "منفاخ قاعدة"
-msgstr ""
+msgstr "منفاخ قاعدة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0550
 msgid "منفاخ قاعدة مسمار"
-msgstr ""
+msgstr "منفاخ قاعدة مسمار"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0287
 msgid "منفاخ هواء"
-msgstr ""
+msgstr "منفاخ هواء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0237
 msgid "موصل"
-msgstr ""
+msgstr "موصل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0551
 msgid "موصل هواء"
-msgstr ""
+msgstr "موصل هواء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0262
 msgid "مولد"
-msgstr ""
+msgstr "مولد"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0202
 msgid "ميزانية"
-msgstr ""
+msgstr "ميزانية"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0552
 msgid "ميزانية عمود فرامل"
-msgstr ""
+msgstr "ميزانية عمود فرامل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0553
 msgid "ميزانية كفر"
-msgstr ""
+msgstr "ميزانية كفر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0071
 msgid "ميزانية كليبر"
-msgstr ""
+msgstr "ميزانية كليبر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0554
 msgid "ناقل تلقائي"
-msgstr ""
+msgstr "ناقل تلقائي"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0063
 msgid "نبل"
-msgstr ""
+msgstr "نبل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0288
 msgid "نبل حديد"
-msgstr ""
+msgstr "نبل حديد"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0331
 msgid "نبل هوز"
-msgstr ""
+msgstr "نبل هوز"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0332
 msgid "نحاسة"
-msgstr ""
+msgstr "نحاسة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0333
 msgid "نحاسة قاعدة"
-msgstr ""
+msgstr "نحاسة قاعدة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0043
 msgid "نسافة"
-msgstr ""
+msgstr "نسافة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0289
 msgid "نقاص"
-msgstr ""
+msgstr "نقاص"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0555
 msgid "نيكل شمعة"
-msgstr ""
+msgstr "نيكل شمعة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0420
 msgid "هرن"
-msgstr ""
+msgstr "هرن"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0119
 msgid "هلال"
-msgstr ""
+msgstr "هلال"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0186
 msgid "هلال راحة"
-msgstr ""
+msgstr "هلال راحة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0290
 msgid "هلال كلاتش"
-msgstr ""
+msgstr "هلال كلاتش"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0203
 msgid "هلالة صينية"
-msgstr ""
+msgstr "هلالة صينية"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0556
 msgid "هند فرامل"
-msgstr ""
+msgstr "هند فرامل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0557
 msgid "هواية صدام"
-msgstr ""
+msgstr "هواية صدام"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0056
 msgid "هوب"
-msgstr ""
+msgstr "هوب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0334
 msgid "هوب غطاء"
-msgstr ""
+msgstr "هوب غطاء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0263
 msgid "هوب فرامل"
-msgstr ""
+msgstr "هوب فرامل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0558
 msgid "هوب قماش"
-msgstr ""
+msgstr "هوب قماش"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0015
 msgid "هوز"
-msgstr ""
+msgstr "هوز"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0335
 msgid "هوز بلاستيك"
-msgstr ""
+msgstr "هوز بلاستيك"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0155
 msgid "هوز دركسيون"
-msgstr ""
+msgstr "هوز دركسيون"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0083
 msgid "هوز رديتر"
-msgstr ""
+msgstr "هوز رديتر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0238
 msgid "هوز زيت"
-msgstr ""
+msgstr "هوز زيت"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0559
 msgid "هوز غمارة"
-msgstr ""
+msgstr "هوز غمارة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0291
 msgid "هوز فرامل"
-msgstr ""
+msgstr "هوز فرامل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0560
 msgid "هوز كلامب"
-msgstr ""
+msgstr "هوز كلامب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0292
 msgid "هوز كمبريسور"
-msgstr ""
+msgstr "هوز كمبريسور"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0068
 msgid "هوز ماء"
-msgstr ""
+msgstr "هوز ماء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0239
 msgid "هوز ماطور"
-msgstr ""
+msgstr "هوز ماطور"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0187
 msgid "هوز ماطور هواء"
-msgstr ""
+msgstr "هوز ماطور هواء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0421
 msgid "هوز مكيف"
-msgstr ""
+msgstr "هوز مكيف"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0057
 msgid "هوز هواء"
-msgstr ""
+msgstr "هوز هواء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0031
 msgid "واشر"
-msgstr ""
+msgstr "واشر"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0561
 msgid "واشر نحاس"
-msgstr ""
+msgstr "واشر نحاس"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0336
 msgid "واير"
-msgstr ""
+msgstr "واير"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0562
 msgid "واير كهرباء"
-msgstr ""
+msgstr "واير كهرباء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0422
 msgid "وجه اقزوز"
-msgstr ""
+msgstr "وجه اقزوز"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0264
 msgid "وجه بخاخ ديزل"
-msgstr ""
+msgstr "وجه بخاخ ديزل"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0423
 msgid "وجه كارتير"
-msgstr ""
+msgstr "وجه كارتير"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0060
 msgid "وردة"
-msgstr ""
+msgstr "وردة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0087
 msgid "وردة صاج"
-msgstr ""
+msgstr "وردة صاج"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0563
 msgid "وردة عمود"
-msgstr ""
+msgstr "وردة عمود"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0240
 msgid "وردة نحاس"
-msgstr ""
+msgstr "وردة نحاس"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0204
 msgid "وصلة"
-msgstr ""
+msgstr "وصلة"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0564
 msgid "وصلة بطارية"
-msgstr ""
+msgstr "وصلة بطارية"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0565
 msgid "وصلة سحب"
-msgstr ""
+msgstr "وصلة سحب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0566
 msgid "وصلة كهرباء"
-msgstr ""
+msgstr "وصلة كهرباء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0241
 msgid "وصلة هواء"
-msgstr ""
+msgstr "وصلة هواء"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0337
 msgid "وصلة هوز"
-msgstr ""
+msgstr "وصلة هوز"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0188
 msgid "يد باب"
-msgstr ""
+msgstr "يد باب"
 
 #. module: KSW_workshop_stock
 #: model:product.template,name:KSW_workshop_stock.vehicle_part_0567
 msgid "يد زجاج"
-msgstr ""
+msgstr "يد زجاج"

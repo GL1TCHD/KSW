@@ -9,3 +9,4 @@ from . import test_attendance_issue_relink_after_redownload
 from . import test_public_holiday_exempts_running_leave
 from . import test_public_holiday_grant
 from . import test_attendance_line_access
+from . import test_duration_display_language

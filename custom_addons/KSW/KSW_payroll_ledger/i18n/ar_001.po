@@ -39,7 +39,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_map__account_id
 #: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_posting_map_search
 msgid "Account"
-msgstr ""
+msgstr "الحساب"
 
 #. module: KSW_payroll_ledger
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_group__map_ids
@@ -51,7 +51,7 @@ msgstr "الحسابات"
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_entity__active
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_group__active
 msgid "Active"
-msgstr ""
+msgstr "نشط"
 
 #. module: KSW_payroll_ledger
 #: model:ir.model.fields.selection,name:KSW_payroll_ledger.selection__hr_payslip_line__x_ledger_deduction__basic
@@ -75,7 +75,7 @@ msgstr ""
 #. module: KSW_payroll_ledger
 #: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_posting_group_form
 msgid "Archived"
-msgstr ""
+msgstr "مؤرشف"
 
 #. module: KSW_payroll_ledger
 #: model:ir.model,name:KSW_payroll_ledger.model_res_partner_bank
@@ -106,12 +106,12 @@ msgstr "الفئة"
 #. module: KSW_payroll_ledger
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_category__code
 msgid "Code"
-msgstr ""
+msgstr "رمز"
 
 #. module: KSW_payroll_ledger
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_entity__company_id
 msgid "Company"
-msgstr ""
+msgstr "الشركة"
 
 #. module: KSW_payroll_ledger
 #: model:ir.model,name:KSW_payroll_ledger.model_res_config_settings
@@ -135,7 +135,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_group__create_uid
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_map__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "أنشئ بواسطة"
 
 #. module: KSW_payroll_ledger
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_employee_posting__create_date
@@ -145,7 +145,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_group__create_date
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_map__create_date
 msgid "Created on"
-msgstr ""
+msgstr "أنشئ في"
 
 #. module: KSW_payroll_ledger
 #: model:ir.model.fields,help:KSW_payroll_ledger.field_ksw_payroll_intercompany__staff_account_id
@@ -198,7 +198,7 @@ msgstr "القسم"
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_group__department_ids
 #: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_posting_group_form
 msgid "Departments"
-msgstr ""
+msgstr "الأقسام"
 
 #. module: KSW_payroll_ledger
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_account_move_line__display_name
@@ -243,7 +243,7 @@ msgstr "الموظف"
 #. module: KSW_payroll_ledger
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_group__employee_count
 msgid "Employee Count"
-msgstr ""
+msgstr "عدد الموظفين"
 
 #. module: KSW_payroll_ledger
 #: model:ir.actions.act_window,name:KSW_payroll_ledger.action_ksw_payroll_employee_posting
@@ -386,7 +386,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_group__write_uid
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_map__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "آخر تحديث بواسطة"
 
 #. module: KSW_payroll_ledger
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_employee_posting__write_date
@@ -396,7 +396,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_group__write_date
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_map__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "آخر تحديث في"
 
 #. module: KSW_payroll_ledger
 #: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_employee_form_ledger
@@ -437,7 +437,7 @@ msgstr "مشكلة في الترحيل إلى دفتر الأستاذ"
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_category__name
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_group__name
 msgid "Name"
-msgstr ""
+msgstr "الاسم"
 
 #. module: KSW_payroll_ledger
 #: model_terms:ir.actions.act_window,help:KSW_payroll_ledger.action_ksw_payroll_employee_posting
@@ -450,7 +450,7 @@ msgstr "لا توجد استثناءات للموظفين"
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_category__note
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_group__note
 msgid "Note"
-msgstr ""
+msgstr "الملاحظات"
 
 #. module: KSW_payroll_ledger
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip__x_ledger_nothing
@@ -652,7 +652,7 @@ msgstr "قواعد الراتب"
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_category__sequence
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_group__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "تسلسل"
 
 #. module: KSW_payroll_ledger
 #: model:ir.model.fields.selection,name:KSW_payroll_ledger.selection__hr_payslip_line__x_ledger_deduction__spread
@@ -759,6 +759,7 @@ msgstr ""
 #. module: KSW_payroll_ledger
 #: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_employee_form_ledger
 #: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_employee_posting_list
+#: code:addons/KSW_payroll_ledger/models/posting.py:0
 msgid "Whole salary"
 msgstr "الراتب كاملاً"
 
@@ -784,19 +785,183 @@ msgstr ""
 #. module: KSW_payroll_ledger
 #: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_posting_group_form
 msgid "Why these accounts (e.g. the BAS voucher it follows)"
-msgstr ""
+msgstr "سبب هذه الحسابات (مثل سند BAS الذي يتبعه)"
 
 #. module: KSW_payroll_ledger
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip_run__x_ledger_move_count
 msgid "X Ledger Move Count"
-msgstr ""
+msgstr "عدد قيود الدفتر"
 
 #. module: KSW_payroll_ledger
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip_run__x_ledger_unposted_count
 msgid "X Ledger Unposted Count"
-msgstr ""
+msgstr "عدد قيود الدفتر غير المرحّلة"
 
 #. module: KSW_payroll_ledger
 #: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_posting_group_form
 msgid "e.g. Jubail Camp"
 msgstr "مثال: كامب الجبيل"
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid ""
+"%(name)s: posted to the suspense account %(acc)s, no posting map row for "
+"some of his figures"
+msgstr ""
+"%(name)s: رُحِّل إلى الحساب المعلّق %(acc)s، لعدم وجود سطر توجيه لبعض بنوده"
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/posting.py:0
+msgid ""
+"%(what)s → %(to)s instead of %(default)s; the rest of his salary stays on "
+"%(rest)s (%(group)s)"
+msgstr ""
+"%(what)s ← %(to)s بدلاً من %(default)s؛ وبقية راتبه تبقى على %(rest)s "
+"(%(group)s)"
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/payroll_ledger.py:0
+msgid "Account %(code)s does not exist in the chart."
+msgstr "الحساب %(code)s غير موجود في دليل الحسابات."
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/posting.py:0
+msgid "Because of"
+msgstr "بسبب"
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/posting.py:0
+msgid "Booked to"
+msgstr "مقيّد على"
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid "Deducted from salary"
+msgstr "خصم من الراتب"
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid "Loan installment"
+msgstr "قسط قرض"
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid ""
+"No default payroll entity in Accounting ▸ Configuration ▸ Payroll Posting ▸ "
+"Entities."
+msgstr ""
+"لا يوجد كيان رواتب افتراضي في المحاسبة ▸ التهيئة ▸ ترحيل الرواتب ▸ الكيانات."
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/ksw_pay_run.py:0
+msgid "Not posted to the ledger"
+msgstr "لم يُرحَّل إلى دفتر الأستاذ"
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid ""
+"Only a Payroll Manager or an accounting administrator may post a batch."
+msgstr "يرحّل الدفعة مدير الرواتب أو مدير المحاسبة فقط."
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/ksw_pay_run.py:0
+msgid "Only the Commission Accountant may post the month."
+msgstr "يرحّل الشهر محاسب العمولات فقط."
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/posting.py:0
+msgid "Part of his salary"
+msgstr "جزء من راتبه"
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid "Reversal of %(slip)s (%(move)s)"
+msgstr "عكس %(slip)s (%(move)s)"
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid "Salary"
+msgstr "راتب"
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid "Some payslips were not posted to the ledger"
+msgstr "بعض كشوف الراتب لم تُرحَّل إلى دفتر الأستاذ"
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/payroll_ledger.py:0
+msgid "The entry does not balance (%(diff).2f)."
+msgstr "القيد غير متوازن (%(diff).2f)."
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/posting.py:0
+msgid "Wage (basic and anything without a category)"
+msgstr "الأجر (الأساسي وكل ما ليس له فئة)"
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/posting.py:0
+msgid ""
+"Whole salary → %(to)s instead of %(group)s, except categories with an "
+"exception of their own"
+msgstr ""
+"الراتب كاملاً ← %(to)s بدلاً من %(group)s، عدا الفئات التي لها استثناء خاص"
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/posting.py:0
+msgid "his exception"
+msgstr "استثناؤه"
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/posting.py:0
+msgid "no account: held out or suspense"
+msgstr "بلا حساب: محجوز أو معلّق"
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid "no loan account"
+msgstr "بلا حساب قرض"
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid "no posting group"
+msgstr "بلا مجموعة ترحيل"
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid "payslip net %(net).2f, entry %(posted).2f%(rules)s"
+msgstr "صافي كشف الراتب %(net).2f، القيد %(posted).2f%(rules)s"
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid "posting group %(group)s has no account for %(what)s"
+msgstr "مجموعة الترحيل %(group)s ليس لها حساب لـ %(what)s"
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid "the wage"
+msgstr "الأجر"

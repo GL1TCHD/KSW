@@ -560,3 +560,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_line__wizard_id
 msgid "Wizard"
 msgstr ""
+
+#. module: KSW_stock_movement
+#: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_line__invoice_date
+msgid "Invoice Date"
+msgstr ""
+
+#. module: KSW_stock_movement
+#: model:ir.model.fields,field_description:KSW_stock_movement.field_ksw_stock_movement_line__invoice_ref
+msgid "Invoice Reference"
+msgstr ""

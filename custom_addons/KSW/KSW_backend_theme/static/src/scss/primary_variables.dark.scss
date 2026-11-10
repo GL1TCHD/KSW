@@ -1,0 +1,88 @@
+// KSW dark mode. Loaded only into web.assets_web_dark / web.assets_backend_lazy_dark,
+// right after primary_variables.scss, so these assignments win over the light ones.
+//
+// Community ships the dark bundle but no global dark palette (Enterprise does), so
+// this file also flips Odoo's own base colours: everything in web derives from
+// $o-white / $o-black / $o-gray-* and the view background.
+//
+// Soft greys, not black on white: body text 12.7:1, muted 6.3:1 (all checked
+// >= 4.5:1). Dense tables read worse in pure high contrast, the main complaint
+// about dark ERP screens.
+
+// ---- KSW tokens ---------------------------------------------------------------
+$ksw-navy: #9db9f0;          // brand text on dark (8.8:1 on the bar)
+$ksw-teal: #5cc6e4;          // links and primary buttons, dark text on it (9.5:1)
+$ksw-ink: #f1f3f6;
+$ksw-text: #dde2e9;
+$ksw-muted: #98a1ad;
+$ksw-line: #363d48;
+$ksw-surface: #20252d;
+$ksw-page: #121519;
+$ksw-card: #1b1f26;
+$ksw-border-strong: #525b68;
+$ksw-border-hover: #6b7482;
+$ksw-apps-bg: #121519;
+$ksw-accent-soft: #173640;
+$ksw-accent-ink: #7fd3ec;
+$ksw-alert: #ff8a80;
+$ksw-alert-soft: #3a1f1f;
+$ksw-ok: #5fd38d;
+$ksw-star: #f3b45a;
+$ksw-dark: true;
+$ksw-control-bg: #2a3039;
+
+// ---- Odoo base palette, flipped -------------------------------------------------
+$o-white: $ksw-card;
+$o-black: $ksw-ink;
+$o-gray-100: $ksw-page;
+$o-gray-200: $ksw-control-bg;
+$o-gray-300: $ksw-line;
+$o-gray-400: #4a525e;
+$o-gray-500: #59616d;
+$o-gray-600: #8a929e;
+$o-gray-700: #b3bac5;
+$o-gray-800: #d0d5dc;
+$o-gray-900: $ksw-text;
+$o-view-background-color: $ksw-card;
+$o-list-group-active-bg: $ksw-accent-soft;
+$o-list-group-active-color: $ksw-ink;
+$o-shadow-color: #000000;
+
+$mk_color_brand: $ksw-navy;
+$mk_color_primary: $ksw-teal;
+$o-brand-odoo: $ksw-navy;
+$o-brand-primary: $ksw-teal;
+$o-community-color: $ksw-navy;
+$o-enterprise-color: $ksw-navy;
+$o-enterprise-action-color: $ksw-teal;
+
+$o-success: $ksw-ok;
+$o-info: #6ab5fb;
+$o-warning: #f3b45a;
+$o-danger: $ksw-alert;
+$o-theme-text-colors: (
+    "primary": $ksw-teal,
+    "success": $o-success,
+    "info": $o-info,
+    "warning": $o-warning,
+    "danger": $o-danger,
+);
+
+// ---- Bootstrap values core builds from Bootstrap's own $white ------------------------
+$popover-bg: $ksw-surface;
+$popover-border-color: $ksw-line;
+$nav-tabs-link-active-bg: $ksw-card;
+$nav-tabs-link-active-border-color: $ksw-line $ksw-line $ksw-card;
+$toast-background-color: rgba(32, 37, 45, .97);
+$dropdown-bg: $ksw-surface;
+$input-bg: $ksw-card;
+
+// ---- Top bar ------------------------------------------------------------------------
+$o-navbar-background: #171b21;
+$o-navbar-border-bottom: 1px solid $ksw-line;
+$o-navbar-entry-color: $ksw-text;
+$o-navbar-entry-color--hover: $ksw-navy;
+$o-navbar-entry-bg--hover: rgba(255, 255, 255, .06);
+$o-navbar-entry-color--active: $ksw-navy;
+$o-navbar-entry-bg--active: rgba(255, 255, 255, .08);
+$o-navbar-brand-color: $ksw-navy;

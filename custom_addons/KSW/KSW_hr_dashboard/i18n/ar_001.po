@@ -25,6 +25,7 @@ msgstr "أيام الغياب"
 #. module: KSW_hr_dashboard
 #. odoo-javascript
 #: code:addons/KSW_hr_dashboard/data/files/ksw_hr_dashboard.json:0
+#: code:addons/KSW_hr_dashboard/data/files/ksw_payroll_dashboard.json:0
 msgid "Amount"
 msgstr "المبلغ"
 
@@ -43,6 +44,7 @@ msgstr "اتجاه الغياب في الحضور والانصراف"
 #. module: KSW_hr_dashboard
 #. odoo-javascript
 #: code:addons/KSW_hr_dashboard/data/files/ksw_hr_dashboard.json:0
+#: code:addons/KSW_hr_dashboard/data/files/ksw_payroll_dashboard.json:0
 msgid "Department"
 msgstr "القسم"
 
@@ -72,6 +74,7 @@ msgstr "رصيد الخصومات المستحق"
 #. module: KSW_hr_dashboard
 #. odoo-javascript
 #: code:addons/KSW_hr_dashboard/data/files/ksw_hr_dashboard.json:0
+#: code:addons/KSW_hr_dashboard/data/files/ksw_payroll_dashboard.json:0
 msgid "Payroll by Department"
 msgstr "الرواتب حسب الإدارة"
 
@@ -86,3 +89,8 @@ msgstr "طلبات الإجازة بانتظار الاعتماد حسب الخ�
 #: code:addons/KSW_hr_dashboard/data/files/ksw_hr_dashboard.json:0
 msgid "Requests"
 msgstr "الطلبات"
+
+#. module: KSW_hr_dashboard
+#: model:spreadsheet.dashboard,name:KSW_hr_dashboard.spreadsheet_dashboard_ksw_payroll
+msgid "KSW Payroll Overview"
+msgstr "نظرة عامة على الرواتب KSW"

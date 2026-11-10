@@ -1,0 +1,587 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* KSW_backend_theme
+#
+# Arabic for MuK Backend Theme, which ships none. Model entries reference the
+# muk_* xml ids; the JS ones reach the client through the global fallback in
+# web/static/src/core/l10n/translation.js (muk_* has no ar terms of its own).
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-10 00:00+0000\n"
+"PO-Revision-Date: 2026-11-10 00:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ar_001\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/muk_web_chatter/static/src/chatter/chatter.xml:0
+msgid "Internal"
+msgstr "داخلي"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/muk_web_chatter/static/src/chatter/composer.js:0
+msgid "Send a message to internal followers..."
+msgstr "إرسال رسالة إلى المتابعين الداخليين..."
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/muk_web_chatter/static/src/core/recipients_list/recipients_list.xml:0
+msgid "Show all recipients"
+msgstr "عرض جميع المستلمين"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/muk_web_chatter/static/src/core/recipients_list/recipients_list.js:0
+msgid "%(recipientCount)s more"
+msgstr "و%(recipientCount)s آخرين"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/muk_web_chatter/static/src/core/recipients_list/recipients_list.xml:0
+msgid "no email address"
+msgstr "لا يوجد بريد إلكتروني"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/muk_web_chatter/static/src/chatter/chatter.xml:0
+msgid "Show/Hide Notifications"
+msgstr "إظهار/إخفاء الإشعارات"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/muk_web_group/static/src/search/expand_all/expand_all.xml:0
+msgid "Expand All"
+msgstr "توسيع الكل"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/muk_web_group/static/src/search/expand_all/expand_all.xml:0
+msgid "Collapse All"
+msgstr "طي الكل"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields,field_description:muk_web_appsbar.field_res_users__sidebar_type
+msgid "Sidebar Type"
+msgstr "شريط التطبيقات الجانبي"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields.selection,name:muk_web_appsbar.selection__res_users__sidebar_type__large
+#: model:ir.model.fields.selection,name:KSW_backend_theme.selection__res_users__ksw_text_size__large
+msgid "Large"
+msgstr "كبير"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields.selection,name:muk_web_appsbar.selection__res_users__sidebar_type__small
+msgid "Small"
+msgstr "أيقونات فقط"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields.selection,name:muk_web_appsbar.selection__res_users__sidebar_type__invisible
+msgid "Invisible"
+msgstr "مخفي"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields,field_description:muk_web_chatter.field_res_users__chatter_position
+msgid "Chatter Position"
+msgstr "موضع المحادثة"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields.selection,name:muk_web_chatter.selection__res_users__chatter_position__side
+msgid "Side"
+msgstr "بجانب النموذج"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields.selection,name:muk_web_chatter.selection__res_users__chatter_position__bottom
+msgid "Bottom"
+msgstr "أسفل النموذج"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields,field_description:muk_web_dialog.field_res_users__dialog_size
+msgid "Dialog Size"
+msgstr "حجم النوافذ المنبثقة"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields.selection,name:muk_web_dialog.selection__res_users__dialog_size__minimize
+msgid "Minimize"
+msgstr "الحجم العادي"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields.selection,name:muk_web_dialog.selection__res_users__dialog_size__maximize
+msgid "Maximize"
+msgstr "ملء الشاشة"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields.selection,name:muk_web_refresh.selection__ir_actions_server__state__refresh
+msgid "Reload Views"
+msgstr "إعادة تحميل الشاشات"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.xml:0
+msgid "Search apps and screens"
+msgstr "ابحث عن تطبيق أو شاشة"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.xml:0
+msgid "No app or screen matches."
+msgstr "لا يوجد تطبيق أو شاشة مطابقة."
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.xml:0
+msgid "Apps"
+msgstr "التطبيقات"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.xml:0
+msgid "Screens"
+msgstr "الشاشات"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.xml:0
+msgid "Waiting for you"
+msgstr "بانتظارك"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.xml:0
+msgid "Configure"
+msgstr "إعداد"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.xml:0
+msgid "Overdue activities"
+msgstr "أنشطة متأخرة"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.xml:0
+msgid "Activities due today"
+msgstr "أنشطة مستحقة اليوم"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.xml:0
+msgid "All clear. No approvals or activities are waiting for you."
+msgstr "لا شيء بانتظارك. لا توجد موافقات أو أنشطة معلّقة."
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.xml:0
+msgid "Customise"
+msgstr "تخصيص"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.xml:0
+msgid "Drag to reorder · click the eye to hide or show"
+msgstr "اسحب لإعادة الترتيب · اضغط على العين للإخفاء أو الإظهار"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.xml:0
+msgid "Save"
+msgstr "حفظ"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.xml:0
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.xml:0
+msgid "Use company default"
+msgstr "استخدام الترتيب الافتراضي"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.xml:0
+msgid "Set as default for everyone"
+msgstr "اعتماده افتراضياً للجميع"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.xml:0
+msgid "Recently opened"
+msgstr "فُتحت مؤخراً"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.xml:0
+msgid "Search screens (Ctrl+K)"
+msgstr "البحث في الشاشات (Ctrl+K)"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.xml:0
+msgid "Search"
+msgstr "بحث"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.js:0
+msgid "Good morning, %s"
+msgstr "صباح الخير، %s"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.js:0
+msgid "Good afternoon, %s"
+msgstr "مساء الخير، %s"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.js:0
+msgid "Good evening, %s"
+msgstr "مساء الخير، %s"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.js:0
+msgid "Nothing is waiting for you."
+msgstr "لا شيء بانتظارك."
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.js:0
+msgid "Everyone without their own layout now sees this one."
+msgstr "أصبح هذا الترتيب هو الافتراضي لكل من ليس له ترتيب خاص."
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.js:0
+msgid "My Activities"
+msgstr "أنشطتي"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.js:0
+msgid "Hide the hidden apps"
+msgstr "إخفاء التطبيقات المخفية"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.js:0
+msgid "Show hidden apps (%s)"
+msgstr "عرض التطبيقات المخفية (%s)"
+
+#. module: KSW_backend_theme
+#. odoo-python
+#: code:addons/KSW_backend_theme/models/ksw_home_inbox_source.py:0
+msgid "Invalid domain: %s"
+msgstr "نطاق غير صالح: %s"
+
+#. module: KSW_backend_theme
+#. odoo-python
+#: code:addons/KSW_backend_theme/models/ksw_home_inbox_source.py:0
+msgid "The domain must be a list."
+msgstr "يجب أن يكون النطاق قائمة."
+
+#. module: KSW_backend_theme
+#. odoo-python
+#: code:addons/KSW_backend_theme/models/res_users.py:0
+msgid "Only administrators can set the default Home layout."
+msgstr "يحدد مدير النظام فقط الترتيب الافتراضي للصفحة الرئيسية."
+
+#. module: KSW_backend_theme
+#: model:ir.model,name:KSW_backend_theme.model_ksw_home_inbox_source
+msgid "Home: Waiting For Me Counter"
+msgstr "الرئيسية: عدّاد بانتظاري"
+
+#. module: KSW_backend_theme
+#: model:ir.actions.act_window,name:KSW_backend_theme.action_ksw_home_inbox_source
+#: model:ir.ui.menu,name:KSW_backend_theme.menu_ksw_home_inbox_source
+msgid "Home: Waiting For Me"
+msgstr "الرئيسية: بانتظاري"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: model:ir.actions.client,name:KSW_backend_theme.action_ksw_home
+#: code:addons/KSW_backend_theme/static/src/home/home.xml:0
+msgid "Home"
+msgstr "الرئيسية"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields,field_description:KSW_backend_theme.field_ksw_home_inbox_source__model_name
+msgid "Model"
+msgstr "النموذج"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields,field_description:KSW_backend_theme.field_ksw_home_inbox_source__domain
+msgid "Domain"
+msgstr "النطاق"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields,field_description:KSW_backend_theme.field_ksw_home_inbox_source__icon
+msgid "Icon"
+msgstr "الأيقونة"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields,field_description:KSW_backend_theme.field_ksw_home_inbox_source__group_ids
+msgid "Only For"
+msgstr "مقصور على"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields,field_description:KSW_backend_theme.field_res_users__ksw_home_config
+msgid "Home Layout"
+msgstr "ترتيب الصفحة الرئيسية"
+
+#. module: KSW_backend_theme
+#: model:ksw.home.inbox.source,name:KSW_backend_theme.inbox_leave_approvals
+msgid "Time off awaiting my approval"
+msgstr "إجازات بانتظار اعتمادي"
+
+#. module: KSW_backend_theme
+#: model:ksw.home.inbox.source,name:KSW_backend_theme.inbox_deductions
+msgid "Loans and deductions awaiting my action"
+msgstr "سلف وخصومات بانتظار إجرائي"
+
+#. module: KSW_backend_theme
+#: model:ksw.home.inbox.source,name:KSW_backend_theme.inbox_revisions
+msgid "Salary revisions awaiting my action"
+msgstr "تعديلات رواتب بانتظار إجرائي"
+
+#. module: KSW_backend_theme
+#: model:ksw.home.inbox.source,name:KSW_backend_theme.inbox_commission_submissions
+msgid "Commission submissions to approve"
+msgstr "عمولات أقسام بانتظار اعتمادي"
+
+#. module: KSW_backend_theme
+#: model:ksw.home.inbox.source,name:KSW_backend_theme.inbox_purchase_requests
+msgid "Purchase requests to approve"
+msgstr "طلبات شراء بانتظار اعتمادي"
+
+#. module: KSW_backend_theme
+#: model:ksw.home.inbox.source,name:KSW_backend_theme.inbox_helpdesk_tickets
+msgid "Open tickets assigned to me"
+msgstr "تذاكر دعم مفتوحة مسندة إليّ"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.js:0
+msgid "Waiting for you: %s"
+msgstr "بانتظارك: %s"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields,field_description:KSW_backend_theme.field_ksw_home_inbox_source__active
+msgid "Active"
+msgstr "نشط"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields,field_description:KSW_backend_theme.field_ksw_home_inbox_source__create_uid
+msgid "Created by"
+msgstr "أنشئ بواسطة"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields,field_description:KSW_backend_theme.field_ksw_home_inbox_source__create_date
+msgid "Created on"
+msgstr "أنشئ في"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields,field_description:KSW_backend_theme.field_ksw_home_inbox_source__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields,field_description:KSW_backend_theme.field_ksw_home_inbox_source__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields,field_description:KSW_backend_theme.field_ksw_home_inbox_source__name
+msgid "Name"
+msgstr "الاسم"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields,field_description:KSW_backend_theme.field_ksw_home_inbox_source__sequence
+msgid "Sequence"
+msgstr "التسلسل"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields,help:KSW_backend_theme.field_ksw_home_inbox_source__icon
+msgid "Font Awesome class, e.g. fa-plane."
+msgstr "فئة أيقونة Font Awesome، مثل fa-plane."
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields,help:KSW_backend_theme.field_ksw_home_inbox_source__group_ids
+msgid "Leave empty to try it for everyone (access rights still apply)."
+msgstr "اتركه فارغاً ليُحتسب للجميع (مع بقاء صلاحيات الوصول سارية)."
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields,help:KSW_backend_theme.field_ksw_home_inbox_source__domain
+msgid "Records waiting for the current user. Evaluated with uid, user and today."
+msgstr "السجلات المنتظرة للمستخدم الحالي. يُقيَّم باستخدام uid و user و today."
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields,help:KSW_backend_theme.field_ksw_home_inbox_source__model_name
+msgid "Technical model name, e.g. hr.leave. Ignored while that module is not installed."
+msgstr "الاسم التقني للنموذج، مثل hr.leave. يُتجاهل ما دامت الوحدة غير مثبتة."
+
+#. module: KSW_backend_theme
+#: model_terms:ir.actions.act_window,help:KSW_backend_theme.action_ksw_home_inbox_source
+msgid "Add a counter to Home"
+msgstr "أضف عدّاداً إلى الصفحة الرئيسية"
+
+#. module: KSW_backend_theme
+#: model_terms:ir.actions.act_window,help:KSW_backend_theme.action_ksw_home_inbox_source
+msgid "A model and a domain of records waiting for the current user (uid). Each user only counts what their access rights let them read, and a counter at zero is hidden."
+msgstr "نموذج ونطاق للسجلات المنتظرة للمستخدم الحالي (uid). يحتسب كل مستخدم ما تسمح له صلاحياته بقراءته فقط، ويُخفى العدّاد عندما يكون صفراً."
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/home/home.xml:0
+msgid "Ctrl K"
+msgstr "Ctrl K"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/appearance/appearance.js:0
+msgid "Light"
+msgstr "فاتح"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/appearance/appearance.js:0
+msgid "Dark"
+msgstr "داكن"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/appearance/appearance.js:0
+msgid "Automatic (this device)"
+msgstr "تلقائي (حسب الجهاز)"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/appearance/appearance.js:0
+msgid "Selected"
+msgstr "محدد"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/appearance/appearance.js:0
+msgid "My Preferences"
+msgstr "تفضيلاتي"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/appearance/appearance.js:0
+msgid "Shortcuts"
+msgstr "الاختصارات"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/tour/quick_tour.js:0
+msgid "Open this menu and press Home to return to the Home page at any time: what is waiting for you, all your apps, and what you opened recently."
+msgstr "افتح هذه القائمة واضغط «الرئيسية» للعودة إلى الصفحة الرئيسية في أي وقت: ما ينتظرك، وجميع تطبيقاتك، وما فتحته مؤخراً."
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/tour/quick_tour.js:0
+msgid "Press this button at any time to return to Home: what is waiting for you, all your apps, and what you opened recently. Shortcut: Alt+H."
+msgstr "اضغط هذا الزر في أي وقت للعودة إلى الصفحة الرئيسية: ما ينتظرك، وجميع تطبيقاتك، وما فتحته مؤخراً. الاختصار: Alt+H."
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/tour/quick_tour.js:0
+msgid "Find any screen by its name instead of going through the menus. Shortcut: Ctrl+K."
+msgstr "ابحث عن أي شاشة باسمها بدلاً من التنقل في القوائم. الاختصار: Ctrl+K."
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/tour/quick_tour.js:0
+msgid "Appearance"
+msgstr "المظهر"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/tour/quick_tour.js:0
+msgid "Open your profile menu and choose Light (the original look), Dark, or Automatic to follow this device."
+msgstr "افتح قائمتك الشخصية واختر «فاتح» (المظهر الأصلي) أو «داكن» أو «تلقائي» ليتبع إعداد جهازك."
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/tour/quick_tour.js:0
+msgid "Text size"
+msgstr "حجم الخط"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/tour/quick_tour.js:0
+msgid "In the same menu, open My Preferences and choose a text size: Automatic, Standard or Large."
+msgstr "من القائمة نفسها افتح «تفضيلاتي» واختر حجم الخط: تلقائي أو عادي أو كبير."
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/tour/quick_tour.js:0
+msgid "%(current)s of %(total)s"
+msgstr "%(current)s من %(total)s"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/tour/quick_tour.js:0
+msgid "Quick tour"
+msgstr "الجولة السريعة"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/tour/quick_tour.xml:0
+msgid "Skip tour"
+msgstr "تخطي الجولة"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/tour/quick_tour.xml:0
+msgid "Back"
+msgstr "السابق"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/tour/quick_tour.xml:0
+msgid "Next"
+msgstr "التالي"
+
+#. module: KSW_backend_theme
+#. odoo-javascript
+#: code:addons/KSW_backend_theme/static/src/tour/quick_tour.xml:0
+msgid "Done"
+msgstr "تم"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields,field_description:KSW_backend_theme.field_res_users__ksw_tour_done
+msgid "Quick Tour Seen"
+msgstr "شوهدت الجولة السريعة"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields,field_description:KSW_backend_theme.field_res_users__ksw_text_size
+msgid "Text Size"
+msgstr "حجم الخط"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields.selection,name:KSW_backend_theme.selection__res_users__ksw_text_size__auto
+msgid "Automatic (by language)"
+msgstr "تلقائي (حسب اللغة)"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields.selection,name:KSW_backend_theme.selection__res_users__ksw_text_size__standard
+msgid "Standard"
+msgstr "عادي"
+
+#. module: KSW_backend_theme
+#: model:ir.model.fields,help:KSW_backend_theme.field_res_users__ksw_text_size
+msgid "Automatic: large for Arabic, standard for English."
+msgstr "تلقائي: كبير للعربية، وعادي للإنجليزية."

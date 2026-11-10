@@ -719,6 +719,7 @@ msgstr ""
 #. module: KSW_payroll_ledger
 #: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_employee_form_ledger
 #: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_employee_posting_list
+#: code:addons/KSW_payroll_ledger/models/posting.py:0
 msgid "Whole salary"
 msgstr ""
 
@@ -755,4 +756,163 @@ msgstr ""
 #. module: KSW_payroll_ledger
 #: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_posting_group_form
 msgid "e.g. Jubail Camp"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid ""
+"%(name)s: posted to the suspense account %(acc)s, no posting map row for "
+"some of his figures"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/posting.py:0
+msgid ""
+"%(what)s → %(to)s instead of %(default)s; the rest of his salary stays on "
+"%(rest)s (%(group)s)"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/payroll_ledger.py:0
+msgid "Account %(code)s does not exist in the chart."
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/posting.py:0
+msgid "Because of"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/posting.py:0
+msgid "Booked to"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid "Deducted from salary"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid "Loan installment"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid ""
+"No default payroll entity in Accounting ▸ Configuration ▸ Payroll Posting ▸ "
+"Entities."
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/ksw_pay_run.py:0
+msgid "Not posted to the ledger"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid ""
+"Only a Payroll Manager or an accounting administrator may post a batch."
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/ksw_pay_run.py:0
+msgid "Only the Commission Accountant may post the month."
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/posting.py:0
+msgid "Part of his salary"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid "Reversal of %(slip)s (%(move)s)"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid "Salary"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid "Some payslips were not posted to the ledger"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/payroll_ledger.py:0
+msgid "The entry does not balance (%(diff).2f)."
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/posting.py:0
+msgid "Wage (basic and anything without a category)"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/posting.py:0
+msgid ""
+"Whole salary → %(to)s instead of %(group)s, except categories with an "
+"exception of their own"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/posting.py:0
+msgid "his exception"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/posting.py:0
+msgid "no account: held out or suspense"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid "no loan account"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid "no posting group"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid "payslip net %(net).2f, entry %(posted).2f%(rules)s"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid "posting group %(group)s has no account for %(what)s"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#. odoo-python
+#: code:addons/KSW_payroll_ledger/models/hr_payslip_run.py:0
+msgid "the wage"
 msgstr ""
