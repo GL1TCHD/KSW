@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <!-- IT Team only: the whole app is hidden from every other user. -->
+    <menuitem id="menu_it_assets_root"
+              name="IT Assets"
+              sequence="97"
+              web_icon="KSW_asset_handover,static/description/icon.png"
+              groups="KSW_helpdesk.group_helpdesk_agent"/>
+
+    <!-- KSW_helpdesk's asset menus, moved under this app. Each override
+         repeats name/parent/action (gotcha #1: a partial <menuitem> override
+         resets them). uninstall_hook moves them back to the Helpdesk. -->
+    <menuitem id="KSW_helpdesk.menu_helpdesk_assets_all"
+              name="Assets"
+              parent="menu_it_assets_root"
+              action="KSW_helpdesk.action_it_asset_all"
+              sequence="10"/>
+
+    <menuitem id="KSW_helpdesk.menu_helpdesk_assets_assignments"
+              name="Assignments"
+              parent="menu_it_assets_root"
+              action="KSW_helpdesk.it_asset_assignment_action"
+              sequence="20"/>
+
+    <menuitem id="KSW_helpdesk.menu_helpdesk_assets_maintenance"
+              name="Maintenance"
+              parent="menu_it_assets_root"
+              action="KSW_helpdesk.it_asset_maintenance_action"
+              sequence="30"/>
+
+    <menuitem id="menu_it_assets_consumables"
+              name="Consumables"
+              parent="menu_it_assets_root"
+              sequence="40"/>
+
+    <menuitem id="KSW_helpdesk.menu_helpdesk_assets_consumables"
+              name="Consumables"
+              parent="menu_it_assets_consumables"
+              action="KSW_helpdesk.action_it_consumable_all"
+              sequence="10"/>
+
+    <menuitem id="KSW_helpdesk.menu_helpdesk_assets_consumable_moves"
+              name="Consumable Moves"
+              parent="menu_it_assets_consumables"
+              action="KSW_helpdesk.it_consumable_move_action"
+              sequence="20"/>
+
+    <menuitem id="KSW_helpdesk.menu_helpdesk_assets_purchase_requests"
+              name="Purchase Requests"
+              parent="menu_it_assets_consumables"
+              action="KSW_helpdesk.action_it_consumable_purchase_request"
+              sequence="30"/>
+
+    <menuitem id="menu_it_assets_config"
+              name="Configuration"
+              parent="menu_it_assets_root"
+              sequence="90"/>
+
+    <menuitem id="KSW_helpdesk.menu_helpdesk_asset_categories"
+              name="Asset Categories"
+              parent="menu_it_assets_config"
+              action="KSW_helpdesk.it_asset_category_action"
+              sequence="10"/>
+
+    <menuitem id="KSW_helpdesk.menu_helpdesk_consumable_categories"
+              name="Consumable Categories"
+              parent="menu_it_assets_config"
+              action="KSW_helpdesk.it_consumable_category_action"
+              sequence="20"/>
+
+</odoo>

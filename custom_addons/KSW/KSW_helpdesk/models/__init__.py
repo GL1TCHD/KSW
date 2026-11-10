@@ -11,3 +11,4 @@ from . import it_consumable
 from . import it_consumable_move
 from . import it_consumable_purchase_request
 from . import it_consumable_purchase_request_line
+from . import helpdesk_dashboard

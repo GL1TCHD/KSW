@@ -1,0 +1,53 @@
+// Same look as the KSW Workshop / ERP overview pages, under its own class names
+// so the Helpdesk does not depend on KSW_erp_dashboard (or fight its styles).
+.o_hd_dashboard {
+    height: 100%;
+    overflow: auto;
+    .o_web_client > .o_action_manager > &.o_action { overflow-y: auto; }
+    padding: 16px;
+    background-color: $o-webclient-background-color;
+
+    .o_hd_grid {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        margin-bottom: 12px;
+        &.o_hd_wide { grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); }
+        @include media-breakpoint-up(xxl) {
+            &.o_hd_main { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+            &.o_hd_main > .o_hd_span3 { grid-column: span 3; }
+            &.o_hd_main > .o_hd_span4 { grid-column: span 4; }
+            &.o_hd_main > .o_hd_span6 { grid-column: span 6; }
+        }
+    }
+    .o_hd_card {
+        background: $o-view-background-color;
+        border: 1px solid $border-color;
+        border-radius: 8px;
+        padding: 14px 16px;
+        min-width: 0;
+        h5 { font-size: 0.95rem; margin-bottom: 10px; color: $o-main-text-color; }
+    }
+    .o_hd_tile {
+        cursor: pointer;
+        &:hover { border-color: $o-brand-primary; }
+        .o_hd_tile_label { font-size: 0.8rem; color: $text-muted; text-transform: uppercase; letter-spacing: 0.03em; }
+        .o_hd_tile_value { font-size: 1.6rem; font-weight: 600; line-height: 1.2; }
+        .o_hd_tile_sub { font-size: 0.85rem; color: $text-muted; }
+    }
+    .o_hd_good { color: $success; }
+    .o_hd_bad { color: $danger; }
+    .o_hd_warn { color: $warning; }
+    .o_hd_rows {
+        width: 100%;
+        td { padding: 4px 0; border-bottom: 1px solid $border-color; vertical-align: middle; }
+        tr:last-child td { border-bottom: 0; }
+        tr.o_hd_click { cursor: pointer; &:hover td { color: $o-brand-primary; } }
+        .o_hd_num { text-align: end; white-space: nowrap; font-variant-numeric: tabular-nums; }
+        .o_hd_name { max-width: 0; width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding-inline-end: 8px; }
+    }
+    .o_hd_bar { height: 8px; border-radius: 4px; background: $o-brand-primary; opacity: 0.75; }
+    .o_hd_bar_track { background: rgba($o-brand-primary, 0.1); border-radius: 4px; }
+    .o_hd_chart { position: relative; }
+    .o_hd_empty { color: $text-muted; font-size: 0.9rem; }
+}

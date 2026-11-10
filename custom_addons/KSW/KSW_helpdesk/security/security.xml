@@ -68,7 +68,7 @@
     <!-- ============================================================ -->
     <!-- Record Rule — hr.employee                                      -->
     <!-- The IT Team needs to pick ANY employee when assigning an asset
-         (it.asset.assign.wizard.employee_id has no domain of its own).
+         (it.asset.assignment.employee_id has no domain of its own).
          Without this, they only get whatever the base hr.employee rules
          allow (KSW_base_security's rule_hr_employee_self limits a plain
          base.group_user to their own record) - read-only, no other HR

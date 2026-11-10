@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-name="KSW_helpdesk.BarChart">
+        <div class="o_hd_chart" t-att-style="'height:' + (props.height or 260) + 'px'">
+            <canvas t-ref="canvas"/>
+        </div>
+    </t>
+
+    <!-- Name, bar, count: tickets grouped by something. -->
+    <t t-name="KSW_helpdesk.CountRows">
+        <div t-if="!rows.length" class="o_hd_empty" t-esc="empty"/>
+        <table class="o_hd_rows">
+            <t t-foreach="rows" t-as="r" t-key="r_index">
+                <tr class="o_hd_click" t-on-click="() => this.open(r.name, r.domain, model)">
+                    <td style="width: 50%" class="o_hd_name" t-att-title="r.name" t-esc="r.name"/>
+                    <td class="o_hd_name"><div class="o_hd_bar_track"><div class="o_hd_bar" t-att-style="'width:' + width(r.count, rows)"/></div></td>
+                    <td class="o_hd_num ps-2" t-esc="n(r.count)"/>
+                </tr>
+            </t>
+        </table>
+    </t>
+
+    <t t-name="KSW_helpdesk.Dashboard">
+        <div class="o_hd_dashboard o_action">
+            <div class="d-flex flex-wrap align-items-center gap-2 mb-3">
+                <h3 class="mb-0 me-auto">Helpdesk Overview</h3>
+                <div class="btn-group btn-group-sm" role="group">
+                    <t t-foreach="periods" t-as="p" t-key="p[0]">
+                        <button type="button" class="btn"
+                                t-att-class="state.period === p[0] ? 'btn-primary' : 'btn-outline-secondary'"
+                                t-on-click="() => this.setPeriod(p[0])" t-esc="p[1]"/>
+                    </t>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-secondary" t-on-click="() => this.load()" title="Refresh">
+                    <i class="fa fa-refresh"/>
+                </button>
+                <button type="button" class="btn btn-sm btn-secondary" t-on-click="() => this.openStandard()">All Tickets</button>
+            </div>
+            <div t-if="state.loading and !state.data" class="o_hd_empty">Loading…</div>
+            <t t-if="state.data">
+                <t t-set="d" t-value="state.data"/>
+                <!-- Headline figures: the first three are the backlog now, the last three the period. -->
+                <div class="o_hd_grid">
+                    <div class="o_hd_card o_hd_tile" t-on-click="() => this.open(labels.open, d.open.domain)">
+                        <div class="o_hd_tile_label">Open tickets</div>
+                        <div class="o_hd_tile_value" t-esc="n(d.open.count)"/>
+                        <div class="o_hd_tile_sub" t-on-click.stop="() => this.open(labels.unassigned, d.open.unassigned_domain)">
+                            <span t-att-class="d.open.unassigned ? 'o_hd_warn' : ''"><t t-esc="n(d.open.unassigned)"/> unassigned</span>
+                            · oldest <t t-esc="n(d.open.oldest_days)"/> days</div>
+                    </div>
+                    <div class="o_hd_card o_hd_tile" t-on-click="() => this.open(labels.overdue, d.overdue.domain)">
+                        <div class="o_hd_tile_label">Overdue</div>
+                        <div class="o_hd_tile_value" t-att-class="d.overdue.count ? 'o_hd_bad' : ''" t-esc="n(d.overdue.count)"/>
+                        <div class="o_hd_tile_sub" t-on-click.stop="() => this.open(labels.blocked, d.overdue.blocked_domain)">
+                            past deadline · <t t-esc="n(d.overdue.blocked)"/> blocked</div>
+                    </div>
+                    <div class="o_hd_card o_hd_tile" t-on-click="() => this.open(labels.urgent, d.urgent.domain)">
+                        <div class="o_hd_tile_label">High &amp; urgent</div>
+                        <div class="o_hd_tile_value" t-att-class="d.urgent.count ? 'o_hd_warn' : ''" t-esc="n(d.urgent.count)"/>
+                        <div class="o_hd_tile_sub">open now</div>
+                    </div>
+                    <div class="o_hd_card o_hd_tile" t-on-click="() => this.open(labels.received, d.received.domain)">
+                        <div class="o_hd_tile_label">Received, this period</div>
+                        <div class="o_hd_tile_value"><t t-esc="n(d.received.count)"/> <small class="text-muted fs-6" t-esc="change(d.received.count, d.received.previous)"/></div>
+                        <div class="o_hd_tile_sub">previous <t t-esc="n(d.received.previous)"/></div>
+                    </div>
+                    <div class="o_hd_card o_hd_tile" t-on-click="() => this.open(labels.closed, d.closed.domain)">
+                        <div class="o_hd_tile_label">Closed, this period</div>
+                        <div class="o_hd_tile_value"><t t-esc="n(d.closed.count)"/> <small class="text-muted fs-6" t-esc="change(d.closed.count, d.closed.previous)"/></div>
+                        <div class="o_hd_tile_sub">previous <t t-esc="n(d.closed.previous)"/></div>
+                    </div>
+                    <div class="o_hd_card o_hd_tile" t-on-click="() => this.open(labels.closed, d.closed.domain)">
+                        <div class="o_hd_tile_label">Average resolution</div>
+                        <div class="o_hd_tile_value" t-esc="duration(d.resolution.hours)"/>
+                        <div class="o_hd_tile_sub">raised to closed · previous <t t-esc="duration(d.resolution.previous)"/></div>
+                    </div>
+                </div>
+
+                <div class="o_hd_grid o_hd_wide o_hd_main">
+                    <div class="o_hd_card o_hd_span6">
+                        <h5 t-esc="trendTitle"/>
+                        <HelpdeskBarChart labels="trendLabels" series="trendSeries" height="320"/>
+                    </div>
+                    <div class="o_hd_card o_hd_span3">
+                        <h5>Open tickets by age</h5>
+                        <table class="o_hd_rows">
+                            <t t-foreach="d.age" t-as="b" t-key="b.key">
+                                <tr class="o_hd_click" t-on-click="() => this.open(labels.openByAge + ': ' + b.label, b.domain)">
+                                    <td class="text-nowrap pe-3" t-esc="b.label"/>
+                                    <td class="o_hd_name"><div class="o_hd_bar_track"><div class="o_hd_bar" t-att-style="'width:' + width(b.count, d.age)"/></div></td>
+                                    <td class="o_hd_num ps-2" t-att-class="b.key === '7p' and b.count ? 'o_hd_bad' : ''" t-esc="n(b.count)"/>
+                                </tr>
+                            </t>
+                        </table>
+                        <h5 class="mt-4">Open tickets by stage</h5>
+                        <t t-call="KSW_helpdesk.CountRows">
+                            <t t-set="rows" t-value="d.by_stage"/>
+                            <t t-set="empty">Nothing open.</t>
+                        </t>
+                    </div>
+                    <div class="o_hd_card o_hd_span3">
+                        <h5>Open tickets by priority</h5>
+                        <t t-call="KSW_helpdesk.CountRows">
+                            <t t-set="rows" t-value="d.by_priority"/>
+                            <t t-set="empty">Nothing open.</t>
+                        </t>
+                        <h5 class="mt-4">Open tickets by type</h5>
+                        <t t-call="KSW_helpdesk.CountRows">
+                            <t t-set="rows" t-value="d.by_type"/>
+                            <t t-set="empty">Nothing open.</t>
+                        </t>
+                    </div>
+
+                    <div class="o_hd_card o_hd_span4">
+                        <h5>Tickets by category, this period</h5>
+                        <t t-call="KSW_helpdesk.CountRows">
+                            <t t-set="rows" t-value="d.categories"/>
+                            <t t-set="empty">No tickets this period.</t>
+                        </t>
+                    </div>
+                    <div class="o_hd_card o_hd_span4">
+                        <h5>IT Team workload</h5>
+                        <div t-if="!d.agents.length" class="o_hd_empty">No assigned tickets.</div>
+                        <table t-else="" class="o_hd_rows">
+                            <tr><td/><td class="o_hd_num text-muted"><small>open</small></td><td class="o_hd_num text-muted ps-2"><small>closed</small></td></tr>
+                            <t t-foreach="d.agents" t-as="r" t-key="r_index">
+                                <tr class="o_hd_click" t-on-click="() => this.open(r.name, r.domain)">
+                                    <td class="o_hd_name" t-att-title="r.name" t-esc="r.name"/>
+                                    <td class="o_hd_num" t-esc="n(r.open)"/>
+                                    <td class="o_hd_num ps-2" t-esc="n(r.closed)"/>
+                                </tr>
+                            </t>
+                        </table>
+                    </div>
+                    <div class="o_hd_card o_hd_span4">
+                        <h5>Satisfaction, this period</h5>
+                        <div t-if="!d.satisfaction.rated" class="o_hd_empty">No ratings on this period's closed tickets.</div>
+                        <t t-else="">
+                            <div class="o_hd_tile_value mb-2 o_hd_click" t-on-click="() => this.open(labels.rated, d.satisfaction.domain)">
+                                <span t-att-class="d.satisfaction.great_pct >= 70 ? 'o_hd_good' : 'o_hd_warn'"><t t-esc="d.satisfaction.great_pct"/>%</span>
+                                <small class="text-muted fs-6 ms-2">rated Great · <t t-esc="n(d.satisfaction.rated)"/> rated</small>
+                            </div>
+                            <t t-call="KSW_helpdesk.CountRows">
+                                <t t-set="rows" t-value="d.satisfaction.rows"/>
+                                <t t-set="empty"/>
+                            </t>
+                        </t>
+                    </div>
+
+                    <div class="o_hd_card o_hd_span6">
+                        <h5>Assets with the most tickets, this period</h5>
+                        <t t-call="KSW_helpdesk.CountRows">
+                            <t t-set="rows" t-value="d.assets"/>
+                            <t t-set="empty">No ticket linked to an asset this period.</t>
+                        </t>
+                    </div>
+                    <div class="o_hd_card o_hd_span6">
+                        <h5>IT asset register <small class="text-muted">now</small></h5>
+                        <t t-call="KSW_helpdesk.CountRows">
+                            <t t-set="rows" t-value="d.register.rows"/>
+                            <t t-set="model" t-value="'it.asset'"/>
+                            <t t-set="empty"/>
+                        </t>
+                        <div class="d-flex gap-3 mt-2 o_hd_tile_sub">
+                            <span class="o_hd_click" style="cursor: pointer" t-on-click="() => this.open(labels.warranty, d.register.warranty_domain, 'it.asset')">
+                                <span t-att-class="d.register.warranty ? 'o_hd_warn' : ''"><t t-esc="n(d.register.warranty)"/> warranty expiring</span></span>
+                            <span class="o_hd_click" style="cursor: pointer" t-on-click="() => this.open(labels.lowStock, d.register.low_stock_domain, 'it.consumable')">
+                                <span t-att-class="d.register.low_stock ? 'o_hd_bad' : ''"><t t-esc="n(d.register.low_stock)"/> consumables low on stock</span></span>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="action_report_it_asset_handover" model="ir.actions.report">
+        <field name="name">Asset Handover Form</field>
+        <field name="model">it.asset.assignment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">KSW_asset_handover.report_it_asset_handover</field>
+        <field name="report_file">KSW_asset_handover.report_it_asset_handover</field>
+        <field name="print_report_name">'Asset Handover - %s - %s' % (object.asset_id.asset_tag, object.employee_id.name)</field>
+        <field name="binding_model_id" ref="KSW_helpdesk.model_it_asset_assignment"/>
+        <field name="binding_type">report</field>
+        <field name="paperformat_id" ref="base.paperformat_euro"/>
+    </record>
+
+    <template id="report_it_asset_handover">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <!-- sudo(): the IT Team reads every employee via a record
+                     rule, but job/department/work contact may still be
+                     field-gated for them (gotcha #5). -->
+                <t t-set="emp" t-value="o.employee_id.sudo()"/>
+                <t t-set="asset" t-value="o.asset_id"/>
+                <t t-set="conditions" t-value="dict(o._fields['condition_out'].selection)"/>
+                <t t-call="web.external_layout">
+                    <div class="page">
+
+                        <h2 class="text-center mb-1">Asset Handover Form <span class="fs-4" dir="rtl">/ نموذج تسليم عهدة</span></h2>
+                        <p class="text-center text-muted mb-4">
+                            Form No. <span t-out="'ASG-%05d' % o.id"/>
+                        </p>
+
+                        <h5>Employee <span dir="rtl">/ الموظف</span></h5>
+                        <table class="table table-sm table-bordered mb-3">
+                            <tr>
+                                <td style="width:20%"><strong>Name</strong></td>
+                                <td style="width:30%" t-out="emp.name or ''"/>
+                                <td style="width:20%"><strong>Department</strong></td>
+                                <td style="width:30%" t-out="emp.department_id.name or ''"/>
+                            </tr>
+                            <tr>
+                                <td><strong>Job Title</strong></td>
+                                <td t-out="emp.job_title or emp.job_id.name or ''"/>
+                                <td><strong>Work Email</strong></td>
+                                <td t-out="emp.work_email or ''"/>
+                            </tr>
+                        </table>
+
+                        <h5>Asset <span dir="rtl">/ العهدة</span></h5>
+                        <table class="table table-sm table-bordered mb-3">
+                            <tr>
+                                <td style="width:20%"><strong>Asset Tag</strong></td>
+                                <td style="width:30%" t-out="asset.asset_tag or ''"/>
+                                <td style="width:20%"><strong>Category</strong></td>
+                                <td style="width:30%" t-out="asset.category_id.name or ''"/>
+                            </tr>
+                            <tr>
+                                <td><strong>Description</strong></td>
+                                <td t-out="asset.name or ''"/>
+                                <td><strong>Brand / Model</strong></td>
+                                <td><t t-out="asset.brand or ''"/> <t t-out="asset.model_name or ''"/></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Serial / IMEI</strong></td>
+                                <td t-out="asset.serial_number or ''"/>
+                                <td><strong>Accessories</strong></td>
+                                <td t-out="o.accessories or ''"/>
+                            </tr>
+                        </table>
+
+                        <h5>Handover Details <span dir="rtl">/ تفاصيل التسليم</span></h5>
+                        <table class="table table-sm table-bordered mb-3">
+                            <tr>
+                                <td style="width:20%"><strong>Date Assigned</strong></td>
+                                <td style="width:30%" t-out="o.date_assigned" t-options="{'widget': 'date'}"/>
+                                <td style="width:20%"><strong>Expected Return</strong></td>
+                                <td style="width:30%">
+                                    <t t-if="o.date_expected_return" t-out="o.date_expected_return" t-options="{'widget': 'date'}"/>
+                                    <t t-else="">Permanent</t>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><strong>Condition</strong></td>
+                                <td t-out="conditions.get(o.condition_out, '')"/>
+                                <td><strong>Handed Over By</strong></td>
+                                <td t-out="o.assigned_by.name or ''"/>
+                            </tr>
+                            <tr t-if="o.notes">
+                                <td><strong>Notes</strong></td>
+                                <td colspan="3" t-out="o.notes"/>
+                            </tr>
+                        </table>
+
+                        <p class="mt-3 mb-4">
+                            I, the undersigned, acknowledge receipt of the above asset in the
+                            stated condition. I agree to use it for work purposes only, keep
+                            it safe, report any damage, loss or theft to the IT Team
+                            immediately, and return it with all accessories when requested or
+                            when my employment ends.
+                        </p>
+                        <p class="mb-4" dir="rtl">
+                            أقر أنا الموقع أدناه باستلام العهدة الموضحة أعلاه بالحالة المذكورة،
+                            وأتعهد باستخدامها لأغراض العمل فقط والمحافظة عليها، وإبلاغ فريق تقنية
+                            المعلومات فوراً عن أي تلف أو فقدان أو سرقة، وإعادتها مع جميع ملحقاتها
+                            عند الطلب أو عند انتهاء خدمتي.
+                        </p>
+
+                        <table class="table table-borderless" style="page-break-inside: avoid;">
+                            <tr>
+                                <td class="text-center" style="width:50%">
+                                    <strong>Received By (Employee) / المستلم</strong>
+                                </td>
+                                <td class="text-center" style="width:50%">
+                                    <strong>Handed Over By (IT Team) / المسلّم</strong>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center" style="height:90px; vertical-align:bottom;">
+                                    <img t-if="o.employee_signature"
+                                         t-att-src="image_data_uri(o.employee_signature)"
+                                         style="max-height:80px; max-width:240px;"/>
+                                </td>
+                                <td class="text-center" style="height:90px; vertical-align:bottom;">
+                                    <img t-if="o.it_signature"
+                                         t-att-src="image_data_uri(o.it_signature)"
+                                         style="max-height:80px; max-width:240px;"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="text-center" style="border-top:1px solid #000;">
+                                    <t t-out="emp.name or ''"/>
+                                    <div class="small text-muted" t-if="o.employee_signed_date">
+                                        <t t-out="o.employee_signed_date" t-options="{'widget': 'datetime'}"/>
+                                    </div>
+                                </td>
+                                <td class="text-center" style="border-top:1px solid #000;">
+                                    <t t-out="o.assigned_by.name or ''"/>
+                                    <div class="small text-muted" t-if="o.it_signed_date">
+                                        <t t-out="o.it_signed_date" t-options="{'widget': 'datetime'}"/>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
+</odoo>

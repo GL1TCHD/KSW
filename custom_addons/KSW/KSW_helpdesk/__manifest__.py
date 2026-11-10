@@ -1,6 +1,6 @@
 {
     'name': 'KSW Helpdesk',
-    'version': '19.0.1.6.0',
+    'version': '19.0.1.8.0',
     'summary': 'Internal IT support ticketing system and asset register for employees',
     'description': """
 Helpdesk / IT Ticketing for KSW
@@ -22,6 +22,10 @@ assign and resolve it:
   the agent's Resolution Notes (how the issue was actually fixed - kept
   as a reference on every closed ticket)
 - Reporting (pivot/graph) and a calendar of ticket deadlines
+- Overview dashboard as the IT Team's landing page: open backlog and its
+  age, overdue and urgent tickets, received vs closed trend, resolution
+  time, workload per agent, satisfaction, and the asset register at a
+  glance. Everyone else still lands on My Tickets
 
 Just two roles: every employee submits tickets (for themselves, or a
 direct report); the IT Team handles everything else.
@@ -31,6 +35,9 @@ IT Asset Register (IT Team only)
 - Asset register with category, brand, model, serial number, purchase
   and warranty information
 - Assign / return workflow with a full assignment history per employee
+- "Assign to Employee" opens the assignment itself as a form (dates,
+  condition, accessories); saving it assigns the asset. Signing and
+  printing the handover form is KSW_asset_handover's job
 - Maintenance tracking (send to / return from repair)
 - Optional link from a ticket to the specific IT asset it's about
 - Automatic activity reminder 30 days before an asset's warranty expires
@@ -83,12 +90,17 @@ their direct report).
         'views/it_consumable_views.xml',
         'views/it_consumable_purchase_request_views.xml',
         'report/report_it_consumable_purchase_request.xml',
-        'wizard/it_asset_assign_wizard_views.xml',
         'wizard/it_asset_return_wizard_views.xml',
         'wizard/it_consumable_issue_wizard_views.xml',
         'wizard/it_consumable_receive_wizard_views.xml',
+        'views/helpdesk_dashboard_views.xml',
         'views/menu.xml',
     ],
+    'assets': {
+        'web.assets_backend': [
+            'KSW_helpdesk/static/src/dashboard/**/*',
+        ],
+    },
     'installable': True,
     'application': True,
     'license': 'LGPL-3',

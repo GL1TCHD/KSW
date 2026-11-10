@@ -6,6 +6,18 @@
               sequence="96"
               web_icon="KSW_helpdesk,static/description/icon.png"/>
 
+    <!-- IT Team only. First child of the app, so the IT Team lands on the
+         overview; everyone else opens on My Tickets, since a menu they
+         cannot see is skipped. The root has no groups=, so nothing above
+         narrows it (gotcha #41). get_dashboard_data refuses anyone else
+         server side. -->
+    <menuitem id="menu_helpdesk_overview"
+              name="Overview"
+              parent="menu_helpdesk_root"
+              action="action_helpdesk_dashboard"
+              sequence="0"
+              groups="KSW_helpdesk.group_helpdesk_agent"/>
+
     <!-- Self-Service (every internal user) -->
     <menuitem id="menu_helpdesk_my_tickets"
               name="My Tickets"

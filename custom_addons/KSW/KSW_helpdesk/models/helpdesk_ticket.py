@@ -244,7 +244,20 @@ class HelpdeskTicket(models.Model):
             self._check_assignee(vals['user_id'])
         if 'employee_id' in vals:
             self._check_employee_scope(vals['employee_id'])
+        # Dragging a ticket into / out of a closed stage on the kanban is a
+        # close / reopen too: without the date, resolution time and the
+        # overview's "closed this period" never count it.
+        to_stamp = to_clear = self.browse()
+        if vals.get('stage_id') and 'close_date' not in vals:
+            if self.env['helpdesk.ticket.stage'].browse(vals['stage_id']).is_closed:
+                to_stamp = self.filtered(lambda t: not t.is_closed)
+            else:
+                to_clear = self.filtered('is_closed')
         result = super().write(vals)
+        if to_stamp:
+            to_stamp.write({'close_date': fields.Datetime.now(), 'closed_by': self.env.user.id})
+        if to_clear:
+            to_clear.write({'close_date': False, 'closed_by': False})
         if 'user_id' in vals:
             self._notify_assignment()
         return result

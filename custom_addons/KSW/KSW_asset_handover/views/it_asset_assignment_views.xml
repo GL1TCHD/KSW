@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="it_asset_assignment_view_list_handover" model="ir.ui.view">
+        <field name="name">it.asset.assignment.list.handover</field>
+        <field name="model">it.asset.assignment</field>
+        <field name="inherit_id" ref="KSW_helpdesk.it_asset_assignment_view_list"/>
+        <field name="arch" type="xml">
+            <field name="date_returned" position="after">
+                <field name="is_fully_signed" string="Signed" optional="show"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="it_asset_assignment_view_form_handover" model="ir.ui.view">
+        <field name="name">it.asset.assignment.form.handover</field>
+        <field name="model">it.asset.assignment</field>
+        <field name="inherit_id" ref="KSW_helpdesk.it_asset_assignment_view_form"/>
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                <button name="%(KSW_asset_handover.action_report_it_asset_handover)d" type="action"
+                        string="Print Handover Form" class="oe_highlight" icon="fa-print"
+                        invisible="not id"/>
+                <button name="action_clear_signatures" type="object"
+                        string="Clear Signatures"
+                        invisible="state != 'active' or not (employee_signature or it_signature)"
+                        confirm="Remove both signatures from this handover form?"/>
+            </field>
+            <xpath expr="//sheet/group" position="before">
+                <field name="is_fully_signed" invisible="1"/>
+                <widget name="web_ribbon" title="Signed" bg_color="text-bg-success"
+                        invisible="not is_fully_signed"/>
+            </xpath>
+            <xpath expr="//notebook/page[@name='notes']" position="before">
+                <page string="Signatures" name="signatures">
+                    <group>
+                        <group string="Employee (Received By)">
+                            <field name="employee_signature" widget="signature" nolabel="1" colspan="2"
+                                   readonly="state != 'active'"
+                                   options="{'full_name': 'employee_id'}"/>
+                            <widget name="ksw_wacom_capture_signature" colspan="2"
+                                    string="Capture from Wacom Pad"
+                                    signature_field="employee_signature"
+                                    capture_method_field="employee_signature_method"
+                                    full_name="employee_id"
+                                    invisible="state != 'active'"/>
+                            <field name="employee_signature_method" invisible="not employee_signature"/>
+                            <field name="employee_signed_date" invisible="not employee_signature"/>
+                        </group>
+                        <group string="IT Team (Handed Over By)">
+                            <field name="it_signature" widget="signature" nolabel="1" colspan="2"
+                                   readonly="state != 'active'"
+                                   options="{'full_name': 'assigned_by'}"/>
+                            <widget name="ksw_wacom_capture_signature" colspan="2"
+                                    string="Capture from Wacom Pad"
+                                    signature_field="it_signature"
+                                    capture_method_field="it_signature_method"
+                                    full_name="assigned_by"
+                                    invisible="state != 'active'"/>
+                            <field name="it_signature_method" invisible="not it_signature"/>
+                            <field name="it_signed_date" invisible="not it_signature"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- The "Assign to Employee" pop-up: Save & Sign saves the assignment
+         (which assigns the asset) and opens the full handover form. -->
+    <record id="it_asset_assignment_view_form_dialog_handover" model="ir.ui.view">
+        <field name="name">it.asset.assignment.form.dialog.handover</field>
+        <field name="model">it.asset.assignment</field>
+        <field name="inherit_id" ref="KSW_helpdesk.it_asset_assignment_view_form_dialog"/>
+        <field name="arch" type="xml">
+            <xpath expr="//footer/button[@special='save']" position="before">
+                <button name="action_open_handover_form" type="object"
+                        string="Save &amp; Sign" class="btn-primary"/>
+            </xpath>
+            <xpath expr="//footer/button[@special='save']" position="attributes">
+                <attribute name="class">btn-secondary</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

@@ -207,8 +207,9 @@ class ItAsset(models.Model):
         return {
             'type': 'ir.actions.act_window',
             'name': _('Assign Asset'),
-            'res_model': 'it.asset.assign.wizard',
+            'res_model': 'it.asset.assignment',
             'view_mode': 'form',
+            'views': [(self.env.ref('KSW_helpdesk.it_asset_assignment_view_form_dialog').id, 'form')],
             'target': 'new',
             'context': {'default_asset_id': self.id},
         }
