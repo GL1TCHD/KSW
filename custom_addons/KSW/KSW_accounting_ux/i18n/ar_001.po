@@ -1276,6 +1276,7 @@ msgstr "حسابات خارج أي مجموعة"
 #. module: KSW_accounting_ux
 #. odoo-javascript
 #: code:addons/KSW_accounting_ux/static/src/account_tree/account_tree.js:0
+#: model_terms:ir.ui.view,arch_db:KSW_accounting_ux.view_move_form_ksw_cost_centres
 msgid "Journal Items"
 msgstr "عناصر اليومية"
 
@@ -1331,3 +1332,9 @@ msgstr "مجموعة"
 #: code:addons/KSW_accounting_ux/static/src/account_tree/account_tree.js:0
 msgid "account"
 msgstr "حساب"
+
+#. module: KSW_accounting_ux
+#. odoo-python
+#: code:addons/KSW_accounting_ux/models/account_move.py:0
+msgid "Journal Items · %s"
+msgstr "عناصر اليومية · %s"

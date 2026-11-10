@@ -18,6 +18,12 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_form"/>
         <field name="arch" type="xml">
+            <!-- The lines inside the form cannot be searched; this opens them where they can. -->
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="action_ksw_open_journal_items" type="object" class="oe_stat_button"
+                        icon="fa-list" string="Journal Items" invisible="not id"
+                        groups="account.group_account_readonly"/>
+            </xpath>
             <xpath expr="//field[@name='line_ids']/list/field[@name='analytic_distribution']" position="after">
                 <field name="x_cost_centre_id" optional="show"/>
                 <field name="x_employee_cost_centre_id" optional="show"/>

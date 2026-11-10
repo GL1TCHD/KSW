@@ -146,7 +146,7 @@ class HrPayslipRun(models.Model):
         if posted:
             Ledger._move(move.journal_id, fields.Date.context_today(self),
                          _('Reversal of %(slip)s (%(move)s)', slip=slip.name, move=move.name),
-                         [(a, -amt, label, an) for a, amt, label, an in lines])
+                         [(a, -amt, label, an, *extra) for a, amt, label, an, *extra in lines])
         slip.sudo().write({'x_ledger_move_id': False})
 
     # ------------------------------------------------------------------ lines
@@ -201,7 +201,8 @@ class HrPayslipRun(models.Model):
             if not any(round(v, 2) for v in per_account.values()):
                 zero |= slip
                 continue
-            lines += block + settle
+            who = self.env['account.move.line']._ksw_employee_vals(employee)
+            lines += [line + (who,) for line in block + settle]
         return lines, done, problems, zero
 
     def _ksw_ledger_block(self, slip, employee, company, month, payer='kawther'):

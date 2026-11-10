@@ -59,8 +59,10 @@ msgstr ""
 
 #. module: KSW_payroll_ledger
 #: model:ir.model,name:KSW_payroll_ledger.model_hr_department
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_account_move_line__x_department_id
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_account_move_line_filter_ksw_employee
 msgid "Department"
-msgstr ""
+msgstr "القسم"
 
 #. module: KSW_payroll_ledger
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_department__display_name
@@ -77,8 +79,10 @@ msgstr ""
 
 #. module: KSW_payroll_ledger
 #: model:ir.model,name:KSW_payroll_ledger.model_hr_employee
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_account_move_line__x_employee_id
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_account_move_line_filter_ksw_employee
 msgid "Employee"
-msgstr ""
+msgstr "الموظف"
 
 #. module: KSW_payroll_ledger
 #: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_employee__x_separate_salary_account

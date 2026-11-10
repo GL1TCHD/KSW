@@ -46,10 +46,13 @@ class KswPayRun(models.Model):
             with self.env.cr.savepoint():
                 company = self.env.company
                 lines = []
+                Line = self.env['account.move.line']
+                whose = Line._ksw_employee_by_label(self.line_ids.employee_id)
                 for row in self._bas_journal_rows():
                     lines.append((Ledger._account(row['code'], company),
                                   (row['debit'] or 0.0) - (row['credit'] or 0.0),
-                                  row['ref'], Ledger._analytic_by_name(row['cost_center'])))
+                                  row['ref'], Ledger._analytic_by_name(row['cost_center']),
+                                  Line._ksw_employee_vals(whose(row['ref']))))
                 move = Ledger._move(Ledger._journal('COMM', company), date, self.name, lines)
                 self.sudo().write({'x_ledger_move_id': move.id or False, 'x_ledger_error': False})
         except UserError as e:

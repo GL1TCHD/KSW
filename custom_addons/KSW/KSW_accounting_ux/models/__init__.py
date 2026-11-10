@@ -8,3 +8,4 @@ from . import account_move_line
 from . import bas_supplier_payment
 from . import bas_native
 from . import account_tree
+from . import account_move

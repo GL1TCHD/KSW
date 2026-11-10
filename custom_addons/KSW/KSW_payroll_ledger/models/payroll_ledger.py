@@ -225,16 +225,21 @@ class KswPayrollLedger(models.AbstractModel):
     # ------------------------------------------------------------------ the entry
     @api.model
     def _move(self, journal, date, ref, lines):
-        """``lines``: [(account, amount, label, analytic or None)], +debit / -credit.
+        """``lines``: [(account, amount, label, analytic or None[, extra vals])],
+        +debit / -credit; ``extra`` is the line's employee and department.
 
-        Lines on the same account, label and cost centre are one line. A
-        refusal names what is missing rather than balancing on a guess."""
-        merged = {}
-        for account, amount, label, analytic in lines:
-            key = (account.id, label or '', analytic.id if analytic else 0)
+        Lines on the same account, label, cost centre and employee are one
+        line. A refusal names what is missing rather than balancing on a guess."""
+        merged, extras = {}, {}
+        for account, amount, label, analytic, *extra in lines:
+            extra = extra[0] if extra else {}
+            key = (account.id, label or '', analytic.id if analytic else 0,
+                   extra.get('x_employee_id') or 0)
             merged[key] = merged.get(key, 0.0) + (amount or 0.0)
+            extras.setdefault(key, extra)
         vals = []
-        for (account_id, label, analytic_id), amount in merged.items():
+        for key, amount in merged.items():
+            account_id, label, analytic_id, _employee = key
             amount = round(amount, 2)
             if not amount:
                 continue
@@ -243,6 +248,7 @@ class KswPayrollLedger(models.AbstractModel):
                 'debit': amount if amount > 0 else 0.0,
                 'credit': -amount if amount < 0 else 0.0,
                 'analytic_distribution': {str(analytic_id): 100} if analytic_id else False,
+                **extras[key],
             }))
         balance = round(sum(v[2]['debit'] - v[2]['credit'] for v in vals), 2)
         if balance:

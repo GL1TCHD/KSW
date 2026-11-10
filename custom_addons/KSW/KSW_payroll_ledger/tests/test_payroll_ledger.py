@@ -240,3 +240,52 @@ class TestPayrollLedger(BasJournalPayrollCommon):
         self.env.invalidate_all()  # the compute must run as him, not come from the cache
         Run.browse(self.batch.id).web_read({
             'x_ledger_move_count': {}, 'x_ledger_unposted_count': {}, 'x_ledger_error': {}})
+
+    def test_12_lines_carry_the_employee_and_department(self):
+        """Entry 93 (Nov 2026): 168 lines, and no way to pick out one man or department."""
+        dept = self.env['hr.department'].sudo().create({'name': 'Ledger Filter Dept'})
+        self.employee.sudo().department_id = dept
+        other = self._employee('Ledger Filter Other', self.employee.sudo().x_salary_bank_account_id)
+        self._payslip([(self.rule_basic, 5000.0), (self.rule_net, 5000.0)])
+        self._payslip([(self.rule_basic, 3000.0), (self.rule_net, 3000.0)], other)
+        move = self._confirm()
+        mine = move.line_ids.filtered(lambda l: l.x_employee_id == self.employee)
+        self.assertEqual({(l.account_id, round(l.balance, 2)) for l in mine},
+                         {(self.wage, 5000.0), (self.payable, -5000.0)})
+        self.assertEqual(mine.x_department_id, dept)
+        self.assertEqual(move.line_ids.x_employee_id, self.employee | other)
+        # A department transfer later does not move the booked lines.
+        self.employee.sudo().department_id = False
+        self.assertEqual(mine.x_department_id, dept)
+
+        # An accountant without HR rights opens the entry's lines in the searchable list.
+        user = self.env['res.users'].sudo().create({
+            'name': 'Ledger Accountant Only', 'login': 'ledger_accountant_only',
+            'group_ids': [(6, 0, [self.env.ref('base.group_user').id,
+                                  self.env.ref('account.group_account_user').id])]})
+        self.assertFalse(user.has_group('hr.group_hr_user'))
+        domain = [('move_id', '=', move.id)]
+        if hasattr(move, 'action_ksw_open_journal_items'):  # KSW_accounting_ux's button
+            domain = move.with_user(user).action_ksw_open_journal_items()['domain']
+            self.assertIn(('move_id', '=', move.id), domain)
+        self.env.invalidate_all()
+        Line = self.env['account.move.line'].with_user(user)
+        found = Line.search(domain + [('x_employee_id', '=', self.employee.id)])
+        self.assertEqual(found, mine)
+        rows = found.web_read({'x_employee_id': {'fields': {'display_name': {}}},
+                               'x_department_id': {'fields': {'display_name': {}}}})
+        self.assertEqual(rows[0]['x_employee_id']['display_name'], self.employee.name)
+        self.assertEqual(Line.search(domain + [('x_department_id', 'child_of', dept.id)]), mine)
+
+    def test_13_label_matching_prefers_the_longest_name(self):
+        Line = self.env['account.move.line']
+        Employee = self.env['hr.employee'].sudo()
+        short = Employee.create({'name': 'AHMED ALI'})
+        long_ = Employee.create({'name': 'MOHAMMED AHMED ALI'})
+        twin_a = Employee.create({'name': 'LEDGER TWIN'})
+        twin_b = Employee.create({'name': 'LEDGER TWIN'})
+        match = Line._ksw_employee_by_label(short | long_ | twin_a | twin_b)
+        self.assertEqual(match('Salary MOHAMMED AHMED ALI October'), long_)
+        self.assertEqual(match('Salary  AHMED ALI October'), short)
+        self.assertFalse(match('Salary LEDGER TWIN October'))
+        self.assertFalse(match('Salary AHMED ALIYU October'))
