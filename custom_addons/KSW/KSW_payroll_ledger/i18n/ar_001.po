@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-09 08:16+0000\n"
-"PO-Revision-Date: 2026-11-09 08:16+0000\n"
+"POT-Creation-Date: 2026-11-10 07:19+0000\n"
+"PO-Revision-Date: 2026-11-10 07:19+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ar_001\n"
@@ -15,6 +15,18 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_payslip_line__x_ledger_to_personal_account
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_salary_rule__x_ledger_to_personal_account
+msgid ""
+"A deduction booked to the employee's own account in BAS (Loan Acc No. in "
+"Bas), on a line of its own, e.g. GOSI. Without an account of his own it is "
+"netted against his salary like any other deduction."
+msgstr ""
+"خصم يُقيَّد على حساب الموظف الخاص في BAS (رقم حساب السلف في BAS) في سطر "
+"مستقل، مثل التأمينات الاجتماعية. إن لم يكن له حساب خاص يُخصم من راتبه كأي "
+"خصم آخر."
 
 #. module: KSW_payroll_ledger
 #: model:ir.model.fields.selection,name:KSW_payroll_ledger.selection__hr_department__x_ledger_entity__hayat
@@ -27,6 +39,11 @@ msgstr "الحياة"
 #: model:ir.model.fields.selection,name:KSW_payroll_ledger.selection__res_partner_bank__x_ledger_entity__kawther
 msgid "Al-Kawther"
 msgstr "الكوثر"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_employee__x_allowance_account_id
+msgid "Allowances Account"
+msgstr "حساب البدلات"
 
 #. module: KSW_payroll_ledger
 #: model:ir.model,name:KSW_payroll_ledger.model_res_partner_bank
@@ -58,6 +75,12 @@ msgstr ""
 "ولا في دفتر الأستاذ."
 
 #. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip_line__x_ledger_to_personal_account
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_salary_rule__x_ledger_to_personal_account
+msgid "Credit the Employee's Own Account"
+msgstr "قيد على حساب الموظف الخاص"
+
+#. module: KSW_payroll_ledger
 #: model:ir.model,name:KSW_payroll_ledger.model_hr_department
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_account_move_line__x_department_id
 #: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_account_move_line_filter_ksw_employee
@@ -65,6 +88,7 @@ msgid "Department"
 msgstr "القسم"
 
 #. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_account_move_line__display_name
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_department__display_name
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_employee__display_name
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip__display_name
@@ -96,6 +120,7 @@ msgstr ""
 "الموظف نفسه يُقدَّم عليه."
 
 #. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_account_move_line__id
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_department__id
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_employee__id
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip__id
@@ -106,6 +131,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_res_config_settings__id
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_res_partner_bank__id
 msgid "ID"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model,name:KSW_payroll_ledger.model_account_move_line
+msgid "Journal Item"
 msgstr ""
 
 #. module: KSW_payroll_ledger
@@ -162,6 +192,16 @@ msgstr "لا شيء للترحيل"
 #: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_employee__x_wage_account_id
 msgid "Only for an employee BAS charges somewhere other than his department."
 msgstr "فقط للموظف الذي يحمّل BAS راتبه على حساب غير حساب قسمه."
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_employee__x_allowance_account_id
+msgid ""
+"Only for an employee whose allowances BAS books somewhere other than his "
+"wage, e.g. a basic on the separate salary account and the allowances on the "
+"camp. Empty: as everyone else."
+msgstr ""
+"فقط للموظف الذي يقيّد BAS بدلاته على حساب غير حساب راتبه، مثل الأساسي على "
+"حساب الرواتب المستقل والبدلات على الكامب. فارغ: كباقي الموظفين."
 
 #. module: KSW_payroll_ledger
 #: model:ir.model,name:KSW_payroll_ledger.model_hr_payslip

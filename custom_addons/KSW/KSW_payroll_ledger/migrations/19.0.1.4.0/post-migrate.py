@@ -1,44 +1,53 @@
-"""Employee and department on the SAL / COMM lines already booked (Nov 2026).
+"""The accountant's review of the reposted Aug–Oct entries (Nov 2026).
 
-New entries are stamped when they are booked. The ones before carry the
-employee only in the line label, so he is read back from it: against the
-payslips / commission month the entry belongs to, or against every employee
-for an entry nothing links to (a reversal). The department is his current
-one; the entries are all from the last few weeks.
+* Equipment Rental Department is the transport branch: 3206010001.
+* GOSI is credited to the employee's own account when he has one.
+* AHMED NAZMI: basic on the separate salary account, allowances on the camp.
+* Three own accounts found in BAS, missing on the employee.
+
+The Jubail-camp allowances and the pro-rata deductions are code, not data.
+Each value is written only where nothing is set.
 """
 import logging
 
 from odoo import SUPERUSER_ID, api
 
+from odoo.addons.KSW_payroll_ledger.hooks import PERSONAL_ACCOUNT_RULES
+
 _logger = logging.getLogger(__name__)
+
+# employee no. -> his own account in BAS
+OWN_ACCOUNTS = {
+    '1526': '1205010009',   # AQEEL MOHAMMED AL ZAHER   — سلف عقيل محمد الزاهر
+    '1468': '1205010369',   # MOHAMMED HABEEB M ALBASTI — سلف محمد حبيب البسطي
+    '1475': '2111010015',   # Taha Hussein Al-Shakhs    — ح جاري/طه حسين
+}
+ALLOWANCE_ACCOUNTS = {'842': '3204010001'}   # AHMED NAZMI: 8,500 on M, 2,750 on the camp
 
 
 def migrate(cr, version):
-    env = api.Environment(cr, SUPERUSER_ID, {'active_test': False})
-    Line = env['account.move.line']
-    Employee = env['hr.employee']
-    moves = env['account.move'].search([('journal_id.code', 'in', ('SAL', 'COMM'))])
-    linked = {}
-    for slip in env['hr.payslip'].search([('x_ledger_move_id', 'in', moves.ids)]):
-        linked.setdefault(slip.x_ledger_move_id.id, Employee)
-        linked[slip.x_ledger_move_id.id] |= slip.employee_id
-    for run in env['ksw.pay.run'].search([('x_ledger_move_id', 'in', moves.ids)]):
-        linked.setdefault(run.x_ledger_move_id.id, Employee)
-        linked[run.x_ledger_move_id.id] |= run.line_ids.employee_id
-    everyone = Line._ksw_employee_by_label(Employee.search([]))
-    stamped = unmatched = 0
-    for move in moves:
-        match = Line._ksw_employee_by_label(linked[move.id]) if move.id in linked else everyone
-        by_employee = {}
-        for line in move.line_ids.filtered(lambda l: not l.x_employee_id):
-            employee = match(line.name)
-            if employee:
-                by_employee.setdefault(employee, Line)
-                by_employee[employee] |= line
-            else:
-                unmatched += 1
-        for employee, lines in by_employee.items():
-            lines.write(Line._ksw_employee_vals(employee))
-            stamped += len(lines)
-    _logger.info('KSW_payroll_ledger: employee stamped on %s lines of %s entries, %s left blank',
-                 stamped, len(moves), unmatched)
+    env = api.Environment(cr, SUPERUSER_ID, {'active_test': False, 'lang': 'en_US'})
+    Account, Employee = env['account.account'], env['hr.employee']
+    rules = env['hr.salary.rule'].search([('code', 'in', PERSONAL_ACCOUNT_RULES)])
+    rules.write({'x_ledger_to_personal_account': True})
+    for company in env['res.company'].search([]):
+        def account(code):
+            return Account.search([('company_ids', 'in', company.id), ('code', '=', code)], limit=1)
+        transport = account('3206010001')
+        if not transport:
+            continue
+        depts = env['hr.department'].search([
+            ('name', '=', 'Equipment Rental Department'), ('x_wage_account_id', '=', False)])
+        depts.write({'x_wage_account_id': transport.id})
+        for number, code in ALLOWANCE_ACCOUNTS.items():
+            emp = Employee.search([('x_employee_no', '=', number)])
+            if len(emp) == 1 and not emp.x_allowance_account_id and account(code):
+                emp.x_allowance_account_id = account(code)
+        for number, code in OWN_ACCOUNTS.items():
+            emp = Employee.search([('x_employee_no', '=', number)])
+            if len(emp) == 1 and not (emp.x_loan_acc_no or '').strip() and account(code):
+                emp.x_loan_acc_no = code
+            elif len(emp) != 1:
+                _logger.warning('KSW_payroll_ledger: employee no. %s not found once, own account %s not set', number, code)
+        _logger.info('KSW_payroll_ledger: 3206010001 on %s; GOSI rules %s',
+                     ', '.join(depts.mapped('name')) or 'no department', ', '.join(rules.mapped('code')))

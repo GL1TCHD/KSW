@@ -14,6 +14,7 @@ what the accountant keys into BAS; this is Odoo's own entry, in journal SAL.
 from markupsafe import Markup
 
 from odoo import _, api, fields, models
+from odoo.tools import float_round
 from odoo.exceptions import UserError
 
 from .payroll_ledger import (
@@ -206,6 +207,10 @@ class HrPayslipRun(models.Model):
         return lines, done, problems, zero
 
     def _ksw_ledger_block(self, slip, employee, company, month, payer='kawther'):
+        """His lines, and the net they must come to.
+
+        Earnings debited; deductions netted against them pro rata; his loans,
+        deductions and GOSI credited to his own account, a line each."""
         Journal = self.env['ksw.bas.journal']
         Ledger = self.env['ksw.payroll.ledger'].with_context(
             ksw_ledger_analytic_cache=self.env.context.get('ksw_ledger_analytic_cache', {}))
@@ -213,7 +218,7 @@ class HrPayslipRun(models.Model):
         wage, whole = Ledger._wage_account(employee, company, payer)
         cost_centre = Ledger._vehicle_cost_centre(employee)
         salary_label = Journal.ref(_('Salary'), who, month)
-        block, net, unmapped = [], 0.0, []
+        earnings, credits, netted, net, unmapped = [], [], 0.0, 0.0, []
         for line in slip.line_ids:
             amount = line.total or 0.0
             rule = line.salary_rule_id
@@ -223,24 +228,95 @@ class HrPayslipRun(models.Model):
                 continue
             if not amount or line.code in TOTAL_CODES:
                 continue
-            if posting == 'loan':
+            if posting == 'loan' or (rule.x_ledger_to_personal_account
+                                     and (employee.x_loan_acc_no or '').strip()):
                 try:
                     code, _name = Journal.loan_account(employee)
-                    loan = Ledger._account(code, company)
+                    own = Ledger._account(code, company)
                 except UserError:
                     unmapped.append(_('no loan account'))
                     continue
-                block.append((loan, amount, Journal.ref(_('Deducted from salary'), who, month), None))
+                for label, part in self._ksw_ledger_credit_parts(slip, line, rule, who, month):
+                    credits.append((own, part, label, None))
             elif posting == 'expense' or rule.x_ledger_account_id:
-                account = wage if (whole and posting == 'expense') else (rule.x_ledger_account_id or wage)
-                block.append((account, amount, salary_label, cost_centre if account == wage else None))
+                account = self._ksw_ledger_earning_account(employee, rule, posting, wage, whole)
+                earnings.append([account, amount, salary_label, cost_centre if account == wage else None])
             elif posting == 'liability':
-                block.append((wage, amount, salary_label, cost_centre))
+                netted += amount
             else:
                 unmapped.append(rule.code or rule.name)
+        self._ksw_ledger_spread(earnings, netted, wage, salary_label, cost_centre)
+        block = [tuple(e) for e in earnings] + credits
         posted = round(sum(b[1] for b in block), 2)
         if unmapped or abs(posted - round(net, 2)) >= 0.005:
             raise UserError(_('payslip net %(net).2f, entry %(posted).2f%(rules)s',
                               net=net, posted=posted,
                               rules=(' (' + ', '.join(unmapped) + ')') if unmapped else ''))
         return block, net
+
+    def _ksw_ledger_earning_account(self, employee, rule, posting, wage, whole):
+        """An allowance on its own account at the main office only.
+
+        A branch (Jubail camp 3204…, transport 3206…) books the whole salary on
+        its wage account, as do the separate salary account and Al-Hayat: an
+        allowance account of another branch is not his."""
+        allowance = rule.x_ledger_account_id
+        if not allowance:
+            return wage
+        if posting != 'expense':
+            return allowance          # e.g. commissions clearing their accrual
+        if employee.x_allowance_account_id:
+            return employee.x_allowance_account_id
+        if whole or (allowance.code or '')[:4] != (wage.code or '')[:4]:
+            return wage
+        return allowance
+
+    @api.model
+    def _ksw_ledger_spread(self, earnings, netted, wage, label, cost_centre):
+        """Deductions netted against the earnings in proportion to them.
+
+        Six days attended of thirty-one: six thirty-firsts of the wage and of
+        each allowance, not the whole allowance and what is left of the wage.
+        Only expense lines share it (a commission clearing its accrual does
+        not); the wage line takes the rounding."""
+        if not round(netted, 2):
+            return
+        shared = [e for e in earnings if (e[0].account_type or '').startswith('expense')]
+        base = sum(e[1] for e in shared)
+        if not shared or not base:
+            earnings.append([wage, netted, label, cost_centre])
+            return
+        digits = 0 if all(float(e[1]).is_integer() for e in shared) and float(netted).is_integer() else 2
+        anchor = next((e for e in shared if e[0] == wage), max(shared, key=lambda e: e[1]))
+        given = 0.0
+        for e in shared:
+            if e is anchor:
+                continue
+            part = float_round(netted * e[1] / base, precision_digits=digits)
+            e[1] += part
+            given += part
+        anchor[1] += netted - given
+
+    def _ksw_ledger_credit_parts(self, slip, line, rule, who, month):
+        """[(label, amount)] for one credit to his own account.
+
+        KSW_DEDUCTIONS is the sum of one input per installment: split by what
+        each one is (loan installment, salary advance, penalty…), so the
+        account shows them apart. Any other rule is one line under its name."""
+        Journal = self.env['ksw.bas.journal']
+        amount = line.total or 0.0
+        if line.code != 'KSW_DEDUCTIONS':
+            return [(Journal.ref(rule.name or rule.code, who, month), amount)]
+        Line = self.env['ksw.deduction.line'].sudo()
+        parts = {}
+        for inp in slip.input_line_ids.filtered(lambda i: (i.code or '').startswith('KSW_DED')):
+            ident = (inp.code or '').rsplit('_', 1)[-1]
+            ded = Line.browse(int(ident)).exists().deduction_id if ident.isdigit() else Line.deduction_id
+            if ded.is_loan:
+                kind = _('Loan installment')
+            else:
+                kind = ded.type_id.name or _('Deducted from salary')
+            parts[kind] = parts.get(kind, 0.0) - (inp.amount or 0.0)
+        if not parts or abs(sum(parts.values()) - amount) >= 0.005:
+            return [(Journal.ref(_('Deducted from salary'), who, month), amount)]
+        return [(Journal.ref(kind, who, month), part) for kind, part in parts.items() if round(part, 2)]

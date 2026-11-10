@@ -24,7 +24,7 @@ class TestPayrollLedger(BasJournalPayrollCommon):
                 {'code': code, 'name': 'Ledger test %s' % code, 'account_type': kind})
         cls.wage = acc('9919010001')
         cls.saudi_wage = acc('9919010010')
-        cls.camp_wage = acc('9919040001')
+        cls.camp_wage = acc('9924010001')   # a branch: its own 4-digit group
         cls.housing = acc('9919010002')
         cls.payable = acc('9917010004', 'liability_current')
         params = env['ir.config_parameter'].sudo()
@@ -71,9 +71,10 @@ class TestPayrollLedger(BasJournalPayrollCommon):
         self.assertEqual(move.state, 'posted')
         self.assertEqual(move.journal_id.code, 'SAL')
         self.assertEqual(move.date, date(2026, 3, 31))
-        # The absence is not a line of its own: the wage is what is paid.
+        # The absence is not a line of its own: what is paid is expensed, the
+        # wage and the housing each by the same share (250 of 6,250 = 4%).
         self.assertEqual(self._lines(move), {
-            (self.wage, 4750.0), (self.housing, 1250.0), (self.payable, -6000.0)})
+            (self.wage, 4800.0), (self.housing, 1200.0), (self.payable, -6000.0)})
 
     def test_02_nothing_before_the_start_date(self):
         self.env['ir.config_parameter'].sudo().set_param('ksw_payroll_ledger.start_date', '2026-04-01')
@@ -145,6 +146,52 @@ class TestPayrollLedger(BasJournalPayrollCommon):
                        (self.rule_net, 14500.0)], employee=apart)
         self.assertEqual(self._lines(self._confirm()), {
             (self.saudi_wage, 14500.0), (self.payable, -14500.0)})
+
+    def test_04f_a_branch_books_the_allowances_on_its_own_account(self):
+        """Jubail camp: all 10,000 on the camp, none on the main office's allowances."""
+        dept = self.env['hr.department'].sudo().create(
+            {'name': 'Ledger Jubail', 'x_wage_account_id': self.camp_wage.id})
+        man = self.env['hr.employee'].sudo().create({'name': 'Ledger Camp Cook', 'department_id': dept.id})
+        self._payslip([(self.rule_basic, 6000.0), (self.rule_hra, 4000.0),
+                       (self.rule_net, 10000.0)], employee=man)
+        self.assertEqual(self._lines(self._confirm()), {
+            (self.camp_wage, 10000.0), (self.payable, -10000.0)})
+
+    def test_04g_an_absence_is_spread_over_wage_and_allowances(self):
+        """Six days of thirty-one: 484 wage + 97 allowance, not 81 + the whole 500."""
+        self._payslip([(self.rule_basic, 2500.0), (self.rule_hra, 500.0),
+                       (self.rule_ded, -2419.0), (self.rule_net, 581.0)])
+        self.assertEqual(self._lines(self._confirm()), {
+            (self.wage, 484.0), (self.housing, 97.0), (self.payable, -581.0)})
+
+    def test_04h_gosi_to_his_own_account_or_netted(self):
+        """GOSI on his own account, a line of its own; without one, netted."""
+        self.rule_gosi.sudo().x_ledger_to_personal_account = True
+        own = self.env['account.account'].sudo().create(
+            {'code': '9905010099', 'name': 'Ledger own account', 'account_type': 'asset_current'})
+        with_acc = self.env['hr.employee'].sudo().create(
+            {'name': 'Ledger GOSI Own', 'x_loan_acc_no': own.code})
+        without = self.env['hr.employee'].sudo().create({'name': 'Ledger GOSI None'})
+        self._payslip([(self.rule_basic, 8000.0), (self.rule_ded, -2612.0),
+                       (self.rule_gosi, -780.0), (self.rule_net, 4608.0)], employee=with_acc)
+        self._payslip([(self.rule_basic, 4000.0), (self.rule_gosi, -390.0),
+                       (self.rule_net, 3610.0)], employee=without)
+        move = self._confirm()
+        own_lines = move.line_ids.filtered(lambda l: l.account_id == own)
+        self.assertEqual(own_lines.mapped('balance'), [-780.0])
+        self.assertIn('GOSI', own_lines.name)
+        wages = move.line_ids.filtered(lambda l: l.account_id == self.wage)
+        self.assertEqual(sorted(wages.mapped('balance')), [3610.0, 5388.0])
+
+    def test_04i_basic_and_allowances_on_different_accounts(self):
+        """AHMED NAZMI: 8,500 on the separate salary account, 2,750 on the camp."""
+        man = self.env['hr.employee'].sudo().create({
+            'name': 'Ledger Nazmi', 'x_separate_salary_account': True,
+            'x_allowance_account_id': self.camp_wage.id})
+        self._payslip([(self.rule_basic, 8500.0), (self.rule_hra, 2750.0),
+                       (self.rule_net, 11250.0)], employee=man)
+        self.assertEqual(self._lines(self._confirm()), {
+            (self.saudi_wage, 8500.0), (self.camp_wage, 2750.0), (self.payable, -11250.0)})
 
     def test_05_one_employee_never_holds_up_the_others(self):
         self.rule_gosi.sudo().x_bas_posting = 'none'

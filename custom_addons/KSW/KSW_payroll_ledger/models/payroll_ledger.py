@@ -11,9 +11,15 @@ block per employee (September 2026, 26009158 / 26009187):
   reasons). Those are the departments that carry it and the employees ticked
   Separate Salary Account;
 * each allowance to its own account: housing 3201010002, transport
-  3201010003, mobile 3201010004, other 3201010011;
-* deductions are not lines of their own: what he is paid is what is expensed;
-* his loan installment credited to his own 1205 account, the net to salaries
+  3201010003, mobile 3201010004, other 3201010011 — at the main office only
+  (3201…). A branch books the whole salary on its one account (Jubail camp
+  3204…, transport 3206…);
+* deductions are not lines of their own: what he is paid is what is expensed,
+  spread over his wage and allowances in proportion (six days attended: six
+  days of each);
+* his loan installments, his other deductions and his GOSI credited to his
+  own account (1205…), one line each so they can be told apart; without an
+  account of his own, GOSI is netted like any deduction. The net to salaries
   payable 2107010004.
 
 Al-Hayat's staff paid from Al-Hayat's own accounts are booked in its H1
@@ -61,6 +67,11 @@ class HrSalaryRule(models.Model):
         help='Where this figure lands in Odoo\'s ledger (parallel run). Empty on an '
              'earning: the employee\'s wage account. Separate from the BAS export '
              'mapping.')
+    x_ledger_to_personal_account = fields.Boolean(
+        string="Credit the Employee's Own Account",
+        help="A deduction booked to the employee's own account in BAS (Loan Acc No. in "
+             "Bas), on a line of its own, e.g. GOSI. Without an account of his own it "
+             "is netted against his salary like any other deduction.")
 
 
 class HrDepartment(models.Model):
@@ -83,6 +94,11 @@ class HrEmployee(models.Model):
     x_wage_account_id = fields.Many2one(
         'account.account', string='Wage Expense Account', groups='hr.group_hr_user',
         help='Only for an employee BAS charges somewhere other than his department.')
+    x_allowance_account_id = fields.Many2one(
+        'account.account', string='Allowances Account', groups='hr.group_hr_user',
+        help='Only for an employee whose allowances BAS books somewhere other than his '
+             'wage, e.g. a basic on the separate salary account and the allowances on '
+             'the camp. Empty: as everyone else.')
     x_separate_salary_account = fields.Boolean(
         string='Separate Salary Account', groups='hr.group_hr_user',
         help='His wage is booked to the separate salary account in Settings '

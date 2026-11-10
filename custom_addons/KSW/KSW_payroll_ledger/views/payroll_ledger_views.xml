@@ -52,6 +52,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='x_bas_posting']" position="after">
                 <field name="x_ledger_account_id" options="{'no_create': True}"/>
+                <field name="x_ledger_to_personal_account"/>
             </xpath>
         </field>
     </record>
@@ -77,6 +78,8 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='department_id']" position="after">
                 <field name="x_wage_account_id" options="{'no_create': True}"
+                       groups="om_hr_payroll.group_hr_payroll_manager"/>
+                <field name="x_allowance_account_id" options="{'no_create': True}"
                        groups="om_hr_payroll.group_hr_payroll_manager"/>
             </xpath>
             <xpath expr="//page[@name='hr_settings']" position="inside">

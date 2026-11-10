@@ -24,7 +24,10 @@ DEPARTMENT_ACCOUNTS = {
     'HR-IST': '3201010010',
     'ALHAYAT-IST': '3205010005',      # اجور ورواتب الاداريين الحياة H1 (paid by Al-Hayat)
     'Non-K': '3201010010',
+    'Equipment Rental Department': '3206010001',   # رواتب واجور فرع نقليات الكوثر
 }
+# Deductions BAS credits to the employee's own account, on a line of their own.
+PERSONAL_ACCOUNT_RULES = ('GOSI', 'VACATION_GOSI')
 
 
 def post_init_hook(env):
@@ -50,6 +53,8 @@ def post_init_hook(env):
             if target and depts:
                 depts.write({'x_wage_account_id': target.id})
         seed_hayat(env, company)
+        env['hr.salary.rule'].sudo().with_context(active_test=False).search(
+            [('code', 'in', PERSONAL_ACCOUNT_RULES)]).write({'x_ledger_to_personal_account': True})
         _logger.info('KSW_payroll_ledger: journals and BAS salary mapping seeded for %s', company.name)
 
 
