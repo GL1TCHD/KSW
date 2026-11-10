@@ -1,0 +1,119 @@
+{
+  "version": "18.5.10",
+  "sheets": [
+    {
+      "id": "sheet1",
+      "name": "Dashboard",
+      "colNumber": 7,
+      "rowNumber": 35,
+      "rows": {},
+      "cols": {},
+      "merges": [],
+      "cells": {},
+      "styles": {},
+      "formats": {},
+      "borders": {},
+      "conditionalFormats": [],
+      "dataValidationRules": [],
+      "figures": [
+        {
+          "id": "00607883-0504-494b-b978-23b622eb75f7",
+          "width": 490,
+          "height": 340,
+          "tag": "chart",
+          "data": {
+            "title": {
+              "text": "Payroll by Department"
+            },
+            "background": "#FFFFFF",
+            "legendPosition": "none",
+            "metaData": {
+              "groupBy": [
+                "department_id"
+              ],
+              "measure": "total",
+              "order": null,
+              "resModel": "hr.payslip.line",
+              "mode": "bar"
+            },
+            "searchParams": {
+              "comparison": null,
+              "context": {
+                "group_by": []
+              },
+              "domain": [
+                [
+                  "department_id",
+                  "!=",
+                  false
+                ]
+              ],
+              "groupBy": [
+                "department_id"
+              ],
+              "orderBy": []
+            },
+            "type": "odoo_bar",
+            "dataSets": [
+              {}
+            ],
+            "verticalAxisPosition": "left",
+            "stacked": false,
+            "axesDesign": {
+              "x": {
+                "title": {
+                  "text": "Department"
+                }
+              },
+              "y": {
+                "title": {
+                  "text": "Amount"
+                }
+              }
+            },
+            "chartId": "00607883-0504-494b-b978-23b622eb75f7",
+            "fieldMatching": {}
+          },
+          "offset": {
+            "x": 20,
+            "y": 20
+          },
+          "col": 0,
+          "row": 0
+        }
+      ],
+      "tables": [],
+      "areGridLinesVisible": true,
+      "isVisible": true,
+      "headerGroups": {
+        "ROW": [],
+        "COL": []
+      },
+      "comments": {}
+    }
+  ],
+  "styles": {},
+  "formats": {},
+  "borders": {},
+  "revisionId": "START_REVISION",
+  "uniqueFigureIds": true,
+  "settings": {
+    "locale": {
+      "name": "English (US)",
+      "code": "en_US",
+      "thousandsSeparator": ",",
+      "decimalSeparator": ".",
+      "dateFormat": "mm/dd/yyyy",
+      "timeFormat": "hh:mm:ss",
+      "formulaArgSeparator": ",",
+      "weekStart": 7
+    }
+  },
+  "pivots": {},
+  "pivotNextId": 1,
+  "customTableStyles": {},
+  "globalFilters": [],
+  "lists": {},
+  "listNextId": 1,
+  "chartOdooMenusReferences": {}
+}

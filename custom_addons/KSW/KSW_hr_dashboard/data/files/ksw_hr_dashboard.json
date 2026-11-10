@@ -1,0 +1,251 @@
+{
+  "version": "18.5.10",
+  "sheets": [
+    {
+      "id": "sheet1",
+      "name": "Dashboard",
+      "colNumber": 7,
+      "rowNumber": 35,
+      "rows": {},
+      "cols": {},
+      "merges": [],
+      "cells": {},
+      "styles": {},
+      "formats": {},
+      "borders": {},
+      "conditionalFormats": [],
+      "dataValidationRules": [],
+      "figures": [
+        {
+          "id": "24eddd91-e355-42da-8e59-f4be19affb87",
+          "width": 490,
+          "height": 340,
+          "tag": "chart",
+          "data": {
+            "title": {
+              "text": "Pending Leave Approvals by Step"
+            },
+            "background": "#FFFFFF",
+            "legendPosition": "none",
+            "metaData": {
+              "groupBy": [
+                "x_annual_approval_state"
+              ],
+              "measure": "__count",
+              "order": null,
+              "resModel": "hr.leave",
+              "mode": "bar"
+            },
+            "searchParams": {
+              "comparison": null,
+              "context": {
+                "group_by": []
+              },
+              "domain": [
+                [
+                  "x_is_annual_leave_type",
+                  "=",
+                  true
+                ],
+                [
+                  "x_annual_approval_state",
+                  "like",
+                  "pending%"
+                ]
+              ],
+              "groupBy": [
+                "x_annual_approval_state"
+              ],
+              "orderBy": []
+            },
+            "type": "odoo_bar",
+            "dataSets": [
+              {}
+            ],
+            "verticalAxisPosition": "left",
+            "stacked": false,
+            "axesDesign": {
+              "x": {
+                "title": {
+                  "text": "Approval Step"
+                }
+              },
+              "y": {
+                "title": {
+                  "text": "Requests"
+                }
+              }
+            },
+            "chartId": "24eddd91-e355-42da-8e59-f4be19affb87",
+            "fieldMatching": {}
+          },
+          "offset": {
+            "x": 20,
+            "y": 20
+          },
+          "col": 0,
+          "row": 0
+        },
+        {
+          "id": "22ff3575-78f0-4445-b122-0d53891b6e69",
+          "width": 490,
+          "height": 340,
+          "tag": "chart",
+          "data": {
+            "title": {
+              "text": "Attendance Absence Trend"
+            },
+            "background": "#FFFFFF",
+            "legendPosition": "none",
+            "metaData": {
+              "groupBy": [
+                "month"
+              ],
+              "measure": "total_absent",
+              "order": null,
+              "resModel": "ksw.attendance.sheet",
+              "mode": "line"
+            },
+            "searchParams": {
+              "comparison": null,
+              "context": {
+                "group_by": []
+              },
+              "domain": [],
+              "groupBy": [
+                "month"
+              ],
+              "orderBy": []
+            },
+            "type": "odoo_line",
+            "dataSets": [
+              {}
+            ],
+            "verticalAxisPosition": "left",
+            "stacked": false,
+            "axesDesign": {
+              "x": {
+                "title": {
+                  "text": "Month"
+                }
+              },
+              "y": {
+                "title": {
+                  "text": "Absent Days"
+                }
+              }
+            },
+            "chartId": "22ff3575-78f0-4445-b122-0d53891b6e69",
+            "fieldMatching": {}
+          },
+          "offset": {
+            "x": 530,
+            "y": 20
+          },
+          "col": 0,
+          "row": 0
+        },
+        {
+          "id": "a63bbfc9-8f9f-4c45-9465-2017a8ff833f",
+          "width": 490,
+          "height": 340,
+          "tag": "chart",
+          "data": {
+            "title": {
+              "text": "Outstanding Deduction Balance"
+            },
+            "background": "#FFFFFF",
+            "legendPosition": "none",
+            "metaData": {
+              "groupBy": [
+                "department_id"
+              ],
+              "measure": "total_pending",
+              "order": null,
+              "resModel": "ksw.deduction",
+              "mode": "bar"
+            },
+            "searchParams": {
+              "comparison": null,
+              "context": {
+                "group_by": []
+              },
+              "domain": [
+                [
+                  "state",
+                  "not in",
+                  [
+                    "completed",
+                    "cancelled"
+                  ]
+                ]
+              ],
+              "groupBy": [
+                "department_id"
+              ],
+              "orderBy": []
+            },
+            "type": "odoo_bar",
+            "dataSets": [
+              {}
+            ],
+            "verticalAxisPosition": "left",
+            "stacked": false,
+            "axesDesign": {
+              "x": {
+                "title": {
+                  "text": "Department"
+                }
+              },
+              "y": {
+                "title": {
+                  "text": "Outstanding"
+                }
+              }
+            },
+            "chartId": "a63bbfc9-8f9f-4c45-9465-2017a8ff833f",
+            "fieldMatching": {}
+          },
+          "offset": {
+            "x": 20,
+            "y": 380
+          },
+          "col": 0,
+          "row": 0
+        }
+      ],
+      "tables": [],
+      "areGridLinesVisible": true,
+      "isVisible": true,
+      "headerGroups": {
+        "ROW": [],
+        "COL": []
+      },
+      "comments": {}
+    }
+  ],
+  "styles": {},
+  "formats": {},
+  "borders": {},
+  "revisionId": "START_REVISION",
+  "uniqueFigureIds": true,
+  "settings": {
+    "locale": {
+      "name": "English (US)",
+      "code": "en_US",
+      "thousandsSeparator": ",",
+      "decimalSeparator": ".",
+      "dateFormat": "mm/dd/yyyy",
+      "timeFormat": "hh:mm:ss",
+      "formulaArgSeparator": ",",
+      "weekStart": 7
+    }
+  },
+  "pivots": {},
+  "pivotNextId": 1,
+  "customTableStyles": {},
+  "globalFilters": [],
+  "lists": {},
+  "listNextId": 1,
+  "chartOdooMenusReferences": {}
+}
