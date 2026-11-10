@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-11-10 07:19+0000\n"
-"PO-Revision-Date: 2026-11-10 07:19+0000\n"
+"POT-Creation-Date: 2026-11-10 12:09+0000\n"
+"PO-Revision-Date: 2026-11-10 12:09+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ar_001\n"
@@ -17,33 +17,52 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: KSW_payroll_ledger
-#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_payslip_line__x_ledger_to_personal_account
-#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_salary_rule__x_ledger_to_personal_account
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_posting_group_form
 msgid ""
-"A deduction booked to the employee's own account in BAS (Loan Acc No. in "
-"Bas), on a line of its own, e.g. GOSI. Without an account of his own it is "
-"netted against his salary like any other deduction."
+"A row without a category takes the wage and every category that has no\n"
+"                        row of its own. One row only: the whole salary on one account."
 msgstr ""
-"خصم يُقيَّد على حساب الموظف الخاص في BAS (رقم حساب السلف في BAS) في سطر "
-"مستقل، مثل التأمينات الاجتماعية. إن لم يكن له حساب خاص يُخصم من راتبه كأي "
-"خصم آخر."
+"السطر بدون فئة يأخذ الراتب الأساسي وكل فئة ليس لها سطر خاص. سطر واحد فقط: "
+"الراتب كله على حساب واحد."
 
 #. module: KSW_payroll_ledger
-#: model:ir.model.fields.selection,name:KSW_payroll_ledger.selection__hr_department__x_ledger_entity__hayat
-#: model:ir.model.fields.selection,name:KSW_payroll_ledger.selection__res_partner_bank__x_ledger_entity__hayat
-msgid "Al-Hayat"
-msgstr "الحياة"
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.res_config_settings_view_form_ledger
+msgid ""
+"A salary figure no posting map row answers goes here and is\n"
+"                                named on the batch. Empty: that employee is held out."
+msgstr ""
+"أي مبلغ راتب لا يقابله سطر في خريطة الترحيل يُقيَّد هنا ويُذكر على الدفعة. "
+"فارغ: يُستبعد ذلك الموظف."
 
 #. module: KSW_payroll_ledger
-#: model:ir.model.fields.selection,name:KSW_payroll_ledger.selection__hr_department__x_ledger_entity__kawther
-#: model:ir.model.fields.selection,name:KSW_payroll_ledger.selection__res_partner_bank__x_ledger_entity__kawther
-msgid "Al-Kawther"
-msgstr "الكوثر"
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_employee_posting__account_id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_map__account_id
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_posting_map_search
+msgid "Account"
+msgstr ""
 
 #. module: KSW_payroll_ledger
-#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_employee__x_allowance_account_id
-msgid "Allowances Account"
-msgstr "حساب البدلات"
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_group__map_ids
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_posting_group_form
+msgid "Accounts"
+msgstr "الحسابات"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_entity__active
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_group__active
+msgid "Active"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields.selection,name:KSW_payroll_ledger.selection__hr_payslip_line__x_ledger_deduction__basic
+#: model:ir.model.fields.selection,name:KSW_payroll_ledger.selection__hr_salary_rule__x_ledger_deduction__basic
+msgid "Against the basic wage only"
+msgstr "من الراتب الأساسي فقط"
+
+#. module: KSW_payroll_ledger
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_posting_group_form
+msgid "Archived"
+msgstr ""
 
 #. module: KSW_payroll_ledger
 #: model:ir.model,name:KSW_payroll_ledger.model_res_partner_bank
@@ -61,6 +80,27 @@ msgstr ""
 "التاريخ أو بعده. ما قبله صُدِّر إلى BAS ولا يُرحَّل. فارغ: لا يُرحَّل شيء."
 
 #. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_intercompany__posting_group_id
+msgid "Book them in"
+msgstr "قيّدهم في"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_employee_posting__category_id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_map__category_id
+msgid "Category"
+msgstr "الفئة"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_category__code
+msgid "Code"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_entity__company_id
+msgid "Company"
+msgstr ""
+
+#. module: KSW_payroll_ledger
 #: model:ir.model,name:KSW_payroll_ledger.model_res_config_settings
 msgid "Config Settings"
 msgstr ""
@@ -75,10 +115,64 @@ msgstr ""
 "ولا في دفتر الأستاذ."
 
 #. module: KSW_payroll_ledger
-#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip_line__x_ledger_to_personal_account
-#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_salary_rule__x_ledger_to_personal_account
-msgid "Credit the Employee's Own Account"
-msgstr "قيد على حساب الموظف الخاص"
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_employee_posting__create_uid
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_entity__create_uid
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_intercompany__create_uid
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_category__create_uid
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_group__create_uid
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_map__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_employee_posting__create_date
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_entity__create_date
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_intercompany__create_date
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_category__create_date
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_group__create_date
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_map__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_ksw_payroll_intercompany__staff_account_id
+msgid ""
+"Credited with the net instead of salaries payable, in the staff entity's "
+"books (1208010010)."
+msgstr ""
+"يُقيَّد عليه الصافي دائناً بدلاً من الرواتب المستحقة، في دفاتر جهة الموظف "
+"(1208010010)."
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_ksw_payroll_entity__payable_account_id
+msgid "Credited with the net of every salary this entity pays."
+msgstr "يُقيَّد عليه دائناً صافي كل راتب تصرفه هذه الجهة."
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_ksw_payroll_intercompany__payer_account_id
+msgid ""
+"Debited with the net, in the paying entity's books (Al-Hayat paying a "
+"Kawther employee: 2101030003). Empty, with the next one: no current "
+"accounts."
+msgstr ""
+"يُقيَّد عليه الصافي مديناً في دفاتر الجهة الصارفة (الحياة تصرف لموظف الكوثر:"
+" 2101030003). فارغ مع الحقل التالي: بدون حسابات جارية."
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip_line__x_ledger_deduction
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_salary_rule__x_ledger_deduction
+msgid "Deduction in the Ledger"
+msgstr "الخصم في دفتر الأستاذ"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_entity__is_default
+msgid "Default Entity"
+msgstr "الجهة الافتراضية"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_entity__default_group_id
+msgid "Default Posting Group"
+msgstr "مجموعة الترحيل الافتراضية"
 
 #. module: KSW_payroll_ledger
 #: model:ir.model,name:KSW_payroll_ledger.model_hr_department
@@ -88,6 +182,12 @@ msgid "Department"
 msgstr "القسم"
 
 #. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_group__department_ids
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_posting_group_form
+msgid "Departments"
+msgstr ""
+
+#. module: KSW_payroll_ledger
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_account_move_line__display_name
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_department__display_name
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_employee__display_name
@@ -95,29 +195,118 @@ msgstr "القسم"
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip_run__display_name
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_salary_rule__display_name
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_pay_run__display_name
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_employee_posting__display_name
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_entity__display_name
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_intercompany__display_name
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_ledger__display_name
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting__display_name
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_category__display_name
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_group__display_name
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_map__display_name
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_res_config_settings__display_name
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_res_partner_bank__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_intercompany__payer_account_id
+msgid "Due from the Staff's Entity"
+msgstr "مستحق من جهة الموظف"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_intercompany__staff_account_id
+msgid "Due to the Payer"
+msgstr "مستحق للجهة الصارفة"
+
+#. module: KSW_payroll_ledger
 #: model:ir.model,name:KSW_payroll_ledger.model_hr_employee
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_account_move_line__x_employee_id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_employee_posting__employee_id
 #: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_account_move_line_filter_ksw_employee
 msgid "Employee"
 msgstr "الموظف"
 
 #. module: KSW_payroll_ledger
-#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_employee__x_separate_salary_account
-msgid ""
-"His wage is booked to the separate salary account in Settings (3201010010) "
-"instead of his department's, whatever the reason BAS keeps it apart. A Wage "
-"Expense Account set on the employee still wins."
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_group__employee_count
+msgid "Employee Count"
 msgstr ""
-"يُقيَّد راتبه على حساب الرواتب المستقل المحدد في الإعدادات (3201010010) "
-"بدلاً من حساب قسمه، أياً كان سبب فصله في BAS. حساب مصروف الأجور المحدد على "
-"الموظف نفسه يُقدَّم عليه."
+
+#. module: KSW_payroll_ledger
+#: model:ir.actions.act_window,name:KSW_payroll_ledger.action_ksw_payroll_employee_posting
+#: model:ir.ui.menu,name:KSW_payroll_ledger.menu_ksw_payroll_employee_posting
+msgid "Employee Exceptions"
+msgstr "استثناءات الموظفين"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields.selection,name:KSW_payroll_ledger.selection__hr_payslip_line__x_ledger_deduction__own_account
+#: model:ir.model.fields.selection,name:KSW_payroll_ledger.selection__hr_salary_rule__x_ledger_deduction__own_account
+msgid "Employee's own account"
+msgstr "حساب الموظف الخاص"
+
+#. module: KSW_payroll_ledger
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_posting_group_list
+msgid "Employees set by hand"
+msgstr "موظفون محددون يدوياً"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_ksw_payroll_employee_posting__category_id
+msgid "Empty: his wage and every category without a row of its own."
+msgstr "فارغ: راتبه الأساسي وكل فئة ليس لها سطر خاص."
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_ksw_payroll_posting_map__category_id
+msgid "Empty: the wage and every category without a row of its own."
+msgstr "فارغ: الراتب الأساسي وكل فئة ليس لها سطر خاص."
+
+#. module: KSW_payroll_ledger
+#: model:ir.actions.act_window,name:KSW_payroll_ledger.action_ksw_payroll_entity
+#: model:ir.ui.menu,name:KSW_payroll_ledger.menu_ksw_payroll_entity
+msgid "Entities"
+msgstr "الجهات"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_employee__x_posting_exception_ids
+msgid ""
+"Figures of his that go to another account than his posting group says: a "
+"category → an account; a row without a category moves his whole salary."
+msgstr ""
+"مبالغ الموظف التي تُقيَّد على حساب غير ما تحدده مجموعة ترحيله: فئة ← حساب؛ "
+"السطر بدون فئة ينقل راتبه كاملاً."
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip_line__x_ledger_account_id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_salary_rule__x_ledger_account_id
+msgid "Fixed Ledger Account"
+msgstr "حساب ثابت في دفتر الأستاذ"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_ksw_payroll_entity__default_group_id
+msgid "For this entity's staff whose department names no posting group."
+msgstr "لموظفي هذه الجهة الذين لا يحدد قسمهم مجموعة ترحيل."
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_map__group_id
+msgid "Group"
+msgstr "المجموعة"
+
+#. module: KSW_payroll_ledger
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_employee_form_ledger
+msgid "His department's"
+msgstr "مجموعة قسمه"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_payslip_line__x_ledger_deduction
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_salary_rule__x_ledger_deduction
+msgid ""
+"How a deduction is booked. Spread: netted against his wage and allowances in"
+" proportion (six days attended: six days of each). Basic: netted against the"
+" wage line only. Own account: credited to his own account in BAS (Loan Acc "
+"No. in Bas) on a line of its own, e.g. GOSI; without one it is spread."
+msgstr ""
+"طريقة قيد الخصم. توزيع: يُخصم من راتبه وبدلاته بالتناسب (ستة أيام حضور: ستة "
+"أيام من كلٍّ منها). الأساسي: يُخصم من سطر الراتب الأساسي فقط. حسابه الخاص: "
+"يُقيَّد دائناً على حسابه الخاص في BAS (رقم حساب السلف) في سطر مستقل، مثل "
+"التأمينات؛ وإن لم يكن له حساب يُوزَّع."
 
 #. module: KSW_payroll_ledger
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_account_move_line__id
@@ -127,7 +316,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip_run__id
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_salary_rule__id
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_pay_run__id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_employee_posting__id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_entity__id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_intercompany__id
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_ledger__id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting__id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_category__id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_group__id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_map__id
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_res_config_settings__id
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_res_partner_bank__id
 msgid "ID"
@@ -144,6 +340,26 @@ msgid "KSW Monthly Pay Run"
 msgstr ""
 
 #. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_employee_posting__write_uid
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_entity__write_uid
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_intercompany__write_uid
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_category__write_uid
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_group__write_uid
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_map__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_employee_posting__write_date
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_entity__write_date
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_intercompany__write_date
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_category__write_date
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_group__write_date
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_map__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: KSW_payroll_ledger
 #: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_employee_form_ledger
 msgid "Ledger"
 msgstr "دفتر الأستاذ"
@@ -154,15 +370,9 @@ msgid "Ledger (parallel run)"
 msgstr "دفتر الأستاذ (التشغيل الموازي)"
 
 #. module: KSW_payroll_ledger
-#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip_line__x_ledger_account_id
-#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_salary_rule__x_ledger_account_id
-msgid "Ledger Account"
-msgstr "حساب دفتر الأستاذ"
-
-#. module: KSW_payroll_ledger
-#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_account_setup_bank_manual_config__x_ledger_entity
-#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_department__x_ledger_entity
-#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_res_partner_bank__x_ledger_entity
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_account_setup_bank_manual_config__x_ledger_entity_id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_department__x_ledger_entity_id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_res_partner_bank__x_ledger_entity_id
 msgid "Ledger Entity"
 msgstr "الجهة المحاسبية"
 
@@ -184,29 +394,115 @@ msgid "Ledger Posting Problem"
 msgstr "مشكلة في الترحيل إلى دفتر الأستاذ"
 
 #. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_entity__name
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_category__name
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_group__name
+msgid "Name"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_entity__note
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_intercompany__note
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_category__note
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_group__note
+msgid "Note"
+msgstr ""
+
+#. module: KSW_payroll_ledger
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip__x_ledger_nothing
 msgid "Nothing to Post"
 msgstr "لا شيء للترحيل"
 
 #. module: KSW_payroll_ledger
-#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_employee__x_wage_account_id
-msgid "Only for an employee BAS charges somewhere other than his department."
-msgstr "فقط للموظف الذي يحمّل BAS راتبه على حساب غير حساب قسمه."
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_payslip_line__x_ledger_account_id
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_salary_rule__x_ledger_account_id
+msgid ""
+"One account for every employee, whatever his posting group: e.g. commissions"
+" clearing the accrual the commission month booked. Leave empty for wages and"
+" allowances; they follow the posting map."
+msgstr ""
+"حساب واحد لكل الموظفين أياً كانت مجموعة ترحيلهم: مثل العمولات التي تُسوّي "
+"مستحق شهر العمولات. اتركه فارغاً للرواتب والبدلات؛ فهي تتبع خريطة الترحيل."
 
 #. module: KSW_payroll_ledger
-#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_employee__x_allowance_account_id
+#: model:ir.model.constraint,message:KSW_payroll_ledger.constraint_ksw_payroll_posting_map_group_category_unique
+msgid "One account per posting group and category."
+msgstr "حساب واحد لكل مجموعة ترحيل وفئة."
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.constraint,message:KSW_payroll_ledger.constraint_ksw_payroll_employee_posting_employee_category_unique
+msgid "One exception per employee and category."
+msgstr "استثناء واحد لكل موظف وفئة."
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.constraint,message:KSW_payroll_ledger.constraint_ksw_payroll_intercompany_payer_staff_unique
+msgid "One row per paying entity and staff entity."
+msgstr "سطر واحد لكل جهة صارفة وجهة موظف."
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_employee__x_posting_group_id
 msgid ""
-"Only for an employee whose allowances BAS books somewhere other than his "
-"wage, e.g. a basic on the separate salary account and the allowances on the "
-"camp. Empty: as everyone else."
+"Only for an employee booked apart from his department, whatever the reason "
+"(e.g. Separate Salaries (M)). Empty: his department's."
 msgstr ""
-"فقط للموظف الذي يقيّد BAS بدلاته على حساب غير حساب راتبه، مثل الأساسي على "
-"حساب الرواتب المستقل والبدلات على الكامب. فارغ: كباقي الموظفين."
+"فقط للموظف الذي يُقيَّد بشكل مختلف عن قسمه أياً كان السبب (مثل رواتب مستقلة "
+"M). فارغ: مجموعة قسمه."
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_intercompany__payer_id
+msgid "Paid by"
+msgstr "تصرفه"
+
+#. module: KSW_payroll_ledger
+#: model:ir.actions.act_window,name:KSW_payroll_ledger.action_ksw_payroll_intercompany
+#: model:ir.ui.menu,name:KSW_payroll_ledger.menu_ksw_payroll_intercompany
+msgid "Paid for Another Entity"
+msgstr "الصرف لجهة أخرى"
 
 #. module: KSW_payroll_ledger
 #: model:ir.model,name:KSW_payroll_ledger.model_hr_payslip
 msgid "Pay Slip"
 msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model,name:KSW_payroll_ledger.model_ksw_payroll_posting
+msgid "Payroll Account Determination"
+msgstr "تحديد حسابات الرواتب"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model,name:KSW_payroll_ledger.model_ksw_payroll_entity
+msgid "Payroll Entity (whose money, whose staff)"
+msgstr "جهة الرواتب (من يصرف، ومن يتبع)"
+
+#. module: KSW_payroll_ledger
+#: model:ir.ui.menu,name:KSW_payroll_ledger.menu_ksw_payroll_posting
+msgid "Payroll Posting"
+msgstr "ترحيل الرواتب"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model,name:KSW_payroll_ledger.model_ksw_payroll_posting_category
+msgid "Payroll Posting Category"
+msgstr "فئة ترحيل الرواتب"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model,name:KSW_payroll_ledger.model_ksw_payroll_employee_posting
+msgid "Payroll Posting Exception"
+msgstr "استثناء ترحيل الرواتب"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model,name:KSW_payroll_ledger.model_ksw_payroll_posting_group
+msgid "Payroll Posting Group"
+msgstr "مجموعة ترحيل الرواتب"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model,name:KSW_payroll_ledger.model_ksw_payroll_posting_map
+msgid "Payroll Posting Map"
+msgstr "خريطة ترحيل الرواتب"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_res_config_settings__ksw_ledger_suspense_account_id
+msgid "Payroll Suspense Account"
+msgstr "حساب معلّق للرواتب"
 
 #. module: KSW_payroll_ledger
 #: model:ir.model,name:KSW_payroll_ledger.model_ksw_payroll_ledger
@@ -239,14 +535,91 @@ msgid "Post to Ledger"
 msgstr "ترحيل إلى دفتر الأستاذ"
 
 #. module: KSW_payroll_ledger
+#: model:ir.actions.act_window,name:KSW_payroll_ledger.action_ksw_payroll_posting_category
+#: model:ir.ui.menu,name:KSW_payroll_ledger.menu_ksw_payroll_posting_category
+msgid "Posting Categories"
+msgstr "فئات الترحيل"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip_line__x_posting_category_id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_salary_rule__x_posting_category_id
+msgid "Posting Category"
+msgstr "فئة الترحيل"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_employee__x_posting_exception_ids
+msgid "Posting Exceptions"
+msgstr "استثناءات الترحيل"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_department__x_posting_group_id
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_employee__x_posting_group_id
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_posting_map_search
+msgid "Posting Group"
+msgstr "مجموعة الترحيل"
+
+#. module: KSW_payroll_ledger
+#: model:ir.actions.act_window,name:KSW_payroll_ledger.action_ksw_payroll_posting_group
+#: model:ir.ui.menu,name:KSW_payroll_ledger.menu_ksw_payroll_posting_group
+msgid "Posting Groups"
+msgstr "مجموعات الترحيل"
+
+#. module: KSW_payroll_ledger
+#: model:ir.actions.act_window,name:KSW_payroll_ledger.action_ksw_payroll_posting_map
+#: model:ir.ui.menu,name:KSW_payroll_ledger.menu_ksw_payroll_posting_map
+msgid "Posting Map"
+msgstr "خريطة الترحيل"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_ksw_payroll_intercompany__posting_group_id
+msgid ""
+"Posting group for these employees when this entity pays them. Empty: their "
+"own."
+msgstr "مجموعة ترحيل هؤلاء الموظفين عندما تصرف لهم هذه الجهة. فارغ: مجموعتهم."
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_employee_posting__note
+msgid "Reason"
+msgstr "السبب"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_entity__payable_account_id
+msgid "Salaries Payable"
+msgstr "الرواتب المستحقة"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model,name:KSW_payroll_ledger.model_ksw_payroll_intercompany
+msgid "Salary Paid for Another Entity"
+msgstr "راتب مصروف لجهة أخرى"
+
+#. module: KSW_payroll_ledger
 #: model:ir.model,name:KSW_payroll_ledger.model_hr_salary_rule
 msgid "Salary Rule"
 msgstr ""
 
 #. module: KSW_payroll_ledger
-#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_employee__x_separate_salary_account
-msgid "Separate Salary Account"
-msgstr "حساب رواتب مستقل"
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_category__rule_ids
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_posting_category_list
+msgid "Salary Rules"
+msgstr "قواعد الراتب"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_entity__sequence
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_category__sequence
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_posting_group__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields.selection,name:KSW_payroll_ledger.selection__hr_payslip_line__x_ledger_deduction__spread
+#: model:ir.model.fields.selection,name:KSW_payroll_ledger.selection__hr_salary_rule__x_ledger_deduction__spread
+msgid "Spread over the earnings"
+msgstr "توزيع على الاستحقاقات"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_ksw_payroll_intercompany__staff_entity_id
+msgid "Staff of"
+msgstr "موظفو"
 
 #. module: KSW_payroll_ledger
 #: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_payslip_run__x_ledger_move_ids
@@ -256,6 +629,16 @@ msgid ""
 msgstr ""
 "الدفعة في دفتر أستاذ أودو (يومية الرواتب)، قيد لكل اعتماد ولكل حساب بنكي. "
 "ليست تصدير BAS."
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.constraint,message:KSW_payroll_ledger.constraint_ksw_payroll_posting_category_code_unique
+msgid "The category code must be unique."
+msgstr "يجب أن يكون رمز الفئة فريداً."
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_ksw_payroll_entity__is_default
+msgid "The entity of a department or bank account that names none."
+msgstr "جهة القسم أو الحساب البنكي الذي لا يحدد جهة."
 
 #. module: KSW_payroll_ledger
 #: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_payslip__x_ledger_move_id
@@ -269,49 +652,75 @@ msgid "The month in Odoo's ledger (journal Commissions). Not the BAS export."
 msgstr "الشهر في دفتر أستاذ أودو (يومية العمولات). ليس تصدير BAS."
 
 #. module: KSW_payroll_ledger
-#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_department__x_wage_account_id
-msgid ""
-"The salary-expense account BAS charges this department's basic wages to. "
-"Empty: the parent department's, else the default in Settings."
-msgstr ""
-"حساب مصروف الرواتب الذي يحمّل عليه BAS الأجور الأساسية لهذا القسم. فارغ: "
-"حساب القسم الأعلى، وإلا الافتراضي في الإعدادات."
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_intercompany_list
+msgid "Their own"
+msgstr "مجموعتهم"
 
 #. module: KSW_payroll_ledger
-#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_department__x_wage_account_id
-#: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_employee__x_wage_account_id
-msgid "Wage Expense Account"
-msgstr "حساب مصروف الأجور"
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_posting_group_form
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_posting_map_list
+msgid "Wage and everything else"
+msgstr "الراتب الأساسي وكل ما عداه"
 
 #. module: KSW_payroll_ledger
-#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_payslip_line__x_ledger_account_id
-#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_salary_rule__x_ledger_account_id
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_payslip_line__x_posting_category_id
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_salary_rule__x_posting_category_id
 msgid ""
-"Where this figure lands in Odoo's ledger (parallel run). Empty on an "
-"earning: the employee's wage account. Separate from the BAS export mapping."
+"What this earning is for the books (Housing, Transport…). The posting map "
+"gives the account per posting group. Empty: the employee's wage."
 msgstr ""
-"الحساب الذي يُقيَّد عليه هذا المبلغ في دفتر أستاذ أودو (التشغيل الموازي). "
-"فارغ في الاستحقاقات: حساب أجور الموظف. مستقل عن ربط تصدير BAS."
+"نوع هذا الاستحقاق محاسبياً (سكن، انتقال…). خريطة الترحيل تحدد الحساب لكل "
+"مجموعة ترحيل. فارغ: الراتب الأساسي للموظف."
 
 #. module: KSW_payroll_ledger
-#: model:ir.model.fields,help:KSW_payroll_ledger.field_account_setup_bank_manual_config__x_ledger_entity
-#: model:ir.model.fields,help:KSW_payroll_ledger.field_res_partner_bank__x_ledger_entity
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_res_config_settings__ksw_ledger_suspense_account_id
 msgid ""
-"Whose money a salary paid from this account is: Al-Hayat's accounts are "
-"booked with its own payable (2107010008). Empty: Al-Kawther."
+"Where a salary figure goes when no posting group or map row answers, so the "
+"batch still posts and the figure is named on it. Empty: that employee is "
+"held out until the configuration is completed."
 msgstr ""
-"الجهة التي يُصرف من مالها الراتب المدفوع من هذا الحساب: حسابات الحياة "
-"تُقيَّد على رواتبها المستحقة (2107010008). فارغ: الكوثر."
+"الحساب الذي يُقيَّد عليه مبلغ الراتب إذا لم تقابله مجموعة أو سطر في الخريطة،"
+" فتُرحَّل الدفعة ويُذكر المبلغ عليها. فارغ: يُستبعد الموظف حتى تكتمل "
+"الإعدادات."
 
 #. module: KSW_payroll_ledger
-#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_department__x_ledger_entity
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_department__x_posting_group_id
 msgid ""
-"Whose staff this department is, for the books: Al-Hayat's are booked in its "
-"H1 accounts when Al-Hayat pays them. Empty: the parent department's, else "
-"Al-Kawther."
+"Which accounts this department's salaries are booked to. Empty: the parent "
+"department's, else the entity's default."
 msgstr ""
-"الجهة التي يتبعها موظفو هذا القسم محاسبياً: موظفو الحياة يُقيَّدون على "
-"حساباتها H1 عندما تصرف لهم الحياة. فارغ: جهة القسم الأعلى، وإلا الكوثر."
+"الحسابات التي تُقيَّد عليها رواتب هذا القسم. فارغ: مجموعة القسم الأعلى، وإلا"
+" الافتراضية للجهة."
+
+#. module: KSW_payroll_ledger
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_employee_form_ledger
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_employee_posting_list
+msgid "Whole salary"
+msgstr "الراتب كاملاً"
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_account_setup_bank_manual_config__x_ledger_entity_id
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_res_partner_bank__x_ledger_entity_id
+msgid ""
+"Whose money a salary paid from this account is: its salaries payable. Empty:"
+" the default entity."
+msgstr ""
+"الجهة التي يُصرف من مالها الراتب المدفوع من هذا الحساب: رواتبها المستحقة. "
+"فارغ: الجهة الافتراضية."
+
+#. module: KSW_payroll_ledger
+#: model:ir.model.fields,help:KSW_payroll_ledger.field_hr_department__x_ledger_entity_id
+msgid ""
+"Whose staff this department is. Empty: the parent department's, else the "
+"default entity."
+msgstr ""
+"الجهة التي يتبعها موظفو هذا القسم. فارغ: جهة القسم الأعلى، وإلا الجهة "
+"الافتراضية."
+
+#. module: KSW_payroll_ledger
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_posting_group_form
+msgid "Why these accounts (e.g. the BAS voucher it follows)"
+msgstr ""
 
 #. module: KSW_payroll_ledger
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip_run__x_ledger_move_count
@@ -322,3 +731,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:KSW_payroll_ledger.field_hr_payslip_run__x_ledger_unposted_count
 msgid "X Ledger Unposted Count"
 msgstr ""
+
+#. module: KSW_payroll_ledger
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_ledger.view_ksw_payroll_posting_group_form
+msgid "e.g. Jubail Camp"
+msgstr "مثال: كامب الجبيل"

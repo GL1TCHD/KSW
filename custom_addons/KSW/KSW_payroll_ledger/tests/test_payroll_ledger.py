@@ -28,28 +28,44 @@ class TestPayrollLedger(BasJournalPayrollCommon):
         cls.housing = acc('9919010002')
         cls.payable = acc('9917010004', 'liability_current')
         params = env['ir.config_parameter'].sudo()
-        params.set_param('ksw_payroll_ledger.wage_account', cls.wage.code)
-        params.set_param('ksw_payroll_ledger.saudi_wage_account', cls.saudi_wage.code)
-        params.set_param('ksw_payroll_ledger.payable_account', cls.payable.code)
         params.set_param('ksw_payroll_ledger.start_date', '2026-03-01')
+        params.set_param('ksw_payroll_ledger.suspense_account_id', False)
         cls.hayat_wage = acc('9925010019')
         cls.hayat_payable = acc('9917010008', 'liability_current')
         cls.hayat_current = acc('9908010010', 'asset_current')
         cls.kawther_current = acc('9901030003', 'liability_current')
-        params.set_param('ksw_payroll_ledger.hayat_wage_account', cls.hayat_wage.code)
-        params.set_param('ksw_payroll_ledger.hayat_payable_account', cls.hayat_payable.code)
-        params.set_param('ksw_payroll_ledger.hayat_current_account', cls.hayat_current.code)
-        params.set_param('ksw_payroll_ledger.kawther_current_account', cls.kawther_current.code)
+        # The posting configuration, as the migration builds it from BAS.
+        Group = env['ksw.payroll.posting.group'].sudo()
+        cls.cat_housing = env['ksw.payroll.posting.category'].sudo().create(
+            {'name': 'Ledger Housing', 'code': 'LEDGER_HRA'})
+        cls.rule_hra.sudo().write({'x_posting_category_id': cls.cat_housing.id, 'x_ledger_account_id': False})
+        cls.main_group = Group.create({'name': 'Ledger Main Office', 'map_ids': [
+            (0, 0, {'account_id': cls.wage.id}),
+            (0, 0, {'category_id': cls.cat_housing.id, 'account_id': cls.housing.id})]})
+        cls.m_group = Group.create({'name': 'Ledger M', 'map_ids': [(0, 0, {'account_id': cls.saudi_wage.id})]})
+        cls.camp_group = Group.create({'name': 'Ledger Camp', 'map_ids': [(0, 0, {'account_id': cls.camp_wage.id})]})
+        cls.hayat_group = Group.create({'name': 'Ledger Hayat Factory',
+                                        'map_ids': [(0, 0, {'account_id': cls.hayat_wage.id})]})
+        Entity = env['ksw.payroll.entity'].sudo()
+        Entity.search([('company_id', '=', env.company.id)]).write({'is_default': False})
+        cls.kawther = Entity.create({'name': 'Ledger Kawther', 'is_default': True,
+                                     'payable_account_id': cls.payable.id, 'default_group_id': cls.main_group.id})
+        cls.hayat = Entity.create({'name': 'Ledger Hayat', 'payable_account_id': cls.hayat_payable.id,
+                                   'default_group_id': cls.hayat_group.id})
+        IC = env['ksw.payroll.intercompany'].sudo()
+        IC.create({'payer_id': cls.kawther.id, 'staff_entity_id': cls.hayat.id, 'posting_group_id': cls.m_group.id})
+        IC.create({'payer_id': cls.hayat.id, 'staff_entity_id': cls.kawther.id,
+                   'payer_account_id': cls.kawther_current.id, 'staff_account_id': cls.hayat_current.id})
         Bank = env['res.partner.bank'].sudo()
         partner = env.company.partner_id
-        cls.kawther_bank = Bank.create({'acc_number': 'LEDGER Kawther Cards', 'partner_id': partner.id})
+        cls.kawther_bank = Bank.create({'acc_number': 'LEDGER Kawther Cards', 'partner_id': partner.id,
+                                        'x_ledger_entity_id': cls.kawther.id})
         cls.hayat_bank = Bank.create({'acc_number': 'LEDGER Hayat Cards', 'partner_id': partner.id,
-                                      'x_ledger_entity': 'hayat'})
+                                      'x_ledger_entity_id': cls.hayat.id})
         cls.hayat_dept = env['hr.department'].sudo().create(
-            {'name': 'Ledger Hayat', 'x_ledger_entity': 'hayat'})
+            {'name': 'Ledger Hayat', 'x_ledger_entity_id': cls.hayat.id})
         cls.hayat_sub = env['hr.department'].sudo().create(
             {'name': 'Ledger Hayat IST', 'parent_id': cls.hayat_dept.id})
-        cls.rule_hra.sudo().x_ledger_account_id = cls.housing
 
     def _lines(self, move):
         return {(l.account_id, round(l.balance, 2)) for l in move.line_ids}
@@ -92,10 +108,10 @@ class TestPayrollLedger(BasJournalPayrollCommon):
         saudi = self.env['hr.employee'].sudo().create(
             {'name': 'Ledger Saudi', 'country_id': self.env.ref('base.sa').id})
         dept = self.env['hr.department'].sudo().create(
-            {'name': 'Ledger Camp', 'x_wage_account_id': self.camp_wage.id})
+            {'name': 'Ledger Camp', 'x_posting_group_id': self.camp_group.id})
         camp = self.env['hr.employee'].sudo().create({'name': 'Ledger Camp Man', 'department_id': dept.id})
         apart = self.env['hr.employee'].sudo().create({
-            'name': 'Ledger Apart', 'department_id': dept.id, 'x_separate_salary_account': True})
+            'name': 'Ledger Apart', 'department_id': dept.id, 'x_posting_group_id': self.m_group.id})
         self._payslip([(self.rule_basic, 7000.0), (self.rule_net, 7000.0)], employee=saudi)
         self._payslip([(self.rule_basic, 2000.0), (self.rule_net, 2000.0)], employee=camp)
         self._payslip([(self.rule_basic, 8250.0), (self.rule_net, 8250.0)], employee=apart)
@@ -141,7 +157,7 @@ class TestPayrollLedger(BasJournalPayrollCommon):
     def test_04e_separate_salary_account_takes_the_allowances(self):
         """BAS books a separate salary in one line, allowances included."""
         apart = self.env['hr.employee'].sudo().create(
-            {'name': 'Ledger Apart Whole', 'x_separate_salary_account': True})
+            {'name': 'Ledger Apart Whole', 'x_posting_group_id': self.m_group.id})
         self._payslip([(self.rule_basic, 12000.0), (self.rule_hra, 2500.0),
                        (self.rule_net, 14500.0)], employee=apart)
         self.assertEqual(self._lines(self._confirm()), {
@@ -150,7 +166,7 @@ class TestPayrollLedger(BasJournalPayrollCommon):
     def test_04f_a_branch_books_the_allowances_on_its_own_account(self):
         """Jubail camp: all 10,000 on the camp, none on the main office's allowances."""
         dept = self.env['hr.department'].sudo().create(
-            {'name': 'Ledger Jubail', 'x_wage_account_id': self.camp_wage.id})
+            {'name': 'Ledger Jubail', 'x_posting_group_id': self.camp_group.id})
         man = self.env['hr.employee'].sudo().create({'name': 'Ledger Camp Cook', 'department_id': dept.id})
         self._payslip([(self.rule_basic, 6000.0), (self.rule_hra, 4000.0),
                        (self.rule_net, 10000.0)], employee=man)
@@ -166,7 +182,7 @@ class TestPayrollLedger(BasJournalPayrollCommon):
 
     def test_04h_gosi_to_his_own_account_or_netted(self):
         """GOSI on his own account, a line of its own; without one, netted."""
-        self.rule_gosi.sudo().x_ledger_to_personal_account = True
+        self.rule_gosi.sudo().x_ledger_deduction = 'own_account'
         own = self.env['account.account'].sudo().create(
             {'code': '9905010099', 'name': 'Ledger own account', 'account_type': 'asset_current'})
         with_acc = self.env['hr.employee'].sudo().create(
@@ -186,12 +202,58 @@ class TestPayrollLedger(BasJournalPayrollCommon):
     def test_04i_basic_and_allowances_on_different_accounts(self):
         """AHMED NAZMI: 8,500 on the separate salary account, 2,750 on the camp."""
         man = self.env['hr.employee'].sudo().create({
-            'name': 'Ledger Nazmi', 'x_separate_salary_account': True,
-            'x_allowance_account_id': self.camp_wage.id})
+            'name': 'Ledger Nazmi', 'x_posting_group_id': self.m_group.id,
+            'x_posting_exception_ids': [(0, 0, {'category_id': self.cat_housing.id,
+                                                'account_id': self.camp_wage.id})]})
         self._payslip([(self.rule_basic, 8500.0), (self.rule_hra, 2750.0),
                        (self.rule_net, 11250.0)], employee=man)
         self.assertEqual(self._lines(self._confirm()), {
             (self.saudi_wage, 8500.0), (self.camp_wage, 2750.0), (self.payable, -11250.0)})
+
+    def test_04j_the_map_is_the_configuration(self):
+        """A new account for the camp's housing: one map row, no code."""
+        camp_housing = self.env['account.account'].sudo().create(
+            {'code': '9924010002', 'name': 'Ledger camp housing', 'account_type': 'expense'})
+        self.camp_group.write({'map_ids': [(0, 0, {'category_id': self.cat_housing.id,
+                                                   'account_id': camp_housing.id})]})
+        dept = self.env['hr.department'].sudo().create(
+            {'name': 'Ledger Camp Two', 'x_posting_group_id': self.camp_group.id})
+        man = self.env['hr.employee'].sudo().create({'name': 'Ledger Camp Two Man', 'department_id': dept.id})
+        self._payslip([(self.rule_basic, 6000.0), (self.rule_hra, 2000.0),
+                       (self.rule_net, 8000.0)], employee=man)
+        self.assertEqual(self._lines(self._confirm()), {
+            (self.camp_wage, 6000.0), (camp_housing, 2000.0), (self.payable, -8000.0)})
+
+    def test_04k_deduction_against_the_basic_only(self):
+        """Treatment 'basic': the allowance is left whole."""
+        self.rule_ded.sudo().x_ledger_deduction = 'basic'
+        self._payslip([(self.rule_basic, 2500.0), (self.rule_hra, 500.0),
+                       (self.rule_ded, -2419.0), (self.rule_net, 581.0)])
+        self.assertEqual(self._lines(self._confirm()), {
+            (self.wage, 81.0), (self.housing, 500.0), (self.payable, -581.0)})
+
+    def test_04l_an_exception_without_category_moves_the_whole_salary(self):
+        man = self.env['hr.employee'].sudo().create({
+            'name': 'Ledger Moved', 'x_posting_exception_ids': [(0, 0, {'account_id': self.camp_wage.id})]})
+        self._payslip([(self.rule_basic, 3000.0), (self.rule_hra, 1000.0),
+                       (self.rule_net, 4000.0)], employee=man)
+        self.assertEqual(self._lines(self._confirm()), {
+            (self.camp_wage, 4000.0), (self.payable, -4000.0)})
+
+    def test_04m_no_row_suspense_or_held_out(self):
+        """A group without a row: held out and named; with a suspense account, posted there."""
+        empty = self.env['ksw.payroll.posting.group'].sudo().create({'name': 'Ledger Empty'})
+        man = self.env['hr.employee'].sudo().create({'name': 'Ledger Unmapped', 'x_posting_group_id': empty.id})
+        slip = self._payslip([(self.rule_basic, 1000.0), (self.rule_net, 1000.0)], employee=man)
+        self.assertFalse(self._confirm())
+        self.assertFalse(slip.x_ledger_move_id)
+        self.assertIn('Ledger Unmapped', self.batch.x_ledger_error)
+        suspense = self.env['account.account'].sudo().create(
+            {'code': '9999990001', 'name': 'Ledger suspense', 'account_type': 'expense'})
+        self.env['ir.config_parameter'].sudo().set_param('ksw_payroll_ledger.suspense_account_id', str(suspense.id))
+        self.batch.action_ksw_ledger_post()
+        self.assertEqual(self._lines(slip.x_ledger_move_id), {(suspense, 1000.0), (self.payable, -1000.0)})
+        self.assertIn('suspense', self.batch.x_ledger_error)
 
     def test_05_one_employee_never_holds_up_the_others(self):
         self.rule_gosi.sudo().x_bas_posting = 'none'

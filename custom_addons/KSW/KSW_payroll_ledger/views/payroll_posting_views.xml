@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Posting groups: who the employee is for the books, and the accounts that follows. -->
+    <record id="view_ksw_payroll_posting_group_list" model="ir.ui.view">
+        <field name="name">ksw.payroll.posting.group.list</field>
+        <field name="model">ksw.payroll.posting.group</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="department_ids" widget="many2many_tags"/>
+                <field name="employee_count" string="Employees set by hand"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_ksw_payroll_posting_group_form" model="ir.ui.view">
+        <field name="name">ksw.payroll.posting.group.form</field>
+        <field name="model">ksw.payroll.posting.group</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <widget name="web_ribbon" title="Archived" bg_color="text-bg-danger" invisible="active"/>
+                    <div class="oe_title">
+                        <label for="name"/>
+                        <h1><field name="name" placeholder="e.g. Jubail Camp"/></h1>
+                    </div>
+                    <field name="active" invisible="1"/>
+                    <separator string="Accounts"/>
+                    <div class="text-muted mb-2">
+                        A row without a category takes the wage and every category that has no
+                        row of its own. One row only: the whole salary on one account.
+                    </div>
+                    <field name="map_ids">
+                        <list editable="bottom">
+                            <field name="category_id" options="{'no_create': True}" placeholder="Wage and everything else"/>
+                            <field name="account_id" options="{'no_create': True}"/>
+                        </list>
+                    </field>
+                    <separator string="Departments"/>
+                    <field name="department_ids" readonly="1">
+                        <list>
+                            <field name="complete_name"/>
+                        </list>
+                    </field>
+                    <field name="note" placeholder="Why these accounts (e.g. the BAS voucher it follows)"/>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_ksw_payroll_posting_group" model="ir.actions.act_window">
+        <field name="name">Posting Groups</field>
+        <field name="res_model">ksw.payroll.posting.group</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'active_test': False}</field>
+    </record>
+
+    <!-- The whole map on one page, to read across groups. -->
+    <record id="view_ksw_payroll_posting_map_list" model="ir.ui.view">
+        <field name="name">ksw.payroll.posting.map.list</field>
+        <field name="model">ksw.payroll.posting.map</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="group_id" options="{'no_create': True}"/>
+                <field name="category_id" options="{'no_create': True}" placeholder="Wage and everything else"/>
+                <field name="account_id" options="{'no_create': True}"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_ksw_payroll_posting_map_search" model="ir.ui.view">
+        <field name="name">ksw.payroll.posting.map.search</field>
+        <field name="model">ksw.payroll.posting.map</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="group_id"/>
+                <field name="category_id"/>
+                <field name="account_id"/>
+                <group>
+                    <filter name="by_group" string="Posting Group" context="{'group_by': 'group_id'}"/>
+                    <filter name="by_account" string="Account" context="{'group_by': 'account_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_ksw_payroll_posting_map" model="ir.actions.act_window">
+        <field name="name">Posting Map</field>
+        <field name="res_model">ksw.payroll.posting.map</field>
+        <field name="view_mode">list</field>
+        <field name="context">{'search_default_by_group': 1}</field>
+    </record>
+
+    <record id="view_ksw_payroll_posting_category_list" model="ir.ui.view">
+        <field name="name">ksw.payroll.posting.category.list</field>
+        <field name="model">ksw.payroll.posting.category</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="code"/>
+                <field name="rule_ids" widget="many2many_tags" readonly="1" string="Salary Rules"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_ksw_payroll_posting_category" model="ir.actions.act_window">
+        <field name="name">Posting Categories</field>
+        <field name="res_model">ksw.payroll.posting.category</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <record id="view_ksw_payroll_entity_list" model="ir.ui.view">
+        <field name="name">ksw.payroll.entity.list</field>
+        <field name="model">ksw.payroll.entity</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="is_default"/>
+                <field name="payable_account_id" options="{'no_create': True}"/>
+                <field name="default_group_id" options="{'no_create': True}"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_ksw_payroll_entity" model="ir.actions.act_window">
+        <field name="name">Entities</field>
+        <field name="res_model">ksw.payroll.entity</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <record id="view_ksw_payroll_intercompany_list" model="ir.ui.view">
+        <field name="name">ksw.payroll.intercompany.list</field>
+        <field name="model">ksw.payroll.intercompany</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="payer_id" options="{'no_create': True}"/>
+                <field name="staff_entity_id" options="{'no_create': True}"/>
+                <field name="posting_group_id" options="{'no_create': True}" placeholder="Their own"/>
+                <field name="payer_account_id" options="{'no_create': True}"/>
+                <field name="staff_account_id" options="{'no_create': True}"/>
+                <field name="note"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_ksw_payroll_intercompany" model="ir.actions.act_window">
+        <field name="name">Paid for Another Entity</field>
+        <field name="res_model">ksw.payroll.intercompany</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <record id="view_ksw_payroll_employee_posting_list" model="ir.ui.view">
+        <field name="name">ksw.payroll.employee.posting.list</field>
+        <field name="model">ksw.payroll.employee.posting</field>
+        <field name="arch" type="xml">
+            <list editable="bottom">
+                <field name="employee_id" options="{'no_create': True}"/>
+                <field name="category_id" options="{'no_create': True}" placeholder="Whole salary"/>
+                <field name="account_id" options="{'no_create': True}"/>
+                <field name="note"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="action_ksw_payroll_employee_posting" model="ir.actions.act_window">
+        <field name="name">Employee Exceptions</field>
+        <field name="res_model">ksw.payroll.employee.posting</field>
+        <field name="view_mode">list</field>
+    </record>
+
+    <menuitem id="menu_ksw_payroll_posting" name="Payroll Posting"
+              parent="account.menu_finance_configuration" sequence="60"
+              groups="account.group_account_manager"/>
+    <menuitem id="menu_ksw_payroll_posting_group" name="Posting Groups" parent="menu_ksw_payroll_posting"
+              action="action_ksw_payroll_posting_group" sequence="10" groups="account.group_account_manager"/>
+    <menuitem id="menu_ksw_payroll_posting_map" name="Posting Map" parent="menu_ksw_payroll_posting"
+              action="action_ksw_payroll_posting_map" sequence="20" groups="account.group_account_manager"/>
+    <menuitem id="menu_ksw_payroll_posting_category" name="Posting Categories" parent="menu_ksw_payroll_posting"
+              action="action_ksw_payroll_posting_category" sequence="30" groups="account.group_account_manager"/>
+    <menuitem id="menu_ksw_payroll_employee_posting" name="Employee Exceptions" parent="menu_ksw_payroll_posting"
+              action="action_ksw_payroll_employee_posting" sequence="40" groups="account.group_account_manager"/>
+    <menuitem id="menu_ksw_payroll_entity" name="Entities" parent="menu_ksw_payroll_posting"
+              action="action_ksw_payroll_entity" sequence="50" groups="account.group_account_manager"/>
+    <menuitem id="menu_ksw_payroll_intercompany" name="Paid for Another Entity" parent="menu_ksw_payroll_posting"
+              action="action_ksw_payroll_intercompany" sequence="60" groups="account.group_account_manager"/>
+
+</odoo>

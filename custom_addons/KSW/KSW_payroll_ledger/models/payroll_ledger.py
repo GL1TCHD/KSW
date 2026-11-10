@@ -1,118 +1,81 @@
 """Where payroll and commission figures land in Odoo's ledger, as in BAS.
 
 BAS books a month's salaries as one accrual voucher per paying channel, one
-block per employee (September 2026, 26009158 / 26009187):
+block per employee (September 2026, 26009158 / 26009187 / 26009232): his
+earnings debited, his deductions netted against them, his loans, other
+deductions and GOSI credited to his own account, the net to the paying
+entity's salaries payable.
 
-* his basic wage to the salary-expense account of where he works: Isuzu
-  drivers 3201010007, Jubail camp 3204010001, everyone else 3201010001; a
-  trailer driver carries his trailer as cost centre. BAS keeps some salaries
-  apart on 3201010010 («رواتب السعوديين M» — despite the name, not a
-  nationality: the IST staff, and anyone else BAS books there for its own
-  reasons). Those are the departments that carry it and the employees ticked
-  Separate Salary Account;
-* each allowance to its own account: housing 3201010002, transport
-  3201010003, mobile 3201010004, other 3201010011 — at the main office only
-  (3201…). A branch books the whole salary on its one account (Jubail camp
-  3204…, transport 3206…);
-* deductions are not lines of their own: what he is paid is what is expensed,
-  spread over his wage and allowances in proportion (six days attended: six
-  days of each);
-* his loan installments, his other deductions and his GOSI credited to his
-  own account (1205…), one line each so they can be told apart; without an
-  account of his own, GOSI is netted like any deduction. The net to salaries
-  payable 2107010004.
-
-Al-Hayat's staff paid from Al-Hayat's own accounts are booked in its H1
-accounts, as BAS keys them in its own voucher (26009232): wages 3205010019
-(factory; admin and ice workers on their own account), payable 2107010008.
-Paid by Al-Kawther they are 3201010010. A Kawther employee paid by Al-Hayat
-is expensed on Kawther's side against Al-Hayat's current account 1208010010,
-and Al-Hayat carries the payment against Kawther's 2101030003. Whose staff
-is the department's (Ledger Entity); whose money is the bank account's.
-
-The accounts are configuration — on the salary rule (allowances), on the
-department and the employee (the wage), in Settings (the defaults) — so a
-department BAS charges somewhere else is one field, not code.
+Which account each figure goes to is configuration, in Accounting ▸
+Configuration ▸ Payroll Posting (models/posting.py): posting groups,
+categories, the posting map, employee exceptions, entities and salaries
+paid for another entity. Nothing about a department or an account code is
+written here.
 """
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
 PARAM_START = 'ksw_payroll_ledger.start_date'
-PARAM_WAGE = 'ksw_payroll_ledger.wage_account'
-# Key kept from 19.0.1.0.0, when this was (wrongly) the Saudi-nationality account.
-PARAM_SEPARATE = 'ksw_payroll_ledger.saudi_wage_account'
-PARAM_PAYABLE = 'ksw_payroll_ledger.payable_account'
-
-PARAM_HAYAT_WAGE = 'ksw_payroll_ledger.hayat_wage_account'
-PARAM_HAYAT_PAYABLE = 'ksw_payroll_ledger.hayat_payable_account'
-# Each side's current account with the other: in Kawther's books, Al-Hayat
-# (1208010010); in Al-Hayat's books, Al-Kawther (2101030003).
-PARAM_HAYAT_CURRENT = 'ksw_payroll_ledger.hayat_current_account'
-PARAM_KAWTHER_CURRENT = 'ksw_payroll_ledger.kawther_current_account'
-
-DEFAULTS = {
-    PARAM_WAGE: '3201010001', PARAM_SEPARATE: '3201010010', PARAM_PAYABLE: '2107010004',
-    PARAM_HAYAT_WAGE: '3205010019', PARAM_HAYAT_PAYABLE: '2107010008',
-    PARAM_HAYAT_CURRENT: '1208010010', PARAM_KAWTHER_CURRENT: '2101030003',
-}
-
-ENTITIES = [('kawther', 'Al-Kawther'), ('hayat', 'Al-Hayat')]
+PARAM_SUSPENSE = 'ksw_payroll_ledger.suspense_account_id'
 
 
 class HrSalaryRule(models.Model):
     _inherit = 'hr.salary.rule'
 
+    x_posting_category_id = fields.Many2one(
+        'ksw.payroll.posting.category', string='Posting Category',
+        help='What this earning is for the books (Housing, Transport…). The posting map '
+             "gives the account per posting group. Empty: the employee's wage.")
     x_ledger_account_id = fields.Many2one(
-        'account.account', string='Ledger Account', company_dependent=False,
-        help='Where this figure lands in Odoo\'s ledger (parallel run). Empty on an '
-             'earning: the employee\'s wage account. Separate from the BAS export '
-             'mapping.')
-    x_ledger_to_personal_account = fields.Boolean(
-        string="Credit the Employee's Own Account",
-        help="A deduction booked to the employee's own account in BAS (Loan Acc No. in "
-             "Bas), on a line of its own, e.g. GOSI. Without an account of his own it "
-             "is netted against his salary like any other deduction.")
+        'account.account', string='Fixed Ledger Account', company_dependent=False,
+        help='One account for every employee, whatever his posting group: e.g. '
+             'commissions clearing the accrual the commission month booked. Leave empty '
+             'for wages and allowances; they follow the posting map.')
+    x_ledger_deduction = fields.Selection(
+        [('spread', 'Spread over the earnings'),
+         ('basic', 'Against the basic wage only'),
+         ('own_account', "Employee's own account")],
+        string='Deduction in the Ledger', default='spread',
+        help="How a deduction is booked. Spread: netted against his wage and allowances "
+             "in proportion (six days attended: six days of each). Basic: netted against "
+             "the wage line only. Own account: credited to his own account in BAS (Loan "
+             "Acc No. in Bas) on a line of its own, e.g. GOSI; without one it is spread.")
 
 
 class HrDepartment(models.Model):
     _inherit = 'hr.department'
 
-    x_wage_account_id = fields.Many2one(
-        'account.account', string='Wage Expense Account',
-        help='The salary-expense account BAS charges this department\'s basic '
-             'wages to. Empty: the parent department\'s, else the default in Settings.')
-    x_ledger_entity = fields.Selection(
-        ENTITIES, string='Ledger Entity',
-        help='Whose staff this department is, for the books: Al-Hayat\'s are booked in '
-             'its H1 accounts when Al-Hayat pays them. Empty: the parent department\'s, '
-             'else Al-Kawther.')
+    x_posting_group_id = fields.Many2one(
+        'ksw.payroll.posting.group', string='Posting Group',
+        help="Which accounts this department's salaries are booked to. Empty: the parent "
+             "department's, else the entity's default.")
+    x_ledger_entity_id = fields.Many2one(
+        'ksw.payroll.entity', string='Ledger Entity',
+        help="Whose staff this department is. Empty: the parent department's, else the "
+             "default entity.")
 
 
 class HrEmployee(models.Model):
     _inherit = 'hr.employee'
 
-    x_wage_account_id = fields.Many2one(
-        'account.account', string='Wage Expense Account', groups='hr.group_hr_user',
-        help='Only for an employee BAS charges somewhere other than his department.')
-    x_allowance_account_id = fields.Many2one(
-        'account.account', string='Allowances Account', groups='hr.group_hr_user',
-        help='Only for an employee whose allowances BAS books somewhere other than his '
-             'wage, e.g. a basic on the separate salary account and the allowances on '
-             'the camp. Empty: as everyone else.')
-    x_separate_salary_account = fields.Boolean(
-        string='Separate Salary Account', groups='hr.group_hr_user',
-        help='His wage is booked to the separate salary account in Settings '
-             '(3201010010) instead of his department\'s, whatever the reason BAS '
-             'keeps it apart. A Wage Expense Account set on the employee still wins.')
+    x_posting_group_id = fields.Many2one(
+        'ksw.payroll.posting.group', string='Posting Group', groups='hr.group_hr_user',
+        help="Only for an employee booked apart from his department, whatever the reason "
+             "(e.g. Separate Salaries (M)). Empty: his department's.")
+    x_posting_exception_ids = fields.One2many(
+        'ksw.payroll.employee.posting', 'employee_id', string='Posting Exceptions',
+        groups='hr.group_hr_user',
+        help='Figures of his that go to another account than his posting group says: '
+             'a category → an account; a row without a category moves his whole salary.')
 
 
 class ResPartnerBank(models.Model):
     _inherit = 'res.partner.bank'
 
-    x_ledger_entity = fields.Selection(
-        ENTITIES, string='Ledger Entity',
-        help='Whose money a salary paid from this account is: Al-Hayat\'s accounts '
-             'are booked with its own payable (2107010008). Empty: Al-Kawther.')
+    x_ledger_entity_id = fields.Many2one(
+        'ksw.payroll.entity', string='Ledger Entity',
+        help='Whose money a salary paid from this account is: its salaries payable. '
+             'Empty: the default entity.')
 
 
 class ResConfigSettings(models.TransientModel):
@@ -125,18 +88,27 @@ class ResConfigSettings(models.TransientModel):
         help='Batches ending and commission months on or after this date are posted '
              'to the ledger. Earlier ones were exported to BAS and are never posted. '
              'Empty: nothing is posted.')
+    ksw_ledger_suspense_account_id = fields.Many2one(
+        'account.account', string='Payroll Suspense Account',
+        help='Where a salary figure goes when no posting group or map row answers, so '
+             'the batch still posts and the figure is named on it. Empty: that employee '
+             'is held out until the configuration is completed.')
 
     @api.model
     def get_values(self):
         res = super().get_values()
         value = self.env['ir.config_parameter'].sudo().get_param(PARAM_START)
         res['ksw_ledger_start_date'] = fields.Date.to_date(value) if value else False
+        suspense = self.env['ir.config_parameter'].sudo().get_param(PARAM_SUSPENSE)
+        res['ksw_ledger_suspense_account_id'] = int(suspense) if suspense and suspense.isdigit() else False
         return res
 
     def set_values(self):
         super().set_values()
         self.env['ir.config_parameter'].sudo().set_param(
             PARAM_START, fields.Date.to_string(self.ksw_ledger_start_date) or False)
+        self.env['ir.config_parameter'].sudo().set_param(
+            PARAM_SUSPENSE, str(self.ksw_ledger_suspense_account_id.id or '') or False)
 
 
 class KswPayrollLedger(models.AbstractModel):
@@ -145,7 +117,7 @@ class KswPayrollLedger(models.AbstractModel):
 
     # ------------------------------------------------------------------ config
     def _param(self, key):
-        return self.env['ir.config_parameter'].sudo().get_param(key) or DEFAULTS.get(key)
+        return self.env['ir.config_parameter'].sudo().get_param(key)
 
     def _start_date(self):
         value = self._param(PARAM_START)
@@ -155,51 +127,17 @@ class KswPayrollLedger(models.AbstractModel):
         start = self._start_date()
         return bool(start and date and date >= start)
 
+    def _suspense_account(self):
+        value = self._param(PARAM_SUSPENSE)
+        return self.env['account.account'].sudo().browse(int(value)).exists() \
+            if value and value.isdigit() else self.env['account.account']
+
     def _account(self, code, company):
         account = self.env['account.account'].sudo().with_company(company).search(
             [('code', '=', code), ('company_ids', 'in', company.id)], limit=1) if code else None
         if not account:
             raise UserError(_('Account %(code)s does not exist in the chart.', code=code))
         return account
-
-    def _entity(self, employee):
-        """Whose staff he is: his department's Ledger Entity up the tree."""
-        dept = employee.sudo().department_id
-        while dept:
-            if dept.x_ledger_entity:
-                return dept.x_ledger_entity
-            dept = dept.parent_id
-        return 'kawther'
-
-    def _wage_account(self, employee, company, payer='kawther'):
-        """``(account, whole)``: where his wage is booked when ``payer`` pays it.
-
-        ``whole``: his allowances land there too, not on their own accounts, as
-        BAS books the separate salary account and Al-Hayat's staff."""
-        employee = employee.sudo()
-        separate = self._account(self._param(PARAM_SEPARATE), company)
-        if self._entity(employee) == 'hayat':
-            if payer != 'hayat':
-                return separate, True
-            account = employee.x_wage_account_id or self._department_wage_account(employee) \
-                or self._account(self._param(PARAM_HAYAT_WAGE), company)
-            return account, True
-        if employee.x_wage_account_id:
-            account = employee.x_wage_account_id
-        elif employee.x_separate_salary_account:
-            account = separate
-        else:
-            account = self._department_wage_account(employee) \
-                or self._account(self._param(PARAM_WAGE), company)
-        return account, account == separate
-
-    def _department_wage_account(self, employee):
-        dept = employee.department_id
-        while dept:
-            if dept.x_wage_account_id:
-                return dept.x_wage_account_id
-            dept = dept.parent_id
-        return None
 
     def _vehicle_cost_centre(self, employee):
         """A driver's own vehicle, as BAS charges his wage (T102)."""

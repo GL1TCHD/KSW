@@ -51,8 +51,9 @@
         <field name="inherit_id" ref="KSW_payroll.view_hr_salary_rule_form_bas"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='x_bas_posting']" position="after">
+                <field name="x_posting_category_id" options="{'no_create': True}"/>
                 <field name="x_ledger_account_id" options="{'no_create': True}"/>
-                <field name="x_ledger_to_personal_account"/>
+                <field name="x_ledger_deduction" invisible="x_bas_posting != 'liability'"/>
             </xpath>
         </field>
     </record>
@@ -63,9 +64,9 @@
         <field name="inherit_id" ref="hr.view_department_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='parent_id']" position="after">
-                <field name="x_wage_account_id" options="{'no_create': True}"
+                <field name="x_posting_group_id" options="{'no_create': True}"
                        groups="om_hr_payroll.group_hr_payroll_user,account.group_account_manager"/>
-                <field name="x_ledger_entity"
+                <field name="x_ledger_entity_id" options="{'no_create': True}"
                        groups="om_hr_payroll.group_hr_payroll_user,account.group_account_manager"/>
             </xpath>
         </field>
@@ -76,17 +77,19 @@
         <field name="model">hr.employee</field>
         <field name="inherit_id" ref="hr.view_employee_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='department_id']" position="after">
-                <field name="x_wage_account_id" options="{'no_create': True}"
-                       groups="om_hr_payroll.group_hr_payroll_manager"/>
-                <field name="x_allowance_account_id" options="{'no_create': True}"
-                       groups="om_hr_payroll.group_hr_payroll_manager"/>
-            </xpath>
             <xpath expr="//page[@name='hr_settings']" position="inside">
                 <separator string="Ledger" groups="om_hr_payroll.group_hr_payroll_user"/>
                 <group groups="om_hr_payroll.group_hr_payroll_user">
-                    <field name="x_separate_salary_account"/>
+                    <field name="x_posting_group_id" options="{'no_create': True}"
+                           placeholder="His department's"/>
                 </group>
+                <field name="x_posting_exception_ids" groups="om_hr_payroll.group_hr_payroll_user">
+                    <list editable="bottom">
+                        <field name="category_id" options="{'no_create': True}" placeholder="Whole salary"/>
+                        <field name="account_id" options="{'no_create': True}"/>
+                        <field name="note"/>
+                    </list>
+                </field>
             </xpath>
         </field>
     </record>
@@ -97,7 +100,7 @@
         <field name="inherit_id" ref="base.view_partner_bank_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='acc_number']" position="after">
-                <field name="x_ledger_entity"
+                <field name="x_ledger_entity_id" options="{'no_create': True}"
                        groups="om_hr_payroll.group_hr_payroll_manager,account.group_account_manager"/>
             </xpath>
         </field>
@@ -120,6 +123,18 @@
                             </div>
                             <div class="content-group mt16">
                                 <field name="ksw_ledger_start_date"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-12 o_setting_box">
+                        <div class="o_setting_right_pane">
+                            <label for="ksw_ledger_suspense_account_id"/>
+                            <div class="text-muted">
+                                A salary figure no posting map row answers goes here and is
+                                named on the batch. Empty: that employee is held out.
+                            </div>
+                            <div class="content-group mt16">
+                                <field name="ksw_ledger_suspense_account_id" options="{'no_create': True}"/>
                             </div>
                         </div>
                     </div>

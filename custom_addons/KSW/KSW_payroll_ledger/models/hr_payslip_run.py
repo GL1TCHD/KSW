@@ -17,9 +17,6 @@ from odoo import _, api, fields, models
 from odoo.tools import float_round
 from odoo.exceptions import UserError
 
-from .payroll_ledger import (
-    PARAM_HAYAT_CURRENT, PARAM_HAYAT_PAYABLE, PARAM_KAWTHER_CURRENT, PARAM_PAYABLE,
-)
 
 TOTAL_CODES = ('GROSS', 'NET')
 
@@ -133,7 +130,8 @@ class HrPayslipRun(models.Model):
 
     def _ksw_ledger_payer(self, slip):
         """Whose money paid him: the paying account's Ledger Entity."""
-        return self._resolve_slip_bank_account(slip).sudo().x_ledger_entity or 'kawther'
+        return self.env['ksw.payroll.posting']._payer_entity(
+            self._resolve_slip_bank_account(slip), self.env.company)
 
     def _ksw_ledger_reverse(self, slip):
         """A booked payslip taken back: its own lines, the other way round."""
@@ -154,44 +152,45 @@ class HrPayslipRun(models.Model):
     def _ksw_ledger_lines(self, slips=None):
         """(lines, slips handled, problems, slips that net to nothing), one block per employee.
 
-        Earnings are debited (allowances to their rule's account, the rest to
-        the employee's wage account); deductions reduce the wage line, as BAS
-        expenses what is paid; loans are credited to his own loan account; the
-        net to the payer's salaries payable. A Kawther employee paid by
-        Al-Hayat: his net is owed to Al-Hayat (1208010010), and Al-Hayat's side
-        of the voucher carries it against Kawther (2101030003) to its payable.
-        Each block is checked against its NET."""
+        Each figure's account comes from the payroll posting configuration
+        (his posting group's map, his exceptions); the net goes to the paying
+        entity's salaries payable, or through the current accounts of Paid for
+        Another Entity. Each block is checked against its NET."""
         self.ensure_one()
         Journal = self.env['ksw.bas.journal']
         lang = Journal.voucher_lang()
         if lang and self.env.context.get('lang') != lang:
             return self.with_context(lang=lang)._ksw_ledger_lines(slips)
-        Ledger = self.env['ksw.payroll.ledger'].with_context(ksw_ledger_analytic_cache={})
+        Posting = self.env['ksw.payroll.posting']
         company = self.env.company
-        payable = {
-            'kawther': Ledger._account(Ledger._param(PARAM_PAYABLE), company),
-            'hayat': Ledger._account(Ledger._param(PARAM_HAYAT_PAYABLE), company),
-        }
         month = Journal.month_label(self.date_end)
         slips = self.slip_ids if slips is None else slips
         lines, done, problems, zero = [], self.env['hr.payslip'], [], self.env['hr.payslip']
+        if not Posting._default_entity(company):
+            return lines, done, [_('No default payroll entity in Accounting ▸ Configuration ▸ '
+                                   'Payroll Posting ▸ Entities.')], zero
         for slip in slips.filtered(lambda s: s.state != 'cancel' or s.x_ledger_move_id).sorted(
                 lambda s: (s.employee_id.sudo().name or '', s.id)):
             if not slip.line_ids:
                 continue
             employee = slip.employee_id.sudo()
             payer = self._ksw_ledger_payer(slip)
+            staff = Posting._staff_entity(employee, company)
+            group = Posting._posting_group(employee, staff, payer)
+            intercompany = Posting._intercompany(payer, staff)
             label = Journal.ref(_('Salary'), Journal.employee_label(employee), month)
             try:
-                block, net = self._ksw_ledger_block(slip, employee, company, month, payer)
-                if payer == 'hayat' and Ledger._entity(employee) != 'hayat':
+                if not group:
+                    raise UserError(_('no posting group'))
+                block, net = self._ksw_ledger_block(slip, employee, company, month, group)
+                if intercompany.payer_account_id and intercompany.staff_account_id:
                     settle = [
-                        (Ledger._account(Ledger._param(PARAM_HAYAT_CURRENT), company), -net, label, None),
-                        (Ledger._account(Ledger._param(PARAM_KAWTHER_CURRENT), company), net, label, None),
-                        (payable['hayat'], -net, label, None),
+                        (intercompany.staff_account_id, -net, label, None),
+                        (intercompany.payer_account_id, net, label, None),
+                        (payer.payable_account_id, -net, label, None),
                     ]
                 else:
-                    settle = [(payable[payer], -net, label, None)]
+                    settle = [(payer.payable_account_id, -net, label, None)]
             except UserError as e:
                 problems.append('%s: %s' % (employee.name, e))
                 continue
@@ -202,33 +201,52 @@ class HrPayslipRun(models.Model):
             if not any(round(v, 2) for v in per_account.values()):
                 zero |= slip
                 continue
+            suspense = self.env['ksw.payroll.ledger']._suspense_account()
+            if suspense and suspense.id in per_account:
+                problems.append(_('%(name)s: posted to the suspense account %(acc)s, no posting '
+                                  'map row for some of his figures', name=employee.name,
+                                  acc=suspense.code))
             who = self.env['account.move.line']._ksw_employee_vals(employee)
             lines += [line + (who,) for line in block + settle]
         return lines, done, problems, zero
 
-    def _ksw_ledger_block(self, slip, employee, company, month, payer='kawther'):
+    def _ksw_ledger_account(self, employee, group, category):
+        """The map's answer, else the suspense account, else a refusal."""
+        account = self.env['ksw.payroll.posting']._account(employee, group, category)
+        if account:
+            return account
+        suspense = self.env['ksw.payroll.ledger']._suspense_account()
+        if suspense:
+            return suspense
+        raise UserError(_('posting group %(group)s has no account for %(what)s',
+                          group=group.name, what=category.name if category else _('the wage')))
+
+    def _ksw_ledger_block(self, slip, employee, company, month, group):
         """His lines, and the net they must come to.
 
-        Earnings debited; deductions netted against them pro rata; his loans,
-        deductions and GOSI credited to his own account, a line each."""
+        Earnings debited to the accounts the posting configuration gives;
+        deductions netted against them (in proportion, or against the wage
+        only) or credited to his own account; his loans and other deductions
+        credited to his own account, a line each."""
         Journal = self.env['ksw.bas.journal']
         Ledger = self.env['ksw.payroll.ledger'].with_context(
             ksw_ledger_analytic_cache=self.env.context.get('ksw_ledger_analytic_cache', {}))
         who = Journal.employee_label(employee)
-        wage, whole = Ledger._wage_account(employee, company, payer)
+        wage = self._ksw_ledger_account(employee, group, False)
         cost_centre = Ledger._vehicle_cost_centre(employee)
         salary_label = Journal.ref(_('Salary'), who, month)
-        earnings, credits, netted, net, unmapped = [], [], 0.0, 0.0, []
+        earnings, credits, spread, against_wage, net, unmapped = [], [], 0.0, 0.0, 0.0, []
         for line in slip.line_ids:
             amount = line.total or 0.0
             rule = line.salary_rule_id
             posting = rule.x_bas_posting
+            treatment = rule.x_ledger_deduction or 'spread'
             if posting == 'payable':
                 net = amount
                 continue
             if not amount or line.code in TOTAL_CODES:
                 continue
-            if posting == 'loan' or (rule.x_ledger_to_personal_account
+            if posting == 'loan' or (posting == 'liability' and treatment == 'own_account'
                                      and (employee.x_loan_acc_no or '').strip()):
                 try:
                     code, _name = Journal.loan_account(employee)
@@ -238,14 +256,25 @@ class HrPayslipRun(models.Model):
                     continue
                 for label, part in self._ksw_ledger_credit_parts(slip, line, rule, who, month):
                     credits.append((own, part, label, None))
-            elif posting == 'expense' or rule.x_ledger_account_id:
-                account = self._ksw_ledger_earning_account(employee, rule, posting, wage, whole)
+            elif rule.x_ledger_account_id:
+                earnings.append([rule.x_ledger_account_id, amount, salary_label, None])
+            elif posting == 'expense':
+                account = self._ksw_ledger_account(employee, group, rule.x_posting_category_id)
                 earnings.append([account, amount, salary_label, cost_centre if account == wage else None])
             elif posting == 'liability':
-                netted += amount
+                if treatment == 'basic':
+                    against_wage += amount
+                else:
+                    spread += amount
             else:
                 unmapped.append(rule.code or rule.name)
-        self._ksw_ledger_spread(earnings, netted, wage, salary_label, cost_centre)
+        self._ksw_ledger_spread(earnings, spread, wage, salary_label, cost_centre)
+        if round(against_wage, 2):
+            line = next((e for e in earnings if e[0] == wage), None)
+            if line:
+                line[1] += against_wage
+            else:
+                earnings.append([wage, against_wage, salary_label, cost_centre])
         block = [tuple(e) for e in earnings] + credits
         posted = round(sum(b[1] for b in block), 2)
         if unmapped or abs(posted - round(net, 2)) >= 0.005:
@@ -253,23 +282,6 @@ class HrPayslipRun(models.Model):
                               net=net, posted=posted,
                               rules=(' (' + ', '.join(unmapped) + ')') if unmapped else ''))
         return block, net
-
-    def _ksw_ledger_earning_account(self, employee, rule, posting, wage, whole):
-        """An allowance on its own account at the main office only.
-
-        A branch (Jubail camp 3204…, transport 3206…) books the whole salary on
-        its wage account, as do the separate salary account and Al-Hayat: an
-        allowance account of another branch is not his."""
-        allowance = rule.x_ledger_account_id
-        if not allowance:
-            return wage
-        if posting != 'expense':
-            return allowance          # e.g. commissions clearing their accrual
-        if employee.x_allowance_account_id:
-            return employee.x_allowance_account_id
-        if whole or (allowance.code or '')[:4] != (wage.code or '')[:4]:
-            return wage
-        return allowance
 
     @api.model
     def _ksw_ledger_spread(self, earnings, netted, wage, label, cost_centre):
