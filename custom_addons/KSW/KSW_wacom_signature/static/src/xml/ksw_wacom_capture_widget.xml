@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="KSW_wacom_signature.KswWacomCaptureWidget">
+        <button type="button"
+                class="btn btn-secondary ksw_wacom_capture_btn"
+                t-on-click="onClickCapture"
+                t-att-disabled="state.checking">
+            <i class="fa fa-pencil-square-o me-1" role="img" aria-label="Signature"/>
+            <t t-if="state.checking">Checking Wacom pad...</t>
+            <t t-elif="state.bridgeAvailable"><t t-esc="props.string"/></t>
+            <t t-else="">Draw Signature (Wacom pad not detected)</t>
+        </button>
+    </t>
+
+</templates>
