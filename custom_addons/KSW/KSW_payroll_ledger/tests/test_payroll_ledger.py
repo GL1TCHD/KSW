@@ -220,6 +220,11 @@ class TestPayrollLedger(BasJournalPayrollCommon):
         self.assertEqual(row.default_account_id, self.saudi_wage)
         self.assertIn(self.saudi_wage.code, row.summary)
         self.assertIn(self.camp_wage.code, row.summary)
+        # The whole picture: the wage stays on M (group), housing moves (exception).
+        preview = str(man.x_posting_preview)
+        self.assertIn(self.saudi_wage.code, preview)
+        self.assertIn(self.camp_wage.code, preview)
+        self.assertIn('Ledger M', preview)
 
     def test_04j_the_map_is_the_configuration(self):
         """A new account for the camp's housing: one map row, no code."""

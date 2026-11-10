@@ -25,6 +25,8 @@ A figure no row answers goes to the suspense account in Settings, named on
 the batch, so the batch still posts (Oracle's suspense costing); without a
 suspense account the employee is held out, as before.
 """
+from markupsafe import Markup
+
 from odoo import api, fields, models
 
 DEDUCTION_TREATMENTS = [
@@ -163,10 +165,17 @@ class KswPayrollEmployeePosting(models.Model):
             row.group_id = group
             row.default_account_id = default.account_id
             what = row.category_id.name or self.env._('Whole salary')
-            row.summary = self.env._(
-                '%(what)s → %(to)s instead of %(default)s (%(group)s)', what=what,
-                to=row.account_id.code or '?', default=default.account_id.code or '?',
-                group=group.name or '?')
+            rest = rows.filtered(lambda r: not r.category_id)[:1].account_id
+            if row.category_id:
+                row.summary = self.env._(
+                    '%(what)s → %(to)s instead of %(default)s; the rest of his salary stays '
+                    'on %(rest)s (%(group)s)', what=what, to=row.account_id.code or '?',
+                    default=default.account_id.code or '?', rest=rest.code or '?',
+                    group=group.name or '?')
+            else:
+                row.summary = self.env._(
+                    'Whole salary → %(to)s instead of %(group)s, except categories with an '
+                    'exception of their own', to=row.account_id.code or '?', group=group.name or '?')
 
     _employee_category_unique = models.Constraint(
         'unique(employee_id, category_id)', 'One exception per employee and category.')
@@ -228,3 +237,47 @@ class KswPayrollPosting(models.AbstractModel):
             if row:
                 return row.account_id
         return self.env['account.account']
+
+
+class HrEmployee(models.Model):
+    _inherit = 'hr.employee'
+
+    x_posting_preview = fields.Html(
+        string='Where His Salary Goes', compute='_compute_posting_preview', compute_sudo=True,
+        sanitize=False, groups='hr.group_hr_user',
+        help='Every part of his salary, the account it is booked to and why: his posting '
+             'group or one of his exceptions. Paid by his own entity.')
+
+    @api.depends('x_posting_group_id', 'x_posting_exception_ids.category_id',
+                 'x_posting_exception_ids.account_id', 'department_id')
+    def _compute_posting_preview(self):
+        Posting = self.env['ksw.payroll.posting']
+        categories = self.env['ksw.payroll.posting.category'].search([])
+        _ = self.env._
+        for employee in self:
+            company = employee.company_id or self.env.company
+            staff = Posting._staff_entity(employee, company)
+            group = Posting._posting_group(employee, staff, staff) if staff else False
+            if not group:
+                employee.x_posting_preview = False
+                continue
+            rows = []
+            for category in [self.env['ksw.payroll.posting.category']] + list(categories):
+                account = Posting._account(employee, group, category)
+                exceptions = employee.x_posting_exception_ids
+                # Same order as _account: his row for the category, else his
+                # row without one, before anything of the group's.
+                by_exception = bool(category and exceptions.filtered(lambda r: r.category_id == category)) \
+                    or bool(exceptions.filtered(lambda r: not r.category_id))
+                source = _('his exception') if by_exception else group.name
+                rows.append(Markup(
+                    '<tr%(style)s><td>%(what)s</td><td>%(code)s %(name)s</td><td>%(source)s</td></tr>') % {
+                    'style': Markup(' style="font-weight:bold"') if by_exception else Markup(''),
+                    'what': category.name if category else _('Wage (basic and anything without a category)'),
+                    'code': account.code or '?', 'name': account.name or _('no account: held out or suspense'),
+                    'source': source})
+            employee.x_posting_preview = Markup(
+                '<table class="table table-sm o_ksw_posting_preview"><thead><tr><th>%(a)s</th>'
+                '<th>%(b)s</th><th>%(c)s</th></tr></thead><tbody>%(rows)s</tbody></table>') % {
+                'a': _('Part of his salary'), 'b': _('Booked to'), 'c': _('Because of'),
+                'rows': Markup('').join(rows)}

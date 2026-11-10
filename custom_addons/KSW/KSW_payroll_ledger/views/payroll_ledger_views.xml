@@ -83,6 +83,8 @@
                     <field name="x_posting_group_id" options="{'no_create': True}"
                            placeholder="His department's"/>
                 </group>
+                <field name="x_posting_preview" nolabel="1" readonly="1" colspan="2"
+                       groups="om_hr_payroll.group_hr_payroll_user"/>
                 <field name="x_posting_exception_ids" groups="om_hr_payroll.group_hr_payroll_user">
                     <list editable="bottom">
                         <field name="category_id" options="{'no_create': True}" placeholder="Whole salary"/>
