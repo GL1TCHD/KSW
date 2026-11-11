@@ -3902,3 +3902,62 @@ msgstr ""
 #: code:addons/KSW_water_delivery/models/account_move_water.py:0
 msgid "id"
 msgstr ""
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/ksw_water_location_request.py:0
+msgid ""
+"No supervisor with an email address was found in the driver's reporting "
+"line, so nobody was notified."
+msgstr ""
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/ksw_water_location_request.py:0
+msgid "Dear %(name)s,"
+msgstr ""
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/ksw_water_location_request.py:0
+msgid ""
+"%(driver)s sent the location of <b>%(client)s</b> and it is waiting for your"
+" approval. No delivery note can be issued for this client until it is "
+"approved."
+msgstr ""
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/ksw_water_location_request.py:0
+msgid "Sent on:"
+msgstr ""
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/ksw_water_location_request.py:0
+msgid "Accuracy:"
+msgstr ""
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/ksw_water_location_request.py:0
+msgid "View on the map"
+msgstr ""
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/ksw_water_location_request.py:0
+msgid "Open the request to approve or reject it"
+msgstr ""
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/ksw_water_location_request.py:0
+msgid "Client location waiting for your approval: %(client)s"
+msgstr ""
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/ksw_water_location_request.py:0
+msgid "Supervisor %(name)s notified by email (%(email)s)."
+msgstr ""

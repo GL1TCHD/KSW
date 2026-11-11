@@ -4138,3 +4138,66 @@ msgstr "عدد سندات المياه"
 #: code:addons/KSW_water_delivery/models/account_move_water.py:0
 msgid "id"
 msgstr "المعرف"
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/ksw_water_location_request.py:0
+msgid ""
+"No supervisor with an email address was found in the driver's reporting "
+"line, so nobody was notified."
+msgstr ""
+"لم يُعثر على مشرف لديه بريد إلكتروني في التسلسل الإداري للسائق، لذلك لم "
+"يُبلَّغ أحد."
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/ksw_water_location_request.py:0
+msgid "Dear %(name)s,"
+msgstr "عزيزي %(name)s،"
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/ksw_water_location_request.py:0
+msgid ""
+"%(driver)s sent the location of <b>%(client)s</b> and it is waiting for your"
+" approval. No delivery note can be issued for this client until it is "
+"approved."
+msgstr ""
+"أرسل %(driver)s موقع العميل <b>%(client)s</b> وهو بانتظار اعتمادك. لا يمكن "
+"إصدار سند تسليم لهذا العميل حتى يُعتمد الموقع."
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/ksw_water_location_request.py:0
+msgid "Sent on:"
+msgstr "تاريخ الإرسال:"
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/ksw_water_location_request.py:0
+msgid "Accuracy:"
+msgstr "الدقة:"
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/ksw_water_location_request.py:0
+msgid "View on the map"
+msgstr "عرض على الخريطة"
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/ksw_water_location_request.py:0
+msgid "Open the request to approve or reject it"
+msgstr "افتح الطلب لاعتماده أو رفضه"
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/ksw_water_location_request.py:0
+msgid "Client location waiting for your approval: %(client)s"
+msgstr "موقع عميل بانتظار اعتمادك: %(client)s"
+
+#. module: KSW_water_delivery
+#. odoo-python
+#: code:addons/KSW_water_delivery/models/ksw_water_location_request.py:0
+msgid "Supervisor %(name)s notified by email (%(email)s)."
+msgstr "تم إبلاغ المشرف %(name)s بالبريد الإلكتروني (%(email)s)."

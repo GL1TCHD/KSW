@@ -69,6 +69,106 @@ class KswWaterLocationRequest(models.Model):
         for request in self:
             request.display_name = request.partner_id.display_name or _('Location')
 
+    @api.model_create_multi
+    def create(self, vals_list):
+        requests = super().create(vals_list)
+        # The driver is usually standing at the gate: nothing can be issued
+        # for this client until somebody approves, so tell that somebody.
+        for request in requests.filtered(lambda r: r.state == 'pending'):
+            request._notify_supervisor_pending()
+        return requests
+
+    # ------------------------------------------------------------------
+    # Telling the supervisor
+    # ------------------------------------------------------------------
+    def _pending_supervisor(self):
+        """The nearest Supervisor up the sender's reporting line.
+
+        Three levels, the same reach as `rule_water_location_request_dispatcher`,
+        so whoever is emailed can open the request and approve it. Never the
+        sender himself: he may not approve his own pin.
+        Returns (user, employee, email) or None.
+        """
+        self.ensure_one()
+        manager = self.employee_id.sudo().parent_id
+        for _level in range(3):
+            if not manager:
+                break
+            user = manager.user_id
+            email = manager.work_email or user.email
+            if (user and user.active and email and user != self.user_id
+                    and user.has_group(DISPATCHER_GROUP)):
+                return user, manager, email
+            manager = manager.parent_id
+        return None
+
+    def _notify_supervisor_pending(self):
+        """Email the supervisor that a client location waits for him.
+
+        A plain queued email in his own language, like the deduction DM
+        notice (`ksw.deduction._notify_dm_deduction_applied`), and the queue is
+        woken now rather than at its hourly run. A chatter note on the request
+        records who was told, or that nobody could be.
+        """
+        self.ensure_one()
+        found = self._pending_supervisor()
+        if not found:
+            self.sudo().message_post(
+                body=_('No supervisor with an email address was found in the '
+                       "driver's reporting line, so nobody was notified."),
+                subtype_xmlid='mail.mt_note')
+            return
+        user, manager, email = found
+        request = self.sudo().with_context(
+            lang=user.lang or 'en_US', tz=user.tz or 'Asia/Riyadh')
+        t = request.env._
+        action = self.env.ref(
+            'KSW_water_delivery.action_water_location_requests',
+            raise_if_not_found=False)
+        link = '%s/odoo/%s/%d' % (
+            request.get_base_url(),
+            'action-%d' % action.id if action else self._name, request.id)
+        client = request.partner_id.display_name
+        sent_on = fields.Datetime.context_timestamp(
+            request, request.received_at or fields.Datetime.now())
+        body = Markup('<p>%(dear)s</p><p>%(intro)s</p>') % {
+            'dear': t('Dear %(name)s,', name=manager.name),
+            'intro': Markup(t(
+                '%(driver)s sent the location of <b>%(client)s</b> and it is '
+                'waiting for your approval. No delivery note can be issued for '
+                'this client until it is approved.')) % {
+                    'driver': request.employee_id.name or request.user_id.name or '',
+                    'client': client},
+        }
+        body += Markup(
+            '<p><b>%(sent_label)s</b> %(sent)s<br/>'
+            '<b>%(acc_label)s</b> ±%(acc)d m<br/>'
+            '<a href="%(map)s">%(map_label)s</a></p>'
+            '<p><a href="%(link)s">%(open_label)s</a></p>'
+        ) % {
+            'sent_label': t('Sent on:'), 'sent': sent_on.strftime('%Y-%m-%d %H:%M'),
+            'acc_label': t('Accuracy:'), 'acc': int(request.accuracy_m),
+            'map': request.map_url or '', 'map_label': t('View on the map'),
+            'link': link, 'open_label': t('Open the request to approve or reject it'),
+        }
+        if (user.lang or '').startswith('ar'):
+            body = Markup('<div dir="rtl">%s</div>') % body
+        self.env['mail.mail'].sudo().create({
+            'subject': t('Client location waiting for your approval: %(client)s',
+                         client=client),
+            'body_html': body,
+            'email_to': email,
+            'model': self._name,
+            'res_id': self.id,
+            'auto_delete': True,
+        })
+        self.env.ref('mail.ir_cron_mail_scheduler_action').sudo()._trigger()
+        self.sudo().message_post(
+            body=Markup('&#9993; %s') % _(
+                'Supervisor %(name)s notified by email (%(email)s).',
+                name=manager.name, email=email),
+            subtype_xmlid='mail.mt_note')
+
     # ------------------------------------------------------------------
     # Review
     # ------------------------------------------------------------------
