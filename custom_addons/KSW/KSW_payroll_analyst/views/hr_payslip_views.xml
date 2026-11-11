@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_hr_payslip_form_payroll_analyst" model="ir.ui.view">
+        <field name="name">hr.payslip.form.payroll.analyst</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="om_hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="before">
+                <field name="x_open_finding_count" invisible="1"/>
+                <div class="alert alert-warning" role="alert"
+                     invisible="not x_open_finding_count"
+                     groups="KSW_payroll.group_hr_payroll_reviewer">
+                    <strong>Payroll check findings on this payslip</strong>
+                    <field name="x_finding_ids" readonly="1" nolabel="1">
+                        <list create="0" delete="0"
+                              decoration-muted="state == 'reviewed'">
+                            <field name="severity" widget="badge"
+                                   decoration-danger="severity == 'critical'"
+                                   decoration-warning="severity == 'warning'"
+                                   decoration-info="severity == 'info'"/>
+                            <field name="title"/>
+                            <field name="amount"/>
+                            <field name="state" widget="badge"
+                                   decoration-success="state == 'reviewed'"/>
+                        </list>
+                    </field>
+                </div>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Explanation" name="ksw_explanation">
+                    <field name="x_explanation_html" readonly="1" nolabel="1"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Action menu on the payslip list and form: check payslips that are
+         not in a batch (vacation / EOS settlements). -->
+    <record id="action_server_ksw_check_payslips" model="ir.actions.server">
+        <field name="name">Check Payroll</field>
+        <field name="model_id" ref="om_hr_payroll.model_hr_payslip"/>
+        <field name="binding_model_id" ref="om_hr_payroll.model_hr_payslip"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="group_ids" eval="[(4, ref('om_hr_payroll.group_hr_payroll_user'))]"/>
+        <field name="state">code</field>
+        <field name="code">action = records.action_ksw_check_payroll()</field>
+    </record>
+</odoo>

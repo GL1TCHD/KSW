@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_ksw_ai_conversation_user,ksw.ai.conversation user,model_ksw_ai_conversation,base.group_user,1,0,0,0
+access_ksw_ai_turn_user,ksw.ai.turn user,model_ksw_ai_turn,base.group_user,1,0,0,0
+access_ksw_ai_conversation_admin,ksw.ai.conversation admin,model_ksw_ai_conversation,base.group_system,1,0,0,1
+access_ksw_ai_turn_admin,ksw.ai.turn admin,model_ksw_ai_turn,base.group_system,1,0,0,1

@@ -1,0 +1,102 @@
+.ksw_ai {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .ksw_ai_input {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 8px 6px 12px;
+        border: 1px solid $border-color;
+        border-radius: 12px;
+        background: $o-view-background-color;
+
+        textarea {
+            flex: 1;
+            border: 0;
+            resize: none;
+            outline: none;
+            background: transparent;
+            min-height: 28px;
+            max-height: 120px;
+        }
+    }
+    .ksw_ai_examples {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+    .ksw_ai_chip {
+        border-radius: 999px;
+    }
+    .ksw_ai_turns {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        max-height: 60vh;
+        overflow-y: auto;
+    }
+    .ksw_ai_q {
+        align-self: flex-end;
+        text-align: end;
+        span {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 12px;
+            background: rgba($primary, 0.1);
+        }
+    }
+    .ksw_ai_a.ksw_ai_error .ksw_ai_text {
+        color: $danger;
+    }
+    .ksw_ai_text {
+        margin-bottom: 6px;
+        line-height: 1.6;
+    }
+    .ksw_ai_block {
+        border: 1px solid $border-color;
+        border-radius: 10px;
+        margin-top: 8px;
+        overflow: hidden;
+    }
+    .ksw_ai_block_head {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 10px;
+        background: rgba($primary, 0.05);
+    }
+    .ksw_ai_count, .ksw_ai_filter, .ksw_ai_note, .ksw_ai_muted {
+        color: $text-muted;
+        font-size: 0.85em;
+    }
+    .ksw_ai_filter {
+        padding: 4px 10px;
+        border-bottom: 1px solid $border-color;
+    }
+    .ksw_ai_table_wrap {
+        max-height: 320px;
+        overflow: auto;
+        th {
+            position: sticky;
+            top: 0;
+            background: $o-view-background-color;
+            white-space: nowrap;
+        }
+    }
+    .ksw_ai_link {
+        cursor: pointer;
+    }
+    .ksw_ai_sums {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 6px 10px;
+        border-top: 1px solid $border-color;
+        font-size: 0.9em;
+    }
+    .ksw_ai_note {
+        margin: 0;
+    }
+}

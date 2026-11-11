@@ -1,0 +1,579 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* KSW_ai_assistant
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-11 15:37+0000\n"
+"PO-Revision-Date: 2026-11-11 15:37+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ar_001\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: KSW_ai_assistant
+#: model_terms:ir.ui.view,arch_db:KSW_ai_assistant.res_config_settings_view_form_ksw_ai
+msgid "AI Assistant"
+msgstr "المساعد الذكي"
+
+#. module: KSW_ai_assistant
+#: model:ir.model,name:KSW_ai_assistant.model_ksw_ai_conversation
+msgid "AI Assistant Conversation"
+msgstr "محادثة المساعد الذكي"
+
+#. module: KSW_ai_assistant
+#: model:ir.model,name:KSW_ai_assistant.model_ksw_ai_turn
+#: model_terms:ir.ui.view,arch_db:KSW_ai_assistant.view_ksw_ai_turn_form
+msgid "AI Assistant Question"
+msgstr "سؤال للمساعد الذكي"
+
+#. module: KSW_ai_assistant
+#: model:ir.actions.act_window,name:KSW_ai_assistant.action_ksw_ai_turn
+#: model_terms:ir.ui.view,arch_db:KSW_ai_assistant.view_ksw_ai_turn_list
+msgid "AI Assistant Questions"
+msgstr "أسئلة المساعد الذكي"
+
+#. module: KSW_ai_assistant
+#: model:ir.model,name:KSW_ai_assistant.model_ksw_ai_tools
+msgid "AI Assistant Tools"
+msgstr "أدوات المساعد الذكي"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_res_config_settings__ksw_ai_provider
+msgid "AI Provider"
+msgstr "مزود الذكاء الاصطناعي"
+
+#. module: KSW_ai_assistant
+#: model_terms:ir.ui.view,arch_db:KSW_ai_assistant.res_config_settings_view_form_ksw_ai
+msgid "AI provider"
+msgstr "مزود الذكاء الاصطناعي"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_res_config_settings__ksw_ai_api_key
+msgid "API Key"
+msgstr "مفتاح API"
+
+#. module: KSW_ai_assistant
+#: model_terms:ir.ui.view,arch_db:KSW_ai_assistant.res_config_settings_view_form_ksw_ai
+msgid "API key"
+msgstr "مفتاح API"
+
+#. module: KSW_ai_assistant
+#. odoo-python
+#: code:addons/KSW_ai_assistant/models/ai_tools.py:0
+msgid "All records"
+msgstr "كل السجلات"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_turn__answer
+#: model_terms:ir.ui.view,arch_db:KSW_ai_assistant.view_ksw_ai_turn_form
+msgid "Answer"
+msgstr "الإجابة"
+
+#. module: KSW_ai_assistant
+#. odoo-javascript
+#: code:addons/KSW_ai_assistant/static/src/chat/ai_chat.xml:0
+msgid ""
+"Answers can be wrong: check the filter under each table. The assistant only "
+"reads, with your own access rights."
+msgstr ""
+"قد تخطئ الإجابة: راجع الفلتر أسفل كل جدول. المساعد يقرأ فقط، وبصلاحياتك أنت."
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields.selection,name:KSW_ai_assistant.selection__res_config_settings__ksw_ai_provider__anthropic
+msgid "Anthropic Claude (paid)"
+msgstr "Anthropic Claude (مدفوع)"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_conversation__api_messages
+msgid "Api Messages"
+msgstr "رسائل الواجهة البرمجية"
+
+#. module: KSW_ai_assistant
+#. odoo-javascript
+#: code:addons/KSW_ai_assistant/static/src/chat/ai_chat.xml:0
+msgid "Ask"
+msgstr "اسأل"
+
+#. module: KSW_ai_assistant
+#. odoo-javascript
+#: code:addons/KSW_ai_assistant/static/src/chat/ai_chat.xml:0
+msgid "Ask Odoo"
+msgstr "اسأل أودو"
+
+#. module: KSW_ai_assistant
+#. odoo-javascript
+#: code:addons/KSW_ai_assistant/static/src/chat/ai_chat.xml:0
+msgid "Ask Odoo (AI assistant)"
+msgstr "اسأل أودو (المساعد الذكي)"
+
+#. module: KSW_ai_assistant
+#. odoo-javascript
+#: code:addons/KSW_ai_assistant/static/src/chat/ai_chat.xml:0
+msgid "Ask about your data, in Arabic or English…"
+msgstr "اسأل عن بياناتك بالعربية أو الإنجليزية…"
+
+#. module: KSW_ai_assistant
+#. odoo-javascript
+#: code:addons/KSW_ai_assistant/static/src/chat/ai_chat.xml:0
+msgid "Ask the AI assistant"
+msgstr "اسأل المساعد الذكي"
+
+#. module: KSW_ai_assistant
+#: model_terms:ir.ui.view,arch_db:KSW_ai_assistant.view_ksw_ai_turn_form
+#: model_terms:ir.ui.view,arch_db:KSW_ai_assistant.view_ksw_ai_turn_list
+msgid "Asked On"
+msgstr "تاريخ السؤال"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_turn__cached_tokens
+msgid "Cached Tokens"
+msgstr "الرموز المخزنة مؤقتا"
+
+#. module: KSW_ai_assistant
+#. odoo-javascript
+#: code:addons/KSW_ai_assistant/static/src/chat/ai_chat.xml:0
+msgid ""
+"Choose a provider and add its key in Settings › General Settings › AI "
+"Assistant."
+msgstr ""
+"اختر المزود وأضف مفتاحه من الإعدادات › الإعدادات العامة › المساعد الذكي."
+
+#. module: KSW_ai_assistant
+#: model:ir.model,name:KSW_ai_assistant.model_res_config_settings
+msgid "Config Settings"
+msgstr "إعدادات التهيئة"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_turn__conversation_id
+msgid "Conversation"
+msgstr "المحادثة"
+
+#. module: KSW_ai_assistant
+#. odoo-python
+#: code:addons/KSW_ai_assistant/models/ai_tools.py:0
+msgid "Count"
+msgstr "العدد"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_conversation__create_uid
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_turn__create_uid
+msgid "Created by"
+msgstr "أنشئ بواسطة"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_conversation__create_date
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_turn__create_date
+msgid "Created on"
+msgstr "أنشئ في"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_conversation__display_name
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_tools__display_name
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_turn__display_name
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_res_config_settings__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: KSW_ai_assistant
+#. odoo-javascript
+#: code:addons/KSW_ai_assistant/static/src/chat/ai_chat.js:0
+msgid "Employees absent more than 3 days last month"
+msgstr "الموظفون الغائبون أكثر من 3 أيام الشهر الماضي"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,help:KSW_ai_assistant.field_res_config_settings__ksw_ai_model
+msgid ""
+"Empty uses the provider default: openai/gpt-oss-120b on Groq, qwen3:8b on "
+"Ollama, claude-opus-5 on Anthropic."
+msgstr ""
+"تركه فارغا يستخدم النموذج الافتراضي للمزود: openai/gpt-oss-120b في Groq، و "
+"qwen3:8b في Ollama، و claude-opus-5 في Anthropic."
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_turn__error
+msgid "Error"
+msgstr "الخطأ"
+
+#. module: KSW_ai_assistant
+#: model_terms:ir.ui.view,arch_db:KSW_ai_assistant.view_ksw_ai_turn_search
+msgid "Errors"
+msgstr "الأخطاء"
+
+#. module: KSW_ai_assistant
+#: model_terms:ir.ui.view,arch_db:KSW_ai_assistant.res_config_settings_view_form_ksw_ai
+msgid "Every question, what the assistant ran and the tokens it used."
+msgstr "كل سؤال، وما نفذه المساعد، وعدد الرموز المستخدمة."
+
+#. module: KSW_ai_assistant
+#. odoo-javascript
+#: code:addons/KSW_ai_assistant/static/src/chat/ai_chat.xml:0
+msgid "Filter used"
+msgstr "الفلتر المستخدم"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields.selection,name:KSW_ai_assistant.selection__res_config_settings__ksw_ai_provider__groq
+msgid "Groq (free tier)"
+msgstr "Groq (الباقة المجانية)"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,help:KSW_ai_assistant.field_res_config_settings__ksw_ai_api_key
+msgid ""
+"Groq: console.groq.com › API Keys. Claude: console.anthropic.com. Not needed"
+" for Ollama."
+msgstr ""
+"Groq: من console.groq.com › API Keys. Claude: من console.anthropic.com. غير "
+"مطلوب لـ Ollama."
+
+#. module: KSW_ai_assistant
+#: model_terms:ir.ui.view,arch_db:KSW_ai_assistant.res_config_settings_view_form_ksw_ai
+msgid "Groq: free key from console.groq.com. Not needed for Ollama."
+msgstr "Groq: مفتاح مجاني من console.groq.com. غير مطلوب لـ Ollama."
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields.selection,name:KSW_ai_assistant.selection__res_config_settings__ksw_ai_effort__high
+msgid "High (most careful)"
+msgstr "عال (الأدق)"
+
+#. module: KSW_ai_assistant
+#. odoo-python
+#: code:addons/KSW_ai_assistant/models/ai_conversation.py:0
+msgid "I cannot help with that request."
+msgstr "لا أستطيع المساعدة في هذا الطلب."
+
+#. module: KSW_ai_assistant
+#. odoo-python
+#: code:addons/KSW_ai_assistant/models/ai_conversation.py:0
+msgid "I could not finish this one. Try asking it more simply."
+msgstr "لم أتمكن من إكمال هذا السؤال. جرب صياغته بشكل أبسط."
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_conversation__id
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_tools__id
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_turn__id
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_res_config_settings__id
+msgid "ID"
+msgstr "المعرف"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_turn__input_tokens
+msgid "Input Tokens"
+msgstr "رموز الإدخال"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_conversation__write_uid
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_turn__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_conversation__write_date
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_turn__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: KSW_ai_assistant
+#: model_terms:ir.ui.view,arch_db:KSW_ai_assistant.res_config_settings_view_form_ksw_ai
+msgid "Leave empty for the provider's default."
+msgstr "اتركه فارغا لاستخدام النموذج الافتراضي للمزود."
+
+#. module: KSW_ai_assistant
+#: model_terms:ir.ui.view,arch_db:KSW_ai_assistant.res_config_settings_view_form_ksw_ai
+msgid ""
+"Lets every user ask questions about their data from Home. Questions and the "
+"records they return are sent to the provider, except with Ollama on your own"
+" server."
+msgstr ""
+"يتيح لكل مستخدم السؤال عن بياناته من الصفحة الرئيسية. ترسل الأسئلة والسجلات "
+"الناتجة عنها إلى المزود، إلا عند استخدام Ollama على خادمكم الخاص."
+
+#. module: KSW_ai_assistant
+#. odoo-javascript
+#: code:addons/KSW_ai_assistant/static/src/chat/ai_chat.xml:0
+msgid "Looking it up…"
+msgstr "جار البحث…"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields.selection,name:KSW_ai_assistant.selection__res_config_settings__ksw_ai_effort__low
+msgid "Low (fastest)"
+msgstr "منخفض (الأسرع)"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields.selection,name:KSW_ai_assistant.selection__res_config_settings__ksw_ai_effort__medium
+msgid "Medium"
+msgstr "متوسط"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_turn__model
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_res_config_settings__ksw_ai_model
+#: model_terms:ir.ui.view,arch_db:KSW_ai_assistant.res_config_settings_view_form_ksw_ai
+msgid "Model"
+msgstr "النموذج"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_conversation__name
+msgid "Name"
+msgstr "الاسم"
+
+#. module: KSW_ai_assistant
+#. odoo-javascript
+#: code:addons/KSW_ai_assistant/static/src/chat/ai_chat.xml:0
+msgid "New"
+msgstr "جديد"
+
+#. module: KSW_ai_assistant
+#. odoo-javascript
+#: code:addons/KSW_ai_assistant/static/src/chat/ai_chat.xml:0
+msgid "New conversation"
+msgstr "محادثة جديدة"
+
+#. module: KSW_ai_assistant
+#. odoo-python
+#: code:addons/KSW_ai_assistant/models/ai_tools.py:0
+msgid "No"
+msgstr "لا"
+
+#. module: KSW_ai_assistant
+#. odoo-python
+#: code:addons/KSW_ai_assistant/models/ai_tools.py:0
+msgid "None"
+msgstr "بدون"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields.selection,name:KSW_ai_assistant.selection__res_config_settings__ksw_ai_provider__ollama
+msgid "Ollama (own server, free, data stays in-house)"
+msgstr "Ollama (خادم خاص، مجاني، البيانات داخل الشركة)"
+
+#. module: KSW_ai_assistant
+#: model_terms:ir.ui.view,arch_db:KSW_ai_assistant.res_config_settings_view_form_ksw_ai
+msgid "Ollama or another OpenAI-compatible server."
+msgstr "Ollama أو خادم آخر متوافق مع OpenAI."
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,help:KSW_ai_assistant.field_res_config_settings__ksw_ai_base_url
+msgid ""
+"Only for Ollama or another server, e.g. http://192.168.1.50:11434/v1. Empty "
+"uses the default."
+msgstr ""
+"لـ Ollama أو خادم آخر فقط، مثل http://192.168.1.50:11434/v1. تركه فارغا "
+"يستخدم العنوان الافتراضي."
+
+#. module: KSW_ai_assistant
+#. odoo-javascript
+#: code:addons/KSW_ai_assistant/static/src/chat/ai_chat.xml:0
+msgid "Open in Odoo"
+msgstr "فتح في أودو"
+
+#. module: KSW_ai_assistant
+#: model_terms:ir.ui.view,arch_db:KSW_ai_assistant.res_config_settings_view_form_ksw_ai
+msgid "Open the log"
+msgstr "فتح السجل"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields.selection,name:KSW_ai_assistant.selection__res_config_settings__ksw_ai_provider__openai_compatible
+msgid "Other OpenAI-compatible server"
+msgstr "خادم آخر متوافق مع OpenAI"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_turn__output_tokens
+msgid "Output Tokens"
+msgstr "رموز الإخراج"
+
+#. module: KSW_ai_assistant
+#. odoo-python
+#: code:addons/KSW_ai_assistant/models/ai_conversation.py:0
+msgid "Please type a question."
+msgstr "اكتب سؤالا من فضلك."
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_conversation__provider
+msgid "Provider"
+msgstr "المزود"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_turn__question
+#: model_terms:ir.ui.view,arch_db:KSW_ai_assistant.view_ksw_ai_turn_form
+msgid "Question"
+msgstr "السؤال"
+
+#. module: KSW_ai_assistant
+#: model_terms:ir.ui.view,arch_db:KSW_ai_assistant.res_config_settings_view_form_ksw_ai
+msgid "Question log"
+msgstr "سجل الأسئلة"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_res_config_settings__ksw_ai_effort
+msgid "Reasoning Effort"
+msgstr "مستوى التفكير"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_res_config_settings__ksw_ai_base_url
+msgid "Server Address"
+msgstr "عنوان الخادم"
+
+#. module: KSW_ai_assistant
+#: model_terms:ir.ui.view,arch_db:KSW_ai_assistant.res_config_settings_view_form_ksw_ai
+msgid "Server address"
+msgstr "عنوان الخادم"
+
+#. module: KSW_ai_assistant
+#. odoo-javascript
+#: code:addons/KSW_ai_assistant/static/src/chat/ai_chat.js:0
+msgid "Show me all loans above 5,000 SAR"
+msgstr "اعرض كل القروض التي تزيد عن 5,000 ريال"
+
+#. module: KSW_ai_assistant
+#. odoo-javascript
+#: code:addons/KSW_ai_assistant/static/src/chat/ai_chat.js:0
+msgid "Something went wrong."
+msgstr "حدث خطأ ما."
+
+#. module: KSW_ai_assistant
+#. odoo-javascript
+#: code:addons/KSW_ai_assistant/static/src/chat/ai_chat.xml:0
+msgid "The AI assistant is not set up yet."
+msgstr "المساعد الذكي غير مهيأ بعد."
+
+#. module: KSW_ai_assistant
+#. odoo-python
+#: code:addons/KSW_ai_assistant/models/ai_conversation.py:0
+msgid ""
+"The AI assistant is not set up yet. An administrator adds the API key in "
+"Settings."
+msgstr "المساعد الذكي غير مهيأ بعد. يضيف مدير النظام مفتاح API من الإعدادات."
+
+#. module: KSW_ai_assistant
+#. odoo-python
+#: code:addons/KSW_ai_assistant/models/ai_conversation.py:0
+msgid "The AI service cannot be reached from the server right now."
+msgstr "لا يمكن الوصول إلى خدمة الذكاء الاصطناعي من الخادم حاليا."
+
+#. module: KSW_ai_assistant
+#. odoo-python
+#: code:addons/KSW_ai_assistant/models/ai_conversation.py:0
+msgid "The AI service is busy. Try again in a minute."
+msgstr "خدمة الذكاء الاصطناعي مشغولة. حاول بعد دقيقة."
+
+#. module: KSW_ai_assistant
+#. odoo-python
+#: code:addons/KSW_ai_assistant/models/ai_conversation.py:0
+msgid ""
+"The AI service rejected the API key. Ask an administrator to check it in "
+"Settings."
+msgstr ""
+"رفضت خدمة الذكاء الاصطناعي مفتاح API. اطلب من مدير النظام مراجعته في "
+"الإعدادات."
+
+#. module: KSW_ai_assistant
+#. odoo-python
+#: code:addons/KSW_ai_assistant/models/ai_conversation.py:0
+msgid "The AI service returned an error. Try again."
+msgstr "أعادت خدمة الذكاء الاصطناعي خطأ. حاول مرة أخرى."
+
+#. module: KSW_ai_assistant
+#. odoo-python
+#: code:addons/KSW_ai_assistant/models/ai_conversation.py:0
+msgid "The question is too long."
+msgstr "السؤال طويل جدا."
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_turn__tool_calls
+msgid "Tool Calls"
+msgstr "استدعاءات الأدوات"
+
+#. module: KSW_ai_assistant
+#: model_terms:ir.ui.view,arch_db:KSW_ai_assistant.view_ksw_ai_turn_list
+msgid "Total"
+msgstr "الإجمالي"
+
+#. module: KSW_ai_assistant
+#. odoo-javascript
+#: code:addons/KSW_ai_assistant/static/src/chat/ai_chat.js:0
+msgid "Total deductions per department this month"
+msgstr "إجمالي الخصومات لكل قسم هذا الشهر"
+
+#. module: KSW_ai_assistant
+#. odoo-javascript
+#: code:addons/KSW_ai_assistant/static/src/chat/ai_chat.xml:0
+msgid "Total of all"
+msgstr "إجمالي الكل"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_conversation__turn_ids
+msgid "Turn"
+msgstr "السؤال"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_conversation__turn_count
+msgid "Turn Count"
+msgstr "عدد الأسئلة"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_conversation__user_id
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_turn__user_id
+#: model_terms:ir.ui.view,arch_db:KSW_ai_assistant.view_ksw_ai_turn_search
+msgid "User"
+msgstr "المستخدم"
+
+#. module: KSW_ai_assistant
+#: model:ir.model.fields,field_description:KSW_ai_assistant.field_ksw_ai_turn__tool_calls_text
+#: model_terms:ir.ui.view,arch_db:KSW_ai_assistant.view_ksw_ai_turn_form
+msgid "What It Ran"
+msgstr "ما تم تنفيذه"
+
+#. module: KSW_ai_assistant
+#. odoo-javascript
+#: code:addons/KSW_ai_assistant/static/src/chat/ai_chat.js:0
+msgid "Who is on annual leave this week?"
+msgstr "من في إجازة سنوية هذا الأسبوع؟"
+
+#. module: KSW_ai_assistant
+#. odoo-python
+#: code:addons/KSW_ai_assistant/models/ai_tools.py:0
+msgid "Yes"
+msgstr "نعم"
+
+#. module: KSW_ai_assistant
+#. odoo-python
+#: code:addons/KSW_ai_assistant/models/ai_tools.py:0
+msgid "and"
+msgstr "و"
+
+#. module: KSW_ai_assistant
+#: model_terms:ir.ui.view,arch_db:KSW_ai_assistant.res_config_settings_view_form_ksw_ai
+msgid "default"
+msgstr "افتراضي"
+
+#. module: KSW_ai_assistant
+#. odoo-python
+#: code:addons/KSW_ai_assistant/models/ai_tools.py:0
+msgid "empty"
+msgstr "فارغ"
+
+#. module: KSW_ai_assistant
+#: model_terms:ir.ui.view,arch_db:KSW_ai_assistant.res_config_settings_view_form_ksw_ai
+msgid "http://localhost:11434/v1"
+msgstr "http://localhost:11434/v1"
+
+#. module: KSW_ai_assistant
+#. odoo-python
+#: code:addons/KSW_ai_assistant/models/ai_tools.py:0
+msgid "not"
+msgstr "ليس"
+
+#. module: KSW_ai_assistant
+#. odoo-python
+#: code:addons/KSW_ai_assistant/models/ai_tools.py:0
+msgid "or"
+msgstr "أو"
+
+#. module: KSW_ai_assistant
+#. odoo-python
+#: code:addons/KSW_ai_assistant/models/ai_tools.py:0
+msgid "yes"
+msgstr "نعم"

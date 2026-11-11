@@ -1,0 +1,1038 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* KSW_payroll_analyst
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-11 14:48+0000\n"
+"PO-Revision-Date: 2026-11-11 14:48+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: ar_001\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip_run.py:0
+msgid "%(c)s critical, %(w)s warnings, %(o)s open in total."
+msgstr "حرجة: %(c)s، تنبيهات: %(w)s، المفتوح إجمالا: %(o)s."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "%(days)s absent days on the worked days."
+msgstr "أيام الغياب في أيام العمل: %(days)s."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid "%(left)s not collected, still owed"
+msgstr "لم يُخصم %(left)s، وما زال مستحقا"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid "%(n)s days"
+msgstr "%(n)s يوم"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "%(n)s due installment(s) not on the payslip"
+msgstr "أقساط مستحقة غير مدرجة في كشف الراتب: %(n)s"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid "%(n)s hours"
+msgstr "%(n)s ساعة"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "%(n)s payslips for the same employee in this batch"
+msgstr "للموظف نفسه %(n)s كشوف راتب في كشف الرواتب هذا"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid "%(n)s times"
+msgstr "%(n)s مرة"
+
+#. module: KSW_payroll_analyst
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.view_hr_payslip_form_payroll_analyst
+msgid "<strong>Payroll check findings on this payslip</strong>"
+msgstr "<strong>ملاحظات فحص الرواتب على كشف الراتب هذا</strong>"
+
+#. module: KSW_payroll_analyst
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.hr_payslip_run_form_payroll_analyst
+msgid ""
+"<strong>Payroll check</strong> ·\n"
+"                        <span>Critical:</span>"
+msgstr "<strong>فحص الرواتب</strong> · <span>حرجة:</span>"
+
+#. module: KSW_payroll_analyst
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.hr_payslip_run_form_payroll_analyst
+msgid ""
+"<strong>Payroll check</strong> ·\n"
+"                        <span>Nothing open.</span>\n"
+"                        <span>Last checked:</span>"
+msgstr ""
+"<strong>فحص الرواتب</strong> · <span>لا توجد ملاحظات مفتوحة.</span> "
+"<span>آخر فحص:</span>"
+
+#. module: KSW_payroll_analyst
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.hr_payslip_run_form_payroll_analyst
+msgid ""
+"<strong>Payroll check</strong> ·\n"
+"                        <span>Open findings:</span>"
+msgstr "<strong>فحص الرواتب</strong> · <span>الملاحظات المفتوحة:</span>"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid ""
+"A negative NET is left out of the bank file: the deductions are larger than "
+"the salary."
+msgstr "الصافي السالب لا يدرج في ملف البنك: الخصومات أكبر من الراتب."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid ""
+"A vacation or End of Service settlement lists every outstanding deduction, "
+"so its NET can be negative. Only what the pay covers is collected; the rest "
+"stays pending."
+msgstr ""
+"تسوية الإجازة أو نهاية الخدمة تعرض كل الخصومات القائمة، لذا قد يكون صافيها "
+"سالبا. لا يخصم إلا ما يغطيه الراتب، ويبقى الباقي معلقا."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Amount"
+msgstr "المبلغ"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_ksw_payroll_finding__amount
+msgid "Amount at Stake"
+msgstr "المبلغ المعني"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid "Attendance"
+msgstr "الحضور والانصراف"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+#: model:ir.model.fields.selection,name:KSW_payroll_analyst.selection__ksw_payroll_finding__check_code__sheet_unconfirmed
+msgid "Attendance sheet not confirmed"
+msgstr "كشف الحضور والانصراف غير معتمد"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid ""
+"Attendance, or how it is counted, changed after this payslip was generated. "
+"Compute Sheet does not rebuild worked days, so it still pays the old "
+"figures. Correct it by regenerating the payslip, or by a revision once it is"
+" paid."
+msgstr ""
+"تغير الحضور والانصراف، أو طريقة احتسابه، بعد إنشاء كشف الراتب هذا. إعادة "
+"الحساب لا تعيد بناء أيام العمل، فما زال الكشف يصرف على الأرقام القديمة. يصحح"
+" بإعادة إنشاء كشف الراتب، أو بتعديل كشف الراتب بعد صرفه."
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_ksw_payroll_finding__run_id
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.view_ksw_payroll_finding_search
+msgid "Batch"
+msgstr "كشف الرواتب"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Change"
+msgstr "الفرق"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_ksw_payroll_finding__check_code
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.view_ksw_payroll_finding_search
+msgid "Check"
+msgstr "الفحص"
+
+#. module: KSW_payroll_analyst
+#: model:ir.actions.server,name:KSW_payroll_analyst.action_server_ksw_check_payslips
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.hr_payslip_run_form_payroll_analyst
+msgid "Check Payroll"
+msgstr "فحص الرواتب"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_hr_payslip_run__x_analysis_by
+msgid "Checked By"
+msgstr "فحص بواسطة"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid "Compared with last month"
+msgstr "مقارنة بالشهر السابق"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Confirmed payslip"
+msgstr "كشف راتب معتمد"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid "Count"
+msgstr "العدد"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_ksw_payroll_finding__create_uid
+msgid "Created by"
+msgstr "أنشئ بواسطة"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_ksw_payroll_finding__create_date
+msgid "Created on"
+msgstr "أنشئ في"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields.selection,name:KSW_payroll_analyst.selection__ksw_payroll_finding__severity__critical
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.view_ksw_payroll_finding_search
+msgid "Critical"
+msgstr "حرجة"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_hr_payslip_run__x_finding_critical_count
+msgid "Critical Findings"
+msgstr "الملاحظات الحرجة"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Days"
+msgstr "الأيام"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Deducted"
+msgstr "المخصوم"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Deducted from the salary, installment not settled"
+msgstr "خُصم من الراتب، والقسط غير مسدد"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields.selection,name:KSW_payroll_analyst.selection__ksw_payroll_finding__check_code__ded_not_settled
+msgid "Deducted, installment still pending"
+msgstr "مخصوم، والقسط ما زال معلقا"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Deduction"
+msgstr "الخصم"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid "Deductions"
+msgstr "الخصومات"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_ksw_payroll_finding__detail
+msgid "Detail"
+msgstr "التفاصيل"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_hr_payslip__display_name
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_hr_payslip_run__display_name
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_ksw_payroll_analyst__display_name
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_ksw_payroll_finding__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Due"
+msgstr "الاستحقاق"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields.selection,name:KSW_payroll_analyst.selection__ksw_payroll_finding__check_code__ded_pending_missing
+msgid "Due installment not on the payslip"
+msgstr "قسط مستحق غير مدرج في كشف الراتب"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid "Earnings"
+msgstr "المستحقات"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_ksw_payroll_finding__employee_id
+msgid "Employee"
+msgstr "الموظف"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields.selection,name:KSW_payroll_analyst.selection__ksw_payroll_finding__check_code__duplicate_in_batch
+msgid "Employee twice in the batch"
+msgstr "الموظف مكرر في كشف الرواتب"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,help:KSW_payroll_analyst.field_ksw_payroll_finding__run_id
+msgid ""
+"Empty for a payslip checked on its own (a vacation or End of Service "
+"settlement outside any batch)."
+msgstr ""
+"فارغ لكشف راتب فُحص منفردا (تسوية إجازة أو نهاية خدمة خارج أي كشف رواتب)."
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_hr_payslip__x_explanation_html
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.view_hr_payslip_form_payroll_analyst
+msgid "Explanation"
+msgstr "الشرح"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Figure"
+msgstr "البند"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "From"
+msgstr "من"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "From attendance today"
+msgstr "من الحضور والانصراف اليوم"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Gross %(gross)s, NET %(net)s."
+msgstr "الإجمالي %(gross)s، الصافي %(net)s."
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_hr_payslip__id
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_hr_payslip_run__id
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_ksw_payroll_analyst__id
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_ksw_payroll_finding__id
+msgid "ID"
+msgstr "المعرف"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,help:KSW_payroll_analyst.field_ksw_payroll_finding__key
+msgid "Identifies the same finding across checks."
+msgstr "يميز الملاحظة نفسها بين مرات الفحص."
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields.selection,name:KSW_payroll_analyst.selection__ksw_payroll_finding__severity__info
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.view_ksw_payroll_finding_search
+msgid "Info"
+msgstr "معلومة"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Input"
+msgstr "المدخل"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Installment"
+msgstr "القسط"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Installment marked collected by this payslip, but not on it"
+msgstr "قسط مسجل كمسدد بهذا الكشف، لكنه غير مدرج فيه"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields.selection,name:KSW_payroll_analyst.selection__ksw_payroll_finding__check_code__ded_settled_missing
+msgid "Installment settled, not on the payslip"
+msgstr "قسط مسدد غير مدرج في كشف الراتب"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Installment status"
+msgstr "حالة القسط"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid "Item"
+msgstr "البند"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_ksw_payroll_finding__key
+msgid "Key"
+msgstr "المفتاح"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields.selection,name:KSW_payroll_analyst.selection__ksw_payroll_finding__check_code__net_swing
+msgid "Large change from last month"
+msgstr "تغير كبير عن الشهر السابق"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_hr_payslip_run__x_analysis_date
+msgid "Last Checked"
+msgstr "آخر فحص"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_ksw_payroll_finding__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_ksw_payroll_finding__write_date
+msgid "Last Updated on"
+msgstr "آخر تحديث في"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Last month"
+msgstr "الشهر السابق"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid ""
+"Last paid by %(slip)s (%(net)s). No payslip for this period in any batch, "
+"and the contract is still running."
+msgstr ""
+"آخر صرف بكشف %(slip)s (%(net)s). لا يوجد كشف راتب لهذه الفترة في أي كشف "
+"رواتب، والعقد ما زال ساريا."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Leave"
+msgstr "الإجازة"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid "Leave settlement for %(type)s, %(start)s to %(end)s."
+msgstr "تسوية %(type)s من %(start)s إلى %(end)s."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Line"
+msgstr "البند"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid "Loans and deductions taken from this payslip:"
+msgstr "القروض والخصومات المخصومة في هذا الكشف:"
+
+#. module: KSW_payroll_analyst
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.view_ksw_payroll_finding_form
+msgid "Mark Reviewed"
+msgstr "تمت المراجعة"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "NET"
+msgstr "الصافي"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid ""
+"NET %(net)s, but the employee has no salary bank account. The Kawthar file "
+"leaves the payslip out; the WPS file writes it without an IBAN."
+msgstr ""
+"الصافي %(net)s، لكن لا يوجد حساب بنكي للراتب لدى الموظف. ملف الكوثر يستبعد "
+"الكشف، وملف حماية الأجور يدرجه بلا رقم آيبان."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "NET %(now)s against %(before)s on %(prev)s (%(sign)s%(chg)s)."
+msgstr "الصافي %(now)s مقابل %(before)s في %(prev)s (%(sign)s%(chg)s)."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid "NET %(now)s against %(before)s on %(slip)s: %(dir)s of %(chg)s."
+msgstr "الصافي %(now)s مقابل %(before)s في %(slip)s: %(dir)s بمقدار %(chg)s."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "NET changed by %(chg)s since last month"
+msgstr "تغير الصافي بمقدار %(chg)s عن الشهر السابق"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields.selection,name:KSW_payroll_analyst.selection__ksw_payroll_finding__check_code__neg_net
+msgid "Negative NET"
+msgstr "صافي سالب"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Negative NET: %(net)s"
+msgstr "صافي سالب: %(net)s"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid "Net salary %(net)s (gross %(gross)s)."
+msgstr "صافي الراتب %(net)s (الإجمالي %(gross)s)."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid "Net salary %(net)s = earnings %(earn)s − deductions %(ded)s."
+msgstr "صافي الراتب %(net)s = المستحقات %(earn)s − الخصومات %(ded)s."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+#: model:ir.model.fields.selection,name:KSW_payroll_analyst.selection__ksw_payroll_finding__check_code__no_bank
+msgid "No bank account"
+msgstr "لا يوجد حساب بنكي"
+
+#. module: KSW_payroll_analyst
+#: model_terms:ir.actions.act_window,help:KSW_payroll_analyst.action_ksw_payroll_finding
+msgid "No findings"
+msgstr "لا توجد ملاحظات"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid ""
+"No worked days this period, so nothing is paid. Expected if the employee did"
+" not work; otherwise check the attendance first."
+msgstr ""
+"لا توجد أيام عمل في هذه الفترة، فلا يصرف شيء. هذا متوقع إن لم يعمل الموظف؛ "
+"وإلا فراجع الحضور والانصراف أولا."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid "Note"
+msgstr "ملاحظة"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "On the payslip"
+msgstr "في كشف الراتب"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip_run.py:0
+msgid "Only a Payroll Officer may check a batch."
+msgstr "فحص كشف الرواتب لمسؤول الرواتب فقط."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid "Only a Payroll Officer may check payslips."
+msgstr "فحص كشوف الراتب لمسؤول الرواتب فقط."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_finding.py:0
+msgid "Only a Payroll Officer may review payroll findings."
+msgstr "مراجعة ملاحظات الرواتب لمسؤول الرواتب فقط."
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields.selection,name:KSW_payroll_analyst.selection__ksw_payroll_finding__state__open
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.view_ksw_payroll_finding_search
+msgid "Open"
+msgstr "مفتوحة"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_hr_payslip__x_open_finding_count
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_hr_payslip_run__x_finding_open_count
+msgid "Open Findings"
+msgstr "الملاحظات المفتوحة"
+
+#. module: KSW_payroll_analyst
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.view_ksw_payroll_finding_form
+msgid "Open Payslip"
+msgstr "فتح كشف الراتب"
+
+#. module: KSW_payroll_analyst
+#: model_terms:ir.actions.act_window,help:KSW_payroll_analyst.action_ksw_payroll_finding
+msgid ""
+"Open a payslip batch and press <strong>Check Payroll</strong>.\n"
+"               Draft batches are also checked every night."
+msgstr ""
+"افتح كشف رواتب واضغط <strong>فحص الرواتب</strong>. كشوف الرواتب المسودة تفحص"
+" أيضا كل ليلة."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Paid last month, no payslip for this period"
+msgstr "صُرف له الشهر السابق، ولا كشف راتب له في هذه الفترة"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields.selection,name:KSW_payroll_analyst.selection__ksw_payroll_finding__check_code__missing_employee
+msgid "Paid last month, not in this period"
+msgstr "صُرف له الشهر السابق وغائب عن هذه الفترة"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model,name:KSW_payroll_analyst.model_hr_payslip
+msgid "Pay Slip"
+msgstr "كشف الراتب"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model,name:KSW_payroll_analyst.model_ksw_payroll_analyst
+msgid "Payroll Analyst"
+msgstr "محلل الرواتب"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model,name:KSW_payroll_analyst.model_ksw_payroll_finding
+msgid "Payroll Analyst Finding"
+msgstr "ملاحظة محلل الرواتب"
+
+#. module: KSW_payroll_analyst
+#: model:ir.actions.server,name:KSW_payroll_analyst.ir_cron_payroll_analyst_ir_actions_server
+msgid "Payroll Analyst: check draft batches"
+msgstr "محلل الرواتب: فحص كشوف الرواتب المسودة"
+
+#. module: KSW_payroll_analyst
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.view_ksw_payroll_finding_form
+msgid "Payroll Check Finding"
+msgstr "ملاحظة فحص الرواتب"
+
+#. module: KSW_payroll_analyst
+#: model:ir.actions.act_window,name:KSW_payroll_analyst.action_ksw_payroll_finding
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_hr_payslip__x_finding_ids
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_hr_payslip_run__x_finding_ids
+#: model:ir.ui.menu,name:KSW_payroll_analyst.menu_ksw_payroll_finding
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.view_ksw_payroll_finding_list
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.view_ksw_payroll_finding_search
+msgid "Payroll Check Findings"
+msgstr "ملاحظات فحص الرواتب"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip_run.py:0
+msgid "Payroll Check: %(name)s"
+msgstr "فحص الرواتب: %(name)s"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip_run.py:0
+msgid "Payroll checked"
+msgstr "تم فحص الرواتب"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_finding.py:0
+msgid "Payroll findings are produced by the analyst and cannot be edited."
+msgstr "ملاحظات الرواتب يصدرها المحلل ولا يمكن تعديلها."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_ksw_payroll_finding__slip_id
+msgid "Payslip"
+msgstr "كشف الراتب"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model,name:KSW_payroll_analyst.model_hr_payslip_run
+msgid "Payslip Batches"
+msgstr "كشوف الرواتب"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Payslip not computed"
+msgstr "كشف الراتب غير محسوب"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields.selection,name:KSW_payroll_analyst.selection__ksw_payroll_finding__check_code__paid_twice
+msgid "Period already paid"
+msgstr "الفترة مصروفة مسبقا"
+
+#. module: KSW_payroll_analyst
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.view_ksw_payroll_finding_form
+msgid "Reopen"
+msgstr "إعادة فتح"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Return from leave not confirmed"
+msgstr "مباشرة العمل بعد الإجازة غير مؤكدة"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields.selection,name:KSW_payroll_analyst.selection__ksw_payroll_finding__check_code__return_unconfirmed
+msgid "Return not confirmed"
+msgstr "المباشرة غير مؤكدة"
+
+#. module: KSW_payroll_analyst
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.view_ksw_payroll_finding_form
+msgid "Review"
+msgstr "المراجعة"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_ksw_payroll_finding__review_note
+msgid "Review Note"
+msgstr "ملاحظة المراجعة"
+
+#. module: KSW_payroll_analyst
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.hr_payslip_run_form_payroll_analyst
+msgid "Review findings"
+msgstr "مراجعة الملاحظات"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields.selection,name:KSW_payroll_analyst.selection__ksw_payroll_finding__state__reviewed
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.view_ksw_payroll_finding_list
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.view_ksw_payroll_finding_search
+msgid "Reviewed"
+msgstr "تمت المراجعة"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_ksw_payroll_finding__reviewed_by
+msgid "Reviewed By"
+msgstr "روجعت بواسطة"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_ksw_payroll_finding__reviewed_on
+msgid "Reviewed On"
+msgstr "روجعت في"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid "Same NET as %(slip)s."
+msgstr "الصافي نفسه كما في %(slip)s."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Settlement deductions exceed the pay: %(net)s"
+msgstr "خصومات التسوية تتجاوز الراتب: %(net)s"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_ksw_payroll_finding__severity
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.view_ksw_payroll_finding_search
+msgid "Severity"
+msgstr "الأهمية"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_ksw_payroll_finding__severity_rank
+msgid "Severity Rank"
+msgstr "ترتيب الأهمية"
+
+#. module: KSW_payroll_analyst
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.hr_payslip_run_form_payroll_analyst
+msgid "Show reviewed"
+msgstr "عرض ما تمت مراجعته"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_ksw_payroll_finding__state
+msgid "State"
+msgstr "الحالة"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Status"
+msgstr "الحالة"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid "Taken"
+msgstr "المخصوم"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid "The attendance deduction comes from:"
+msgstr "خصم الغياب والتأخير ناتج عن:"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid ""
+"The attendance sheet for %(month)s/%(year)s is still a draft (supervisor: "
+"%(sup)s)."
+msgstr ""
+"كشف الحضور والانصراف لشهر %(month)s/%(year)s ما زال مسودة (المشرف: %(sup)s)."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid ""
+"The batch removes this payslip by itself at the next bank export or Mark as "
+"Done; nothing to do unless it should be paid."
+msgstr ""
+"كشف الرواتب يستبعد هذا الكشف تلقائيا عند تصدير ملف البنك التالي أو عند "
+"الإقفال؛ لا يلزم إجراء إلا إذا كان يجب صرفه."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid ""
+"The deduction record says this payslip collected it, yet the payslip carries"
+" no such deduction and its NET does not include it. Check which figure the "
+"bank actually paid before correcting either side."
+msgstr ""
+"سجل الخصم يذكر أن هذا الكشف سدد القسط، لكن الكشف لا يتضمن هذا الخصم وصافيه "
+"لا يشمله. تحقق من المبلغ الذي صرفه البنك فعلا قبل تصحيح أي من الطرفين."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid ""
+"The employee worked %(days)s days, yet nothing will be paid: the deductions "
+"above take the whole salary."
+msgstr ""
+"عمل الموظف %(days)s يوما، ومع ذلك لن يصرف له شيء: الخصومات أعلاه تستغرق "
+"الراتب كاملا."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid ""
+"The money already left in a bank file, so this month is paid twice and must "
+"be recovered."
+msgstr "المبلغ صُرف فعلا في ملف بنك، فهذا الشهر مصروف مرتين ويجب استرداده."
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,help:KSW_payroll_analyst.field_ksw_payroll_finding__amount
+msgid ""
+"The money this finding is about: the NET, the installment, or the change in "
+"the attendance deduction."
+msgstr ""
+"المبلغ الذي تخصه الملاحظة: الصافي، أو القسط، أو الفرق في خصم الغياب "
+"والتأخير."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid ""
+"The payslip counts %(days)s absent days. Confirming the sheet later does not"
+" update it (Compute Sheet keeps the worked days)."
+msgstr ""
+"كشف الراتب يحتسب %(days)s يوم غياب. اعتماد كشف الحضور لاحقا لا يحدثه (إعادة "
+"الحساب تبقي أيام العمل كما هي)."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid ""
+"The payslip took this money but the installment does not say so: it will be "
+"collected again by the next payroll run."
+msgstr ""
+"خُصم المبلغ في الكشف لكن القسط لا يزال غير مسدد: سيخصم مرة أخرى في مسير "
+"الرواتب التالي."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid ""
+"The salary could not cover %(amt)s of the installments; that part stays "
+"pending for a later payslip."
+msgstr ""
+"لم يكف الراتب لتغطية %(amt)s من الأقساط؛ ويبقى هذا الجزء معلقا لكشف راتب "
+"لاحق."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "There is no attendance sheet for %(month)s/%(year)s."
+msgstr "لا يوجد كشف حضور وانصراف لشهر %(month)s/%(year)s."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid ""
+"They became due after this payslip was computed. Mark as Done recomputes and"
+" will deduct them, lowering NET by up to %(amount)s. A bank file exported "
+"before that would not match."
+msgstr ""
+"أصبحت مستحقة بعد حساب هذا الكشف. الإقفال يعيد الحساب وسيخصمها، فينخفض الصافي"
+" بما يصل إلى %(amount)s. ملف البنك المصدر قبل ذلك لن يطابق."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid ""
+"This is a revision of %(slip)s: the whole period is recalculated with "
+"current data, and what was already paid is subtracted, so the NET is only "
+"the difference."
+msgstr ""
+"هذا تعديل لكشف الراتب %(slip)s: تعاد حسبة الفترة كاملة بالبيانات الحالية "
+"ويطرح ما صُرف سابقا، فالصافي هو الفرق فقط."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "This month"
+msgstr "هذا الشهر"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid ""
+"This payslip has no salary lines, so nothing will be paid. Press Compute "
+"Sheet or remove it from the batch."
+msgstr ""
+"لا توجد بنود راتب في هذا الكشف، فلن يصرف شيء. احسب الكشف أو احذفه من كشف "
+"الرواتب."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid "This payslip has not been computed yet."
+msgstr "لم يحسب كشف الراتب هذا بعد."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "This payslip was already sent to the bank on %(date)s."
+msgstr "أرسل كشف الراتب هذا إلى البنك في %(date)s."
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "This period is already paid by %(slips)s"
+msgstr "هذه الفترة مصروفة مسبقا بكشف %(slips)s"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid "Time"
+msgstr "الوقت"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_ksw_payroll_finding__title
+msgid "Title"
+msgstr "العنوان"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "To"
+msgstr "إلى"
+
+#. module: KSW_payroll_analyst
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.view_ksw_payroll_finding_list
+msgid "Total"
+msgstr "الإجمالي"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Type"
+msgstr "النوع"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields.selection,name:KSW_payroll_analyst.selection__ksw_payroll_finding__severity__warning
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.view_ksw_payroll_finding_search
+msgid "Warning"
+msgstr "تنبيه"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields,field_description:KSW_payroll_analyst.field_hr_payslip_run__x_finding_warning_count
+msgid "Warning Findings"
+msgstr "ملاحظات التنبيه"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Whole period absent, NET is zero"
+msgstr "غياب طوال الفترة، والصافي صفر"
+
+#. module: KSW_payroll_analyst
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.view_ksw_payroll_finding_form
+msgid "Why this is fine, or what was done about it"
+msgstr "لماذا لا مشكلة، أو ما الإجراء المتخذ"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+#: model:ir.model.fields.selection,name:KSW_payroll_analyst.selection__ksw_payroll_finding__check_code__stale_attendance
+msgid "Worked days out of date"
+msgstr "أيام العمل غير محدثة"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "Worked, but NET is zero"
+msgstr "عمل الموظف، والصافي صفر"
+
+#. module: KSW_payroll_analyst
+#: model:ir.model.fields.selection,name:KSW_payroll_analyst.selection__ksw_payroll_finding__check_code__zero_net
+msgid "Zero NET"
+msgstr "صافي صفر"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid "a decrease"
+msgstr "نقص"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid "already collected earlier"
+msgstr "مخصوم سابقا"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/hr_payslip.py:0
+msgid "an increase"
+msgstr "زيادة"
+
+#. module: KSW_payroll_analyst
+#. odoo-python
+#: code:addons/KSW_payroll_analyst/models/payroll_analyst.py:0
+msgid "deleted"
+msgstr "محذوف"
+
+#. module: KSW_payroll_analyst
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.hr_payslip_run_form_payroll_analyst
+msgid ""
+"·\n"
+"                        <span>Last checked:</span>"
+msgstr "· <span>آخر فحص:</span>"
+
+#. module: KSW_payroll_analyst
+#: model_terms:ir.ui.view,arch_db:KSW_payroll_analyst.hr_payslip_run_form_payroll_analyst
+msgid ""
+"·\n"
+"                        <span>Warnings:</span>"
+msgstr "· <span>تنبيهات:</span>"

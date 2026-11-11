@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_payslip_run_form_payroll_analyst" model="ir.ui.view">
+        <field name="name">hr.payslip.run.form.payroll.analyst</field>
+        <field name="model">hr.payslip.run</field>
+        <field name="inherit_id" ref="om_hr_payroll.hr_payslip_run_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header/field[@name='state']" position="before">
+                <button name="action_ksw_check_payroll" type="object"
+                        string="Check Payroll" icon="fa-stethoscope"
+                        groups="om_hr_payroll.group_hr_payroll_user"/>
+            </xpath>
+            <xpath expr="//sheet/label[@for='name']" position="before">
+                <field name="x_finding_critical_count" invisible="1"/>
+                <field name="x_finding_warning_count" invisible="1"/>
+                <field name="x_finding_open_count" invisible="1"/>
+                <div class="alert alert-danger d-flex align-items-center justify-content-between"
+                     role="alert"
+                     invisible="not x_finding_critical_count"
+                     groups="KSW_payroll.group_hr_payroll_reviewer">
+                    <span>
+                        <strong>Payroll check</strong> ·
+                        <span>Critical:</span> <field name="x_finding_critical_count" class="oe_inline"/> ·
+                        <span>Warnings:</span> <field name="x_finding_warning_count" class="oe_inline"/> ·
+                        <span>Last checked:</span> <field name="x_analysis_date" class="oe_inline" readonly="1"/>
+                    </span>
+                    <button name="action_ksw_open_findings" type="object"
+                            string="Review findings" class="btn-danger"/>
+                </div>
+                <div class="alert alert-warning d-flex align-items-center justify-content-between"
+                     role="alert"
+                     invisible="x_finding_critical_count or not x_finding_open_count"
+                     groups="KSW_payroll.group_hr_payroll_reviewer">
+                    <span>
+                        <strong>Payroll check</strong> ·
+                        <span>Open findings:</span> <field name="x_finding_open_count" class="oe_inline"/> ·
+                        <span>Last checked:</span> <field name="x_analysis_date" class="oe_inline" readonly="1"/>
+                    </span>
+                    <button name="action_ksw_open_findings" type="object"
+                            string="Review findings" class="btn-secondary"/>
+                </div>
+                <div class="alert alert-success d-flex align-items-center justify-content-between"
+                     role="alert"
+                     invisible="not x_analysis_date or x_finding_open_count"
+                     groups="KSW_payroll.group_hr_payroll_reviewer">
+                    <span>
+                        <strong>Payroll check</strong> ·
+                        <span>Nothing open.</span>
+                        <span>Last checked:</span> <field name="x_analysis_date" class="oe_inline" readonly="1"/>
+                    </span>
+                    <button name="action_ksw_open_findings" type="object"
+                            string="Show reviewed" class="btn-link"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

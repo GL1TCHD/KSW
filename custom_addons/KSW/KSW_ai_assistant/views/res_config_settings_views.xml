@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_ksw_ai" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.ksw.ai</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='languages']" position="after">
+                <div id="ksw_ai_assistant" groups="base.group_system">
+                    <block title="AI Assistant" name="ksw_ai_setting_container">
+                        <setting id="ksw_ai_provider_setting" string="AI provider"
+                                 help="Lets every user ask questions about their data from Home. Questions and the records they return are sent to the provider, except with Ollama on your own server.">
+                            <field name="ksw_ai_provider"/>
+                        </setting>
+                        <setting id="ksw_ai_key_setting" string="API key"
+                                 help="Groq: free key from console.groq.com. Not needed for Ollama."
+                                 invisible="ksw_ai_provider == 'ollama'">
+                            <field name="ksw_ai_api_key" password="True"/>
+                        </setting>
+                        <setting id="ksw_ai_model_setting" string="Model"
+                                 help="Leave empty for the provider's default.">
+                            <field name="ksw_ai_model" placeholder="default"/>
+                            <field name="ksw_ai_effort" invisible="ksw_ai_provider != 'anthropic'"/>
+                        </setting>
+                        <setting id="ksw_ai_url_setting" string="Server address"
+                                 help="Ollama or another OpenAI-compatible server."
+                                 invisible="ksw_ai_provider not in ('ollama', 'openai_compatible')">
+                            <field name="ksw_ai_base_url" placeholder="http://localhost:11434/v1"/>
+                        </setting>
+                        <setting id="ksw_ai_log_setting" string="Question log"
+                                 help="Every question, what the assistant ran and the tokens it used.">
+                            <button name="%(KSW_ai_assistant.action_ksw_ai_turn)d" type="action"
+                                    string="Open the log" class="btn-link" icon="oi-arrow-right"/>
+                        </setting>
+                    </block>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
