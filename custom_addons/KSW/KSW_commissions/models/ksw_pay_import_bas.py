@@ -221,8 +221,16 @@ class KswPayBatchBasImport(models.Model):
             if sub_batch:
                 # This sub-batch's own rows; anything else he has here is
                 # somebody else's handover, compared by x_overlap_note.
-                mine = rows.filtered(lambda e: e.x_sub_batch_id == sub_batch)
+                # A batch row already inside these days is one the sub-batch
+                # is about to collect (_collect_entries): refreshed here, not
+                # imported a second time beside it (KSWCO SUB00008: four
+                # drivers' October trips paid twice).
                 segments = [window or (month_start, month_end)]
+                mine = rows.filtered(
+                    lambda e: e.x_sub_batch_id == sub_batch or (
+                        not e.x_sub_batch_id and e.state == 'draft'
+                        and not e.x_sub_batch_left_out
+                        and e._within(*segments[0])))
             else:
                 mine = rows.filtered(lambda e: not e.x_sub_batch_id)
                 taken = [r._span() for r in rows - mine]

@@ -179,6 +179,32 @@ class TestSubBatchLock(SubBatchCommon):
         self.assertEqual(defaults.get('employee_id'), self.emp_a2.id)
         self.assertEqual(self.meal_a.state, 'approved')
 
+    def test_12c_submitting_a_batch_of_only_early_rows_can_be_reopened(self):
+        """KSWCO PB000120 (Nov 2026): the Overtime batch held only the early
+        employee's approved row; pressing the batch's Submit made it read
+        approved, and only the GM could reopen an approved batch. The GM
+        decided nothing on it, so the supervisor takes it back himself."""
+        meals_sub = self._sub_batch(self.emp_a, batch=self.meals_batch)
+        meals_sub.with_user(self.sup_a).action_submit()
+        meals_sub.with_user(self.gm).action_approve()
+        self.meals_batch.with_user(self.sup_a).action_submit()
+        self.assertEqual(self.meals_batch.state, 'approved')
+        self.assertTrue(self.meals_batch.with_user(self.sup_a).x_can_reopen)
+        self.meals_batch.with_user(self.sup_a).action_reset_to_draft()
+        self.assertEqual(self.meals_batch.state, 'draft')
+        self.assertEqual(self.meal_a.state, 'approved')
+        more = self._entry(self.meals_batch, self.emp_a2, user=self.sup_a)
+        self.assertEqual(more.state, 'draft')
+
+    def test_12d_a_batch_the_gm_approved_stays_his_to_reopen(self):
+        self.meals_batch.with_user(self.sup_a).action_submit()
+        self.meals_batch.entry_ids.sudo().write({'state': 'approved'})
+        self.meals_batch.sudo()._sync_state_from_entries()
+        self.assertEqual(self.meals_batch.state, 'approved')
+        self.assertFalse(self.meals_batch.with_user(self.sup_a).x_can_reopen)
+        with self.assertRaises(UserError):
+            self.meals_batch.with_user(self.sup_a).action_reset_to_draft()
+
     def test_13_a_batch_with_approved_rows_cannot_be_deleted_by_anyone(self):
         sub = self._sub_batch(self.emp_a)
         sub.with_user(self.sup_a).action_submit()

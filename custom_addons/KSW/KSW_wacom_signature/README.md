@@ -66,3 +66,21 @@ pattern Odoo core uses for `add_banner()`. Position (`pos_x`/`pos_y`, in
 points from the bottom-left of the page) and size (`sig_width`/
 `sig_height`) are plain fields on the record - open the Source Document
 tab to check where things land on the page before signing.
+
+## Evidence and integrity
+
+- **Biometric record**: a pad capture also stores Wacom's SigText
+  (`signature_sigtext`), which holds pen position, pressure and timing, bound to
+  the signer name and the source PDF's SHA-256. A handwriting examiner can
+  verify it with Wacom's tools. Drawing or uploading a signature instead clears it.
+- **Fingerprints**: SHA-256 of the source PDF and of the signed PDF (at the
+  moment of signing), shown on the form and in the chatter.
+- **Verify**: *Verify Integrity* on a signed document checks the stored file.
+  *Signatures → Verify a Signed PDF* checks any file someone hands you.
+- **Lock**: a signed document cannot be edited or deleted. A Signature Manager
+  can reset it to draft only with a reason. The signed PDF and its fingerprint
+  are kept as a chatter attachment.
+
+This makes an internal signature defensible. It is not a certified digital
+signature under the Saudi Electronic Transactions Law. That needs a PAdES
+signature with a certificate from a licensed provider (or Nafath).

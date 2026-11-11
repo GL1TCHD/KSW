@@ -262,6 +262,11 @@ class KswPayBatch(models.Model):
             if rec.state == 'draft' or locked[key]:
                 rec.x_can_reopen = False
                 continue
+            if rec._approved_only_by_sub_batches():
+                # The GM never decided this batch: its rows were approved
+                # in sub-batches, so it is still the supervisor's to type in.
+                rec.x_can_reopen = rec.submission_id.state != 'submitted'
+                continue
             if rec.state == 'approved':
                 # Money that has left is history, for the GM too.
                 rec.x_can_reopen = is_gm and not rec.sudo().entry_ids.filtered(
@@ -721,6 +726,21 @@ class KswPayBatch(models.Model):
             if rec.submission_id != submission:
                 rec.sudo().write({'submission_id': submission.id})
 
+    def _approved_only_by_sub_batches(self):
+        """Approved, but only because every row came in a sub-batch.
+
+        Submitting a batch whose rows were all sent early reads as approved
+        (``action_submit``), yet the GM has decided nothing on the batch
+        itself and the month is still open. Reopening it touches none of
+        those rows (``_sub_batch_controlled``), so it is the supervisor's
+        to do (KSWCO PB000120, Supply Chain Oct 2026: one early row, paid on
+        a vacation payslip, and the Overtime batch closed for everybody).
+        """
+        self.ensure_one()
+        entries = self.sudo().entry_ids
+        return (self.state == 'approved' and bool(entries)
+                and entries == entries._sub_batch_controlled())
+
     def _sync_state_from_entries(self):
         """Make the batch read what its rows say.
 
@@ -940,7 +960,8 @@ class KswPayBatch(models.Model):
                 rec.submission_id._sync_state_from_entries()
                 rec.entry_ids._join_open_sub_batch()
                 continue
-            if rec.state == 'approved':
+            if rec.state == 'approved' \
+                    and not rec._approved_only_by_sub_batches():
                 raise UserError(_(
                     "%(name)s has been approved. Only the General Manager "
                     "can reopen it.", name=rec.name))

@@ -533,3 +533,193 @@ msgstr "Y (نقطة من الأسفل)"
 #: model_terms:ir.ui.view,arch_db:KSW_wacom_signature.view_ksw_signature_document_form
 msgid "e.g. Offer Letter - John Doe"
 msgstr "مثال: خطاب عرض - محمد أحمد"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__signature_sigtext
+msgid "Biometric Signature Data"
+msgstr "بيانات التوقيع الحيوية"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__has_biometric_data
+msgid "Biometric Data Captured"
+msgstr "تم التقاط البيانات الحيوية"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__source_pdf_sha256
+msgid "Source PDF SHA-256"
+msgstr "بصمة SHA-256 لملف PDF الأصلي"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_document__signed_pdf_sha256
+msgid "Signed PDF SHA-256"
+msgstr "بصمة SHA-256 لملف PDF الموقّع"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,help:KSW_wacom_signature.field_ksw_signature_document__source_pdf_sha256
+msgid "Fingerprint of the uploaded PDF. Also bound into the Wacom biometric data."
+msgstr "بصمة ملف PDF المرفوع، وهي مرتبطة أيضًا ببيانات توقيع Wacom الحيوية."
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,help:KSW_wacom_signature.field_ksw_signature_document__signed_pdf_sha256
+msgid "Fingerprint of the signed PDF at the moment of signing. Any later change to the file, even one byte, gives a different value."
+msgstr "بصمة ملف PDF الموقّع لحظة التوقيع. أي تعديل لاحق على الملف، ولو بايت واحد، ينتج قيمة مختلفة."
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_reset_wizard__document_id
+msgid "Document"
+msgstr "المستند"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_verify_wizard__pdf_file
+msgid "PDF to Check"
+msgstr "ملف PDF المراد التحقق منه"
+
+#. module: KSW_wacom_signature
+#: model:ir.model.fields,field_description:KSW_wacom_signature.field_ksw_signature_verify_wizard__file_sha256
+msgid "File SHA-256"
+msgstr "بصمة SHA-256 للملف"
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/models/ksw_signature_document.py:0
+#: model:ir.model,name:KSW_wacom_signature.model_ksw_signature_reset_wizard
+#: model_terms:ir.ui.view,arch_db:KSW_wacom_signature.view_ksw_signature_reset_wizard_form
+msgid "Reset Signed Document"
+msgstr "إعادة فتح مستند موقّع"
+
+#. module: KSW_wacom_signature
+#: model:ir.model,name:KSW_wacom_signature.model_ksw_signature_verify_wizard
+#: model:ir.ui.menu,name:KSW_wacom_signature.menu_ksw_wacom_signature_verify
+#: model:ir.actions.act_window,name:KSW_wacom_signature.action_ksw_signature_verify_wizard
+#: model_terms:ir.ui.view,arch_db:KSW_wacom_signature.view_ksw_signature_verify_wizard_form
+msgid "Verify a Signed PDF"
+msgstr "التحقق من ملف PDF موقّع"
+
+#. module: KSW_wacom_signature
+#: model_terms:ir.ui.view,arch_db:KSW_wacom_signature.view_ksw_signature_document_form
+msgid "Verify Integrity"
+msgstr "التحقق من سلامة المستند"
+
+#. module: KSW_wacom_signature
+#: model_terms:ir.ui.view,arch_db:KSW_wacom_signature.view_ksw_signature_reset_wizard_form
+msgid ""
+"The document goes back to draft. The signed PDF, its fingerprint\n"
+"                    and your reason are kept in the document history."
+msgstr "سيعود المستند إلى مسودة، مع الاحتفاظ بملف PDF الموقّع وبصمته والسبب في سجل المستند."
+
+#. module: KSW_wacom_signature
+#: model_terms:ir.ui.view,arch_db:KSW_wacom_signature.view_ksw_signature_reset_wizard_form
+msgid "Why must this signed document change?"
+msgstr "لماذا يلزم تعديل هذا المستند الموقّع؟"
+
+#. module: KSW_wacom_signature
+#: model_terms:ir.ui.view,arch_db:KSW_wacom_signature.view_ksw_signature_verify_wizard_form
+msgid "Upload a signed PDF to check it was signed here and has not been changed since."
+msgstr "ارفع ملف PDF موقّعًا للتأكد من أنه وُقّع في النظام ولم يُعدَّل بعد توقيعه."
+
+#. module: KSW_wacom_signature
+#: model_terms:ir.ui.view,arch_db:KSW_wacom_signature.view_ksw_signature_verify_wizard_form
+msgid "Close"
+msgstr "إغلاق"
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/models/ksw_signature_document.py:0
+msgid "Signing results and fingerprints are set by the system only."
+msgstr "نتائج التوقيع والبصمات يحددها النظام فقط."
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/models/ksw_signature_document.py:0
+msgid "A signed document is locked. A Signature Manager can reset it to draft (with a reason, kept in the history) if it must change."
+msgstr "المستند الموقّع مقفل. يمكن لمدير التوقيعات إعادته إلى مسودة عند الضرورة، مع ذكر السبب الذي يُحفظ في السجل."
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/models/ksw_signature_document.py:0
+msgid "A signed document cannot be deleted."
+msgstr "لا يمكن حذف مستند موقّع."
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/models/ksw_signature_document.py:0
+msgid "Captured"
+msgstr "تم الالتقاط"
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/models/ksw_signature_document.py:0
+msgid "Not captured"
+msgstr "لم يتم الالتقاط"
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/models/ksw_signature_document.py:0
+msgid "A reason is required to reset a signed document."
+msgstr "يجب ذكر سبب لإعادة فتح مستند موقّع."
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/models/ksw_signature_document.py:0
+msgid "Only signed documents can be reset."
+msgstr "لا يمكن إعادة فتح إلا المستندات الموقّعة."
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/models/ksw_signature_document.py:0
+msgid "This document has not been signed yet."
+msgstr "لم يُوقَّع هذا المستند بعد."
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/models/ksw_signature_document.py:0
+msgid "Integrity Check"
+msgstr "التحقق من السلامة"
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/models/ksw_signature_document.py:0
+msgid "The signed PDF is unchanged since it was signed."
+msgstr "ملف PDF الموقّع لم يتغير منذ توقيعه."
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/models/ksw_signature_document.py:0
+msgid "WARNING: the stored signed PDF does not match the fingerprint taken at signing."
+msgstr "تحذير: ملف PDF الموقّع المحفوظ لا يطابق البصمة المسجلة عند التوقيع."
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/wizard/ksw_signature_verify_wizard.py:0
+msgid "Genuine and unchanged."
+msgstr "أصلي ولم يُعدَّل."
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/wizard/ksw_signature_verify_wizard.py:0
+msgid "Document:"
+msgstr "المستند:"
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/wizard/ksw_signature_verify_wizard.py:0
+msgid "Signer:"
+msgstr "الموقّع:"
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/wizard/ksw_signature_verify_wizard.py:0
+msgid "Signed on:"
+msgstr "تاريخ التوقيع:"
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/wizard/ksw_signature_verify_wizard.py:0
+msgid "No match."
+msgstr "لا يوجد تطابق."
+
+#. module: KSW_wacom_signature
+#. odoo-python
+#: code:addons/KSW_wacom_signature/wizard/ksw_signature_verify_wizard.py:0
+msgid "This file is not a document signed in Odoo, or it has been changed since it was signed."
+msgstr "هذا الملف ليس مستندًا موقّعًا في النظام، أو عُدِّل بعد توقيعه."

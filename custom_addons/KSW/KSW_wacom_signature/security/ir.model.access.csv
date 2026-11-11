@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_ksw_signature_document_user,ksw.signature.document.user,model_ksw_signature_document,group_wacom_signature_user,1,1,1,1
 access_ksw_signature_document_manager,ksw.signature.document.manager,model_ksw_signature_document,group_wacom_signature_manager,1,1,1,1
+access_ksw_signature_reset_wizard_manager,ksw.signature.reset.wizard.manager,model_ksw_signature_reset_wizard,group_wacom_signature_manager,1,1,1,0
+access_ksw_signature_verify_wizard_user,ksw.signature.verify.wizard.user,model_ksw_signature_verify_wizard,group_wacom_signature_user,1,1,1,0

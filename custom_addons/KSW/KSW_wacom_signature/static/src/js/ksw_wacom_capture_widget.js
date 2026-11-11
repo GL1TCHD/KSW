@@ -26,6 +26,8 @@ export class KswWacomCaptureWidget extends Component {
         ...standardWidgetProps,
         signatureField: { type: String },
         captureMethodField: { type: String, optional: true },
+        sigTextField: { type: String, optional: true },
+        bindHashField: { type: String, optional: true },
         fullName: { type: String, optional: true },
         string: { type: String, optional: true },
     };
@@ -62,11 +64,13 @@ export class KswWacomCaptureWidget extends Component {
 
     async _captureFromPad() {
         try {
-            const dataUrl = await captureWacomSignature({
+            const { bindHashField, record } = this.props;
+            const { dataUrl, sigText } = await captureWacomSignature({
                 who: this.defaultName,
                 why: _t("Document Approval"),
+                bindData: (bindHashField && record.data[bindHashField]) || "",
             });
-            await this._saveSignature(dataUrl, "wacom_pad");
+            await this._saveSignature(dataUrl, "wacom_pad", sigText);
         } catch (error) {
             this.notification.add(error.message || _t("Wacom pad capture failed."), {
                 type: "danger",
@@ -88,12 +92,15 @@ export class KswWacomCaptureWidget extends Component {
         this.dialogService.add(SignatureDialog, dialogProps);
     }
 
-    async _saveSignature(dataUrl, method) {
+    async _saveSignature(dataUrl, method, sigText = false) {
         const values = {
             [this.props.signatureField]: dataUrl.split(",")[1] || false,
         };
         if (this.props.captureMethodField) {
             values[this.props.captureMethodField] = method;
+        }
+        if (this.props.sigTextField) {
+            values[this.props.sigTextField] = sigText || false;
         }
         await this.props.record.update(values);
     }
@@ -104,6 +111,8 @@ export const kswWacomCaptureWidget = {
     extractProps: ({ attrs }) => ({
         signatureField: attrs.signature_field || "signature_image",
         captureMethodField: attrs.capture_method_field,
+        sigTextField: attrs.sigtext_field,
+        bindHashField: attrs.bind_hash_field,
         fullName: attrs.full_name,
         string: attrs.string || _t("Capture from Wacom Pad"),
     }),

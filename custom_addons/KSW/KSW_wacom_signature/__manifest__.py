@@ -1,6 +1,6 @@
 {
     'name': 'KSW Wacom Signature',
-    'version': '19.0.1.0.0',
+    'version': '19.0.1.1.0',
     'author': 'KSW',
     'category': 'Human Resources',
     'summary': 'Sign uploaded PDF documents with a Wacom STU signature pad',
@@ -18,6 +18,7 @@ also works out of the box with a Wacom tablet used as a plain HID pointer.
         'security/security.xml',
         'security/ir.model.access.csv',
         'views/ksw_signature_document_views.xml',
+        'wizard/ksw_signature_wizard_views.xml',
     ],
     'assets': {
         'web.assets_backend': [

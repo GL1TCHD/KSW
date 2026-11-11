@@ -156,9 +156,13 @@ export function isWacomBridgeAvailable() {
  * @param {Object} params
  * @param {string} params.who - name of the signer, shown on the pad/dialog
  * @param {string} params.why - reason for signing, shown on the pad/dialog
- * @returns {Promise<string>} data:image/png;base64,... string
+ * @param {string} [params.bindData] - extra text bound into the signature
+ *   hash next to the signer name (the source PDF's SHA-256), tying the
+ *   biometric record to that exact document
+ * @returns {Promise<{dataUrl: string, sigText: string}>} the PNG as a
+ *   data:image/png;base64 URL, and Wacom's SigText (the biometric record)
  */
-export async function captureWacomSignature({ who, why }) {
+export async function captureWacomSignature({ who, why, bindData = "" }) {
     sessionReadyPromise = null; // always start this capture with a fresh session
     const ready = await checkWacomBridge();
     if (!ready) {
@@ -201,7 +205,7 @@ export async function captureWacomSignature({ who, why }) {
                 return;
             }
             const variant = new sdk.Variant();
-            variant.Set(whoText);
+            variant.Set(bindData ? `${whoText}|${bindData}` : whoText);
             hash.Add(variant, onAdd);
         }
 
@@ -261,7 +265,15 @@ export async function captureWacomSignature({ who, why }) {
                 reject(new Error(`Wacom RenderBitmap failed (status ${status}).`));
                 return;
             }
-            resolve(`data:image/png;base64,${imageBase64}`);
+            const dataUrl = `data:image/png;base64,${imageBase64}`;
+            sigObjV.GetSigText((sigObjT, sigText, textStatus) => {
+                // The image is still a valid signature without the biometric
+                // record; never fail the capture over it.
+                resolve({
+                    dataUrl,
+                    sigText: textStatus === sdk.ResponseStatus.OK ? sigText : "",
+                });
+            });
         }
     });
 }

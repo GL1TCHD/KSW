@@ -10,6 +10,9 @@
                     <button name="action_apply_signature" string="Apply Signature to PDF"
                             type="object" class="btn-primary"
                             invisible="state != 'draft'"/>
+                    <button name="action_verify_integrity" string="Verify Integrity"
+                            type="object"
+                            invisible="state != 'signed'"/>
                     <button name="action_reset_draft" string="Reset to Draft"
                             type="object"
                             invisible="state != 'signed'"
@@ -30,6 +33,7 @@
                         <group>
                             <field name="company_id" groups="base.group_multi_company"/>
                             <field name="capture_method" readonly="1"/>
+                            <field name="has_biometric_data" readonly="1" invisible="not capture_method"/>
                             <field name="signed_uid" readonly="1" invisible="not signed_uid"/>
                             <field name="signed_date" readonly="1" invisible="not signed_date"/>
                         </group>
@@ -40,6 +44,7 @@
                                 <field name="source_pdf_filename" invisible="1"/>
                                 <field name="source_pdf" filename="source_pdf_filename"
                                        widget="pdf_viewer" readonly="state != 'draft'"/>
+                                <field name="source_pdf_sha256" invisible="not source_pdf_sha256"/>
                             </group>
                         </page>
                         <page string="Signature" name="signature">
@@ -47,10 +52,13 @@
                                 <field name="signature_image" widget="signature"
                                        readonly="state != 'draft'"
                                        options="{'full_name': 'signer_name'}"/>
+                                <field name="signature_sigtext" invisible="1"/>
                                 <widget name="ksw_wacom_capture_signature"
                                         string="Capture from Wacom Pad"
                                         signature_field="signature_image"
                                         capture_method_field="capture_method"
+                                        sigtext_field="signature_sigtext"
+                                        bind_hash_field="source_pdf_sha256"
                                         full_name="signer_name"
                                         invisible="state != 'draft'"/>
                             </group>
@@ -67,6 +75,7 @@
                                 <field name="signed_pdf_filename" invisible="1"/>
                                 <field name="signed_pdf" filename="signed_pdf_filename"
                                        widget="pdf_viewer" readonly="1"/>
+                                <field name="signed_pdf_sha256"/>
                             </group>
                         </page>
                     </notebook>

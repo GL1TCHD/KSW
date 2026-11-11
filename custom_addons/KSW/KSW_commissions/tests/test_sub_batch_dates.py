@@ -249,6 +249,16 @@ class TestSendEarlyTrips(SendEarlyCommon):
         self.assertEqual(rest.x_window_to, date(2029, 3, 15))
         self.assertFalse(mine.filtered('x_overlap_note'))
 
+    def test_23b_a_batch_row_inside_the_days_is_refreshed_not_doubled(self):
+        self._import_batch()
+        imported = self._rows(self.driver_1)
+        self.assertEqual(len(imported), 1)
+        sub = self._send(self.trips_batch, self.driver_1)
+        mine = self._rows(self.driver_1)
+        self.assertEqual(mine, imported)
+        self.assertEqual(mine.x_sub_batch_id, sub)
+        self.assertEqual(mine.state, 'submitted')
+
     def test_24_everything_covered_means_nothing_to_import(self):
         self._send(self.trips_batch, self.driver_1)
         self._import_batch()
