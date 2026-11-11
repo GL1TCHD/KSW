@@ -2036,8 +2036,12 @@ class HrPayslip(models.Model):
         InputLine = self.env['hr.payslip.input'].sudo()
 
         prior_slips = self._revision_prior_slips()
+        # What actually left the bank: the WPS and Kawthar files only carry
+        # NET > 0, so a negative-NET slip (a whole month absent while GOSI
+        # still applies) paid nothing.  Subtracting its negative NET would
+        # pay back the deduction it never collected.
         prior_net = sum(
-            self._get_net_total(slip) for slip in prior_slips)
+            max(self._get_net_total(slip), 0.0) for slip in prior_slips)
         slip_refs = ', '.join(
             s.number or s.name or str(s.id) for s in prior_slips)
 

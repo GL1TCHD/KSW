@@ -431,6 +431,26 @@ class TestPayslipRevision(TransactionCase):
         self.assertEqual(len(carried), 1)
         self.assertEqual(carried.amount, 1500.0)
 
+    def test_negative_net_original_counts_as_nothing_paid(self):
+        """KSWCO SLIP/15163: a month read as wholly absent came out at NET
+        −780 (GOSI with no salary to take it from). The bank files only
+        carry NET > 0, so nothing was paid — the revision must not add the
+        780 back as if it had been collected."""
+        original = self._make_payslip('Original negative')
+        penalty = self._add_input(original, 'PENALTY', 7000.0)
+        original.compute_sheet()
+        self.assertLess(self._net(original), 0)
+        self._confirm(original)
+
+        revision = self._issue_revision(original)
+        self.assertEqual(revision.x_prior_net_paid, 0.0)
+        self.assertFalse(self._input(revision, 'PRIOR_NET'))
+
+        # The correction: the penalty did not belong to this period.
+        self._input(revision, 'PENALTY').unlink()
+        revision.compute_sheet()
+        self.assertEqual(self._net(revision), self._net(original) + penalty.amount)
+
     # ==================================================================
     # 5. Chained revisions
     # ==================================================================
